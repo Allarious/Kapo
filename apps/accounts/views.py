@@ -85,3 +85,20 @@ class LogoutView(LoginRequiredMixin, RedirectView):
     def get(self, request, *args, **kwargs):
         logout(request)
         return super(LogoutView, self).get(request, *args, **kwargs)
+
+def login_user(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                # users = Users.objects.filter(auth_user= request.user)
+                playlists = Playlist.objects.filter(user=request.user)
+                return render(request, 'music/index.html', {'playlists': playlists})
+            else:
+                return render(request, 'music/login.html', {'error_message': 'Your account has been disabled'})
+        else:
+            return render(request, 'music/login.html', {'error_message': 'Invalid login'})
+    return render(request, 'music/login.html')

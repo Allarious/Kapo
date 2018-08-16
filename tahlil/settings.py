@@ -22,6 +22,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'rquvk2em%8k8h!fw((*o2sn&$)ar&36tvql-27j86hb$nvk0sy'
 
+#Add this because of AbstractUser error
+AUTH_USER_MODEL = "accounts.MyUser"
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
