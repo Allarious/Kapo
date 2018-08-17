@@ -10,7 +10,7 @@
 # from django.utils.http import urlsafe_base64_decode
 # from django.views import generic
 # from django.views.generic import FormView, RedirectView
-# from apps.accounts.forms.forms import SignUpForm
+from apps.accounts.forms.forms import SignUpForm, UserForm
 # from apps.accounts.tokens import account_activation_token
 #
 #
@@ -108,6 +108,55 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
+
+
+def register(request):
+    form = UserForm(request.POST or None)
+    if form.is_valid():
+        user = form.save(commit=False)
+        # user.refresh_from_db()
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        user.set_password(password)
+        user.save()
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return render(request, 'music/index.html', {})
+    context = {
+        "form": form,
+    }
+    return render(request, 'music/register.html', context)
+
+
+
+def sign_up(request):
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, request.FILES)
+        form = SignUpForm(request.POST)
+        if form.is_valid() and user_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.is_customer = True
+            if request.user.username != '' and request.user.is_authorized and not request.user.isBen and not request.user.isOrg:
+                user.state = True
+            user.save()
+            customer = form.save(commit=False)
+            customer.user = user
+            customer.save()
+
+
+            return render(request, 'thanks.html')
+
+        else:
+            print(user_form.errors, form.errors)
+
+    else:
+        user_form = UserForm()
+        form = SignUpForm()
+    return render(request, 'SignUp.html',
+                  {'user_form': user_form, 'form': form})
 
 
 def login_user(request):

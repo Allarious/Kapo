@@ -24,7 +24,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', login_user, name='index'),
-    # url(r'^register/$', views.register, name='register'),
+    url(r'^register/$', views.sign_up, name='register'),
     # url(r'^login_user/$', views.login_user, name='login_user'),
     # url(r'^logout_user/$', views.logout_user, name='logout_user'),
     # url(r'^(?P<album_id>[0-9]+)/$', views.detail, name='detail'),
