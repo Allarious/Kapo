@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('apps.accounts.urls')),
     url(r'^', include('apps.accounts.urls')),
+    url(r'^', include('apps.customer.urls')),
 ]
 
 if settings.DEBUG:
