@@ -5,4 +5,6 @@ from apps.customer.views import *
 from . import views
 
 app_name = "customer"
+urlpatterns = [
 url(r'^profile/(?P<customer_id>\d+)/$', profile_view, name='customer_profile'),
+]

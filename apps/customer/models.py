@@ -7,7 +7,7 @@ class Customer(models.Model):
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE, primary_key=True)
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
-    gender = models.CharField(max_length=10, choices=SEX_CHOICES, default='Male')
+    gender = models.CharField(max_length=10, choices=SEX_CHOICES, default='Blank')
     day = models.IntegerField(default=0)
     month = models.IntegerField(default=0)
     year = models.IntegerField(default=0)

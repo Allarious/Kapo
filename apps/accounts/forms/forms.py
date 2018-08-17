@@ -10,7 +10,8 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import ugettext_lazy as _
-from apps.accounts.models import MyUser, Customer
+from apps.accounts.models import MyUser
+from apps.customer.models import Customer
 from apps.accounts.tokens import account_activation_token
 from captcha.fields import ReCaptchaField
 
@@ -40,7 +41,7 @@ class SignUpForm(forms.ModelForm):
 
     class Meta:
         model = Customer
-        fields = ('firstName', 'lastName', 'gender', 'day', 'month', 'year', 'nationalId', 'city', 'address', 'phone')
+        fields = ('first_name', 'last_name', 'gender', 'day', 'month', 'year', 'national_id', 'city', 'address', 'phone')
 
 # class SignUpForm(UserCreationForm):
 #     first_name = forms.CharField(max_length=30, required=True)
