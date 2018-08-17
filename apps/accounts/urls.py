@@ -21,7 +21,7 @@ from django.conf.urls import url
 from apps.accounts.views import login_user
 from . import views
 
-
+app_name = "accounts"
 urlpatterns = [
     url(r'^$', login_user, name='index'),
     url(r'^register/$', views.sign_up, name='register'),

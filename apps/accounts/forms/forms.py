@@ -34,14 +34,13 @@ class UserForm(forms.ModelForm):
         if not password == confirm_password:
             raise forms.ValidationError('Password does not match.')
 
+
 class SignUpForm(forms.ModelForm):
     terms = forms.BooleanField(required=True)
+
     class Meta:
         model = Customer
         fields = ('firstName', 'lastName', 'gender', 'day', 'month', 'year', 'nationalId', 'city', 'address', 'phone')
-
-
-
 
 # class SignUpForm(UserCreationForm):
 #     first_name = forms.CharField(max_length=30, required=True)

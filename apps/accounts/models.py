@@ -3,9 +3,9 @@ from django.db import models
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
-
 from django.contrib.auth.models import AbstractUser, AbstractBaseUser
 from django.db import models
+
 
 class MyUser(AbstractUser):
     is_manager = models.BooleanField(default=False)
@@ -14,6 +14,7 @@ class MyUser(AbstractUser):
 
 
 SEX_CHOICES = (('male', 'Male'), ('female', 'Female'), ('other', 'Other'), ('blank', 'blank'))
+
 
 class Customer(models.Model):
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE, primary_key=True)
@@ -28,8 +29,10 @@ class Customer(models.Model):
     address = models.CharField(max_length=100, default='st')
     phone = models.CharField(max_length=12)
 
+
 class Manager(models.Model):
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE, primary_key=True)
+
 
 class Employee(models.Model):
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE, primary_key=True)
@@ -43,9 +46,6 @@ class Employee(models.Model):
     city = models.CharField(max_length=10, default='blank')
     address = models.CharField(max_length=100, default='st')
     phone = models.CharField(max_length=12)
-
-
-
 
 # class Profile(models.Model):
 #     user = models.OneToOneField(MyUser, related_name='profile')
