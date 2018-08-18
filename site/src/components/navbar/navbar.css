@@ -1,0 +1,31 @@
+.navbar{
+    overflow: auto;
+    width: 90%;
+    background-color: #F9F9F9;
+    border-radius: 50px;
+    position: fixed;
+    top: 0px;
+    z-index: 2;
+    left: 5%;
+    border: 1px solid #97C4C4;
+    margin-top: 5px;
+}
+
+.navComponents{
+    background-color: #F9F9F9;
+    padding: 15px 10px;
+    float: left;
+    color: black;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    margin: 5px 10px;
+}
+
+.navComponents:nth-child(1){
+    margin-left: 50px ;
+}
+.navComponents:hover{
+    background-color: #97C4C4;
+    color: white;
+}

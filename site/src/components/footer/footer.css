@@ -1,0 +1,38 @@
+.footer{
+    width: 100%;
+    background-color: #F9F9F9;
+    overflow: auto;
+    text-align: center;
+}
+
+.footer-components{
+    float: left;
+    width: 20%;
+    height: 200px;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+}
+
+.wrapper-header{
+    padding: 10px 0;
+    border-bottom: 1px solid #97C4C4;
+}
+
+.wrapper-body{
+    padding: 20px 0;
+}
+
+.wrapper-body-button{
+    padding: 5% 20%;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #97C4C4;
+    color: #F9F9F9;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.wrapper-body-button:hover{
+    border: 1px solid #97C4C4;
+    background-color: #F9F9F9;
+    color: black;
+}

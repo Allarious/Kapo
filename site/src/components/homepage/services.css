@@ -1,0 +1,120 @@
+.container{
+    width: 700px;
+    height: 700px;
+    margin: 0px auto;
+    /*background-color: #F9F9F9;*/
+    overflow: hidden;
+    /*border-radius: 300px;*/
+}
+
+.section{
+    width: 100%;
+    background-color: #F9F9F9;
+    padding: 40px 0;
+    margin: 150px 0;
+}
+
+.content{
+    background-color: #97C4C4;
+    height: 30%;
+    width: 30%;
+    float: left;
+    margin: 1.5% 1.5%;
+    transition: 0.3s;
+    box-shadow: 5px 5px 10px #aaaaaa;
+}
+
+.break{
+    clear: both;
+}
+
+.content:hover{
+    background-color: #F9F9F9;
+}
+
+.content:nth-child(1){
+    border-radius: 50% 0 0 0;
+    background-image: url("../../images/icons8-visa-filled.svg");
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.content:nth-child(1):hover{
+    background-image: url("../../images/icons8-visa-filled (1).svg");
+}
+.content:nth-child(2){
+    background-image: url("../../images/bitcoin-coin1.svg");
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.content:nth-child(2):hover{
+    background-image: url("../../images/bitcoin-coin.svg");
+}
+.content:nth-child(3){
+    border-radius: 0 50% 0 0;
+    background-image: url("../../images/f06353389f1.svg");
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.content:nth-child(3):hover{
+    background-image: url("../../images/f06353389f.svg");
+}
+.content:nth-child(5){
+    background-image: url("../../images/mastercard1.svg");
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.content:nth-child(5):hover{
+    background-image: url("../../images/mastercard.svg");
+}
+.content:nth-child(6){
+    border-radius: 50%;
+    background-image: url("../../images/if_88_111104.svg");
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.content:nth-child(6):hover{
+    background-image: url("../../images/if_88_111104_2.svg");
+}
+.content:nth-child(7){
+    background-image: url("../../images/tether-seeklogo.com1.svg");
+    background-size: 70% 70%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.content:nth-child(7):hover{
+    background-image: url("../../images/tether-seeklogo.com.svg");
+}
+.content:nth-child(9){
+    border-radius: 0 0 0 50%;
+    background-image: url("../../images/e8076fb39d1.svg");
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.content:nth-child(9):hover{
+    background-image: url("../../images/e8076fb39d.svg");
+}
+.content:nth-child(10){
+    background-image: url("../../images/litecoin1.svg");
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.content:nth-child(10):hover{
+    background-image: url("../../images/litecoin.svg");
+}
+.content:nth-child(11){
+    border-radius: 0 0 50% 0;
+    background-image: url("../../images/icons8-paypal (1).svg");
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.content:nth-child(11):hover{
+    background-image: url("../../images/icons8-paypal.svg");
+}
