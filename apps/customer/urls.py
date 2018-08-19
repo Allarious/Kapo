@@ -6,5 +6,6 @@ from . import views
 
 app_name = "customer"
 urlpatterns = [
-url(r'^profile/$', profile_view, name='customer_profile'),
+url(r'^profile/$', customer_profile_view, name='customer_profile'),
+url(r'^home/$', customer_home_view, name='customer_home'),
 ]
