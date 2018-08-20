@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+</head>
+
+<body>
+
+
+    <h1>Rial Management</h1>
+    <div> remain : {{ customer.rial_wallet }} Rials</div>
+
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Submit</button>
+    </form>
+
+
+
+</body>
+</html>
