@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import FormView
 
-from apps.customer.forms.forms import RialIncForm
+from apps.customer.forms.forms import RialIncForm, ExchangeForm
 from apps.customer.models import Customer
 
 
@@ -20,10 +20,6 @@ def customer_home_view(request):
 
 
 @login_required
-
-
-
-
 def customer_rial_inc_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     if request.method == 'POST':
@@ -32,8 +28,24 @@ def customer_rial_inc_view(request):
             amount = form.cleaned_data['amount']
             customer.rial_wallet += amount
             customer.save()
-            return HttpResponseRedirect('/customer/home/')
+            return HttpResponseRedirect('/customer/')
     else:
         form = RialIncForm()
 
     return render(request, 'customer_rial_wallet_inc.html', {'customer': customer, 'form': form})
+
+
+@login_required
+def customer_exchange_view(request):
+    customer = get_object_or_404(Customer, pk=request.user.id)
+    if request.method == 'POST':
+        form = ExchangeForm(request.POST)
+        if form.is_valid():
+            amount = form.cleaned_data['amount']
+            customer.rial_wallet += amount
+            customer.save()
+            return HttpResponseRedirect('/customer/')
+    else:
+        form = ExchangeForm()
+
+    return render(request, 'customer_exchange.html', {'customer': customer, 'form': form})

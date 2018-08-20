@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+</head>
+
+<body>
+
+
+<h1>Exchange</h1>
+<div> Rial remain : {{ customer.rial_wallet }} ﷼<br/>
+    Euro remain : {{ customer.euro_wallet }} €<br/>
+    Dollar remain: {{ customer.dollar_wallet }}<br/>
+    Rial =
+
+
+</div>
+
+
+<form method="post" novalidate>
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Submit</button>
+</form>
+
+
+</body>
+</html>

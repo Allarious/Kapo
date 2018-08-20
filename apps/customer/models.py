@@ -18,3 +18,6 @@ class Customer(models.Model):
     rial_wallet = models.IntegerField(default=0)
     dollar_wallet = models.IntegerField(default=0)
     euro_wallet = models.IntegerField(default=0)
+
+
+
