@@ -1,8 +1,7 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.views.generic import FormView
-
+from apps.core.models import Configuration
 from apps.customer.forms.forms import RialIncForm, ExchangeForm
 from apps.customer.models import Customer
 
@@ -38,14 +37,42 @@ def customer_rial_inc_view(request):
 @login_required
 def customer_exchange_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
+    dollar_rate = Configuration.objects.get(key='dollar')
+    euro_rate = Configuration.objects.get(key='euro')
     if request.method == 'POST':
         form = ExchangeForm(request.POST)
         if form.is_valid():
             amount = form.cleaned_data['amount']
-            customer.rial_wallet += amount
+            currency = form.cleaned_data['currency']
+            if currency[0] == 'euro':
+                cost = amount * int(euro_rate.value)
+                if customer.rial_wallet >= cost:
+                    customer.rial_wallet -= cost
+                    customer.euro_wallet += int(amount)
+                else:
+                    form.add_error('amount', 'not enough money')
+                    return render(request, 'customer_exchange.html', {'customer': customer,
+                                                                      'form': form,
+                                                                      'dollar': dollar_rate,
+                                                                      'euro': euro_rate, })
+            elif currency[0] == 'dollar':
+                cost = amount * int(dollar_rate.value)
+                if customer.rial_wallet >= cost:
+                    customer.rial_wallet -= cost
+                    customer.dollar_wallet += int(amount)
+                else:
+                    form.add_error('amount', 'not enough money')
+                    return render(request, 'customer_exchange.html', {'customer': customer,
+                                                                      'form': form,
+                                                                      'dollar': dollar_rate,
+                                                                      'euro': euro_rate, })
+
             customer.save()
             return HttpResponseRedirect('/customer/')
     else:
         form = ExchangeForm()
 
-    return render(request, 'customer_exchange.html', {'customer': customer, 'form': form})
+    return render(request, 'customer_exchange.html', {'customer': customer,
+                                                      'form': form,
+                                                      'dollar': dollar_rate,
+                                                      'euro': euro_rate, })

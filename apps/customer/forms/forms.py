@@ -6,7 +6,9 @@ class RialIncForm(forms.Form):
 
 
 class ExchangeForm(forms.Form):
-    amount = forms.IntegerField()
+    amount = forms.IntegerField( required=True, min_value=10, initial=0)
     CHOICES = (('dollar', 'Dollar'),
                ('euro', 'Euro'))
-    picked = forms.MultipleChoiceField(choices=CHOICES, widget=forms.MultipleChoiceField())
+    currency = forms.MultipleChoiceField(choices=CHOICES, label='currency',)
+
+
