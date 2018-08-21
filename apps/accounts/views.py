@@ -106,9 +106,10 @@ from apps.accounts.forms.forms import SignUpForm, UserForm
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 # Create your views here.
-
 
 def register(request):
     form = UserForm(request.POST or None)
@@ -137,24 +138,29 @@ def sign_up(request):
         form = SignUpForm(request.POST)
         if form.is_valid() and user_form.is_valid():
             user = user_form.save()
+            username = request.POST['username']
+            password = request.POST['password']
             user.set_password(user.password)
             user.is_customer = True
-            if request.user.username != '' and request.user.is_authorized and not request.user.isBen and not request.user.isOrg:
-                user.state = True
             user.save()
             customer = form.save(commit=False)
             customer.user = user
             customer.save()
-
-
-            return render(request, 'thanks.html')
+            user =authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect(reverse('accounts:customer_home'))
 
         else:
+            # print(form)
+            # print(user_form)
             print(user_form.errors, form.errors)
 
     else:
         user_form = UserForm()
         form = SignUpForm()
+    print("how")
     return render(request, 'SignUp.html',
                   {'user_form': user_form, 'form': form})
 
@@ -168,7 +174,7 @@ def login_user(request):
             if user.is_active:
                 if user.is_customer:
                     login(request, user)
-                    return render(request, 'userProfile.html', {})
+                    return HttpResponseRedirect(reverse('accounts:customer_home'))
                 if user.is_manager:
                     login(request, user)
                     return render(request, 'managerProfile.html', {})

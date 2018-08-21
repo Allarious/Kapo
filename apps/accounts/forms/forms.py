@@ -41,7 +41,7 @@ class SignUpForm(forms.ModelForm):
 
     class Meta:
         model = Customer
-        fields = ('first_name', 'last_name', 'gender', 'day', 'month', 'year', 'national_id', 'city', 'address', 'phone')
+        fields = ('first_name', 'last_name')#, 'gender', 'day', 'month', 'year', 'national_id', 'city', 'address', 'phone')
 
 # class SignUpForm(UserCreationForm):
 #     first_name = forms.CharField(max_length=30, required=True)
