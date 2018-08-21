@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:3000/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+    <link rel="manifest" href="http://localhost:3000/manifest.json">
+    <link rel="shortcut icon" href="http://localhost:3000/favicon.ico">
+    <link rel="stylesheet" href="./React App_files/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <!--
+      Notice the use of  in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Home Page</title>
+  <style type="text/css">body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+</style><style type="text/css">body{
+  padding-top: 75px;
+}
+.App__App__3t9oX {
+  text-align: center;
+}
+
+</style><style type="text/css">.navbar__navbar__2bGl1{
+    overflow: auto;
+    width: 90%;
+    background-color: #F9F9F9;
+    border-radius: 50px;
+    position: fixed;
+    top: 0px;
+    z-index: 2;
+    left: 5%;
+    border: 1px solid #97C4C4;
+    margin-top: 5px;
+}
+
+.navbar__navComponents__A_iF-{
+    background-color: #F9F9F9;
+    padding: 15px 10px;
+    float: left;
+    color: black;
+    cursor: pointer;
+    border-radius: 5px;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    margin: 5px 10px;
+}
+
+.navbar__navComponents__A_iF-:nth-child(1){
+    margin-left: 50px ;
+}
+.navbar__navComponents__A_iF-:hover{
+    background-color: #97C4C4;
+    color: white;
+}</style><style type="text/css">.footer__footer__1ewxg{
+    width: 100%;
+    background-color: #F9F9F9;
+    overflow: auto;
+    text-align: center;
+}
+
+.footer__footer-components__24pDN{
+    float: left;
+    width: 20%;
+    height: 200px;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+}
+
+.footer__wrapper-header__2lVLG{
+    padding: 10px 0;
+    border-bottom: 1px solid #97C4C4;
+}
+
+.footer__wrapper-body__34NLC{
+    padding: 20px 0;
+}
+
+.footer__wrapper-body-button__19lEO{
+    padding: 5% 20%;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: #97C4C4;
+    color: #F9F9F9;
+    cursor: pointer;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+.footer__wrapper-body-button__19lEO:hover{
+    border: 1px solid #97C4C4;
+    background-color: #F9F9F9;
+    color: black;
+}</style><style type="text/css">.login__login-container__fTfJi{
+    padding-top: 30px;
+    background-color: #F9F9F9;
+    margin: 100px auto;
+    width: 300px;
+    border-radius: 20px;
+    text-align: center;
+    -webkit-box-shadow: 5px 5px 10px #aaaaaa;
+            box-shadow: 5px 5px 10px #aaaaaa;
+}
+.login__logo__2KG6D{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background-color: #97C4C4;
+    margin: auto;
+    -webkit-box-shadow: 1px 1px 10px #aaaaaa;
+            box-shadow: 1px 1px 10px #aaaaaa;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.login__forget-password__1Uigg{
+    cursor: pointer;
+    font-size: 15px;
+    color: black;
+    margin: 0px auto;
+    padding-bottom: 20px;
+}
+</style><style type="text/css">.input__login-input__1pYxI{
+    margin-top: 20px;
+    height: 20px;
+    width: 230px;
+    border: 2px solid #97C4C4;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 15px;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+.input__login-input__1pYxI:focus{
+    outline: none;
+    border: 2px solid rosybrown;
+}</style><style type="text/css">.button__form-button__KT9Md{
+    width: 60%;
+    height: 50px;
+    background-color: #97C4C4;
+    border-radius: 5px;
+    margin-top: 30px;
+    color: #F9F9F9;
+    font-size: 15px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+
+}
+.button__form-button__KT9Md:hover{
+    background-color: #F9F9F9;
+    color: black;
+    border: 1px solid #97C4C4;
+}
+.button__form-button__KT9Md:focus{
+    outline: none;
+}</style><style type="text/css">.resetpassword__reset-password-container__1799K{
+    padding-top: 30px;
+    background-color: #F9F9F9;
+    margin: 100px auto;
+    width: 300px;
+    border-radius: 20px;
+    text-align: center;
+    -webkit-box-shadow: 5px 5px 10px #aaaaaa;
+            box-shadow: 5px 5px 10px #aaaaaa;
+}
+.resetpassword__logo__2DtMR{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background-color: #97C4C4;
+    margin: auto;
+    -webkit-box-shadow: 1px 1px 10px #aaaaaa;
+            box-shadow: 1px 1px 10px #aaaaaa;
+    background-size: 80% 80%;
+    background-repeat: no-repeat;
+    background-position: 50% 90%;
+}
+</style><style type="text/css">.signup__signup-container__3eqmF{
+    padding-top: 30px;
+    background-color: #F9F9F9;
+    margin: 100px auto;
+    width: 300px;
+    border-radius: 20px;
+    text-align: center;
+    -webkit-box-shadow: 5px 5px 10px #aaaaaa;
+            box-shadow: 5px 5px 10px #aaaaaa;
+}
+.signup__conditions-of-use__2PETr{
+    font-size: 10px;
+    padding-bottom: 20px;
+}
+</style><style type="text/css"></style><style type="text/css">.firstglance__container__3AFm_ {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+    z-index: 1;
+    height: 500px;
+    width: 90%;
+    background-color: #97C4C4;
+    border-radius: 30px;
+    margin: 30px auto;
+    overflow: hidden;
+}
+
+.firstglance__head__389rp{
+    position: relative;
+    top: 200px;
+    right: 25%;
+}
+.firstglance__site-name__2TUAQ{
+    float: left;
+    font-size: 100px;
+    color: #F9F9F9;
+}
+.firstglance__motto__2FEn8{
+    clear: both;
+    font-size: 20px;
+    color: #F9F9F9;
+    position: relative;
+    top:20px;
+}
+
+.firstglance__card__1RJpG {
+    width: 230px;
+    height: 120px;
+    background: #FFFFFF;
+    border-radius: 11px;
+    display: block;
+    padding: 30px;
+    content: "";
+    -webkit-box-shadow: 0 3px 30px 0 rgba(26, 34, 40, 0.12), 0 10px 50px 0 rgba(0, 0, 0, 0.18);
+            box-shadow: 0 3px 30px 0 rgba(26, 34, 40, 0.12), 0 10px 50px 0 rgba(0, 0, 0, 0.18);
+    z-index: 1;
+    position: relative;
+    bottom: 150px;
+    left: 30%;
+}
+
+.firstglance__item__1KV_W {
+    width: 230px;
+    display: block;
+    background: #FFFFFF;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    -webkit-animation: firstglance__down__2noau 1.5s infinite;
+            animation: firstglance__down__2noau 1.5s infinite;
+    padding: 30px;
+}
+.firstglance__item__1KV_W .firstglance__pic__bAraj {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    background: #E7E7E7;
+    border-radius: 50%;
+}
+.firstglance__item__1KV_W .firstglance__line__3DgKJ {
+    width: 145px;
+    display: inline-block;
+    height: 30px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    background: #E7E7E7;
+    border-radius: 30px;
+}
+
+.firstglance__item-animate__VQRBu {
+    -webkit-animation: firstglance__in__4N38i 1.5s infinite;
+            animation: firstglance__in__4N38i 1.5s infinite;
+}
+
+@-webkit-keyframes firstglance__in__4N38i {
+    0% {
+        opacity: 1;
+        -webkit-transform: translate(0, 0) scaleX(1) scaleY(1) rotateX(0deg);
+                transform: translate(0, 0) scaleX(1) scaleY(1) rotateX(0deg);
+    }
+    100% {
+        opacity: 0.5;
+        -webkit-transform: translate(0, 150%) scaleX(0.8) scaleY(0) rotateX(10deg);
+                transform: translate(0, 150%) scaleX(0.8) scaleY(0) rotateX(10deg);
+    }
+}
+
+@keyframes firstglance__in__4N38i {
+    0% {
+        opacity: 1;
+        -webkit-transform: translate(0, 0) scaleX(1) scaleY(1) rotateX(0deg);
+                transform: translate(0, 0) scaleX(1) scaleY(1) rotateX(0deg);
+    }
+    100% {
+        opacity: 0.5;
+        -webkit-transform: translate(0, 150%) scaleX(0.8) scaleY(0) rotateX(10deg);
+                transform: translate(0, 150%) scaleX(0.8) scaleY(0) rotateX(10deg);
+    }
+}
+@-webkit-keyframes firstglance__down__2noau {
+    0% {
+        opacity: 1;
+        -webkit-transform: translate(0, 0);
+                transform: translate(0, 0);
+    }
+    100% {
+        -webkit-transform: translate(0, calc(100% + 30px));
+                transform: translate(0, calc(100% + 30px));
+    }
+}
+@keyframes firstglance__down__2noau {
+    0% {
+        opacity: 1;
+        -webkit-transform: translate(0, 0);
+                transform: translate(0, 0);
+    }
+    100% {
+        -webkit-transform: translate(0, calc(100% + 30px));
+                transform: translate(0, calc(100% + 30px));
+    }
+}
+@-webkit-keyframes firstglance__down1__3_h-Q {
+    3% {
+        opacity: 1;
+        -webkit-transform: translate(0, 0);
+                transform: translate(0, 0);
+    }
+    100% {
+        -webkit-transform: translate(0, calc(100% + 30px));
+                transform: translate(0, calc(100% + 30px));
+    }
+}
+@keyframes firstglance__down1__3_h-Q {
+    3% {
+        opacity: 1;
+        -webkit-transform: translate(0, 0);
+                transform: translate(0, 0);
+    }
+    100% {
+        -webkit-transform: translate(0, calc(100% + 30px));
+                transform: translate(0, calc(100% + 30px));
+    }
+}
+@-webkit-keyframes firstglance__down2__3wht2 {
+    8% {
+        opacity: 1;
+        -webkit-transform: translate(0, 0);
+                transform: translate(0, 0);
+    }
+    100% {
+        -webkit-transform: translate(0, calc(100% + 30px));
+                transform: translate(0, calc(100% + 30px));
+    }
+}
+@keyframes firstglance__down2__3wht2 {
+    8% {
+        opacity: 1;
+        -webkit-transform: translate(0, 0);
+                transform: translate(0, 0);
+    }
+    100% {
+        -webkit-transform: translate(0, calc(100% + 30px));
+                transform: translate(0, calc(100% + 30px));
+    }
+}
+@-webkit-keyframes firstglance__down3__3jrK2 {
+    12% {
+        opacity: 1;
+        -webkit-transform: translate(0, 0);
+                transform: translate(0, 0);
+    }
+    100% {
+        -webkit-transform: translate(0, calc(100% + 30px));
+                transform: translate(0, calc(100% + 30px));
+    }
+}
+@keyframes firstglance__down3__3jrK2 {
+    12% {
+        opacity: 1;
+        -webkit-transform: translate(0, 0);
+                transform: translate(0, 0);
+    }
+    100% {
+        -webkit-transform: translate(0, calc(100% + 30px));
+                transform: translate(0, calc(100% + 30px));
+    }
+}
+.firstglance__item-container__3MzmG {
+    position: relative;
+    bottom: 150px;
+    left: 30%;
+}
+.firstglance__item-container__3MzmG .firstglance__item__1KV_W:nth-child(1) {
+    -webkit-animation: firstglance__down3__3jrK2 1.5s infinite;
+            animation: firstglance__down3__3jrK2 1.5s infinite;
+}
+.firstglance__item-container__3MzmG .firstglance__item__1KV_W:nth-child(2) {
+    -webkit-animation: firstglance__down2__3wht2 1.5s infinite;
+            animation: firstglance__down2__3wht2 1.5s infinite;
+}
+.firstglance__item-container__3MzmG .firstglance__item__1KV_W:nth-child(3) {
+    -webkit-animation: firstglance__down1__3_h-Q 1.5s infinite;
+            animation: firstglance__down1__3_h-Q 1.5s infinite;
+}
+.firstglance__item-container__3MzmG .firstglance__item__1KV_W:nth-child(4) {
+    -webkit-animation: firstglance__down__2noau 1.5s infinite;
+            animation: firstglance__down__2noau 1.5s infinite;
+}
+
+.firstglance__num__22xON {
+    font-family: Courier;
+    color: #464F56;
+    letter-spacing: 0.5px;
+    padding-top: 30px;
+}
+
+.firstglance__name__2_WtJ {
+    font-family: Helvetica;
+    color: #464F56;
+    font-size: 16px;
+    padding-top: 35px;
+}
+</style><style type="text/css">.services__container__2FFdR{
+    width: 700px;
+    height: 700px;
+    margin: 0px auto;
+    /*background-color: #F9F9F9;*/
+    overflow: hidden;
+    /*border-radius: 300px;*/
+}
+
+.services__section__3QZJX{
+    width: 100%;
+    background-color: #F9F9F9;
+    padding: 40px 0;
+    margin: 150px 0;
+}
+
+.services__content__18hIP{
+    background-color: #97C4C4;
+    height: 30%;
+    width: 30%;
+    float: left;
+    margin: 1.5% 1.5%;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    -webkit-box-shadow: 5px 5px 10px #aaaaaa;
+            box-shadow: 5px 5px 10px #aaaaaa;
+}
+
+.services__break__2oHwk{
+    clear: both;
+}
+
+.services__content__18hIP:hover{
+    background-color: #F9F9F9;
+}
+
+.services__content__18hIP:nth-child(1){
+    border-radius: 50% 0 0 0;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.services__content__18hIP:nth-child(1):hover{
+}
+.services__content__18hIP:nth-child(2){
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.services__content__18hIP:nth-child(2):hover{
+}
+.services__content__18hIP:nth-child(3){
+    border-radius: 0 50% 0 0;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.services__content__18hIP:nth-child(3):hover{
+}
+.services__content__18hIP:nth-child(5){
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.services__content__18hIP:nth-child(5):hover{
+}
+.services__content__18hIP:nth-child(6){
+    border-radius: 50%;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.services__content__18hIP:nth-child(6):hover{
+}
+.services__content__18hIP:nth-child(7){
+    background-size: 70% 70%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.services__content__18hIP:nth-child(7):hover{
+}
+.services__content__18hIP:nth-child(9){
+    border-radius: 0 0 0 50%;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.services__content__18hIP:nth-child(9):hover{
+}
+.services__content__18hIP:nth-child(10){
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.services__content__18hIP:nth-child(10):hover{
+}
+.services__content__18hIP:nth-child(11){
+    border-radius: 0 0 50% 0;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.services__content__18hIP:nth-child(11):hover{
+}</style></head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root">
+        <div class="App__App__3t9oX">
+            <div class="navbar__navbar__2bGl1">
+                <a href={% url 'accounts:index' %}><div class="navbar__navComponents__A_iF-">  HomePage  </div></a>
+                <a href={% url 'accounts:customer_home' %}><div class="navbar__navComponents__A_iF-"> Profile </div></a>
+                <a href={% url 'accounts:login' %}><div class="navbar__navComponents__A_iF-">  Login  </div></a>
+                <a href={% url 'accounts:register' %}><div class="navbar__navComponents__A_iF-">  Signup  </div></a>
+                <a href={% url 'accounts:logout' %}><div class="navbar__navComponents__A_iF-">  Logout  </div></a>
+            </div>
+            <div>
+                <div class="firstglance__container__3AFm_">
+                    <div class="firstglance__head__389rp">
+                        <div class="firstglance__site-name__2TUAQ">Kapo</div>
+                        <div class="firstglance__motto__2FEn8">Everything Will Be A Lot Easier From Now On!</div>
+                    </div>
+                    <div class="firstglance__item-container__3MzmG">
+                        <div class="firstglance__item__1KV_W"><div class="firstglance__pic__bAraj"></div>
+                            <div class="firstglance__line__3DgKJ"></div>
+                        </div>
+                        <div class="firstglance__item__1KV_W">
+                            <div class="firstglance__pic__bAraj"></div>
+                            <div class="firstglance__line__3DgKJ"></div>
+                        </div>
+                        <div class="firstglance__item-animate__VQRBu"><div class="firstglance__item__1KV_W"><div class="firstglance__pic__bAraj"></div><div class="firstglance__line__3DgKJ"></div></div></div></div><div class="firstglance__card__1RJpG"><div><svg width="54px" height="18px" viewBox="0 0 54 18" version="1.1"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Desktop-HD" transform="translate(-880.000000, -450.000000)" fill-rule="nonzero" fill="#464F56"><g id="Group-12" transform="translate(857.000000, 425.000000)"><g id="card"><g id="Visa_Inc._logo" transform="translate(23.276576, 25.726742)"><polygon id="polygon9" points="23.0863929 16.9935312 18.7706301 16.9935312 21.4700174 0.302548034 25.7855442 0.302548034"></polygon><path d="M38.7314166,0.710594948 C37.8801586,0.372876536 36.5299929,-6.12702237e-06 34.860517,-6.12702237e-06 C30.5985626,-6.12702237e-06 27.5973291,2.2726901 27.578921,5.52196131 C27.5435207,7.91926643 29.7277163,9.25078794 31.36132,10.0501256 C33.0310319,10.8669275 33.598616,11.4000553 33.598616,12.1281205 C33.5816239,13.2462965 32.2493944,13.7617242 31.0068455,13.7617242 C29.2837972,13.7617242 28.3605586,13.4959863 26.9575286,12.8738858 L26.3892365,12.6072039 L25.7853082,16.3539667 C26.7975194,16.815114 28.6624047,17.2243409 30.5985626,17.242277 C35.1269629,17.242277 38.075096,15.004745 38.1100242,11.5421283 C38.1272523,9.64207873 36.9739121,8.18618433 34.4873983,6.99649984 C32.9779316,6.23279838 32.053513,5.71784271 32.053513,4.93644113 C32.0712131,4.22607605 32.8353865,3.49848286 34.5393187,3.49848286 C35.9423487,3.4628466 36.9732041,3.80009301 37.7541337,4.13757542 L38.1444805,4.31481269 L38.7314166,0.710594948 L38.7314166,0.710594948 L38.7314166,0.710594948 Z" id="path11"></path><path d="M44.4674376,11.080509 C44.8228561,10.1216342 46.1904859,6.41050765 46.1904859,6.41050765 C46.1725498,6.44614391 46.5451964,5.43393268 46.758306,4.81254024 L47.0599161,6.25073451 C47.0599161,6.25073451 47.87719,10.246007 48.0546632,11.080509 C47.3801704,11.080509 45.3198757,11.080509 44.4674376,11.080509 L44.4674376,11.080509 Z M49.7947037,0.302548034 L46.4564598,0.302548034 C45.4270205,0.302548034 44.6449109,0.604158188 44.2007557,1.68740592 L37.7902419,16.9932952 L42.3186423,16.9932952 C42.3186423,16.9932952 43.0641716,14.9332365 43.2244167,14.4895533 C43.7212003,14.4895533 48.1264077,14.4895533 48.7655003,14.4895533 C48.8894012,15.0755455 49.280456,16.9932952 49.280456,16.9932952 L53.2764365,16.9932952 L49.7947037,0.302548034 L49.7947037,0.302548034 L49.7947037,0.302548034 Z" id="path13"></path><path d="M15.1659404,0.302548034 L10.9393862,11.6842013 L10.4775309,9.37586883 C9.69612929,6.71235381 7.24548779,3.81850114 4.51070026,2.37959887 L8.38207191,16.9758311 L12.9458725,16.9758311 L19.7295049,0.302548034 L15.1659404,0.302548034 L15.1659404,0.302548034 L15.1659404,0.302548034 Z" id="path15"></path><path d="M7.01467814,0.302548034 L0.0710365562,0.302548034 L4.89161542e-08,0.639794442 C5.41647473,2.02488833 9.00370035,5.36360418 10.4775309,9.37657684 L8.96806409,1.70557805 C8.71955432,0.63955844 7.95585287,0.337712285 7.01467814,0.302548034 L7.01467814,0.302548034 Z" id="path17"></path></g></g></g></g></g></svg><div class="firstglance__num__22xON">1321 5328 1249 1249</div><div class="firstglance__name__2_WtJ">Burak Aslan</div></div></div></div><div class="services__section__3QZJX"><div class="services__container__2FFdR"><div class="services__content__18hIP"></div><div class="services__content__18hIP"></div><div class="services__content__18hIP"></div><div class="services__break__2oHwk"></div><div class="services__content__18hIP"></div><div class="services__content__18hIP"></div><div class="services__content__18hIP"></div><div class="services__break__2oHwk"></div><div class="services__content__18hIP"></div><div class="services__content__18hIP"></div><div class="services__content__18hIP"></div><div class="services__break__2oHwk"></div></div></div></div><div class="footer__footer__1ewxg"><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Contact Us</div><div class="footer__wrapper-body__34NLC">021-1234567<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Email Us</div><div class="footer__wrapper-body__34NLC">info@Kapo.ir<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Follow Us</div><div class="footer__wrapper-body__34NLC"><button class="footer__wrapper-body-button__19lEO">Telegram</button><button class="footer__wrapper-body-button__19lEO">Instagram</button></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Meet us</div><div class="footer__wrapper-body__34NLC">Sharif University Of Tehran<div></div></div></div></div></div></div></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  <script type="text/javascript" src="./React App_files/bundle.js.download"></script>
+
+</body></html>

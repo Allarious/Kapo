@@ -104,12 +104,14 @@ from apps.accounts.forms.forms import SignUpForm, UserForm
 #     return render(request, 'music/login.html')
 
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 # Create your views here.
+def index(request):
+    return render(request, 'Home_page.html', {})
 
 def register(request):
     form = UserForm(request.POST or None)
@@ -161,7 +163,7 @@ def sign_up(request):
         user_form = UserForm()
         form = SignUpForm()
     print("how")
-    return render(request, 'SignUp.html',
+    return render(request, 'SignUp1.html',
                   {'user_form': user_form, 'form': form})
 
 
@@ -182,7 +184,11 @@ def login_user(request):
                     login(request, user)
                     return render(request, 'employeeProfile.html', {})
             else:
-                return render(request, 'index.html', {'error_message': 'Your account has been disabled'})
+                return render(request, 'Login.html', {'error_message': 'Your account has been disabled'})
         else:
-            return render(request, 'index.html', {'error_message': 'Invalid login'})
-    return render(request, 'index.html')
+            return render(request, 'Login.html', {'error_message': 'Invalid login'})
+    return render(request, 'Login.html')
+
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('accounts:index'))

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up</title>
+  <meta charset="utf-8">
+  
+</head>
+
+  <body>
+ <div>
+   <div id="signup">
+      <div>
+         <div>
+            <h1>Sign up</h1>
+           <div class="divider"></div>
+         </div>
+           <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+               {% csrf_token %}
+{#               {{ user_form }}#}
+{#               {{ form }}#}
+	            <div>
+              <input id="first-name" type="text" name="first_name">
+              <label for="first-name">First Name</label>
+            </div>
+            <div>
+              <input id="last-name" type="text" name="last_name">
+              <label for="last-name">Last Name</label>
+             </div>
+               <div>
+              <input id="user_name" type="text" name="username">
+              <label for="user_name">Username</label>
+             </div>
+             <div>
+              <input id="email" type="email" name="email">
+              <label for="email">Email</label>
+             </div>
+             <div>
+               <input id="password" type="password" name="password">
+               <label for="password">Password</label>
+              </div>
+               <div>
+               <input id="cpassword" type="password" name="password2">
+               <label for="cpassword">Confirm Password</label>
+              </div>
+              <div>
+                  <div class="controls">
+                    <input type="checkbox" id="checkbox" class="checkbox" name="terms">
+                    <label class="checkb" style="display: inline;" for="checkbox"><span></span>I accept the agreements</label>
+                </div>
+               <button type="submit" id="done" class="btn btn-success">Done</button>
+               <input type="button" id="cancel" value="Cancel">
+              </div>
+             </form>
+           </div>
+        </div>
+    </div>
+  <div id="test-check"></div>
+</body>
+</html>
