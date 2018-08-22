@@ -1,9 +1,9 @@
 import React from 'react';
 
-import classes from './button.css';
+import classes from './authbutton.css';
 
-const Button = (props) => {
+const Authbutton = (props) => {
     return <button className={classes["form-button"]}>{props.children}</button>;
 };
 
-export default Button;
+export default Authbutton;

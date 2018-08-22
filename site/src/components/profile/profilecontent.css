@@ -1,0 +1,17 @@
+.container{
+    float: left;
+    width: 35%;
+    height: 50px;
+    border: #468189 solid 1px;
+    margin: 5px 5%;
+    border-radius: 25px;
+    line-height: 50px;
+    padding: 0 2%;
+}
+.name{
+    color: #468189;
+    float: left;
+}
+.cont{
+    float: left;
+}

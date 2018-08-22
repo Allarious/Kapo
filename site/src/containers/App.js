@@ -8,6 +8,7 @@ import Login from '../components/login'
 import ResetPassword from '../components/resetpassword';
 import SignUp from '../components/signup';
 import HomePage from '../components/homepage';
+import Profile from '../components/profile';
 
 class App extends Component {
 
@@ -28,6 +29,13 @@ class App extends Component {
         } else if(this.state.visiblePage === 'ForgetPassword')
         {
             return <ResetPassword/>;
+        } else if(this.state.visiblePage === 'Profile')
+        {
+            return <Profile/>;
+        }
+        else if(this.state.visiblePage === 'EditProfile')
+        {
+            return <Profile/>;
         }
     };
 

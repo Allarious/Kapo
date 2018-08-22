@@ -11,7 +11,7 @@ const Navbar = (props) => {
             clicked: 'Homepage',
             id:'c1'},
         {text :'Profile',
-            clicked: 'Homepage',
+            clicked: 'Profile',
             id:'c2'},
         {text :'Login',
             clicked: 'Login',

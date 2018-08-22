@@ -1,14 +1,14 @@
 import React from 'react';
 import classes from './Authentication/resetpassword.css';
-import Inp from './Authentication/input';
-import Button from './Authentication/button';
+import Inp from './inputs/input';
+import Authbutton from './Buttons/authbutton';
 
 const ResetPassword = () => {
     return (
         <div className={classes["reset-password-container"]}>
             <div className={classes.logo}></div>
             <Inp holder="Enter Your Email" type="text"/>
-            <Button>Confirm</Button>
+            <Authbutton>Confirm</Authbutton>
         </div>
     );
 };

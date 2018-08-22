@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Authentication/signup.css';
-import Inp from './Authentication/input';
-import Button from './Authentication/button';
+import Inp from './inputs/input';
+import Authbutton from './Buttons/authbutton';
 
 const SignUpPage = () => {
     return (
@@ -13,7 +13,7 @@ const SignUpPage = () => {
             <Inp holder="E-mail" type="email"/>
             <Inp holder="Password" type="password"/>
             <Inp holder="Confirm Password" type="password"/>
-            <Button>Sign Up</Button>
+            <Authbutton>Sign Up</Authbutton>
             <p className={classes["conditions-of-use"]}>By signing up you agree to our <a href="">Conditions of use</a></p>
         </div>
     );

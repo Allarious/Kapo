@@ -14,7 +14,7 @@
 
 .head{
     position: relative;
-    top: 200px;
+    top: 250px;
     right: 25%;
 }
 .site-name{
@@ -31,8 +31,8 @@
 }
 
 .card {
-    width: 230px;
-    height: 120px;
+    width: 270px;
+    height: 180px;
     background: #FFFFFF;
     border-radius: 11px;
     display: block;
@@ -41,12 +41,12 @@
     box-shadow: 0 3px 30px 0 rgba(26, 34, 40, 0.12), 0 10px 50px 0 rgba(0, 0, 0, 0.18);
     z-index: 1;
     position: relative;
-    bottom: 150px;
+    bottom: 250px;
     left: 30%;
 }
 
 .item {
-    width: 230px;
+    width: 270px;
     display: block;
     background: #FFFFFF;
     border-radius: 8px;
@@ -123,7 +123,7 @@
 }
 .item-container {
     position: relative;
-    bottom: 150px;
+    bottom: 250px;
     left: 30%;
 }
 .item-container .item:nth-child(1) {

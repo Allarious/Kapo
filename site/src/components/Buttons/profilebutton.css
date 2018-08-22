@@ -1,0 +1,22 @@
+.form-button{
+    width: 10%;
+    height: 50px;
+    background-color: #97C4C4;
+    border-radius: 5px;
+    margin-top: 30px;
+    color: #F9F9F9;
+    font-size: 15px;
+    cursor: pointer;
+    margin-bottom: 30px;
+    transition: 0.3s;
+    float: right;
+
+}
+.form-button:hover{
+    background-color: #F9F9F9;
+    color: black;
+    border: 1px solid #97C4C4;
+}
+.form-button:focus{
+    outline: none;
+}

@@ -1,0 +1,19 @@
+.container{
+    padding: 0 2%;
+    height: 50px;
+    border: 1px solid #468189;
+    border-radius: 25px;
+    width: 30%;
+    margin-left: 2.5%;
+    line-height: 50px;
+    float: left;
+    text-align: center;
+    cursor: pointer;
+}
+.name{
+    color: #468189;
+    float: left;
+}
+.amount{
+    float: left;
+}
