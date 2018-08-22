@@ -1,7 +1,7 @@
 import React from 'react';
-import classes from './Authentication/signup.css';
+import classes from './authentication/signup.css';
 import Inp from './inputs/input';
-import Authbutton from './Buttons/authbutton';
+import Authbutton from './buttons/authbutton';
 
 const SignUpPage = () => {
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
-import classes from './Authentication/resetpassword.css';
+import classes from './authentication/resetpassword.css';
 import Inp from './inputs/input';
-import Authbutton from './Buttons/authbutton';
+import Authbutton from './buttons/authbutton';
 
 const ResetPassword = () => {
     return (

@@ -9,6 +9,7 @@ import ResetPassword from '../components/resetpassword';
 import SignUp from '../components/signup';
 import HomePage from '../components/homepage';
 import Profile from '../components/profile';
+import EditProfile from '../components/editprofile';
 
 class App extends Component {
 
@@ -31,11 +32,11 @@ class App extends Component {
             return <ResetPassword/>;
         } else if(this.state.visiblePage === 'Profile')
         {
-            return <Profile/>;
+            return <Profile clicked={this.changePage}/>;
         }
         else if(this.state.visiblePage === 'EditProfile')
         {
-            return <Profile/>;
+            return <EditProfile/>;
         }
     };
 

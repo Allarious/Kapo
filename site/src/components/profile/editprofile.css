@@ -1,0 +1,13 @@
+.signup-container{
+    padding-top: 30px;
+    background-color: #F9F9F9;
+    margin: 100px auto;
+    width: 300px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 5px 5px 10px #aaaaaa;
+}
+.conditions-of-use{
+    font-size: 10px;
+    padding-bottom: 20px;
+}

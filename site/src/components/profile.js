@@ -2,12 +2,12 @@ import React from 'react';
 
 import classes from './profile/profile.css';
 
-import Button from './Buttons/profilebutton'
+import Button from './buttons/profilebutton'
 import Att from './profile/profilecontent';
 import Table from './table/table';
 import WalletPart from "./profile/walletpart";
 
-const Profile = () => {
+const Profile = (props) => {
 
     const profile =[
         {att : 'First Name',
@@ -76,8 +76,9 @@ const Profile = () => {
                         })}
                     </div>
             </div>
+            <div onClick={() => props.clicked('EditProfile')}>
             <Button>Edit Profile</Button>
-
+            </div>
         </div>
     );
 };
