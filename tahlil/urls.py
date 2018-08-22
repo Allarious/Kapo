@@ -1,15 +1,18 @@
 from django.conf.urls import include, url
+from django.urls import path
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib.auth.views import password_reset_complete, password_reset, password_reset_done, password_reset_confirm
+from django.contrib.auth.views import password_reset_complete, password_reset, password_reset_done, \
+    password_reset_confirm
+
 from apps.accounts.views import login_user, index
 
 urlpatterns = [
-    url(r'^$', index, name='index'),
+    path('', include('apps.kapo.urls'), name='index'),
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/', include('apps.accounts.urls', namespace='accounts')),
-    url(r'^customer/', include('apps.customer.urls', namespace='customer')),
+    url(r'^accounts/', include('apps.accounts.urls')),
+    path('customer/', include('apps.customer.urls')),
 
     url(r'^login', login_user, name='login'),
     url(r'^reset/done/$', password_reset_complete, name='password_reset_complete'),

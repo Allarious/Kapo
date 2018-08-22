@@ -1,8 +1,8 @@
-from django.conf.urls import url
+from django.urls import path
 from apps.kapo.views import *
 
 urlpatterns = [
-    url(r'^contact-us', contact_us_view, name='contact-us'),
-    url(r'^about-us', about_us_view, name='about-us'),
-    url(r'^policy', policy_view, name='policy'),
+    path('contact-us/', contact_us_view, name='contact-us'),
+    path('about-us/', about_us_view, name='about-us'),
+    path('policy/', policy_view, name='policy'),
 ]
