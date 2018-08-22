@@ -25,6 +25,7 @@
     <option name="TEMPLATE_FOLDERS">
       <list>
         <option value="$MODULE_DIR$/apps/customer/templates" />
+        <option value="$MODULE_DIR$/apps/kapo/templates" />
       </list>
     </option>
   </component>

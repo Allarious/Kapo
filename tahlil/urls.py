@@ -4,12 +4,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import password_reset_complete, password_reset, password_reset_done, password_reset_confirm
 from apps.accounts.views import login_user
+from apps.kapo import views as kapo_views
 
 urlpatterns = [
     url(r'^', include('apps.accounts.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('apps.accounts.urls', namespace='accounts')),
     url(r'^customer/', include('apps.customer.urls', namespace='customer')),
+    url(r'^contact-us', kapo_views.contact_us_view, name='contact-us'),
+
 
     url(r'^login', login_user, name='login'),
     url(r'^password_reset_complete/', password_reset_complete, name='password_reset_complete'),
