@@ -8,7 +8,7 @@ from apps.accounts.views import login_user
 urlpatterns = [
     url(r'^', include('apps.accounts.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^accounts/', include('apps.accounts.urls')),
+    url(r'^accounts/', include('apps.accounts.urls', namespace='accounts')),
     url(r'^customer/', include('apps.customer.urls', namespace='customer')),
 
     url(r'^login', login_user, name='login'),

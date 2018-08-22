@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'apps.customer',
     'apps.accounts',
     'apps.core',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [
