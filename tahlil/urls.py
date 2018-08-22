@@ -10,8 +10,8 @@ from apps.accounts.views import login_user, index
 
 urlpatterns = [
     path('', include('apps.kapo.urls'), name='index'),
-    url(r'^admin/', admin.site.urls),
-    url(r'^accounts/', include('apps.accounts.urls')),
+    path('admin/', admin.site.urls),
+    path('accounts/', include('apps.accounts.urls')),
     path('customer/', include('apps.customer.urls')),
 
     url(r'^login', login_user, name='login'),
