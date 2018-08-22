@@ -15,7 +15,8 @@ def customer_profile_view(request):
 @login_required
 def customer_home_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
-    karmozds = Configuration.objects.exclude(key='dollar').exclude(key='euro')
+    # karmozds = Configuration.objects.exclude(key='dollar').exclude(key='euro')
+    karmozds = Configuration.objects.all()
     return render(request, 'customer_home.html', {'customer': customer, 'karmozds': karmozds})
 
 
