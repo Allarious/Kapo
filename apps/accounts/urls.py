@@ -8,7 +8,7 @@ from apps.customer.views import customer_home_view
 from django.contrib.auth.views import password_reset_complete, password_reset, password_reset_done, \
     password_reset_confirm
 
-app_name = "account"
+app_name = "accounst"
 urlpatterns = [
                   url(r'^$', views.index, name='index'),
                   url(r'^login', login_user, name='login'),
