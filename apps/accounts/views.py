@@ -10,6 +10,8 @@
 # from django.utils.http import urlsafe_base64_decode
 # from django.views import generic
 # from django.views.generic import FormView, RedirectView
+from django.urls import reverse
+
 from apps.accounts.forms.forms import SignUpForm, UserForm
 # from apps.accounts.tokens import account_activation_token
 #
@@ -107,11 +109,12 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
+
 
 # Create your views here.
 def index(request):
     return render(request, 'Home_page.html', {})
+
 
 def register(request):
     form = UserForm(request.POST or None)
@@ -133,7 +136,6 @@ def register(request):
     return render(request, 'music/register.html', context)
 
 
-
 def sign_up(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST, request.FILES)
@@ -148,7 +150,7 @@ def sign_up(request):
             customer = form.save(commit=False)
             customer.user = user
             customer.save()
-            user =authenticate(username=username, password=password)
+            user = authenticate(username=username, password=password)
             if user is not None:
                 if user.is_active:
                     login(request, user)
@@ -188,6 +190,7 @@ def login_user(request):
         else:
             return render(request, 'Login.html', {'error_message': 'Invalid login'})
     return render(request, 'Login.html')
+
 
 def user_logout(request):
     logout(request)
