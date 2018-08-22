@@ -14,10 +14,10 @@ urlpatterns = [
     path('accounts/', include('apps.accounts.urls')),
     path('customer/', include('apps.customer.urls')),
 
-    url(r'^login', login_user, name='login'),
-    url(r'^reset/done/$', password_reset_complete, name='password_reset_complete'),
-    url(r'^password-reset/$', password_reset, name='password_reset'),
-    url(r'^password-reset/done/$', password_reset_done, name='password_reset_done'),
+    path('login/', login_user, name='login'),
+    path('reset/done/', password_reset_complete, name='password_reset_complete'),
+    path('password-reset/', password_reset, name='password_reset'),
+    path('password-reset/done/', password_reset_done, name='password_reset_done'),
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         password_reset_confirm, name='password_reset_confirm'),
 
