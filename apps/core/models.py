@@ -1,8 +1,9 @@
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils import timezone
 
-# Create your models here.
-from apps.customer.models import Customer
+from apps.accounts.models import MyUser
+from apps.customer.models import Customer, DomesticCardField
 
 
 class Configuration(models.Model):
@@ -143,9 +144,6 @@ class AbstractTransaction(models.Model):
     id = models.AutoField(primary_key=True)
     owner = models.ForeignKey(Customer, on_delete=models.CASCADE)
     creation_time = models.DateTimeField(default=timezone.now)
-    dollar_cost = models.IntegerField(null=True, blank=True)
-    euro_cost = models.IntegerField(null=True, blank=True)
-    rial_cost = models.IntegerField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     paid = models.BooleanField(default=False)
     verified = models.BooleanField(default=False)
@@ -156,27 +154,63 @@ class AbstractTransaction(models.Model):
 
 class ExamTransaction(AbstractTransaction):
     exam_title = models.CharField(max_length=30)
+    dollar_cost = models.IntegerField(validators=[MaxValueValidator(1000), MinValueValidator(1)])
     site_url = models.URLField(null=True, blank=True)
+    site_authentication = models.BooleanField(default=False)
     site_username = models.CharField(null=True, blank=True, max_length=50)
-    site_password = models.CharField(null=True, blank=True,max_length=50)
+    site_password = models.CharField(null=True, blank=True, max_length=50)
+
+    def __str__(self):
+        return self.exam_title + ' ' + str(self.id)
 
 
 class ApplicationTuitionFeeTransaction(AbstractTransaction):
     FEE_CHOICES = (('application fee', 'Application Fee'), ('tuition fee', 'Tuition Fee'))
     fee_type = models.CharField(choices=FEE_CHOICES, max_length=50)
+
+    dollar_cost = models.IntegerField(
+        null=True, blank=True,
+        validators=[MaxValueValidator(1000), MinValueValidator(1)])
+
+    euro_cost = models.IntegerField(
+        null=True, blank=True,
+        validators=[MaxValueValidator(1000), MinValueValidator(1)])
+
     site_url = models.URLField(null=True, blank=True)
+    site_authentication = models.BooleanField(default=False)
     site_username = models.CharField(null=True, blank=True, max_length=50)
     site_password = models.CharField(null=True, blank=True, max_length=50)
 
+    def __str__(self):
+        return self.fee_type + ' ' + str(self.id)
+
 
 class ForeignPaymentTransaction(AbstractTransaction):
-    foreign_bank_account_id = CreditCardField()
-    foreign_bank_account_name = models.CharField(max_length=20)
+    dollar_cost = models.IntegerField(
+        null=True, blank=True,
+        validators=[MaxValueValidator(1000), MinValueValidator(1)])
+
+    euro_cost = models.IntegerField(
+        null=True, blank=True,
+        validators=[MaxValueValidator(1000), MinValueValidator(1)])
+
+    foreign_card_number = models.CharField(max_length=19)
+
+    def __str__(self):
+        return 'Foreign payment ' + str(self.id)
 
 
 class DomesticPaymentTransaction(AbstractTransaction):
-    domestic_bank_account_id = models.CharField(max_length=16)
+    rial_cost = models.IntegerField(validators=[MaxValueValidator(30000000), MinValueValidator(10000)])
+    domestic_card_number = DomesticCardField(max_length=16)
+
+    def __str__(self):
+        return 'Domestic payment' + ' ' + str(self.id)
 
 
 class UnknownPaymentTransaction(AbstractTransaction):
-    domestic_bank_account_id = models.CharField(max_length=16)
+    rial_cost = models.IntegerField(validators=[MaxValueValidator(30000000), MinValueValidator(10000)])
+    domestic_card_number = models.CharField(max_length=16)
+
+    def __str__(self):
+        return 'Unknown payment' + ' ' + str(self.id)
