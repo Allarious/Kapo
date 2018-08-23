@@ -2,7 +2,6 @@ from django.contrib import admin
 from .models import *
 
 
-# Register your models here.
 class ConfigurationAdmin(admin.ModelAdmin):
     list_display = ('key', 'value')
 
@@ -15,7 +14,7 @@ class TransactionAdmin(admin.ModelAdmin):
 
 
 class AppTransactionAdmin(admin.ModelAdmin):
-    list_display = ('owner','fee_type', 'paid')
+    list_display = ('owner', 'fee_type', 'paid')
 
 
 admin.site.register(ExamTransaction, TransactionAdmin)
