@@ -14,7 +14,7 @@ import EditProfile from '../components/editprofile';
 class App extends Component {
 
     state = {
-      visiblePage: 'Homepage',
+      visiblePage: 'EditProfile',
     };
 
     generateContent = () => {
