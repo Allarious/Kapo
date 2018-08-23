@@ -18,6 +18,8 @@ class Customer(models.Model):
     dollar_wallet = models.IntegerField(default=0)
     euro_wallet = models.IntegerField(default=0)
 
+    def __str__(self):
+        return self.first_name
 
 
 
