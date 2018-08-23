@@ -1,6 +1,6 @@
 from django.urls import path
 
-from apps.customer.views import *
+from .views import *
 
 app_name = "customer"
 urlpatterns = [

@@ -6,10 +6,10 @@ from django.conf.urls.static import static
 from django.contrib.auth.views import password_reset_complete, password_reset, password_reset_done, \
     password_reset_confirm
 
-from apps.accounts.views import login_user, index
+from apps.accounts.views import login_user
 
 urlpatterns = [
-    path('', include('apps.kapo.urls'), name='index'),
+    path('', include('apps.core.urls'), name='index'),
     path('admin/', admin.site.urls),
     path('accounts/', include('apps.accounts.urls')),
     path('customer/', include('apps.customer.urls')),

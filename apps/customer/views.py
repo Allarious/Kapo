@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from apps.core.models import Configuration
-from apps.customer.forms.forms import RialIncForm, ExchangeForm
+from apps.customer.forms.currency_forms import RialIncForm, ExchangeForm
 from apps.customer.models import Customer
 
 
@@ -15,7 +15,7 @@ def customer_profile_view(request):
 @login_required
 def customer_home_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
-    # karmozds = Configuration.objects.exclude(key='dollar').exclude(key='euro')
+    karmozds = Configuration.objects.exclude(key='dollar').exclude(key='euro')
     karmozds = Configuration.objects.all()
     return render(request, 'customer_home.html', {'customer': customer, 'karmozds': karmozds})
 
