@@ -8,7 +8,7 @@ const Wrapper = (props) => {
     if (props.makeButton)
     {
         buttons = props.buttons.map((btn) => {
-           return <button className={classes["wrapper-body-button"]}>{btn.txt}</button>
+           return (<button key={btn.id} className={classes["wrapper-body-button"]}>{btn.txt}</button>);
         });
     }
 

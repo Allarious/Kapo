@@ -12,6 +12,8 @@ const EditProfile = () => {
             <Inp holder="Username" type="text"/>
             <Inp holder="E-mail" type="email"/>
             <Inp holder="Contact Number" type="text"/>
+            <Inp holder="Region" type="text"/>
+            <Inp holder="Country" type="text"/>
             <Inp holder="Birth Date" type="text"/>
             <div className={classes.gap}></div>
             <div className={classes["section-header"]}>Change Password</div>

@@ -9,7 +9,7 @@
     cursor: pointer;
     margin-bottom: 30px;
     transition: 0.3s;
-
+    border: none;
 }
 .form-button:hover{
     background-color: #F9F9F9;

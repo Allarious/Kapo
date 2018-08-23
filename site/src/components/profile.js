@@ -4,7 +4,7 @@ import classes from './profile/profile.css';
 
 import Button from './buttons/profilebutton'
 import Att from './profile/profilecontent';
-import Table from './table/table';
+// import Table from './table/table';
 import WalletPart from "./profile/walletpart";
 
 const Profile = (props) => {
@@ -30,7 +30,13 @@ const Profile = (props) => {
             id: 'a6'},
         {att : 'Joining Date',
             attCont: '7/5/1955',
-            id: 'a7'},
+            id: 'a8'},
+        {att : 'Region',
+            attCont: 'Tehran',
+            id: 'a9'},
+        {att : 'Country',
+            attCont: 'Iran',
+            id: 'a10'},
     ];
 
 

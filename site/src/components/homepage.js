@@ -1,6 +1,6 @@
 import React from 'react';
 
-import classes from './homepage/homepage.css';
+// import classes from './homepage/homepage.css';
 import FirstGlance from './homepage/firstglance';
 import Services from './homepage/services';
 import OurTeam from './homepage/ourteam';

@@ -6,7 +6,7 @@ const FollowUs = () => {
 
     let buttons = [
         {id: 'b1', txt:'Telegram'},
-        {id:'b2', txt:'Instagram'},
+        {id: 'b2', txt:'Instagram'},
     ];
 
     return <Wrapper head={'Follow Us'} makeButton={true} buttons={buttons}/>;

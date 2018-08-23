@@ -22,6 +22,9 @@ const Navbar = (props) => {
         {text :'Logout',
             clicked:'Homepage',
             id:'c5'},
+        {text :'Send Message',
+            clicked:'SendMessage',
+            id:'c6'},
     ];
 
     return(

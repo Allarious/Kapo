@@ -1,0 +1,87 @@
+.container{
+    background-color: #F9F9F9;
+    width: 80%;
+    padding: 30px;
+    margin: 20px auto;
+    border-radius: 30px;
+    overflow: auto;
+}
+.send-to{
+    height: 40px;
+    background-color: #eeeeee;
+    border-radius: 20px;
+    margin: 10px;
+    border: 1px solid #468189;
+    width: 30%;
+    overflow: hidden;
+}
+.send-to-container{
+    height: 100%;
+    width: 200%;
+}
+.send-to-image{
+    float: left;
+    width: 40px;
+    height: 100%;
+    background-color: #97C4C4;
+    line-height: 40px;
+    color: #2c3e50;
+}
+.send-to-input{
+    width: 80%;
+    height: 100%;
+    float: left;
+    border: none;
+    padding-left: 10px;
+}
+.send-to-input:focus{
+    outline: none;
+}
+.subject{
+    height: 40px;
+    background-color: #eeeeee;
+    border-radius: 20px;
+    margin: 10px;
+    border: 1px solid #468189;
+    width: 40%;
+    overflow: hidden;
+}
+.subject-container{
+    height: 100%;
+    width: 200%;
+}
+.subject-image{
+    float: left;
+    width: 80px;
+    height: 100%;
+    background-color: #97C4C4;
+    line-height: 40px;
+    color: #2c3e50;
+}
+.subject-input{
+    width: 80%;
+    height: 100%;
+    float: left;
+    border: none;
+    padding-left: 10px;
+}
+.subject-input:focus{
+    outline: none;
+}
+.text-body{
+    background-color: #eeeeee;
+    border-radius: 30px;
+    margin: 10px;
+    height: 400px;
+    overflow: hidden;
+}
+.text-body-input{
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 30px;
+    background-color: #eeeeee;
+}
+.text-body-input:focus{
+    outline: none;
+}

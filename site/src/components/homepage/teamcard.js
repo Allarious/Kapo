@@ -1,6 +1,6 @@
 import React from 'react';
 
-import classes from './teamcard.css';
+// import classes from './teamcard.css';
 import Card from './card';
 
 const TeamCard = () => {

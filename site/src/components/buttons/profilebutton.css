@@ -10,7 +10,7 @@
     margin-bottom: 30px;
     transition: 0.3s;
     float: right;
-
+    border: none;
 }
 .form-button:hover{
     background-color: #F9F9F9;

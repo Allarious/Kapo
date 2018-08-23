@@ -10,11 +10,12 @@ import SignUp from '../components/signup';
 import HomePage from '../components/homepage';
 import Profile from '../components/profile';
 import EditProfile from '../components/editprofile';
+import SendMessage from '../components/sendmessage';
 
 class App extends Component {
 
     state = {
-      visiblePage: 'EditProfile',
+      visiblePage: 'SendMessage',
     };
 
     generateContent = () => {
@@ -33,10 +34,12 @@ class App extends Component {
         } else if(this.state.visiblePage === 'Profile')
         {
             return <Profile clicked={this.changePage}/>;
-        }
-        else if(this.state.visiblePage === 'EditProfile')
+        } else if(this.state.visiblePage === 'EditProfile')
         {
             return <EditProfile/>;
+        } else if(this.state.visiblePage === 'SendMessage')
+        {
+            return <SendMessage/>;
         }
     };
 
