@@ -25,9 +25,12 @@ const Navbar = (props) => {
         {text :'Convert',
             clicked:'Convert',
             id:'c6'},
+        {text :'Error',
+            clicked:'Error',
+            id:'c7'},
         {text :'Logout',
             clicked:'Homepage',
-            id:'c7'},
+            id:'c8'},
     ];
 
     return(

@@ -69,7 +69,7 @@ const Profile = (props) => {
             <div className={classes.wallet}>
                 {wallet.map((event) => {
                     return(
-                        <WalletPart id={event.id} moneyType={event.money} amount={event.amount}/>
+                        <WalletPart id={event.id} moneyType={event.money} amount={event.amount} clicked={props.clicked}/>
                     );
                 })}
             </div>

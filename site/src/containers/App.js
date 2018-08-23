@@ -12,11 +12,12 @@ import Profile from '../components/profile';
 import EditProfile from '../components/editprofile';
 import SendMessage from '../components/sendmessage';
 import Conv from '../components/convert';
+import Error from '../components/error'
 
 class App extends Component {
 
     state = {
-      visiblePage: 'Convert',
+      visiblePage: 'Homepage',
     };
 
     generateContent = () => {
@@ -44,6 +45,9 @@ class App extends Component {
         } else if(this.state.visiblePage === 'Convert')
         {
             return <Conv/>;
+        } else if(this.state.visiblePage === 'Error')
+        {
+            return <Error/>;
         }
     };
 
