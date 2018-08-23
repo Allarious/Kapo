@@ -1,0 +1,56 @@
+.content{
+    float: left;
+    height: 580px;
+    width: 25%;
+    margin: 0 4.1%;
+    padding: 20px;
+    background-color: #F9F9F9;
+    border-radius: 20px;
+    border: 1px solid #468189;
+}
+.logo{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #97C4C4;
+    margin: 30px auto;
+    background-image: url("../../images/iran-rial.svg");
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.logo1{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #97C4C4;
+    margin: 30px auto;
+    background-image: url("../../images/dollar-symbol.svg");
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.logo2{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #97C4C4;
+    margin: 30px auto;
+    background-image: url("../../images/euro-currency-symbol.svg");
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.remain{
+    width: 80%;
+    margin: 0 auto;
+    padding: 5px;
+    border: 1px solid #468189;
+    border-radius: 10px;
+}
+.explain{
+    margin: 40px auto 0 auto;
+}
+.to{
+    padding-top: 20px;
+}

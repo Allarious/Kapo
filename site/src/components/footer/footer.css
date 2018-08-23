@@ -30,6 +30,10 @@
     color: #F9F9F9;
     cursor: pointer;
     transition: 0.3s;
+    border: none;
+}
+.wrapper-body-button:focus{
+    outline: none;
 }
 .wrapper-body-button:hover{
     border: 1px solid #97C4C4;
