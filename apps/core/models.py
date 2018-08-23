@@ -147,7 +147,8 @@ class AbstractTransaction(models.Model):
     euro_cost = models.IntegerField(null=True, blank=True)
     rial_cost = models.IntegerField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    paid = models.BooleanField()
+    paid = models.BooleanField(default=False)
+    verified = models.BooleanField(default=False)
 
     class Meta:
         abstract = True
