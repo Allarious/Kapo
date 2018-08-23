@@ -2,24 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0339a635-0961-4de1-8fa8-8ab9dbf3b394" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/apps/core/forms/__init__.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/apps/core/forms/transaction_forms.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/apps/core/urls.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/apps/accounts/models.py" afterPath="$PROJECT_DIR$/apps/accounts/models.py" />
-      <change beforePath="$PROJECT_DIR$/apps/accounts/views.py" afterPath="$PROJECT_DIR$/apps/accounts/views.py" />
-      <change beforePath="$PROJECT_DIR$/apps/core/models.py" afterPath="$PROJECT_DIR$/apps/core/models.py" />
-      <change beforePath="$PROJECT_DIR$/apps/core/views.py" afterPath="$PROJECT_DIR$/apps/core/views.py" />
-      <change beforePath="$PROJECT_DIR$/apps/customer/forms/forms.py" afterPath="$PROJECT_DIR$/apps/customer/forms/currency_forms.py" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/apps/accounts/migrations/0001_initial.py" />
+      <change beforePath="$PROJECT_DIR$/apps/accounts/migrations/0002_auto_20180822_1330.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/apps/core/admin.py" afterPath="$PROJECT_DIR$/apps/core/admin.py" />
+      <change beforePath="$PROJECT_DIR$/apps/core/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/apps/core/migrations/0001_initial.py" />
+      <change beforePath="$PROJECT_DIR$/apps/customer/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/apps/customer/migrations/0001_initial.py" />
+      <change beforePath="$PROJECT_DIR$/apps/customer/migrations/0002_configuration.py" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/apps/customer/migrations/0003_delete_configuration.py" afterPath="" />
       <change beforePath="$PROJECT_DIR$/apps/customer/models.py" afterPath="$PROJECT_DIR$/apps/customer/models.py" />
-      <change beforePath="$PROJECT_DIR$/apps/customer/urls.py" afterPath="$PROJECT_DIR$/apps/customer/urls.py" />
-      <change beforePath="$PROJECT_DIR$/apps/customer/views.py" afterPath="$PROJECT_DIR$/apps/customer/views.py" />
-      <change beforePath="$PROJECT_DIR$/apps/kapo/templates/about_us.html" afterPath="$PROJECT_DIR$/apps/core/templates/about_us.html" />
-      <change beforePath="$PROJECT_DIR$/apps/kapo/templates/contact_us.html" afterPath="$PROJECT_DIR$/apps/core/templates/contact_us.html" />
-      <change beforePath="$PROJECT_DIR$/apps/kapo/templates/policy.html" afterPath="$PROJECT_DIR$/apps/core/templates/policy.html" />
-      <change beforePath="$PROJECT_DIR$/apps/kapo/urls.py" afterPath="$PROJECT_DIR$/apps/kapo/urls.py" />
-      <change beforePath="$PROJECT_DIR$/apps/kapo/views.py" afterPath="$PROJECT_DIR$/apps/kapo/views.py" />
-      <change beforePath="$PROJECT_DIR$/tahlil/urls.py" afterPath="$PROJECT_DIR$/tahlil/urls.py" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/venv/" />
     <ignored path="$PROJECT_DIR$/venv1/" />
@@ -77,8 +69,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/core/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="170" column="51" lean-forward="true" selection-start-line="170" selection-start-column="51" selection-end-line="170" selection-end-column="51" />
+            <state relative-caret-position="558">
+              <caret line="170" column="51" lean-forward="false" selection-start-line="170" selection-start-column="51" selection-end-line="170" selection-end-column="51" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -89,9 +81,31 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/apps/customer/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="16" column="55" lean-forward="false" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="55" />
+            <state relative-caret-position="270">
+              <caret line="20" column="4" lean-forward="false" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/customer/admin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="8" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/core/admin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -113,7 +127,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/apps/customer/templates/customer_rial_wallet_inc.html" />
-        <option value="$PROJECT_DIR$/apps/core/admin.py" />
         <option value="$PROJECT_DIR$/apps/customer/templates/customer_exchange.html" />
         <option value="$PROJECT_DIR$/apps/accounts/serializers.py" />
         <option value="$PROJECT_DIR$/apps/accounts/forms/forms.py" />
@@ -138,6 +151,7 @@
         <option value="$PROJECT_DIR$/apps/customer/urls.py" />
         <option value="$PROJECT_DIR$/apps/customer/views.py" />
         <option value="$PROJECT_DIR$/apps/core/models.py" />
+        <option value="$PROJECT_DIR$/apps/core/admin.py" />
         <option value="$PROJECT_DIR$/apps/customer/models.py" />
       </list>
     </option>
@@ -448,20 +462,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/core/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/customer/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="8" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/customer/templates/customer_rial_wallet_inc.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -734,18 +734,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/core/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="170" column="51" lean-forward="true" selection-start-line="170" selection-start-column="51" selection-end-line="170" selection-end-column="51" />
+        <state relative-caret-position="558">
+          <caret line="170" column="51" lean-forward="false" selection-start-line="170" selection-start-column="51" selection-end-line="170" selection-end-column="51" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/apps/core/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/customer/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="8" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/apps/customer/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" column="55" lean-forward="false" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="55" />
+        <state relative-caret-position="270">
+          <caret line="20" column="4" lean-forward="false" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
           <folding />
         </state>
       </provider>

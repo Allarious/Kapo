@@ -8,17 +8,16 @@ class Customer(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     gender = models.CharField(max_length=10, choices=SEX_CHOICES)
-    day = models.IntegerField(default=0)
-    month = models.IntegerField(default=0)
-    year = models.IntegerField(default=0)
+    birthday_date = models.DateField()
     national_id = models.CharField(max_length=10)
     city = models.CharField(max_length=10)
     address = models.CharField(max_length=100)
     phone = models.CharField(max_length=12, unique=True)
-    domestic_bank_account_id = models.CharField(unique=True, max_length=16)
+    domestic_bank_account_id = models.CharField(unique=True, max_length=16, null=True)
     rial_wallet = models.IntegerField(default=0)
     dollar_wallet = models.IntegerField(default=0)
     euro_wallet = models.IntegerField(default=0)
+
 
 
 
