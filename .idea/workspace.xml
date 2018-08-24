@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0339a635-0961-4de1-8fa8-8ab9dbf3b394" name="Default" comment="conflicts solved">
+    <list default="true" id="0339a635-0961-4de1-8fa8-8ab9dbf3b394" name="Default" comment="edit profile added">
+      <change afterPath="$PROJECT_DIR$/apps/customer/templates/customer_update.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/tahlil.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/tahlil.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/accounts/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/accounts/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/core/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/core/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/core/migrations/0002_auto_20180823_2301.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/core/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/core/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/core/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/core/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/customer/forms/currency_forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/customer/forms/currency_forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/customer/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/customer/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/customer/migrations/0002_auto_20180823_2229.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/customer/migrations/0003_auto_20180823_2235.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/customer/migrations/0002_auto_20180824_1015.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/customer/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/customer/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/customer/views/transaction_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/customer/views/transaction_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Home_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/templates/Home_page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/templates/Login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/SignUp1.html" beforeDir="false" afterPath="$PROJECT_DIR$/apps/accounts/templates/SignUp1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/customer/templates/Customer_HomePage.html" beforeDir="false" afterPath="$PROJECT_DIR$/apps/customer/templates/Customer_HomePage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/customer/templates/Profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/apps/customer/templates/Profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/customer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/customer/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/customer/views/currency_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/customer/views/currency_views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/venv/" />
     <ignored path="$PROJECT_DIR$/venv1/" />
@@ -38,64 +33,53 @@
     <session id="-232333926">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.0" value="3" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.1" value="1" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="gitignore" value="1" />
-          <entry key="html" value="15" />
-          <entry key="py" value="77" />
+          <entry key="gitignore" value="2" />
+          <entry key="html" value="23" />
+          <entry key="py" value="88" />
           <entry key="txt" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="15" />
-          <entry key="PLAIN_TEXT" value="3" />
-          <entry key="Python" value="77" />
+          <entry key="HTML" value="23" />
+          <entry key="PLAIN_TEXT" value="4" />
+          <entry key="Python" value="88" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="2" />
-          <entry key="html" value="347" />
-          <entry key="py" value="1096" />
-          <entry key="py@tahlil" value="227" />
-          <entry key="txt" value="43" />
+          <entry key="html" value="545" />
+          <entry key="py" value="1658" />
+          <entry key="py@tahlil" value="267" />
+          <entry key="txt" value="61" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="CommandLine" value="191" />
-          <entry key="HTML" value="347" />
-          <entry key="PLAIN_TEXT" value="81" />
-          <entry key="Python" value="1096" />
+          <entry key="CommandLine" value="231" />
+          <entry key="HTML" value="545" />
+          <entry key="PLAIN_TEXT" value="99" />
+          <entry key="Python" value="1658" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/apps/customer/views/transaction_views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="37" column="38" selection-start-line="37" selection-start-column="38" selection-end-line="37" selection-end-column="38" />
-              <folding>
-                <element signature="e#0#44#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/customer/views/currency_views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1241">
-              <caret lean-forward="true" selection-end-column="44" />
+            <state relative-caret-position="68">
+              <caret line="97" column="32" selection-start-line="97" selection-start-column="32" selection-end-line="97" selection-end-column="32" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -104,13 +88,15 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tahlil/urls.py">
+        <entry file="file://$PROJECT_DIR$/apps/customer/templates/customer_rial_wallet_inc.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/customer/templates/customer_update.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="299">
+              <caret line="1250" column="23" selection-start-line="1250" selection-start-column="23" selection-end-line="1250" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -119,7 +105,7 @@
         <entry file="file://$PROJECT_DIR$/apps/customer/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+              <caret line="9" column="48" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -128,55 +114,43 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/core/urls.py">
+        <entry file="file://$PROJECT_DIR$/apps/customer/templates/Profile.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+            <state relative-caret-position="210">
+              <caret line="1286" column="22" selection-start-line="1286" selection-start-column="22" selection-end-line="1286" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/apps/customer/forms/currency_forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
               <folding>
-                <element signature="e#0#28#0" expanded="true" />
+                <element signature="e#0#24#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/core/views.py">
+        <entry file="file://$PROJECT_DIR$/apps/customer/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="6" column="53" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="53" />
+            <state relative-caret-position="419">
+              <caret line="27" column="51" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
               <folding>
-                <element signature="e#0#35#0" expanded="true" />
+                <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/core/forms/transaction_forms.py">
+        <entry file="file://$PROJECT_DIR$/apps/accounts/forms/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/accounts/decorators.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="10" column="47" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="47" />
-              <folding>
-                <element signature="e#0#51#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/core/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="154" column="6" selection-start-line="154" selection-start-column="6" selection-end-line="154" selection-end-column="6" />
+            <state relative-caret-position="-221">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
             </state>
           </provider>
         </entry>
@@ -184,10 +158,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/accounts/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-544">
-              <caret line="1" column="31" selection-start-line="1" selection-end-line="1" selection-end-column="31" />
+            <state relative-caret-position="-102">
+              <caret line="42" column="52" lean-forward="true" selection-start-line="42" selection-start-column="52" selection-end-line="42" selection-end-column="52" />
               <folding>
-                <marker date="1535100654039" expanded="true" signature="3217:3220" ph="..." />
+                <element signature="e#1#32#0" expanded="true" />
+                <marker date="1535117542631" expanded="true" signature="3217:3220" ph="..." />
               </folding>
             </state>
           </provider>
@@ -207,8 +182,8 @@
     <findStrings>
       <find>admin</find>
       <find>react</find>
-      <find>div</find>
       <find>core</find>
+      <find>div</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -232,27 +207,30 @@
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/tahlil/settings.py" />
         <option value="$PROJECT_DIR$/apps/accounts/decorator.py" />
-        <option value="$PROJECT_DIR$/apps/customer/templates/Customer_HomePage.html" />
-        <option value="$PROJECT_DIR$/apps/customer/templates/Profile.html" />
         <option value="$PROJECT_DIR$/apps/customer/views.py" />
         <option value="$PROJECT_DIR$/tahlil/urls.py" />
         <option value="$PROJECT_DIR$/apps/accounts/decorators.py" />
-        <option value="$PROJECT_DIR$/apps/customer/views/currency_views.py" />
         <option value="$PROJECT_DIR$/apps/accounts/urls.py" />
         <option value="$PROJECT_DIR$/templates/Home_page.html" />
         <option value="$PROJECT_DIR$/templates/Login.html" />
         <option value="$PROJECT_DIR$/templates/SignUp1.html" />
-        <option value="$PROJECT_DIR$/apps/accounts/views.py" />
         <option value="$PROJECT_DIR$/apps/core/forms/transaction_forms.py" />
         <option value="$PROJECT_DIR$/apps/accounts/models.py" />
         <option value="$PROJECT_DIR$/apps/accounts/admin.py" />
         <option value="$PROJECT_DIR$/templates/notification.html" />
         <option value="$PROJECT_DIR$/apps/core/models.py" />
-        <option value="$PROJECT_DIR$/apps/customer/models.py" />
-        <option value="$PROJECT_DIR$/apps/customer/urls.py" />
         <option value="$PROJECT_DIR$/apps/core/urls.py" />
         <option value="$PROJECT_DIR$/apps/core/views.py" />
         <option value="$PROJECT_DIR$/apps/customer/views/transaction_views.py" />
+        <option value="$PROJECT_DIR$/apps/customer/models.py" />
+        <option value="$PROJECT_DIR$/apps/customer/templates/Customer_HomePage.html" />
+        <option value="$PROJECT_DIR$/apps/accounts/views.py" />
+        <option value="$PROJECT_DIR$/apps/accounts/templates/SignUp1.html" />
+        <option value="$PROJECT_DIR$/apps/customer/templates/customer_update.html" />
+        <option value="$PROJECT_DIR$/apps/customer/templates/Profile.html" />
+        <option value="$PROJECT_DIR$/apps/customer/urls.py" />
+        <option value="$PROJECT_DIR$/apps/customer/views/currency_views.py" />
+        <option value="$PROJECT_DIR$/apps/customer/forms/currency_forms.py" />
       </list>
     </option>
   </component>
@@ -268,13 +246,14 @@
     <option name="height" value="805" />
   </component>
   <component name="ProjectReloadState">
-    <option name="STATE" value="1" />
+    <option name="STATE" value="2" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -291,25 +270,6 @@
               <item name="tahlil" type="b2602c69:ProjectViewProjectNode" />
               <item name="tahlil" type="462c0819:PsiDirectoryNode" />
               <item name="apps" type="462c0819:PsiDirectoryNode" />
-              <item name="accounts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tahlil" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tahlil" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tahlil" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tahlil" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
-              <item name="core" type="462c0819:PsiDirectoryNode" />
-              <item name="forms" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tahlil" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tahlil" type="462c0819:PsiDirectoryNode" />
-              <item name="apps" type="462c0819:PsiDirectoryNode" />
               <item name="customer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -319,27 +279,16 @@
               <item name="customer" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="tahlil" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tahlil" type="462c0819:PsiDirectoryNode" />
-              <item name="tahlil" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tahlil" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tahlil" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/apps/accounts/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -350,135 +299,6 @@
       <recent name="C:\Users\rezab\PycharmProjects\tahlil\apps\accounts\templates" />
       <recent name="$PROJECT_DIR$/apps" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/accounts/migrations/0001_initial.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/core/admin.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/core/forms/transaction_forms.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/core/migrations/0001_initial.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/core/models.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/core/views.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/customer/migrations/0001_initial.py</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/core/migrations/0002_auto_20180823_2301.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/customer/migrations/0002_auto_20180823_2229.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/customer/migrations/0003_auto_20180823_2235.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/customer/templates/customer_transactions.html</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/customer/templates/exam_transactions.html</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/customer/views/__init__.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/customer/views/transaction_views.py</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/core/migrations/0002_auto_20180823_1342.py</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/customer/views.py</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-        <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/accounts/urls.py</PATH>
-        <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/customer/views/currency_views.py</PATH>
-        <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/customer/models.py</PATH>
-        <PATH vcs="Git" revision="">$PROJECT_DIR$/apps/customer/urls.py</PATH>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -515,11 +335,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.urls" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -539,34 +354,21 @@
       <option name="project" value="LOCAL" />
       <updated>1534956113540</updated>
     </task>
-    <task id="LOCAL-00002" summary="passwordreset complet">
-      <created>1535097439456</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1535097439456</updated>
-    </task>
-    <task id="LOCAL-00003" summary="conflicts solved">
-      <created>1535097826782</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1535097826782</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.17449665" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.17718121" />
       <window_info id="Structure" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="manage.py@tahlil" sideWeight="0.49932885" visible="true" weight="0.32907802" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.50067115" side_tool="true" weight="0.32907802" />
-      <window_info anchor="bottom" id="Version Control" order="1" weight="0.32907802" />
+      <window_info anchor="bottom" id="Version Control" order="1" />
       <window_info anchor="bottom" id="Python Console" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="3" weight="0.36879432" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.19858156" />
       <window_info anchor="bottom" id="Docker" order="4" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="5" />
       <window_info anchor="bottom" id="Find" order="6" />
@@ -575,8 +377,6 @@
       <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="11" />
-      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
-      <window_info anchor="bottom" id="manage.py@tahlil" order="13" sideWeight="0.49932885" visible="true" weight="0.32907802" />
       <window_info anchor="right" id="SciView" order="0" />
       <window_info anchor="right" id="Database" order="1" />
       <window_info anchor="right" id="Commander" order="2" weight="0.4" />
@@ -585,12 +385,12 @@
     </layout>
     <layout-to-restore>
       <window_info id="Favorites" order="0" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.16595136" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.17668097" />
       <window_info id="Structure" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Event Log" order="0" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="1" />
       <window_info anchor="bottom" id="Python Console" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="3" visible="true" weight="0.32889965" />
+      <window_info anchor="bottom" id="Terminal" order="3" visible="true" weight="0.28174123" />
       <window_info anchor="bottom" id="Docker" order="4" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="5" />
       <window_info anchor="bottom" id="Find" order="6" />
@@ -625,27 +425,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="passwordreset complet" />
     <MESSAGE value="conflicts solved" />
-    <option name="LAST_COMMIT_MESSAGE" value="conflicts solved" />
+    <MESSAGE value="edit profile added" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit profile added" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apps/customer/forms/forms.py" />
-    <entry file="file://$PROJECT_DIR$/templates/index.html" />
-    <entry file="file://$PROJECT_DIR$/templates/SignUp.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="18" column="106" selection-start-line="18" selection-start-column="77" selection-end-line="18" selection-end-column="106" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/Cellar/python3/3.6.1/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/contrib/auth/views.py" />
-    <entry file="file:///usr/local/Cellar/python3/3.6.1/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/urlresolvers.py" />
-    <entry file="file://$PROJECT_DIR$/apps/customer/templates/customer_profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="62" selection-start-line="8" selection-start-column="62" selection-end-line="8" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/customer/templates/customer_home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -682,12 +465,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/kapo/urls.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/accounts/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -695,29 +472,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv2/Lib/site-packages/django/db/models/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv2/Lib/site-packages/django/db/models/fields/related.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="1002" column="8" selection-start-line="1002" selection-start-column="8" selection-end-line="1002" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/React App.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="798" column="8" selection-start-line="798" selection-start-column="5" selection-end-line="798" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/venv2/Lib/site-packages/django/db/models/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/venv2/Lib/site-packages/django/db/models/fields/related.py" />
+    <entry file="file://C:/../../React App.html" />
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -725,20 +482,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv2/Lib/site-packages/django/core/management/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="409" selection-start-line="409" selection-end-line="409" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv2/Lib/site-packages/django/contrib/admin/options.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1177">
-          <caret line="508" column="6" selection-start-line="508" selection-start-column="6" selection-end-line="508" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/venv2/Lib/site-packages/django/core/management/base.py" />
+    <entry file="file://$PROJECT_DIR$/venv2/Lib/site-packages/django/contrib/admin/options.py" />
     <entry file="file://$PROJECT_DIR$/apps/core/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -750,245 +495,246 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <folding>
-            <element signature="e#0#66#0" expanded="true" />
+            <element signature="e#0#66#0" />
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/accounts/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/customer/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#0#32#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv2/Lib/site-packages/django/contrib/auth/decorators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/customer/forms/currency_forms.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/customer/templates/Customer_HomePage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="555" column="80" selection-start-line="555" selection-start-column="80" selection-end-line="555" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/customer/templates/Profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="1304" column="341" selection-start-line="1304" selection-start-column="341" selection-end-line="1304" selection-end-column="341" />
-          <folding>
-            <element signature="e#31824#31830#0#HTML" expanded="true" />
-            <element signature="e#32093#32099#0#HTML" expanded="true" />
-            <element signature="e#32362#32368#0#HTML" expanded="true" />
-            <element signature="e#32763#32769#0#HTML" expanded="true" />
-            <element signature="e#33060#33066#0#HTML" expanded="true" />
-            <element signature="e#33353#33359#0#HTML" expanded="true" />
-            <element signature="e#33655#33661#0#HTML" expanded="true" />
-            <element signature="e#33942#33948#0#HTML" expanded="true" />
-            <element signature="e#34223#34229#0#HTML" expanded="true" />
-            <element signature="e#34526#34532#0#HTML" expanded="true" />
-            <element signature="e#34804#34810#0#HTML" expanded="true" />
-            <element signature="e#35093#35099#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/customer/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/accounts/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="39" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/accounts/templates/Home_page.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="556" column="116" selection-start-line="556" selection-start-column="116" selection-end-line="556" selection-end-column="116" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/accounts/templates/Login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="576" column="116" selection-start-line="576" selection-start-column="116" selection-end-line="576" selection-end-column="116" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/accounts/templates/SignUp1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="576" column="116" selection-start-line="576" selection-start-column="116" selection-end-line="576" selection-end-column="116" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/notification.html" />
+    <entry file="file://$PROJECT_DIR$/templates/Login.html" />
+    <entry file="file://$PROJECT_DIR$/venv2/Lib/site-packages/django/contrib/auth/decorators.py" />
     <entry file="file://$PROJECT_DIR$/tahlil/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-175">
-          <caret line="44" column="14" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="14" />
+        <state relative-caret-position="17">
+          <caret line="3" column="26" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv2/Lib/site-packages/django/forms/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-55">
-          <caret line="1149" column="6" selection-start-line="1149" selection-start-column="6" selection-end-line="1149" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/accounts/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="e#0#69#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Home_page.html" />
     <entry file="file://$PROJECT_DIR$/apps/accounts/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="20" column="67" selection-start-line="20" selection-start-column="67" selection-end-line="20" selection-end-column="67" />
+        <state relative-caret-position="364">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/notification.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="158" column="31" selection-start-line="158" selection-start-column="31" selection-end-line="158" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/accounts/forms/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="24" column="48" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/customer/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tahlil/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/core/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/customer/views/currency_views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1241">
-          <caret lean-forward="true" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/customer/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/accounts/decorators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="10" column="47" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
+            <element signature="e#0#32#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/core/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="6" column="53" selection-start-line="6" selection-start-column="53" selection-end-line="6" selection-end-column="53" />
+        <state relative-caret-position="272">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/customer/views.py" />
+    <entry file="file:///usr/local/Cellar/python3/3.6.1/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/contrib/auth/models.py" />
+    <entry file="file://$PROJECT_DIR$/tahlil/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-19">
+          <caret line="8" column="48" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/accounts/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/Cellar/python3/3.6.1/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/contrib/auth/decorators.py" />
+    <entry file="file://$PROJECT_DIR$/apps/accounts/decorators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#0#51#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/core/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
+        <state relative-caret-position="2533">
           <caret line="154" column="6" selection-start-line="154" selection-start-column="6" selection-end-line="154" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/core/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/accounts/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/customer/templates/Customer_HomePage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="554" column="57" selection-start-line="554" selection-start-column="57" selection-end-line="554" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/customer/templates/customer_profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="62" selection-start-line="8" selection-start-column="62" selection-end-line="8" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/registration/password_reset_confirm.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="163" column="10" lean-forward="true" selection-start-line="163" selection-start-column="10" selection-end-line="163" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/accounts/templates/SignUp1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-614">
+          <caret line="198" column="14" lean-forward="true" selection-start-line="198" selection-start-column="14" selection-end-line="198" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/accounts/templates/Login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="77">
+          <caret line="580" column="28" lean-forward="true" selection-start-line="579" selection-start-column="8" selection-end-line="580" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/customer/templates/Profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="1286" column="22" selection-start-line="1286" selection-start-column="22" selection-end-line="1286" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/accounts/forms/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-221">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv2/Lib/site-packages/django/middleware/clickjacking.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/customer/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="48" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/accounts/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-544">
-          <caret line="1" column="31" selection-start-line="1" selection-end-line="1" selection-end-column="31" />
+        <state relative-caret-position="-102">
+          <caret line="42" column="52" lean-forward="true" selection-start-line="42" selection-start-column="52" selection-end-line="42" selection-end-column="52" />
           <folding>
-            <marker date="1535100654039" expanded="true" signature="3217:3220" ph="..." />
+            <element signature="e#1#32#0" expanded="true" />
+            <marker date="1535117542631" expanded="true" signature="3217:3220" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv2/Lib/site-packages/django/db/backends/sqlite3/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="302" selection-start-line="302" selection-end-line="302" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/customer/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="27" column="51" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/customer/templates/customer_update.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="1250" column="23" selection-start-line="1250" selection-start-column="23" selection-end-line="1250" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/core/forms/transaction_forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+        <state relative-caret-position="-476">
+          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/customer/views/transaction_views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="37" column="38" selection-start-line="37" selection-start-column="38" selection-end-line="37" selection-end-column="38" />
+        <state relative-caret-position="187">
+          <caret line="32" column="23" selection-start-line="32" selection-start-column="23" selection-end-line="32" selection-end-column="23" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/customer/templates/customer_rial_wallet_inc.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/customer/views/currency_views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="97" column="32" selection-start-line="97" selection-start-column="32" selection-end-line="97" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/customer/forms/currency_forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
           </folding>
         </state>
       </provider>
