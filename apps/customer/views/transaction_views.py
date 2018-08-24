@@ -28,21 +28,23 @@ def exam_transactions_view(request):
     if request.method == 'POST':
         form = ExamTransactionForm(request.POST)
         if form.is_valid():
-            form.save(commit=False)
-            form.dollar_cost = form.cleaned_data['dollar_cost']
-            # print(form.owner)
-            form.owner = customer
-            # print(form.owner.user_id)
+            exam = form.save(commit=False)
+            exam.dollar_cost = form.cleaned_data['dollar_cost']
+            exam.owner = customer
 
-            if customer.dollar_wallet < form.dollar_cost:
+            if customer.dollar_wallet < exam.dollar_cost:
                 form.add_error('dollar_cost',
                                'You need {} more dollars!'.format(form.dollar_cost - customer.dollar_wallet))
                 return render(request, 'exam_transactions.html',
                               {'customer': customer, 'form': form, 'exam_wage': exam_wage,
                                'dollar_rate': dollar_rate,
                                'euro_rate': euro_rate})
-            form.save()
-            return HttpResponseRedirect('/customer/')
+            exam.save()
+            customer.dollar_wallet -= exam.dollar_cost
+            customer.save()
+            exam.paid = True
+            exam.save()
+            return redirect('/customer/')
     else:
         form = ExamTransactionForm()
 
