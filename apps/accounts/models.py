@@ -10,7 +10,7 @@ class MyUser(AbstractUser):
 
 
 
-SEX_CHOICES = (('male', 'Male'), ('female', 'Female'), ('other', 'Other'))
+SEX_CHOICES = (('male', 'Male'), ('female', 'Female'), ('other', 'Non Binary'))
 
 
 

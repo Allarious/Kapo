@@ -19,16 +19,10 @@ class Employee(models.Model):
     phone = models.CharField(max_length=12, unique=False, default='')
     domestic_card_number = DomesticCardField(unique=False, max_length=16, null=True)
     rial_wallet = models.FloatField(default=0)
-    dollar_wallet = models.FloatField(default=0)
-    euro_wallet = models.FloatField(default=0)
 
     def clean(self):
         if self.rial_wallet < 0:
             raise ValidationError('You Dont have enough Rials')
-        if self.dollar_wallet < 0:
-            raise ValidationError('You Dont have enough Dolars')
-        if self.euro_wallet < 0:
-            raise ValidationError('You Dont have enough Euros')
 
     def __str__(self):
         return self.first_name
