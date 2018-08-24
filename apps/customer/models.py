@@ -20,7 +20,7 @@ class Customer(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     gender = models.CharField(max_length=10, choices=SEX_CHOICES, default='male')
-    birthday_date = models.DateField(null=True, default=date.today)
+    birthday_date = models.DateField(null=True)
     national_id = models.CharField(max_length=10, default='')
     city = models.CharField(max_length=10, default='')
     country = models.CharField(max_length=20, default='Iran')
