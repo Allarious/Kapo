@@ -13,8 +13,6 @@ class MyUser(AbstractUser):
 SEX_CHOICES = (('male', 'Male'), ('female', 'Female'), ('other', 'Other'))
 
 
-class Manager(models.Model):
-    user = models.OneToOneField(MyUser, on_delete=models.CASCADE, primary_key=True)
 
 
 
