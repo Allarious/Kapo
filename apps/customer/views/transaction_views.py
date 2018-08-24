@@ -55,3 +55,7 @@ def exam_transactions_view(request):
     return render(request, 'exam_transactions.html',
                   {'customer': customer, 'form': form, 'exam_wage': exam_wage, 'dollar_rate': dollar_rate,
                    'euro_rate': euro_rate})
+
+
+def app_fee_transactions_view(request):
+    pass

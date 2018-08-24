@@ -12,4 +12,5 @@ urlpatterns = [
     path('exchange/', customer_exchange_view, name="exchange"),
     path('transactions/', customer_transactions_view, name='customer_transactions'),
     path('transactions/exam', exam_transactions_view, name='exam_transactions'),
+    path('transactions/app-fee', app_fee_transactions_view, name='fee_transactions'),
 ]
