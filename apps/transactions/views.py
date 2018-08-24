@@ -19,9 +19,9 @@ def customer_transactions_view(request):
 @customer_required
 def exam_transactions_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
-    exam_wage = Configuration.objects.get(key='exam wage')
-    dollar_rate = Configuration.objects.get(key='dollar')
-    euro_rate = Configuration.objects.get(key='euro')
+    exam_wage = float(Configuration.objects.get(key='exam wage').value)
+    dollar_rate = int(Configuration.objects.get(key='dollar').value)
+    euro_rate = int(Configuration.objects.get(key='euro').value)
 
     if request.method == 'POST':
         form = ExamTransactionForm(request.POST)
@@ -54,9 +54,9 @@ def exam_transactions_view(request):
 
 def app_fee_transactions_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
-    fee_wage = Configuration.objects.get(key='fee wage')
-    dollar_rate = Configuration.objects.get(key='dollar')
-    euro_rate = Configuration.objects.get(key='euro')
+    fee_wage = float(Configuration.objects.get(key='exam wage').value)
+    dollar_rate = int(Configuration.objects.get(key='dollar').value)
+    euro_rate = int(Configuration.objects.get(key='euro').value)
 
     if request.method == 'POST':
         form = ExamTransactionForm(request.POST)
@@ -69,7 +69,7 @@ def app_fee_transactions_view(request):
                 form.add_error('dollar_cost',
                                'You need {} more dollars!'.format(exam.dollar_cost - customer.dollar_wallet))
                 return render(request, 'exam_transactions.html',
-                              {'customer': customer, 'form': form, 'exam_wage': exam_wage,
+                              {'customer': customer, 'form': form, 'fee_wage': fee_wage,
                                'dollar_rate': dollar_rate,
                                'euro_rate': euro_rate})
             exam.save()

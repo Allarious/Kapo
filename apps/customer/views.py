@@ -56,10 +56,10 @@ def customer_exchange_view(request):
             amount = form.cleaned_data['amount']
             currency = form.cleaned_data['currency']
             if currency[0] == 'euro':
-                cost = amount * int(euro_rate.value)
+                cost = amount * float(euro_rate.value)
                 if customer.rial_wallet >= cost:
                     customer.rial_wallet -= cost
-                    customer.euro_wallet += int(amount)
+                    customer.euro_wallet += float(amount)
                 else:
                     form.add_error('amount', 'not enough money')
                     return render(request, 'customer_exchange.html', {'customer': customer,
@@ -67,10 +67,10 @@ def customer_exchange_view(request):
                                                                       'dollar': dollar_rate,
                                                                       'euro': euro_rate, })
             elif currency[0] == 'dollar':
-                cost = amount * int(dollar_rate.value)
+                cost = amount * float(dollar_rate.value)
                 if customer.rial_wallet >= cost:
                     customer.rial_wallet -= cost
-                    customer.dollar_wallet += int(amount)
+                    customer.dollar_wallet += float(amount)
                 else:
                     form.add_error('amount', 'not enough money')
                     return render(request, 'customer_exchange.html', {'customer': customer,
@@ -87,10 +87,13 @@ def customer_exchange_view(request):
                                                       'form': form,
                                                       'dollar': dollar_rate,
                                                       'euro': euro_rate, })
+
+
 @login_required
 @customer_required
 def index(request):
     return render(request, 'Customer_HomePage.html', {})
+
 
 def update_customer_profile(request):
     user = MyUser.objects.get(username=request.user.username)
@@ -118,7 +121,6 @@ def update_customer_profile(request):
             user.save()
             customer.save()
             return HttpResponseRedirect(reverse('customer:customer_profile'))
-
 
         else:
             print(user_form.errors, form.errors)
