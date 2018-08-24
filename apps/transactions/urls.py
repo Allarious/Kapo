@@ -10,4 +10,5 @@ urlpatterns = [
     path('app-fee/', app_fee_transactions_view, name='application fee transactions'),
     path('foreign-pay/', foreign_pay_transactions_view, name='foreign pay transactions'),
     path('domestic-pay/', domestic_pay_transactions_view, name='domestic pay transactions'),
+    path('unknown-pay/', unknown_pay_transactions_view, name='unknown pay transactions'),
 ]

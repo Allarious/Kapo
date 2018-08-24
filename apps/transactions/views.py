@@ -37,11 +37,6 @@ def exam_transactions_view(request):
                                'dollar_rate': dollar_rate,
                                'euro_rate': euro_rate})
             exam.save()
-            customer.dollar_wallet -= cost
-            # TODO add money to manager
-            customer.save()
-            exam.paid = True
-            exam.save()
             return redirect('/customer/')
     else:
         form = ExamTransactionForm()
@@ -75,10 +70,6 @@ def app_fee_transactions_view(request):
                                    'dollar_rate': dollar_rate,
                                    'euro_rate': euro_rate})
                 fee.save()
-                customer.dollar_wallet -= fee.dollar_cost
-                customer.save()
-                fee.paid = True
-                fee.save()
 
 
             elif fee.euro_cost > fee.dollar_cost and fee.dollar_cost == 0:
@@ -93,17 +84,12 @@ def app_fee_transactions_view(request):
                                    'euro_rate': euro_rate})
 
                 fee.save()
-                customer.euro_wallet -= fee.euro_cost
-                customer.save()
-                fee.paid = True
-                fee.save()
             else:
                 form.add_error('dollar_cost', 'sth went wrong!')
                 return render(request, 'fee_transactions.html',
                               {'customer': customer, 'form': form, 'wage': wage,
                                'dollar_rate': dollar_rate,
                                'euro_rate': euro_rate})
-            # TODO add money to manager
 
             return redirect('/customer/')
     else:
@@ -138,10 +124,6 @@ def foreign_pay_transactions_view(request):
                                    'dollar_rate': dollar_rate,
                                    'euro_rate': euro_rate})
                 pay.save()
-                customer.dollar_wallet -= pay.dollar_cost
-                customer.save()
-                pay.paid = True
-                pay.save()
 
 
             elif pay.euro_cost > pay.dollar_cost and pay.dollar_cost == 0:
@@ -156,17 +138,13 @@ def foreign_pay_transactions_view(request):
                                    'euro_rate': euro_rate})
 
                 pay.save()
-                customer.euro_wallet -= pay.euro_cost
-                customer.save()
-                pay.paid = True
-                pay.save()
+
             else:
                 form.add_error('dollar_cost', 'sth went wrong!')
                 return render(request, 'foreign_pay_transaction.html',
                               {'customer': customer, 'form': form, 'wage': wage,
                                'dollar_rate': dollar_rate,
                                'euro_rate': euro_rate})
-            # TODO add money to manager
 
             return redirect('/customer/')
     else:
@@ -181,27 +159,51 @@ def foreign_pay_transactions_view(request):
 @customer_required
 def domestic_pay_transactions_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
-
+    wage = float(Configuration.objects.get(key='domestic wage').value)
     if request.method == 'POST':
         form = DomesticPaymentTransactionForm(request.POST)
         if form.is_valid():
             pay = form.save(commit=False)
             pay.owner = customer
-            if customer.rial_wallet < pay.rial_cost:
+            cost = pay.rial_cost * wage
+            if customer.rial_wallet < cost:
                 form.add_error('rial_cost',
-                               'You need {} more Rials!'.format(pay.rial_cost - customer.dollar_wallet))
+                               'You need {} more Rials!'.format(cost - customer.dollar_wallet))
                 return render(request, 'domestic_pay_transaction.html',
-                              {'customer': customer, 'form': form})
-            pay.save()
-            customer.rial_wallet -= pay.rial_cost
-            customer.domestic_card_number = pay.domestic_card_number
-            customer.domestic_card_number = pay.domestic_card_number
-            customer.save()
-            pay.paid = True
+                              {'customer': customer, 'wage': wage, 'form': form})
             pay.save()
             return redirect('/customer/')
     else:
         form = DomesticPaymentTransactionForm()
 
     return render(request, 'domestic_pay_transaction.html',
-                  {'customer': customer, 'form': form})
+                  {'customer': customer, 'wage': wage, 'form': form})
+
+
+@login_required
+@customer_required
+def unknown_pay_transactions_view(request):
+    customer = get_object_or_404(Customer, pk=request.user.id)
+    wage = float(Configuration.objects.get(key='domestic wage').value)
+
+    if request.method == 'POST':
+        form = UnknownPaymentTransactionForm(request.POST)
+        if form.is_valid():
+            pay = form.save(commit=False)
+            pay.owner = customer
+            cost = pay.rial_cost * wage
+            if customer.rial_wallet < cost:
+                form.add_error('rial_cost',
+                               'You need {} more Rials!'.format(cost - customer.dollar_wallet))
+                return render(request, 'unknown_pay_transaction.html',
+                              {'customer': customer, 'wage': wage, 'form': form})
+            pay.save()
+
+            # TODO Reza add new customer if we dont have the user
+
+            return redirect('/customer/')
+    else:
+        form = UnknownPaymentTransactionForm()
+
+    return render(request, 'unknown_pay_transaction.html',
+                  {'customer': customer, 'wage': wage, 'form': form})
