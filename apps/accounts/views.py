@@ -95,3 +95,5 @@ def login_user(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('accounts:index'))
+
+
