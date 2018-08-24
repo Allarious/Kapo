@@ -159,3 +159,6 @@ venv.bak/
 
 .DS_Store
 tahlil/__pycache__/
+
+
+db.sqlite3

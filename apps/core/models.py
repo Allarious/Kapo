@@ -156,7 +156,7 @@ class ExamTransaction(AbstractTransaction):
     exam_title = models.CharField(max_length=30)
     dollar_cost = models.IntegerField(validators=[MaxValueValidator(1000), MinValueValidator(1)])
     site_url = models.URLField(null=True, blank=True)
-    site_authentication = models.BooleanField(default=False)
+    site_authentication = models.NullBooleanField(default=False)
     site_username = models.CharField(null=True, blank=True, max_length=50)
     site_password = models.CharField(null=True, blank=True, max_length=50)
 

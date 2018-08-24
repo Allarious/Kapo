@@ -2,9 +2,20 @@ from apps.core.models import *
 from django import forms
 
 
+# class ExamTransactionForm(forms.Form):
+#     owner = forms.ModelChoiceField
+#     exam_title = forms.CharField(max_length=30)
+#     dollar_cost = forms.IntegerField()
+#     site_authentication = forms.BooleanField(required=False)
+#     site_username = forms.CharField(required=False, max_length=50)
+#     site_password = forms.CharField(required=False, max_length=50)
+
+
 class ExamTransactionForm(forms.ModelForm):
-    owner = forms.ModelChoiceField
-    dollar_cost = forms.IntegerField(min_value=0)
+    # def __init__(self):
+    #     super(ExamTransaction,self).
+    #     self.fields['owner'] = forms.ModelChoiceField
+    #     self.fields['dollar_cost'] = forms.IntegerField(min_value=0)
 
     class Meta:
         model = ExamTransaction
