@@ -43,7 +43,7 @@ def update_customer_profile(request):
                     setattr(customer, attr, form.data[attr])
             user.save()
             customer.save()
-            return HttpResponseRedirect(reverse('customer:customer_profile'))
+            return HttpResponseRedirect(reverse('customer:customer profile'))
 
         else:
             print(user_form.errors, form.errors)
@@ -134,3 +134,17 @@ def customer_exchange_view(request):
                                                       'form': form,
                                                       'dollar': dollar_rate,
                                                       'euro': euro_rate, })
+
+
+def customer_dashboard_view(request):
+    customer = get_object_or_404(Customer, pk=request.user.id)
+    if request.method == 'POST':
+        if request.POST.get('transactions button'):
+            pass
+        # TODO one list or miltiple lists
+        elif request.POST.get('messages button'):
+            # TODO Reza messago bezan
+            pass
+        elif request.POST.get('orders button'):
+            # TODO DUDU WTF?
+            pass
