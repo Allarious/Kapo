@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0339a635-0961-4de1-8fa8-8ab9dbf3b394" name="Default" comment="conflicts solved">
-      <change beforePath="$PROJECT_DIR$/apps/customer/models.py" afterPath="$PROJECT_DIR$/apps/customer/models.py" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
     </list>
     <ignored path="$PROJECT_DIR$/venv/" />
@@ -236,10 +235,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="20" />
-    <option name="width" value="1440" />
-    <option name="height" value="805" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="x" value="-227" />
+    <option name="y" value="-1080" />
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectReloadState">
     <option name="STATE" value="1" />
@@ -1310,7 +1310,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-227" y="-1080" width="1920" height="1080" extended-state="6" />
+    <frame x="-227" y="-1080" width="1920" height="1080" extended-state="0" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
