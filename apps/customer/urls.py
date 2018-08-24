@@ -2,7 +2,7 @@ from django.conf.urls import include
 from django.urls import path
 from .views import *
 
-# TODO badan uel ha doros beshe ba estefade az id e cutomer
+# TODO badan url ha doros beshe ba estefade az id e cutomer
 app_name = "customer"
 urlpatterns = [
     path('home-page', index, name='index'),

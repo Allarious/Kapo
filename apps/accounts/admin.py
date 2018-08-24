@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from apps.accounts.models import Manager, Employee, MyUser
+from apps.accounts.models import Manager, MyUser
 
 
 # class ManagerAdmin(admin.ModelAdmin):
@@ -8,13 +8,6 @@ from apps.accounts.models import Manager, Employee, MyUser
 #
 #
 # admin.site.register(Manager, ManagerAdmin)
-
-
-class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ('user', 'first_name', 'last_name')
-
-
-admin.site.register(Employee,EmployeeAdmin)
 
 
 class MyUserAdmin(admin.ModelAdmin):

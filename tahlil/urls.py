@@ -12,6 +12,7 @@ urlpatterns = [
     path('', include('apps.core.urls'), name='index'),
     path('admin/', admin.site.urls),
     path('accounts/', include('apps.accounts.urls')),
+    path('employee/', include('apps.employee.urls')),
     path('customer/', include('apps.customer.urls')),
 
     path('login/', login_user, name='login'),
