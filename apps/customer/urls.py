@@ -1,9 +1,11 @@
 from django.urls import path
 
 from .views import *
+from apps.customer.views import index
 
 app_name = "customer"
 urlpatterns = [
+    path('home-page', index, name='index'),
     path('profile', customer_profile_view, name='customer_profile'),
     path('', customer_home_view, name='customer_home'),
     path('rial-inc/', customer_rial_inc_view, name='customer_rial_inc'),

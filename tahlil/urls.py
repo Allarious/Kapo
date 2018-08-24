@@ -6,7 +6,7 @@ from django.conf.urls.static import static
 from django.contrib.auth.views import password_reset_complete, password_reset, password_reset_done, \
     password_reset_confirm
 
-from apps.accounts.views import login_user
+from apps.accounts.views import login_user,index
 
 urlpatterns = [
     path('', include('apps.core.urls'), name='index'),

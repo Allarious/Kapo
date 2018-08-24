@@ -48,7 +48,7 @@ def sign_up(request):
             customer.user = user
             customer.save()
             user = authenticate(username=username, password=password)
-            if user is not None:
+            if user is not None and customer is not None:
                 if user.is_active:
                     login(request, user)
                     return HttpResponseRedirect(reverse('accounts:customer_home'))

@@ -4,23 +4,27 @@ from django.contrib.auth.decorators import login_required
 from apps.core.models import Configuration
 from apps.customer.forms.currency_forms import RialIncForm, ExchangeForm
 from apps.customer.models import Customer
+from apps.accounts.decorators import customer_required
+
 
 
 @login_required
+@customer_required
 def customer_profile_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
-    return render(request, 'customer_profile.html', {'customer': customer, })
+    return render(request, 'Profile.html', {'customer': customer, })
 
 
 @login_required
+@customer_required
 def customer_home_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     karmozds = Configuration.objects.exclude(key='dollar').exclude(key='euro')
-    karmozds = Configuration.objects.all()
     return render(request, 'customer_home.html', {'customer': customer, 'karmozds': karmozds})
 
 
 @login_required
+@customer_required
 def customer_rial_inc_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     if request.method == 'POST':
@@ -37,6 +41,7 @@ def customer_rial_inc_view(request):
 
 
 @login_required
+@customer_required
 def customer_exchange_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     dollar_rate = Configuration.objects.get(key='dollar')
@@ -78,3 +83,7 @@ def customer_exchange_view(request):
                                                       'form': form,
                                                       'dollar': dollar_rate,
                                                       'euro': euro_rate, })
+@login_required
+@customer_required
+def index(request):
+    return render(request, 'Customer_HomePage.html', {})
