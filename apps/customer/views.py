@@ -5,7 +5,8 @@ from apps.core.models import Configuration
 from apps.customer.forms.currency_forms import *
 from apps.customer.models import Customer
 from apps.accounts.decorators import customer_required
-
+from django.views.generic.edit import UpdateView
+from django.urls import reverse
 
 
 @login_required
@@ -90,3 +91,41 @@ def customer_exchange_view(request):
 @customer_required
 def index(request):
     return render(request, 'Customer_HomePage.html', {})
+
+def update_customer_profile(request):
+    user = MyUser.objects.get(username=request.user.username)
+    # customer = user.customer
+    if request.method == 'POST':
+        user_form = EditUser(request.POST, request.FILES)
+        form = EditCustomerProfile(request.POST)
+
+        if user_form.is_valid() and form.is_valid():
+            for attr in user_form.data:
+                if attr in user_form.fields and user_form.data[attr] != '':
+                    if attr != 'password2':
+                        if getattr(user, attr) is not user_form.data[attr]:
+
+                            if attr == 'password':
+
+                                user.set_password(user_form.data[attr])
+                            else:
+                                setattr(user, attr, user_form.data[attr])
+            print(1)
+            customer = Customer.objects.get(user=user)
+            for attr in form.data:
+                if attr in form.fields and form.data[attr] != '' and form.data[attr] != 'blank':
+                    setattr(customer, attr, form.data[attr])
+            user.save()
+            customer.save()
+            return HttpResponseRedirect(reverse('customer:customer_profile'))
+
+
+        else:
+            print(user_form.errors, form.errors)
+
+    else:
+        user_form = EditUser()
+        form = EditCustomerProfile()
+
+    return render(request, 'customer_update.html',
+                  {'user_form': user_form, 'form': form})
