@@ -34,7 +34,7 @@ def exam_transactions_view(request):
 
             if customer.dollar_wallet < exam.dollar_cost:
                 form.add_error('dollar_cost',
-                               'You need {} more dollars!'.format(form.dollar_cost - customer.dollar_wallet))
+                               'You need {} more dollars!'.format(examgit.dollar_cost - customer.dollar_wallet))
                 return render(request, 'exam_transactions.html',
                               {'customer': customer, 'form': form, 'exam_wage': exam_wage,
                                'dollar_rate': dollar_rate,

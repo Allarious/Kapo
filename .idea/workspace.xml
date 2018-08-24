@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0339a635-0961-4de1-8fa8-8ab9dbf3b394" name="Default" comment="passwordreset complet">
-      <change beforePath="$PROJECT_DIR$/apps/core/forms/transaction_forms.py" afterPath="$PROJECT_DIR$/apps/core/forms/transaction_forms.py" />
-      <change beforePath="$PROJECT_DIR$/apps/core/models.py" afterPath="$PROJECT_DIR$/apps/core/models.py" />
       <change beforePath="$PROJECT_DIR$/apps/customer/views/transaction_views.py" afterPath="$PROJECT_DIR$/apps/customer/views/transaction_views.py" />
     </list>
     <ignored path="$PROJECT_DIR$/venv/" />
@@ -125,11 +123,11 @@
               <file leaf-file-name="transaction_views.py" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/apps/customer/views/transaction_views.py">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state relative-caret-position="208">
-                      <caret line="44" column="9" lean-forward="false" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
+                    <state relative-caret-position="190">
+                      <caret line="36" column="70" lean-forward="false" selection-start-line="36" selection-start-column="70" selection-end-line="36" selection-end-column="70" />
                       <folding>
                         <element signature="e#0#44#0" expanded="true" />
-                        <marker date="1535111791310" expanded="true" signature="1172:1235" ph="..." />
+                        <marker date="1535111991595" expanded="true" signature="1172:1235" ph="..." />
                       </folding>
                     </state>
                   </provider>
@@ -509,7 +507,7 @@
           <caret line="30" column="22" lean-forward="false" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
-            <marker date="1535111791310" expanded="true" signature="1172:1235" ph="..." />
+            <marker date="1535111991595" expanded="true" signature="1172:1235" ph="..." />
           </folding>
         </state>
       </provider>
@@ -796,11 +794,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/customer/views/transaction_views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="44" column="9" lean-forward="false" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
+        <state relative-caret-position="190">
+          <caret line="36" column="70" lean-forward="false" selection-start-line="36" selection-start-column="70" selection-end-line="36" selection-end-column="70" />
           <folding>
             <element signature="e#0#44#0" expanded="true" />
-            <marker date="1535111791310" expanded="true" signature="1172:1235" ph="..." />
+            <marker date="1535111991595" expanded="true" signature="1172:1235" ph="..." />
           </folding>
         </state>
       </provider>
