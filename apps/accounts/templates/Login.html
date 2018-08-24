@@ -10,7 +10,7 @@
     -->
     <link rel="manifest" href="http://localhost:3000/manifest.json">
     <link rel="shortcut icon" href="http://localhost:3000/favicon.ico">
-    <link rel="stylesheet" href="./SignUp1_files/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../templates/React%20App1_files/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     <!--
       Notice the use of  in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -20,7 +20,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Sign Up</title>
+    <title>Login</title>
   <style type="text/css">body {
   margin: 0;
   padding: 0;
@@ -575,41 +575,19 @@
                 <a href={% url 'accounts:customer_home' %}><div class="navbar__navComponents__A_iF-"> Profile </div></a>
                 <a href={% url 'accounts:login' %}><div class="navbar__navComponents__A_iF-">  Login  </div></a>
                 <a href={% url 'accounts:register' %}><div class="navbar__navComponents__A_iF-">  Signup  </div></a>
-                <a href={% url 'accounts:logout' %}><div class="navbar__navComponents__A_iF-">  Logout  </div></a>
             </div>
-            <div class="signup__signup-container__3eqmF"><div>
-        </div>
-                <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
-               {% csrf_token %}
-                <div>
-                    <input class="input__login-input__1pYxI" type="text" placeholder="First Name" name="first_name">
-                </div>
-                <div>
-                    <input class="input__login-input__1pYxI" type="text" placeholder="Last Name" name="last_name">
-                </div>
-                <div>
-                    <input class="input__login-input__1pYxI" type="text" placeholder="Username" name="username">
-                </div>
-                <div>
-                    <input class="input__login-input__1pYxI" type="email" placeholder="E-mail" name="email">
-                </div>
-                <div>
-                    <input class="input__login-input__1pYxI" type="password" placeholder="Password" name="password">
-                </div>
-                <div>
-                    <input class="input__login-input__1pYxI" type="password" placeholder="Confirm Password" name="password2">
-                </div>
-                    <div>
-                    <input type="checkbox" id="checkbox" class="checkbox" name="terms">
-                    <label class="checkb" style="display: inline;" for="checkbox"> <span></span>
-                        <p class="signup__conditions-of-use__2PETr">By signing up you agree to our <a href="http://localhost:3000/">Conditions of use</a></p>
-                    </label>
-                </div>
-                <button class="button__form-button__KT9Md">Sign Up</button>
-{#                <p class="signup__conditions-of-use__2PETr">By signing up you agree to our <a href="http://localhost:3000/">Conditions of use</a></p>#}
-                </form>
+            <div class="login__login-container__fTfJi"><div class="login__logo__2KG6D"></div>
+        <form class="form-horizontal login-form" method="post" role="form" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <input class="input__login-input__1pYxI" type="text" placeholder="Username" name="username" required>
             </div>
-            <div class="footer__footer__1ewxg"><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Contact Us</div><div class="footer__wrapper-body__34NLC">021-1234567<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Email Us</div><div class="footer__wrapper-body__34NLC">info@Kapo.ir<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Follow Us</div><div class="footer__wrapper-body__34NLC"><button class="footer__wrapper-body-button__19lEO">Telegram</button><button class="footer__wrapper-body-button__19lEO">Instagram</button></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Meet us</div><div class="footer__wrapper-body__34NLC">Sharif University Of Tehran<div></div></div></div></div></div></div></div>
+            <div>
+                <input class="input__login-input__1pYxI" type="password" placeholder="Password"  name="password" required>
+            </div>
+            <button class="button__form-button__KT9Md">Login</button>
+        </form>
+                <a href={% url 'accounts:password_reset' %}><p class="login__forget-password__1Uigg">Forgot Your Password?</p></a></div><div class="footer__footer__1ewxg"><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Contact Us</div><div class="footer__wrapper-body__34NLC">021-1234567<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Email Us</div><div class="footer__wrapper-body__34NLC">info@Kapo.ir<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Follow Us</div><div class="footer__wrapper-body__34NLC"><button class="footer__wrapper-body-button__19lEO">Telegram</button><button class="footer__wrapper-body-button__19lEO">Instagram</button></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Meet us</div><div class="footer__wrapper-body__34NLC">Sharif University Of Tehran<div></div></div></div></div></div></div></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -620,6 +598,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  <script type="text/javascript" src="./SignUp1_files/bundle.js.download"></script>
+  <script type="text/javascript" src="../../../templates/React%20App1_files/bundle.js.download"></script>
 
 </body></html>

@@ -12,6 +12,9 @@ from django.http import HttpResponseRedirect
 def index(request):
     return render(request, 'Home_page.html', {})
 
+def handler404(request):
+    return render(request, '404.html', status=404)
+
 
 def register(request):
     form = UserForm(request.POST or None)

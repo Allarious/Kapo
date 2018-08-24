@@ -4,23 +4,27 @@ from django.contrib.auth.decorators import login_required
 from apps.core.models import Configuration, ExamTransaction
 from apps.customer.models import Customer
 from apps.core.forms.transaction_forms import *
+from apps.accounts.decorators import customer_required
 
 
 @login_required
+@customer_required
 def customer_transactions_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     return render(request, 'customer_transactions.html', {'customer': customer, })
 
 
 @login_required
+@customer_required
 def customer__transactions_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     return render(request, 'customer_transactions.html', {'customer': customer, })
 
 
 @login_required
+@customer_required
 def exam_transactions_view(request):
-    customer = get_object_or_404(Customer, pk=request.user.id)
+    customer = get_object_or_404(Customer, pk=request.user)
     exam_wage = Configuration.objects.get(key='exam wage')
     dollar_rate = Configuration.objects.get(key='dollar')
     euro_rate = Configuration.objects.get(key='euro')
@@ -31,7 +35,7 @@ def exam_transactions_view(request):
             form.save(commit=False)
             form.dollar_cost = form.cleaned_data['dollar_cost']
             # print(form.owner)
-            form.owner = customer
+            form.owner = customer.user
             # print(form.owner.user_id)
 
             if customer.dollar_wallet < form.dollar_cost:
@@ -41,6 +45,7 @@ def exam_transactions_view(request):
                               {'customer': customer, 'form': form, 'exam_wage': exam_wage,
                                'dollar_rate': dollar_rate,
                                'euro_rate': euro_rate})
+            print(form)
             form.save()
             return HttpResponseRedirect('/customer/')
     else:

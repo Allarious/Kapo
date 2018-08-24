@@ -8,6 +8,8 @@ class MyUser(AbstractUser):
     is_employee = models.BooleanField(default=False)
 
 
+
+
 SEX_CHOICES = (('male', 'Male'), ('female', 'Female'), ('other', 'Other'))
 
 

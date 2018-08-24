@@ -142,7 +142,7 @@ class CreditCardField(forms.CharField):
 
 class AbstractTransaction(models.Model):
     id = models.AutoField(primary_key=True)
-    owner = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    owner = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     creation_time = models.DateTimeField(default=timezone.now)
     description = models.TextField(null=True, blank=True)
     paid = models.BooleanField(default=False)
