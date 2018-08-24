@@ -62,6 +62,48 @@
 .navbar__navComponents__A_iF-:nth-child(1){
     margin-left: 50px ;
 }
+
+{#    .checkb {#}
+{#	position: static;#}
+{#	color: #444444;#}
+{#	font-size: 14px;#}
+{#	display: inline;#}
+{#	float: right;#}
+{#	margin-right: 30px;#}
+{#	margin-bottom: 0px;#}
+{#}#}
+{#    .checkbox + label span{#}
+{#        position: relative;#}
+{#	display: inline;#}
+{#	cursor: pointer;#}
+{#	width: 16px;#}
+{#	height: 16px;#}
+{#	margin-left: 10px;#}
+{#}#}
+{#.checkbox:checked + label span{#}
+{#}#}
+{#.checkbox + label {#}
+{#	cursor: pointer;#}
+{#	position: relative;#}
+{#	margin-left: 5px;#}
+{#}#}
+
+label {
+  display: block;
+  padding-left: 15px;
+  text-indent: -15px;
+}
+input {
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  margin:0;
+  vertical-align: bottom;
+  position: relative;
+  top: -1px;
+  *overflow: hidden;
+}
+
 .navbar__navComponents__A_iF-:hover{
     background-color: #97C4C4;
     color: white;
@@ -147,6 +189,7 @@
     -o-transition: 0.3s;
     transition: 0.3s;
 }
+
 .input__login-input__1pYxI:focus{
     outline: none;
     border: 2px solid rosybrown;
@@ -592,16 +635,23 @@
                 <div>
                     <input class="input__login-input__1pYxI" type="email" placeholder="E-mail" name="email">
                 </div>
+                    <div><input class="input__login-input__1pYxI" type="tel" placeholder="Contact Number" name="phone" pattern="09[0-9]{9}"></div>
+                <div><input class="input__login-input__1pYxI" type="text" placeholder="Region" name="city"></div>
+                <div><input class="input__login-input__1pYxI" type="text" placeholder="Country" name="country"></div>
+                <div><input class="input__login-input__1pYxI" type="date" placeholder="Birth Date" name="birthday_date"></div>
                 <div>
                     <input class="input__login-input__1pYxI" type="password" placeholder="Password" name="password">
                 </div>
                 <div>
                     <input class="input__login-input__1pYxI" type="password" placeholder="Confirm Password" name="password2">
                 </div>
-                    <div>
+                    <div class="signup__conditions-of-use__2PETr">{{ user_form.errors }}</div>
+
+                    <br>
+                    <div class="signup__conditions-of-use__2PETr">
                     <input type="checkbox" id="checkbox" class="checkbox" name="terms">
-                    <label class="checkb" style="display: inline;" for="checkbox"> <span></span>
-                        <p class="signup__conditions-of-use__2PETr">By signing up you agree to our <a href="http://localhost:3000/">Conditions of use</a></p>
+                    <label class="checkb" for="checkbox" style="display: inline;"> <span></span>
+                        By signing up you agree to our <a href="http://localhost:3000/">Conditions of use</a>
                     </label>
                 </div>
                 <button class="button__form-button__KT9Md">Sign Up</button>

@@ -1238,15 +1238,15 @@ html {
                 <div>
                     <input class="input__login-input__FAzIY" type="email" placeholder="E-mail" name="email">
                 </div>
-                <div><input class="input__login-input__FAzIY" type="text" placeholder="Contact Number" name="phone"></div>
+                <div><input class="input__login-input__FAzIY" type="tel" placeholder="Contact Number" name="phone" pattern="09[0-9]{9}"></div>
                 <div><input class="input__login-input__FAzIY" type="text" placeholder="Region" name="city"></div>
                 <div><input class="input__login-input__FAzIY" type="text" placeholder="Country" name="country"></div>
-                <div><input class="input__login-input__FAzIY" type="text" placeholder="Birth Date" name="birthday_date"></div>
+                <div><input class="input__login-input__FAzIY" type="date" placeholder="Birth Date" name="birthday_date"></div>
                 <div class="editprofile__gap__2XiPp"></div>
                 <div class="editprofile__section-header__1W1Ik">Change Password</div>
                 <div><input class="input__login-input__FAzIY" type="password" placeholder="New Password" name="password"></div>
                 <div><input class="input__login-input__FAzIY" type="password" placeholder="Confirm New Password" name="password2"></div>
-                <div><input class="input__login-input__FAzIY" type="password" placeholder="Old Password" name="old_password"></div>
+                {{ user_form.errors }}
                 <button class="authbutton__form-button__26qDW">Save Changes</button>
                 </form>
             </div>

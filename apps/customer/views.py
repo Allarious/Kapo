@@ -94,7 +94,10 @@ def customer_exchange_view(request):
 def index(request):
     return render(request, 'Customer_HomePage.html', {})
 
+# TODO badan fieldash kamel beshan tebghe model
 
+@login_required
+@customer_required
 def update_customer_profile(request):
     user = MyUser.objects.get(username=request.user.username)
     # customer = user.customer
@@ -113,7 +116,6 @@ def update_customer_profile(request):
                                 user.set_password(user_form.data[attr])
                             else:
                                 setattr(user, attr, user_form.data[attr])
-            print(1)
             customer = Customer.objects.get(user=user)
             for attr in form.data:
                 if attr in form.fields and form.data[attr] != '' and form.data[attr] != 'blank':
