@@ -1,7 +1,6 @@
+from django.conf.urls import include
 from django.urls import path
-
-from .views.currency_views import *
-from .views.transaction_views import *
+from .views import *
 
 app_name = "customer"
 urlpatterns = [
@@ -10,7 +9,6 @@ urlpatterns = [
     path('', customer_home_view, name='customer_home'),
     path('rial-inc/', customer_rial_inc_view, name='customer_rial_inc'),
     path('exchange/', customer_exchange_view, name="exchange"),
-    path('transactions/', customer_transactions_view, name='customer_transactions'),
-    path('transactions/exam', exam_transactions_view, name='exam_transactions'),
-    path('transactions/app-fee', app_fee_transactions_view, name='fee_transactions'),
+    path('transactions/', include('apps.transactions.urls'), name='customer_transactions'),
+
 ]
