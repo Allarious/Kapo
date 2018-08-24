@@ -28,9 +28,12 @@ const Navbar = (props) => {
         {text :'Error',
             clicked:'Error',
             id:'c7'},
-        {text :'Logout',
-            clicked:'Homepage',
+        {text :'Accounts',
+            clicked:'Accounts',
             id:'c8'},
+        {text :'Dashboard',
+            clicked:'Dashboard',
+            id:'c9'},
     ];
 
     return(

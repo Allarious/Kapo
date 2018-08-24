@@ -1,0 +1,8 @@
+.container{
+    width: 85%;
+    margin: 30px auto;
+    background-color: #eeeeee;
+    border-radius: 30px;
+    padding: 30px;
+    overflow: hidden;
+}

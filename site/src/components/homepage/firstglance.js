@@ -58,7 +58,7 @@ const FirstGlance = () => {
                       1321 5328 1249 1249
                   </div>
                   <div className={classes.name}>
-                      Burak Aslan
+                      John Doe
                   </div>
               </div>
           </div>

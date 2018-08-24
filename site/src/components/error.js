@@ -2,7 +2,7 @@ import React from 'react';
 
 import classes from './error/error.css';
 
-const Error = () => {
+const Error = (props) => {
     return(
         <div className={classes.container}>
         <div className={classes["text-wrapper"]}>
@@ -15,7 +15,7 @@ const Error = () => {
             </div>
 
             <div className={classes.buttons}>
-                <a className={classes.button} href="">Go to homepage</a>
+                <a className={classes.button} onClick={() => props.clicked('Homepage')}>Go to homepage</a>
             </div>
         </div>
         </div>

@@ -31,6 +31,7 @@
     cursor: pointer;
     transition: 0.3s;
     border: none;
+    border: 1px solid #97C4C4;
 }
 .wrapper-body-button:focus{
     outline: none;

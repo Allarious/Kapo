@@ -13,11 +13,13 @@ import EditProfile from '../components/editprofile';
 import SendMessage from '../components/sendmessage';
 import Conv from '../components/convert';
 import Error from '../components/error'
+import Accounts from '../components/accounts';
+import Dashboard from '../components/dashboard';
 
 class App extends Component {
 
     state = {
-      visiblePage: 'Homepage',
+      visiblePage: 'Dashboard',
     };
 
     generateContent = () => {
@@ -29,7 +31,7 @@ class App extends Component {
             return <Login clicked={this.changePage}/>;
         } else if(this.state.visiblePage === 'Signup')
         {
-            return <SignUp/>;
+            return <SignUp clicked={this.changePage}/>;
         } else if(this.state.visiblePage === 'ForgetPassword')
         {
             return <ResetPassword/>;
@@ -47,7 +49,15 @@ class App extends Component {
             return <Conv/>;
         } else if(this.state.visiblePage === 'Error')
         {
-            return <Error/>;
+            return <Error clicked={this.changePage}/>;
+        } else if(this.state.visiblePage === 'Accounts')
+        {
+            return <Accounts/>;
+        } else if(this.state.visiblePage === 'Dashboard')
+        {
+            return <Dashboard/>;
+        } else {
+            return <Error clicked={this.changePage}/>;
         }
     };
 

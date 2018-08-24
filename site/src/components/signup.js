@@ -3,7 +3,7 @@ import classes from './authentication/signup.css';
 import Inp from './inputs/input';
 import Authbutton from './buttons/authbutton';
 
-const SignUpPage = () => {
+const SignUpPage = (props) => {
     return (
         <div className={classes["signup-container"]}>
             <div className={classes.logo}></div>
@@ -14,7 +14,7 @@ const SignUpPage = () => {
             <Inp holder="Password" type="password"/>
             <Inp holder="Confirm Password" type="password"/>
             <Authbutton>Sign Up</Authbutton>
-            <p className={classes["conditions-of-use"]}>By signing up you agree to our <a href="">Conditions of use</a></p>
+            <p className={classes["conditions-of-use"]}>By signing up you agree to our <a className={classes["conditions-of-use-a"]} onClick={() => props.clicked('ConditionsofUse')}>Conditions of use</a></p>
         </div>
     );
 };

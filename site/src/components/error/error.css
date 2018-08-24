@@ -50,6 +50,7 @@ html {
     color: white;
     border-radius: 26px;
     transition: all 0.2s ease-in-out;
+    cursor: pointer;
 }
 .buttons a.button:hover {
     background-color: #F9F9F9;
