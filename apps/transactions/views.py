@@ -1,22 +1,13 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from apps.core.models import Configuration, ExamTransaction
 from apps.customer.models import Customer
-from apps.core.forms.transaction_forms import *
+from .forms.forms import *
 from apps.accounts.decorators import customer_required
 
 
 @login_required
 @customer_required
 def customer_transactions_view(request):
-    customer = get_object_or_404(Customer, pk=request.user.id)
-    return render(request, 'customer_transactions.html', {'customer': customer, })
-
-
-@login_required
-@customer_required
-def customer__transactions_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     return render(request, 'customer_transactions.html', {'customer': customer, })
 
