@@ -20,11 +20,9 @@ class Employee(models.Model):
     domestic_card_number = DomesticCardField(unique=False, max_length=16, null=True)
     rial_wallet = models.FloatField(default=0)
 
-
     def clean(self):
         if self.rial_wallet < 0:
             raise ValidationError('You Dont have enough Rials')
-
 
     def __str__(self):
         return self.first_name
