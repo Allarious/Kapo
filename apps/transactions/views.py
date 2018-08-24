@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+
+from apps.core.models import Configuration
 from apps.customer.models import Customer
 from .forms.forms import *
 from apps.accounts.decorators import customer_required
