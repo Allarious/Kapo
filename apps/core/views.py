@@ -14,3 +14,5 @@ def about_us_view(request):
 
 def policy_view(request):
     return render(request, 'policy.html', {})
+
+

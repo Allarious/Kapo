@@ -1,7 +1,18 @@
+import re
+
+from django.core.exceptions import ValidationError
 from django.db import models
 from datetime import date
 
 from apps.accounts.models import MyUser, SEX_CHOICES
+
+
+class DomesticCardField(models.CharField):
+    def clean(self, value, model_instance):
+        value = super(DomesticCardField, self).clean(value, model_instance)
+        if not re.match(r'[0-9]{16}', value):
+            raise ValidationError('16 numbers only.')
+        return value
 
 
 class Customer(models.Model):
@@ -22,6 +33,3 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.first_name
-
-
-

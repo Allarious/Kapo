@@ -5,7 +5,7 @@ from apps.accounts.views import login_user
 from . import views
 from tahlil import settings
 from django.conf.urls.static import static
-from apps.customer.views import customer_profile_view
+from apps.customer.views.currency_views import customer_profile_view
 from django.contrib.auth.views import password_reset, password_reset_complete, password_reset_confirm, password_reset_done
 
 app_name = "accounts"
