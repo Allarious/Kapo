@@ -148,7 +148,7 @@ class AbstractTransaction(models.Model):
 
 class ExamTransaction(AbstractTransaction):
     exam_title = models.CharField(max_length=30)
-    dollar_cost = models.IntegerField(validators=[MaxValueValidator(1000), MinValueValidator(1)])
+    dollar_cost = models.FloatField(default=0, validators=[MaxValueValidator(1000), MinValueValidator(1)])
     site_url = models.URLField(null=True, blank=True)
     site_authentication = models.NullBooleanField(default=False)
     site_username = models.CharField(null=True, blank=True, max_length=50)
@@ -162,13 +162,13 @@ class ApplicationTuitionFeeTransaction(AbstractTransaction):
     FEE_CHOICES = (('application fee', 'Application Fee'), ('tuition fee', 'Tuition Fee'))
     fee_type = models.CharField(choices=FEE_CHOICES, max_length=50)
 
-    dollar_cost = models.IntegerField(
-        null=True, blank=True,
-        validators=[MaxValueValidator(1000), MinValueValidator(1)])
+    dollar_cost = models.FloatField(default=0,
+                                    null=True, blank=True,
+                                    validators=[MaxValueValidator(1000), MinValueValidator(0)])
 
-    euro_cost = models.IntegerField(
-        null=True, blank=True,
-        validators=[MaxValueValidator(1000), MinValueValidator(1)])
+    euro_cost = models.FloatField(default=0,
+                                  null=True, blank=True,
+                                  validators=[MaxValueValidator(1000), MinValueValidator(0)])
 
     site_url = models.URLField(null=True, blank=True)
     site_authentication = models.BooleanField(default=False)
@@ -180,13 +180,13 @@ class ApplicationTuitionFeeTransaction(AbstractTransaction):
 
 
 class ForeignPaymentTransaction(AbstractTransaction):
-    dollar_cost = models.IntegerField(
-        null=True, blank=True,
-        validators=[MaxValueValidator(1000), MinValueValidator(1)])
+    dollar_cost = models.FloatField(default=0,
+                                    null=True, blank=True,
+                                    validators=[MaxValueValidator(1000), MinValueValidator(0)])
 
-    euro_cost = models.IntegerField(
-        null=True, blank=True,
-        validators=[MaxValueValidator(1000), MinValueValidator(1)])
+    euro_cost = models.FloatField(default=0,
+                                  null=True, blank=True,
+                                  validators=[MaxValueValidator(1000), MinValueValidator(0)])
 
     foreign_card_number = models.CharField(max_length=19)
 
@@ -195,7 +195,7 @@ class ForeignPaymentTransaction(AbstractTransaction):
 
 
 class DomesticPaymentTransaction(AbstractTransaction):
-    rial_cost = models.IntegerField(validators=[MaxValueValidator(30000000), MinValueValidator(10000)])
+    rial_cost = models.FloatField(default=0, validators=[MaxValueValidator(30000000), MinValueValidator(10000)])
     domestic_card_number = DomesticCardField(max_length=16)
 
     def __str__(self):
@@ -203,7 +203,7 @@ class DomesticPaymentTransaction(AbstractTransaction):
 
 
 class UnknownPaymentTransaction(AbstractTransaction):
-    rial_cost = models.IntegerField(validators=[MaxValueValidator(30000000), MinValueValidator(10000)])
+    rial_cost = models.FloatField(default=0, validators=[MaxValueValidator(30000000), MinValueValidator(10000)])
     domestic_card_number = models.CharField(max_length=16)
 
     def __str__(self):
