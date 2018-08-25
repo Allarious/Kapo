@@ -147,7 +147,7 @@ class AbstractTransaction(models.Model):
 
 
 class RialWalletIncTransaction(AbstractTransaction):
-    rial_inc = models.FloatField(default=0, validators=[MaxValueValidator(300000000), MinValueValidator(100000)])
+    amount = models.FloatField(default=0, validators=[MaxValueValidator(300000000), MinValueValidator(100000)])
 
     def __str__(self):
         return 'Rial inc ' + str(self.id)
@@ -157,7 +157,7 @@ class CurrencyConvertTransaction(AbstractTransaction):
     rial_cost = models.FloatField(validators=[MaxValueValidator(300000000), MinValueValidator(100000)])
     CHOICES = (('dollar', 'Dollar'), ('euro', 'Euro'))
     currency = models.CharField(choices=CHOICES, max_length=20)
-    currency_inc = models.FloatField(validators=[MaxValueValidator(1000), MinValueValidator(1)])
+    amount = models.FloatField(validators=[MaxValueValidator(1000), MinValueValidator(1)])
 
     def __str__(self):
         return str(self.currency) + ' Convert ' + str(self.id)

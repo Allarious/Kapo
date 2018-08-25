@@ -4,20 +4,7 @@ from apps.accounts.models import MyUser, SEX_CHOICES
 from datetime import date
 
 
-class RialIncForm(forms.Form):
-    amount = forms.IntegerField(required=True, min_value=1000, initial=0)
-
-
-class ExchangeForm(forms.Form):
-    amount = forms.IntegerField( required=True, min_value=10, initial=0)
-    CHOICES = (('dollar', 'Dollar'),
-               ('euro', 'Euro'))
-    currency = forms.MultipleChoiceField(choices=CHOICES, label='currency',)
-
-
-
 class EditUser(forms.ModelForm):
-
     username = forms.CharField(max_length=30, required=False)
     password = forms.CharField(widget=forms.PasswordInput, required=False)
     password2 = forms.CharField(widget=forms.PasswordInput, required=False)
@@ -45,6 +32,7 @@ class EditCustomerProfile(forms.ModelForm):
     country = forms.CharField(max_length=20, required=False)
     # address = forms.CharField(max_length=100, default='Tehran')
     phone = forms.CharField(max_length=12, required=False)
+
     # domestic_bank_account_id = forms.CharField(unique=False, max_length=16, null=True)
 
     class Meta:

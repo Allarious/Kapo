@@ -3,7 +3,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
 from apps.core.models import Configuration
-from apps.customer.models import Customer
 from .forms.forms import *
 from apps.accounts.decorators import customer_required
 
@@ -13,6 +12,74 @@ from apps.accounts.decorators import customer_required
 def customer_transactions_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     return render(request, 'customer_transactions.html', {'customer': customer, })
+
+
+@login_required
+@customer_required
+def customer_rial_inc_view(request):
+    customer = get_object_or_404(Customer, pk=request.user.id)
+    if request.method == 'POST':
+        form = RialIncForm(request.POST)
+        if form.is_valid():
+            transaction = form.save(commit=False)
+            customer.rial_wallet += transaction.amount
+            customer.save()
+            transaction.paid = True
+            transaction.save()
+            return HttpResponseRedirect('/customer/')
+    else:
+        form = RialIncForm()
+
+    return render(request, 'customer_rial_wallet_inc.html', {'customer': customer, 'form': form})
+
+
+@login_required
+@customer_required
+def customer_exchange_view(request):
+    customer = get_object_or_404(Customer, pk=request.user.id)
+    dollar_rate = float(Configuration.objects.get(key='dollar').value)
+    euro_rate = float(Configuration.objects.get(key='euro').value)
+
+    if request.method == 'POST':
+        form = ExchangeForm(request.POST)
+        if form.is_valid():
+            exchange = form.save(commit=False)
+            if exchange.currency == 'euro':
+                cost = exchange.amount * euro_rate
+                if customer.rial_wallet >= cost:
+                    customer.rial_wallet -= cost
+                    exchange.rial_cost = cost
+                    customer.euro_wallet += exchange.amount
+                else:
+                    form.add_error('amount', 'not enough money')
+                    return render(request, 'customer_exchange.html', {'customer': customer,
+                                                                      'form': form,
+                                                                      'dollar': dollar_rate,
+                                                                      'euro': euro_rate, })
+            elif exchange.currency == 'dollar':
+                cost = exchange.amount * dollar_rate
+                if customer.rial_wallet >= cost:
+                    customer.rial_wallet -= cost
+                    exchange.rial_cost = cost
+                    customer.dollar_wallet += exchange.amount
+                else:
+                    form.add_error('amount', 'not enough money')
+                    return render(request, 'customer_exchange.html', {'customer': customer,
+                                                                      'form': form,
+                                                                      'dollar': dollar_rate,
+                                                                      'euro': euro_rate, })
+
+            customer.save()
+            exchange.paid = True
+            exchange.save()
+            return HttpResponseRedirect('/customer/')
+    else:
+        form = ExchangeForm()
+
+    return render(request, 'customer_exchange.html', {'customer': customer,
+                                                      'form': form,
+                                                      'dollar': dollar_rate,
+                                                      'euro': euro_rate, })
 
 
 @login_required
