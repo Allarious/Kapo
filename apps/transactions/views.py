@@ -22,6 +22,7 @@ def customer_rial_inc_view(request):
         form = RialIncForm(request.POST)
         if form.is_valid():
             transaction = form.save(commit=False)
+            transaction.owner = customer
             customer.rial_wallet += transaction.amount
             customer.save()
             transaction.paid = True
@@ -44,6 +45,7 @@ def customer_exchange_view(request):
         form = ExchangeForm(request.POST)
         if form.is_valid():
             exchange = form.save(commit=False)
+            exchange.owner = customer
             if exchange.currency == 'euro':
                 cost = exchange.amount * euro_rate
                 if customer.rial_wallet >= cost:
@@ -51,7 +53,7 @@ def customer_exchange_view(request):
                     exchange.rial_cost = cost
                     customer.euro_wallet += exchange.amount
                 else:
-                    form.add_error('amount', 'not enough money')
+                    form.add_error('amount', 'موجودی کافی نیست')
                     return render(request, 'customer_exchange.html', {'customer': customer,
                                                                       'form': form,
                                                                       'dollar': dollar_rate,
@@ -63,7 +65,7 @@ def customer_exchange_view(request):
                     exchange.rial_cost = cost
                     customer.dollar_wallet += exchange.amount
                 else:
-                    form.add_error('amount', 'not enough money')
+                    form.add_error('amount', 'موجودی کافی نیست')
                     return render(request, 'customer_exchange.html', {'customer': customer,
                                                                       'form': form,
                                                                       'dollar': dollar_rate,

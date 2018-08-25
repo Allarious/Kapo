@@ -79,7 +79,7 @@ def customer_dashboard_view(request):
     if request.method == 'POST':
         if request.POST.get('transactions button'):
             pass
-        # TODO one list or miltiple lists
+        # TODO Reza one list or miltiple lists
         elif request.POST.get('messages button'):
             # TODO Reza messago bezan
             pass
