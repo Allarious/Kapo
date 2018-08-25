@@ -8,6 +8,8 @@
     border-radius: 20px;
     border: 1px solid #468189;
     overflow: hidden;
+    box-shadow: 5px 5px 10px #aaaaaa;
+
 }
 .logo{
     width: 120px;

@@ -1,0 +1,59 @@
+.container{
+    width: 95%;
+    height: 75px;
+    border: 1px solid #468189;
+    border-radius: 37.5px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: 0.4s;
+    box-shadow: 5px 5px 10px #aaaaaa;
+
+}
+.container:hover{
+    height: 400px;
+    border-radius: 30px;
+}
+.middle{
+    float: left;
+    border-left: 1px solid #468189;
+    border-right: 1px solid #468189;
+    border-bottom: 1px solid #468189;
+    width: 16.75%;
+    line-height: 75px;
+}
+.right{
+    float: left;
+    border-left: 1px solid #468189;
+    border-bottom: 1px solid #468189;
+    width: 16.5%;
+    line-height: 75px;
+    color: lightgreen;
+}
+.left{
+    float: left;
+    border-right: 1px solid #468189;
+    border-bottom: 1px solid #468189;
+    width: 16.5%;
+    line-height: 75px;
+}
+/*.costR{*/
+    /**/
+/*}*/
+/*.costD{*/
+/**/
+/*}*/
+/*.date{*/
+/**/
+/*}*/
+/*.time{*/
+/**/
+/*}*/
+/*.condition{*/
+/**/
+/*}*/
+.more-info{
+}
+.break{
+    clear: both;
+}

@@ -1,0 +1,21 @@
+.container{
+    height: 65px;
+    line-height: 65px;
+    width: 95%;
+    margin: 5px auto;
+    border-radius: 30px;
+    border: 1px solid #468189;
+    box-shadow: 2px 2px 6px #aaaaaa;
+    cursor: pointer;
+}
+
+.header{
+    float: left;
+    width: 80%;
+}
+
+.condition{
+    float: left;
+    width: 20%;
+    color: salmon;
+}

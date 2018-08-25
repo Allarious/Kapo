@@ -4,7 +4,7 @@ import classes from './profile/profile.css';
 
 import Button from './buttons/profilebutton'
 import Att from './profile/profilecontent';
-// import Table from './table/table';
+// import Tablecomponents from './table/table';
 import WalletPart from "./profile/walletpart";
 
 const Profile = (props) => {

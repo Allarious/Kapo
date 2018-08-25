@@ -5,6 +5,7 @@
     margin: 20px auto;
     border-radius: 30px;
     overflow: auto;
+    box-shadow: 1px 1px 10px #aaaaaa;
 }
 .send-to{
     height: 40px;
@@ -72,7 +73,7 @@
     background-color: #eeeeee;
     border-radius: 30px;
     margin: 10px;
-    height: 400px;
+    height: 310px;
     overflow: hidden;
 }
 .text-body-input{

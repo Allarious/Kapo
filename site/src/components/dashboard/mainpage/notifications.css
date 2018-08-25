@@ -1,0 +1,19 @@
+.container{
+
+    width: 40%;
+    height: 400px;
+    background-color: #eeeeee;
+    float: left;
+    margin: 0 5%;
+    border-radius: 30px;
+    border: 1px solid #468189;
+    overflow: scroll;
+    padding: 5px;
+    box-shadow: 5px 5px 10px #aaaaaa;
+
+}
+
+.header{
+    margin: 0 auto;
+    color: #468189;
+}

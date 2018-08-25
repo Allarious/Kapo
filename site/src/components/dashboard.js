@@ -1,40 +1,114 @@
 import React, {Component} from 'react';
 
 import classes from './dashboard/dashboard.css';
+import Messages from './dashboard/messages';
+import MainPage from './dashboard/mainpage';
+import Transactions from './dashboard/transactions';
+import Orders from './dashboard/orders';
 
 class Dashboard extends Component {
 
     state = {
         dashboardPages: [
-            {id:'p1', name: 'Main Page',},
-            {id:'p2', name: 'Messages',},
-            {id:'p3', name: 'Transactions',},
-            {id:'p4', name: 'Orders',}
+            {id:'p1', name: 'Main Page', active:true,},
+            {id:'p2', name: 'Messages', active:false,},
+            {id:'p3', name: 'Transactions', active:false,},
+            {id:'p4', name: 'Orders', active:false,}
         ],
-        visiblePage: 'dashboardMain',
+        visiblePage: 'Main Page',
     };
 
-    leftCol = (
-        <div className={classes["left-col"]}>
-            <div className={classes.logo}></div>
-            {this.state.dashboardPages.map((event) => {
-                return <button className={classes["left-col-selectors"]}>{event.name}</button>;
-            })}
-        </div>
-    );
+    changeActive = (event) => {
+
+        if (event === 0){
+            this.setState({visiblePage:'Main Page'})
+        } else if(event === 1){
+            this.setState({visiblePage:'Messages'})
+        }else if(event === 2){
+            this.setState({visiblePage:'Transactions'})
+        }else if(event === 3){
+            this.setState({visiblePage:'Orders'})
+        }
+        this.setState({dashboardPages: [
+                {id:'p1', name: 'Main Page', active: (event === 0) ,},
+                {id:'p2', name: 'Messages', active: (event === 1) ,},
+                {id:'p3', name: 'Transactions', active: (event === 2) ,},
+                {id:'p4', name: 'Orders', active: (event === 3) ,}
+            ]});
+
+    };
+
+    content = <div></div>
+
 
     render()
     {
-        return (<div className={classes.container}>
-            {this.leftCol}
+
+        let nav = <div></div>
+        if(this.state.visiblePage === 'Messages')
+        {
+            this.content = <Messages/>;
+            nav = (        <div className={classes["nav-container"]}>
+                <div className={classes["message-from"]}>from</div>
+                <div className={classes["message-name"]}>name</div>
+                <div className={classes["message-thumbnail"]}>thumbnail</div>
+                <div className={classes["message-condition"]}>condition</div>
+            </div>);
+        } else if (this.state.visiblePage === 'Main Page')
+        {
+            this.content = <MainPage/>;
+        } else if (this.state.visiblePage === 'Transactions')
+        {
+            this.content = <Transactions/>;
+            nav = (<div className={classes["nav-container"]}>
+                <div className={classes.left}>type</div>
+                <div className={classes.middle}>costR</div>
+                <div className={classes.middle}>costD</div>
+                <div className={classes.middle}>date</div>
+                <div className={classes.middle}>time</div>
+                <div className={classes.right}>condition</div>
+            </div>);
+        }else if (this.state.visiblePage === 'Orders')
+        {
+            this.content = <Orders/>;
+            nav = (<div className={classes["nav-container"]}>
+                <div className={classes.left}>type</div>
+                <div className={classes.middle}>costR</div>
+                <div className={classes.middle}>costD</div>
+                <div className={classes.middle}>date</div>
+                <div className={classes.middle}>time</div>
+                <div className={classes.right}>condition</div>
+            </div>);
+        } else {
+            this.content = <MainPage/>;
+        }
+
+        let leftCol = (
+            <div className={classes["left-col"]}>
+                <div className={classes.logo}> Kapo </div>
+                {this.state.dashboardPages.map((event, index) => {
+                    if (event.active)
+                    {
+                        return <button key={event.id} className={classes["left-col-selectors-active"]} onClick={() => this.changeActive(index)}>{event.name}</button>;
+                    }else {
+                        return <button key={event.id} className={classes["left-col-selectors"]} onClick={() => this.changeActive(index)}>{event.name}</button>;
+                    }
+                })}
+            </div>
+        );
+
+        return (
+            <div className={classes.container}>
+            {leftCol}
             <div className={classes["right-col"]}>
-            <div className={classes.nav}></div>
-            <div className={classes["inner-container"]}>
-                <div className={classes["main-page-content"]}></div>
-                <div className={classes["main-page-content"]}></div>
-            </div>
-            </div>
-        </div>);
+                    <div className={classes.nav}>
+                        {nav}
+                    </div>
+                        <div className={classes["inner-container"]}>
+                            {this.content}
+                        </div>
+                    </div>
+                </div>);
     }
 }
 

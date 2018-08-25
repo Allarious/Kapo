@@ -9,6 +9,8 @@
     border: 2px solid #468189;
     overflow: hidden;
     cursor: pointer;
+    box-shadow: 5px 5px 10px #aaaaaa;
+
 }
 .im{
     position: relative;
