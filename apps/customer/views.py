@@ -100,23 +100,23 @@ def customer_dashboard_view(request):
 
             # for list of transactions uncomment bellow
 
-            # transactions.extend(rial_incs)
-            # transactions.extend(converts)
-            # transactions.extend(exams)
-            # transactions.extend(fees)
-            # transactions.extend(foreign_payments)
-            # transactions.extend(domestic_payments)
-            # transactions.extend(unknown_payments)
+            transactions.extend(rial_incs)
+            transactions.extend(converts)
+            transactions.extend(exams)
+            transactions.extend(fees)
+            transactions.extend(foreign_payments)
+            transactions.extend(domestic_payments)
+            transactions.extend(unknown_payments)
 
             # for lisf of lists of defferent transactions type uncomment beloq
 
-            transactions.append(rial_incs)
-            transactions.append(converts)
-            transactions.append(exams)
-            transactions.append(fees)
-            transactions.append(foreign_payments)
-            transactions.append(domestic_payments)
-            transactions.append(unknown_payments)
+            # transactions.append(rial_incs)
+            # transactions.append(converts)
+            # transactions.append(exams)
+            # transactions.append(fees)
+            # transactions.append(foreign_payments)
+            # transactions.append(domestic_payments)
+            # transactions.append(unknown_payments)
 
             #
 
@@ -135,19 +135,19 @@ def customer_dashboard_view(request):
 
             # for list of transactions uncomment bellow
 
-            # transactions.extend(exams)
-            # transactions.extend(fees)
-            # transactions.extend(foreign_payments)
-            # transactions.extend(domestic_payments)
-            # transactions.extend(unknown_payments)
+            transactions.extend(exams)
+            transactions.extend(fees)
+            transactions.extend(foreign_payments)
+            transactions.extend(domestic_payments)
+            transactions.extend(unknown_payments)
 
             # for lisf of lists of defferent transactions type uncomment beloq
 
-            transactions.append(exams)
-            transactions.append(fees)
-            transactions.append(foreign_payments)
-            transactions.append(domestic_payments)
-            transactions.append(unknown_payments)
+            # transactions.append(exams)
+            # transactions.append(fees)
+            # transactions.append(foreign_payments)
+            # transactions.append(domestic_payments)
+            # transactions.append(unknown_payments)
 
             return render(request, 'customer_dashboard.html',
                           {'customer': customer, 'transactions': transactions})
