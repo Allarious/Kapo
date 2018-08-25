@@ -18,7 +18,7 @@ urlpatterns = [
     path('password_reset/', password_reset, name='password_reset'),
     path('password_reset/done/', password_reset_done, name='password_reset_done'),
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$', password_reset_confirm, name='password_reset_confirm'),
-
+#TODO reset password o email munde
     path('customer/customer_home', customer_profile_view,  name='customer_home'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_DIR)

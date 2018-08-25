@@ -76,28 +76,36 @@ def customer_home_view(request):
     return render(request, 'customer_home.html',
                   {'customer': customer, 'karmozds': karmozds, 'euro_rate': euro_rate, 'dollar_rate': dollar_rate})
 
-
 def customer_dashboard_view(request):
+    return render(request, 'customer_dashboard1.html')
+
+def message_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
-    if request.method == 'POST':
+    messages = Message.objects.all().filter(receiver=customer.user)
+    return render(request, 'customer_message_dashboard.html', {'messages': messages})
 
-        if request.POST.get('transactions button'):
-            # list of all transactions
-            transactions = customer_all_transactions(customer)
 
-            return render(request, 'customer_dashboard.html',
-                          {'customer': customer, 'transactions': transactions})
-
-        elif request.POST.get('messages button'):
-            # TODO Reza messago bezan
-            pass
-
-        elif request.POST.get('orders button'):
-            # list of all transactions that needed or needs verification
-            transactions = customer_order_transactions(customer)
-
-            return render(request, 'customer_dashboard.html',
-                          {'customer': customer, 'transactions': transactions})
+# def customer_dashboard_view(request):
+#     customer = get_object_or_404(Customer, pk=request.user.id)
+#     if request.method == 'POST':
+#
+#         if request.POST.get('transactions button'):
+#             # list of all transactions
+#             transactions = customer_all_transactions(customer)
+#
+#             return render(request, 'customer_dashboard.html',
+#                           {'customer': customer, 'transactions': transactions})
+#
+#         elif request.POST.get('messages button'):
+#             # TODO Reza messago bezan
+#             pass
+#
+#         elif request.POST.get('orders button'):
+#             # list of all transactions that needed or needs verification
+#             transactions = customer_order_transactions(customer)
+#
+#             return render(request, 'customer_dashboard.html',
+#                           {'customer': customer, 'transactions': transactions})
 
 
 def customer_all_transactions(customer):

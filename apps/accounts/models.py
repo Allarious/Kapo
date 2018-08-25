@@ -15,7 +15,16 @@ class Message(models.Model):
     message = models.TextField(null=True, blank=True)
     read = models.BooleanField(default=False)
 
+
+NOTIFICATION_TYPES = (('message', 'Message'), ('transaction', 'Transaction'), ('order', 'Order'), ('feature', 'Feature'))
 SEX_CHOICES = (('male', 'Male'), ('female', 'Female'), ('other', 'Non Binary'))
+
+
+class notification:
+    owner = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='owner')
+    type = models.CharField(max_length=10, choices=NOTIFICATION_TYPES)
+
+
 
 
 

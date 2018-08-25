@@ -23,7 +23,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Transactions</title>
   <style type="text/css">body {
   margin: 0;
   padding: 0;
@@ -1672,7 +1672,7 @@ html {
                 <a href={% url 'customer:customer_profile' %}><div class="navbar__navComponents__A_iF-"> Profile </div></a>
                 <a href={% url 'customer:send_message' %}><div class="navbar__navComponents__A_iF-">  Send Message  </div></a>
                 <a href={% url 'customer:transactions:customer rial inc' %}><div class="navbar__navComponents__A_iF-">  Convert  </div></a>
-                <div class="navbar__navComponents__A_iF-">  Dashboard  </div>
+                <a href={% url 'customer:dashboard' %}><div class="navbar__navComponents__A_iF-">  Dashboard  </div></a>
                 <a href={% url 'accounts:logout' %}><div class="navbar__navComponents__A_iF-">  Logout  </div></a>
             </div>
             <div class="convert__container__2X1cP">
