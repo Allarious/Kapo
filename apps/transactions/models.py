@@ -151,6 +151,7 @@ class AbstractTransaction(models.Model):
         difference = now - self.creation_time
         if difference.days >= 1:
             self.verified = False
+            self.checking_employee = None
             return True
         else:
             return False
