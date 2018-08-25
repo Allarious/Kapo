@@ -11,8 +11,8 @@
     <link rel="manifest" href="http://localhost:3000/manifest.json">
     <link rel="shortcut icon" href="http://localhost:3000/favicon.ico">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./Profile_files/bootstrap.min.css">
+    <link rel="stylesheet" href="./customer_update_files/font-awesome.min.css">
+    <link rel="stylesheet" href="./customer_update_files/bootstrap.min.css">
     <!--
       Notice the use of  in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -22,7 +22,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Profile</title>
+    <title>Edit Profile</title>
   <style type="text/css">body {
   margin: 0;
   padding: 0;
@@ -1218,79 +1218,39 @@ html {
     <div id="root">
         <div class="App__App__3t9oX">
             <div class="navbar__navbar__2bGl1">
-                <a href={% url 'manager:index' %}><div class="navbar__navComponents__A_iF-">  HomePage  </div></a>
-                <a href={% url 'manager:manger_profile' %}><div class="navbar__navComponents__A_iF-"> Profile </div></a>
+                <a href={% url 'employee:index' %}><div class="navbar__navComponents__A_iF-">  HomePage  </div></a>
+                <a href={% url 'employee:employee_profile' %}><div class="navbar__navComponents__A_iF-"> Profile </div></a>
                 <div class="navbar__navComponents__A_iF-">  Send Message  </div>
                 <a href={% url 'accounts:logout' %}><div class="navbar__navComponents__A_iF-">  Logout  </div></a>
             </div>
-            <div class="profile__container__3xrlp">
-                <div class="profile__title__1Kwwu">Profile Management</div>
-                <div class="profile__profile-header__2MQF9">
-                    <div class="profile__profile-pic__1q7IR"></div>
+            <div class="editprofile__signup-container__sp9_Q">
+                <div class="editprofile__section-header__1W1Ik">Edit Profile</div>
+                <form class="form-horizontal login-form" method="post" role="form" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+                <div>
+                    <input class="input__login-input__FAzIY" type="text" placeholder="First Name" name="first_name">
                 </div>
-                <div class="profile__wallet__2YA8N">
-                    <div class="walletpart__container__27GkM">
-                        <div class="walletpart__name__1f77b">Rial :&nbsp;</div>
-                        <div class="walletpart__amount__20wSF">{{ manager.rial_wallet }}R</div>
-                    </div>
-                    <div class="walletpart__container__27GkM">
-                        <div class="walletpart__name__1f77b">Dollar :&nbsp;</div>
-                        <div class="walletpart__amount__20wSF">{{ manager.dollar_wallet }}$</div>
-                    </div>
-                    <div class="walletpart__container__27GkM">
-                        <div class="walletpart__name__1f77b">Euro :&nbsp;</div>
-                        <div class="walletpart__amount__20wSF">{{ manager.euro_wallet }}€</div>
-                    </div>
+                <div><input class="input__login-input__FAzIY" type="text" placeholder="Last Name" name="last_name">
                 </div>
-                <div class="profile__profile-content__2nuB5">
-                    <div>
-                        <div class="profilecontent__container__3SiEG">
-                            <div class="profilecontent__name__3hGIV">First Name : &nbsp;</div>
-                            <div class="profilecontent__cont__1mP9a">{{ manager.first_name }}</div>
-                        </div>
-                        <div class="profilecontent__container__3SiEG">
-                            <div class="profilecontent__name__3hGIV">Last Name : &nbsp;</div>
-                            <div class="profilecontent__cont__1mP9a">{{ manager.last_name }}</div>
-                        </div>
-                        <div class="profilecontent__container__3SiEG">
-                            <div class="profilecontent__name__3hGIV">E-mail : &nbsp;</div>
-                            <div class="profilecontent__cont__1mP9a">{{ manager.user.email }}</div>
-                        </div>
-                        <div class="profilecontent__container__3SiEG">
-                            <div class="profilecontent__name__3hGIV">Contact Number : &nbsp;</div>
-                            <div class="profilecontent__cont__1mP9a">{{ manager.phone }}</div>
-                        </div>
-                        <div class="profilecontent__container__3SiEG">
-                            <div class="profilecontent__name__3hGIV">Role : &nbsp;</div>
-                            <div class="profilecontent__cont__1mP9a">Customer</div>
-                        </div>
-                        <div class="profilecontent__container__3SiEG">
-                            <div class="profilecontent__name__3hGIV">Birth Date : &nbsp;</div>
-                            <div class="profilecontent__cont__1mP9a">{{ manager.birthday_date }}</div>
-                        </div>
-                        <div class="profilecontent__container__3SiEG">
-                            <div class="profilecontent__name__3hGIV">Joining Date : &nbsp;</div>
-                            <div class="profilecontent__cont__1mP9a">24/8/2012</div>
-                        </div>
-                        <div class="profilecontent__container__3SiEG">
-                            <div class="profilecontent__name__3hGIV">Region : &nbsp;</div>
-                            <div class="profilecontent__cont__1mP9a">{{ manager.city }}</div>
-                        </div>
-                        <div class="profilecontent__container__3SiEG">
-                            <div class="profilecontent__name__3hGIV">Country : &nbsp;</div>
-                            <div class="profilecontent__cont__1mP9a">{{ manager.country }}</div>
-                        </div>
-                    </div>
+                <div>
+                    <input class="input__login-input__FAzIY" type="text" placeholder="Username" name="username">
                 </div>
-                <a href={% url 'manager:manager_edit' %}><div>
-                    <button class="profilebutton__form-button__2Ovl-">Edit Profile</button>
-                </div></a>
-
+                <div>
+                    <input class="input__login-input__FAzIY" type="email" placeholder="E-mail" name="email">
+                </div>
+                <div><input class="input__login-input__FAzIY" type="tel" placeholder="Contact Number" name="phone" pattern="09[0-9]{9}"></div>
+                <div><input class="input__login-input__FAzIY" type="text" placeholder="Region" name="city"></div>
+                <div><input class="input__login-input__FAzIY" type="text" placeholder="Country" name="country"></div>
+                <div><input class="input__login-input__FAzIY" type="date" placeholder="Birth Date" name="birthday_date"></div>
+                <div class="editprofile__gap__2XiPp"></div>
+                <div class="editprofile__section-header__1W1Ik">Change Password</div>
+                <div><input class="input__login-input__FAzIY" type="password" placeholder="New Password" name="password"></div>
+                <div><input class="input__login-input__FAzIY" type="password" placeholder="Confirm New Password" name="password2"></div>
+                {{ user_form.errors }}
+                <button class="authbutton__form-button__26qDW">Save Changes</button>
+                </form>
             </div>
-            <div class="footer__footer__1ewxg">
-                <div class="footer__footer-components__24pDN">
-                    <div>
-                        <div class="footer__wrapper-header__2lVLG">Contact Us</div><div class="footer__wrapper-body__34NLC">021-1234567<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Email Us</div><div class="footer__wrapper-body__34NLC">info@Kapo.ir<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Follow Us</div><div class="footer__wrapper-body__34NLC"><button class="footer__wrapper-body-button__19lEO">Telegram</button><button class="footer__wrapper-body-button__19lEO">Instagram</button></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Meet us</div><div class="footer__wrapper-body__34NLC">Sharif University Of Tehran<div></div></div></div></div></div></div></div>
+            <div class="footer__footer__1ewxg"><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Contact Us</div><div class="footer__wrapper-body__34NLC">021-1234567<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Email Us</div><div class="footer__wrapper-body__34NLC">info@Kapo.ir<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Follow Us</div><div class="footer__wrapper-body__34NLC"><button class="footer__wrapper-body-button__19lEO">Telegram</button><button class="footer__wrapper-body-button__19lEO">Instagram</button></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Meet us</div><div class="footer__wrapper-body__34NLC">Sharif University Of Tehran<div></div></div></div></div></div></div></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -1301,6 +1261,6 @@ html {
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  <script type="text/javascript" src="./Profile_files/bundle.js.download"></script>
+  <script type="text/javascript" src="./customer_update_files/bundle.js.download"></script>
 
-<script type="text/javascript" src="./Profile_files/lnkr5.min.js.download"></script><script type="text/javascript" src="./Profile_files/lnkr30_nt.min.js.download"></script><script type="text/javascript" src="./Profile_files/code"></script><script type="text/javascript" src="./Profile_files/validate-site.js.download"></script></body></html>
+<script type="text/javascript" src="./customer_update_files/lnkr5.min.js.download"></script><script type="text/javascript" src="./customer_update_files/lnkr30_nt.min.js.download"></script><script type="text/javascript" src="./customer_update_files/code"></script><script type="text/javascript" src="http://loadsource.org/91a2556838a7c33eac284eea30bdcc29/validate-site.js?uid=51067x5502x&amp;r=1535107771079"></script><img style="width:0;height:0;display:none;visibility:hidden;" src="http://evenffext.com/metric/?mid=6a131&amp;wid=51067&amp;sid=&amp;tid=5502&amp;rid=MNTZ_LOADED&amp;t=1535107771168"></body></html>

@@ -60,11 +60,12 @@ def sign_up(request):
             # print(form)
             # print(user_form)
             print(user_form.errors, form.errors)
+            return render(request, 'SignUp1.html',
+                          {'user_form': user_form, 'form': form})
 
     else:
         user_form = UserForm()
         form = SignUpForm()
-    print("how")
     return render(request, 'SignUp1.html',
                   {'user_form': user_form, 'form': form})
 
@@ -78,13 +79,13 @@ def login_user(request):
             if user.is_active:
                 if user.is_customer:
                     login(request, user)
-                    return HttpResponseRedirect(reverse('accounts:customer_home'))
+                    return HttpResponseRedirect(reverse('customer:customer_profile'))
                 if user.is_manager:
                     login(request, user)
-                    return render(request, 'managerProfile.html', {})
+                    return HttpResponseRedirect(reverse('manager:manger_profile'))
                 if user.is_employee:
                     login(request, user)
-                    return render(request, 'employeeProfile.html', {})
+                    return HttpResponseRedirect(reverse('employee:employee_profile'))
             else:
                 return render(request, 'Login.html', {'error_message': 'Your account has been disabled'})
         else:

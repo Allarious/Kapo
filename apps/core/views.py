@@ -6,6 +6,10 @@ from django.urls import reverse
 def index(request):
     if request.user.is_authenticated and request.user.is_customer:
         return HttpResponseRedirect(reverse('customer:index'))
+    elif request.user.is_authenticated and request.user.is_employee:
+        return HttpResponseRedirect(reverse('employee:index'))
+    elif request.user.is_authenticated and request.user.is_manager:
+        return HttpResponseRedirect(reverse('manager:index'))
     return render(request, 'Home_page.html', {})
 
 
