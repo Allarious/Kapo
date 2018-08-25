@@ -2,6 +2,22 @@ from apps.transactions.models import *
 from django import forms
 
 
+class RialIncForm(forms.ModelForm):
+    class Meta:
+        model = RialWalletIncTransaction
+        fields = ['amount']
+
+
+class ExchangeForm(forms.ModelForm):
+    # amount = forms.IntegerField(required=True, min_value=10, initial=0)
+    # CHOICES = (('dollar', 'Dollar'),
+    #            ('euro', 'Euro'))
+    # currency = forms.MultipleChoiceField(choices=CHOICES, label='currency', )
+    class Meta:
+        model = CurrencyConvertTransaction
+        fields = ['amount', 'currency']
+
+
 class ExamTransactionForm(forms.ModelForm):
     class Meta:
         model = ExamTransaction
