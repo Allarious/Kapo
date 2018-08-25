@@ -13,8 +13,8 @@
 <div> Rial remain : {{ customer.rial_wallet }} ﷼ <br/>
     Euro remain : {{ customer.euro_wallet }} €<br/>
     Dollar remain: {{ customer.dollar_wallet }} $<br/>
-    Rial rate = {{ dollar.value }}<br/>
-    Rial rate = {{ euro.value }}<br/>
+    Dollar rate = {{ dollar }}<br/>
+    Euro rate = {{ euro }}<br/>
 
 
 </div>
@@ -22,7 +22,7 @@
 
 <form method="post" novalidate>
     {% csrf_token %}
-    {{ form }}
+    {{ form.as_p }}
     <output name="cost"> cost</output>
     <button type="submit">Submit</button>
 </form>
