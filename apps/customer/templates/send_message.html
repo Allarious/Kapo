@@ -1674,7 +1674,9 @@ html {
                 {% else %} {% url 'manager:manger_profile' %}{% endif %}><div class="navbar__navComponents__A_iF-"> Profile </div></a>
                 <a href={% if user.is_customer  %}{% url 'customer:send_message' %} {% elif user.is_employee %} {% url 'employee:send_message' %}
                 {% else %} {% url 'manager:send_message' %}{% endif %}><div class="navbar__navComponents__A_iF-">  Send Message  </div></a>
-                <div class="navbar__navComponents__A_iF-">  Convert  </div>
+                {% if user.is_customer %}
+                <a href={% url 'customer:transactions:exchange' %}><div class="navbar__navComponents__A_iF-">  Convert  </div></a>
+                {% endif %}
                 <div class="navbar__navComponents__A_iF-">  Dashboard  </div>
                 <a href={% url 'accounts:logout' %}><div class="navbar__navComponents__A_iF-">  Logout  </div></a>
             </div>
@@ -1697,6 +1699,7 @@ html {
                     <textarea class="sendmessage__text-body-input__jErOV" type="text" name="message"></textarea>
                 </div>
                 <a href={% url 'customer:index' %}><button class="profilebutton__form-button__2Ovl-">Send</button></a>
+                    {{ form.errors }}
                 </form>
             </div><div class="footer__footer__1ewxg"><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Contact Us</div><div class="footer__wrapper-body__34NLC">021-1234567<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Email Us</div><div class="footer__wrapper-body__34NLC">info@Kapo.ir<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Follow Us</div><div class="footer__wrapper-body__34NLC"><button class="footer__wrapper-body-button__19lEO">Telegram</button><button class="footer__wrapper-body-button__19lEO">Instagram</button></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Meet us</div><div class="footer__wrapper-body__34NLC">Sharif University Of Tehran<div></div></div></div></div></div></div></div>
     <!--

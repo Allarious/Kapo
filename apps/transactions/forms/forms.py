@@ -2,10 +2,8 @@ from apps.transactions.models import *
 from django import forms
 
 
-class RialIncForm(forms.ModelForm):
-    class Meta:
-        model = RialWalletIncTransaction
-        fields = ['amount']
+class RialIncForm(forms.Form):
+    amount = forms.FloatField(validators=[MaxValueValidator(300000000), MinValueValidator(100000)], required=False)
 
 
 class ExchangeForm(forms.ModelForm):
@@ -15,7 +13,7 @@ class ExchangeForm(forms.ModelForm):
     # currency = forms.MultipleChoiceField(choices=CHOICES, label='currency', )
     class Meta:
         model = CurrencyConvertTransaction
-        fields = ['amount', 'currency']
+        fields = ['amount']
 
 
 class ExamTransactionForm(forms.ModelForm):
@@ -52,3 +50,7 @@ class UnknownPaymentTransactionForm(forms.ModelForm):
     class Meta:
         model = UnknownPaymentTransaction
         fields = ['domestic_card_number', 'rial_cost', 'description']
+
+class Exchange2Form(forms.Form):
+    dollar_amount = forms.FloatField(validators=[MaxValueValidator(1000), MinValueValidator(1)], required=False)
+    euro_amount = forms.FloatField(validators=[MaxValueValidator(1000), MinValueValidator(1)], required=False)

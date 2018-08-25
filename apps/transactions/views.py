@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-
+from django.urls import reverse
 from apps.core.models import Configuration
 from .forms.forms import *
 from apps.accounts.decorators import customer_required
@@ -18,7 +18,7 @@ def customer_transactions_view(request):
 @customer_required
 def customer_rial_inc_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
-    if request.method == 'POST':
+    if request.method == 'POST' and request.POST.get("rial_inc"):
         form = RialIncForm(request.POST)
         if form.is_valid():
             transaction = form.save(commit=False)
@@ -27,13 +27,13 @@ def customer_rial_inc_view(request):
             customer.save()
             transaction.paid = True
             transaction.save()
-            return HttpResponseRedirect('/customer/')
+            return HttpResponseRedirect(reverse('customer:index'))
     else:
         form = RialIncForm()
 
-    return render(request, 'customer_rial_wallet_inc.html', {'customer': customer, 'form': form})
+    return render(request, 'transactions.html', {'customer': customer, 'form': form})
 
-
+# TODO update lahze yi maghdar e motanazer java script
 @login_required
 @customer_required
 def customer_exchange_view(request):
@@ -42,44 +42,65 @@ def customer_exchange_view(request):
     euro_rate = float(Configuration.objects.get(key='euro').value)
 
     if request.method == 'POST':
-        form = ExchangeForm(request.POST)
-        if form.is_valid():
-            exchange = form.save(commit=False)
+        exchange_form = Exchange2Form(request.POST)
+        form = RialIncForm(request.POST)
+        print(exchange_form, form)
+        print(request.POST)
+        if exchange_form.is_valid() and form.is_valid():
+            exchange = CurrencyConvertTransaction()
             exchange.owner = customer
-            if exchange.currency == 'euro':
+            if request.POST.get("rial_inc") == '':
+                if form.is_valid():
+                    transaction = RialWalletIncTransaction()
+                    transaction.amount = form.cleaned_data['amount']
+                    transaction.owner = customer
+                    customer.rial_wallet += transaction.amount
+                    customer.save()
+                    transaction.paid = True
+                    transaction.save()
+                    return HttpResponseRedirect(reverse('customer:index'))
+            if request.POST.get('euro_exchange') == '':
+                exchange.currency = 'euro'
+                exchange.amount = exchange_form.cleaned_data['euro_amount']
                 cost = exchange.amount * euro_rate
                 if customer.rial_wallet >= cost:
                     customer.rial_wallet -= cost
                     exchange.rial_cost = cost
                     customer.euro_wallet += exchange.amount
                 else:
-                    form.add_error('amount', 'موجودی کافی نیست')
-                    return render(request, 'customer_exchange.html', {'customer': customer,
-                                                                      'form': form,
+                    exchange_form.add_error('euro_amount', 'موجودی کافی نیست')
+                    return render(request, 'transactions.html', {'customer': customer,
+                                                                      'exchange_form': exchange_form,
+                                                                 'form' : form,
                                                                       'dollar': dollar_rate,
                                                                       'euro': euro_rate, })
-            elif exchange.currency == 'dollar':
+            elif request.POST.get('dollar_exchange') == '':
+                exchange.currency = 'dollar'
+                exchange.amount = exchange_form.cleaned_data['dollar_amount']
                 cost = exchange.amount * dollar_rate
                 if customer.rial_wallet >= cost:
                     customer.rial_wallet -= cost
                     exchange.rial_cost = cost
                     customer.dollar_wallet += exchange.amount
                 else:
-                    form.add_error('amount', 'موجودی کافی نیست')
-                    return render(request, 'customer_exchange.html', {'customer': customer,
-                                                                      'form': form,
+                    exchange_form.add_error('dollar_amount', 'موجودی کافی نیست')
+                    return render(request, 'transactions.html', {'customer': customer,
+                                                                      'exchange_form': exchange_form,
+                                                                 'form' : form,
                                                                       'dollar': dollar_rate,
                                                                       'euro': euro_rate, })
 
             customer.save()
             exchange.paid = True
             exchange.save()
-            return HttpResponseRedirect('/customer/')
+            return HttpResponseRedirect(reverse('customer:index'))
     else:
-        form = ExchangeForm()
+        form = RialIncForm()
+        exchange_form = ExchangeForm()
 
-    return render(request, 'customer_exchange.html', {'customer': customer,
-                                                      'form': form,
+    return render(request, 'transactions.html', {'customer': customer,
+                                                      'exchange_form': exchange_form,
+                                                                 'form' : form,
                                                       'dollar': dollar_rate,
                                                       'euro': euro_rate, })
 
