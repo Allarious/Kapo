@@ -5,6 +5,7 @@ from apps.customer.models import DomesticCardField
 
 from apps.accounts.models import MyUser, SEX_CHOICES
 
+
 class Manager(models.Model):
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE, primary_key=True, unique=True)
     first_name = models.CharField(max_length=20)
