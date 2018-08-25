@@ -9,6 +9,8 @@ from django import forms
 from django.forms.widgets import TextInput
 from django.utils.translation import ugettext_lazy as _
 
+from apps.employee.models import Employee
+
 
 class TelephoneInput(TextInput):
     # switch input type to type tel so that the numeric keyboard shows on mobile devices
@@ -141,6 +143,7 @@ class AbstractTransaction(models.Model):
     description = models.TextField(null=True, blank=True)
     paid = models.BooleanField(default=False)
     verified = models.BooleanField(default=False)
+    checking_employee = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True)
     checking = models.BooleanField(default=False)
 
     class Meta:
