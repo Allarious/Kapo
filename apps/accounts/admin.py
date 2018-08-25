@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from apps.accounts.models import MyUser
+from apps.accounts.models import MyUser, Message
 
 
 # class ManagerAdmin(admin.ModelAdmin):
@@ -15,3 +15,10 @@ class MyUserAdmin(admin.ModelAdmin):
 
 
 admin.site.register(MyUser, MyUserAdmin)
+
+
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ('sender', 'receiver', 'subject', 'message')
+
+
+admin.site.register(Message, MessageAdmin)

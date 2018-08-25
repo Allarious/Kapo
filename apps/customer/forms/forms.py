@@ -2,6 +2,7 @@ from django import forms
 from apps.customer.models import Customer
 from apps.accounts.models import MyUser, SEX_CHOICES
 from datetime import date
+from apps.accounts.models import Message
 
 
 class EditUser(forms.ModelForm):
@@ -38,3 +39,8 @@ class EditCustomerProfile(forms.ModelForm):
     class Meta:
         model = Customer
         fields = ('first_name', 'last_name', 'birthday_date', 'city', 'country', 'phone')
+
+class SendMessage(forms.Form):
+    subject = forms.CharField(max_length=40, required=False)
+    message = forms.CharField(required=False)
+    receiver = forms.CharField(max_length=40, required=False)

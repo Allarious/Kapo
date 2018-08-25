@@ -8,7 +8,12 @@ class MyUser(AbstractUser):
     is_employee = models.BooleanField(default=False)
 
 
-
+class Message(models.Model):
+    sender = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='sender')
+    receiver = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='receiver')
+    subject = models.CharField(max_length=40)
+    message = models.TextField(null=True, blank=True)
+    read = models.BooleanField(default=False)
 
 SEX_CHOICES = (('male', 'Male'), ('female', 'Female'), ('other', 'Non Binary'))
 

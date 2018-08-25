@@ -7,6 +7,7 @@ from apps.customer.models import Customer
 from apps.accounts.decorators import customer_required
 from django.urls import reverse
 from apps.transactions.models import *
+from apps.accounts.models import *
 
 
 @login_required
@@ -47,6 +48,8 @@ def update_customer_profile(request):
 
         else:
             print(user_form.errors, form.errors)
+            return render(request, 'customer_update.html',
+                          {'user_form': user_form, 'form': form})
 
     else:
         user_form = EditUser()
@@ -155,3 +158,36 @@ def customer_dashboard_view(request):
 
             return render(request, 'customer_dashboard.html',
                           {'customer': customer, 'transactions': transactions})
+
+
+def send_message(request):
+    user = MyUser.objects.get(username=request.user.username)
+    if request.method == 'POST':
+        form = SendMessage(request.POST)
+
+        if form.is_valid():
+            message = Message()
+            receiver = form.cleaned_data['receiver']
+            message_receiver = MyUser.objects.get(username=receiver)
+            message.receiver = message_receiver
+            message.sender = user
+            message.subject = form.cleaned_data['subject']
+            message.message = form.cleaned_data['message']
+            message.save()
+            if user.is_customer:
+                return HttpResponseRedirect(reverse('customer:index'))
+            elif user.is_employee:
+                return HttpResponseRedirect(reverse('employee:index'))
+            else:
+                return HttpResponseRedirect(reverse('manager:index'))
+
+        else:
+            print(form.errors)
+            return render(request, 'send_message.html',
+                          {user: 'user', 'form': form})
+
+    else:
+        form = SendMessage()
+
+    return render(request, 'send_message.html',
+                  {user: 'user', 'form': form})

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from apps.customer.forms.forms import EditUser
+from apps.customer.forms.forms import EditUser, SendMessage
+from apps.accounts.models import *
 from apps.employee.forms import EditEmployeeProfile
 from apps.employee.models import Employee
 from apps.accounts.decorators import employee_required
