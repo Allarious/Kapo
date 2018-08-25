@@ -142,7 +142,7 @@ class AbstractTransaction(models.Model):
     creation_time = models.DateTimeField(default=timezone.now)
     description = models.TextField(null=True, blank=True)
     paid = models.BooleanField(default=False)
-    verified = models.BooleanField(default=False)
+    verified = models.NullBooleanField(default=None)
     checking_employee = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True)
     checking = models.BooleanField(default=False)
 
@@ -152,6 +152,7 @@ class AbstractTransaction(models.Model):
         if difference.days >= 1:
             self.verified = False
             self.checking_employee = None
+            self.save()
             return True
         else:
             return False

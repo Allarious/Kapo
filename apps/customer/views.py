@@ -120,14 +120,15 @@ def customer_dashboard_view(request):
 
             #
 
+            for transaction in transactions:
+                transaction.is_one_day_passed()
+
             return render(request, 'customer_dashboard.html',
                           {'customer': customer, 'transactions': transactions})
-
 
         elif request.POST.get('messages button'):
             # TODO Reza messago bezan
             pass
-
 
         elif request.POST.get('orders button'):
             # list of all transactions that needed or needs verification
@@ -148,6 +149,9 @@ def customer_dashboard_view(request):
             # transactions.append(foreign_payments)
             # transactions.append(domestic_payments)
             # transactions.append(unknown_payments)
+
+            for transaction in transactions:
+                transaction.is_one_day_passed()
 
             return render(request, 'customer_dashboard.html',
                           {'customer': customer, 'transactions': transactions})
