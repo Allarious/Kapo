@@ -1,12 +1,12 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from apps.core.models import Configuration
 from apps.customer.forms.forms import *
 from apps.customer.models import Customer
 from apps.accounts.decorators import customer_required
-from django.views.generic.edit import UpdateView
 from django.urls import reverse
+from apps.transactions.models import *
 
 
 @login_required
@@ -77,12 +77,77 @@ def customer_home_view(request):
 def customer_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     if request.method == 'POST':
+
+        transactions = []
+        # Rial increase transactions:
+        rial_incs = RialWalletIncTransaction.objects.all().filter(owner=customer)
+        # Convert transactions:
+        converts = CurrencyConvertTransaction.objects.all().filter(owner=customer)
+        # Exam transactions:
+        exams = ExamTransaction.objects.filter(owner=customer)
+        # Application and tuition fees transactions:
+        fees = ApplicationTuitionFeeTransaction.objects.filter(owner=customer)
+        # Foregin payments transactions:
+        foreign_payments = ForeignPaymentTransaction.objects.filter(owner=customer)
+        # Domestic transactions:
+        domestic_payments = DomesticPaymentTransaction.objects.filter(owner=customer)
+        #  Unknown payments transactions:
+        unknown_payments = UnknownPaymentTransaction.objects.filter(owner=customer)
+
         if request.POST.get('transactions button'):
-            pass
-        # TODO Reza one list or miltiple lists
+            # list of all transactions
+            transactions = []
+
+            # for list of transactions uncomment bellow
+
+            # transactions.extend(rial_incs)
+            # transactions.extend(converts)
+            # transactions.extend(exams)
+            # transactions.extend(fees)
+            # transactions.extend(foreign_payments)
+            # transactions.extend(domestic_payments)
+            # transactions.extend(unknown_payments)
+
+            # for lisf of lists of defferent transactions type uncomment beloq
+
+            transactions.append(rial_incs)
+            transactions.append(converts)
+            transactions.append(exams)
+            transactions.append(fees)
+            transactions.append(foreign_payments)
+            transactions.append(domestic_payments)
+            transactions.append(unknown_payments)
+
+            #
+
+            return render(request, 'customer_dashboard.html',
+                          {'customer': customer, 'transactions': transactions})
+
+
         elif request.POST.get('messages button'):
             # TODO Reza messago bezan
             pass
+
+
         elif request.POST.get('orders button'):
-            # TODO DUDU WTF?
-            pass
+            # list of all transactions that needed or needs verification
+            transactions = []
+
+            # for list of transactions uncomment bellow
+
+            # transactions.extend(exams)
+            # transactions.extend(fees)
+            # transactions.extend(foreign_payments)
+            # transactions.extend(domestic_payments)
+            # transactions.extend(unknown_payments)
+
+            # for lisf of lists of defferent transactions type uncomment beloq
+
+            transactions.append(exams)
+            transactions.append(fees)
+            transactions.append(foreign_payments)
+            transactions.append(domestic_payments)
+            transactions.append(unknown_payments)
+
+            return render(request, 'customer_dashboard.html',
+                          {'customer': customer, 'transactions': transactions})
