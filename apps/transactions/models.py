@@ -141,6 +141,7 @@ class AbstractTransaction(models.Model):
     description = models.TextField(null=True, blank=True)
     paid = models.BooleanField(default=False)
     verified = models.BooleanField(default=False)
+    checking = models.BooleanField(default=False)
 
     class Meta:
         abstract = True

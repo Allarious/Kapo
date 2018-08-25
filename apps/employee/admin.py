@@ -6,4 +6,4 @@ class EmployeeAdmin(admin.ModelAdmin):
     list_display = ('user', 'first_name', 'last_name')
 
 
-admin.site.register(Employee,EmployeeAdmin)
+admin.site.register(Employee, EmployeeAdmin)

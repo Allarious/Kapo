@@ -16,3 +16,8 @@ def employee_profile_view(request):
 @employee_required
 def index(request):
     return render(request, 'employee_HomePage.html', {})
+
+
+# @login_required
+# @employee_required
+
