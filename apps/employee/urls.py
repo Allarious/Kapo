@@ -7,4 +7,5 @@ app_name = "employee"
 urlpatterns = [
     path('home-page', index, name='index'),
     path('profile', employee_profile_view, name='employee_profile'),
+    path('check-trans', employee_check_transaction_view, name='employee_checking_transactions'),
 ]

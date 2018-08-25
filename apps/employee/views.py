@@ -31,7 +31,39 @@ def employee_check_transaction_view(request):
         # TODO accept transaction and do the money work
         else:
             pass
-        # TODO deny transaction and dont do any money work
+        # TODO deny transaction and don't do any money work
+
+        return redirect('/employee/')
+
+    elif request.POST.get('New Transaction'):
+        transactions = []
+        # Exam transactions:
+        exams = ExamTransaction.objects.filter(checking=False, verified=None)
+        # Application and tuition fees transactions:
+        fees = ApplicationTuitionFeeTransaction.objects.filter(checking=False, verified=None)
+        # Foregin payments transactions:
+        foreign_payments = ForeignPaymentTransaction.objects.filter(checking=False, verified=None)
+        # Domestic transactions:
+        domestic_payments = DomesticPaymentTransaction.objects.filter(checking=False, verified=None)
+        #  Unknown payments transactions:
+        unknown_payments = UnknownPaymentTransaction.objects.filter(checking=False, verified=None)
+
+        transactions.extend(exams)
+        transactions.extend(fees)
+        transactions.extend(foreign_payments)
+        transactions.extend(domestic_payments)
+        transactions.extend(unknown_payments)
+
+        for transaction in transactions:
+            transaction.is_one_day_passed()
+            if transaction.verified is False:
+                transactions.pop(transaction)
+
+        transactions.sort(key=lambda transaction: transaction.creation_time, reverse=True)
+        transactions[0].checking_employee = employee
+        transactions[0].checking = True
+
+        return redirect('employee:employee_checking_transactions')
 
     else:
 
