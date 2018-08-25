@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from apps.customer.forms.forms import EditUser
+from apps.customer.views import customer_all_transactions
 from apps.employee.forms import EditEmployeeProfile
 from apps.employee.models import Employee
 from apps.accounts.decorators import employee_required
@@ -68,6 +69,14 @@ def employee_check_transaction_view(request):
 
         return redirect('employee:employee_checking_transactions')
 
+    elif request.POST.get('Customer selected'):
+        # delete this customer
+        customer = Customer()
+        # TODO get customer from request
+        return employee_transaction_owner_view(request, customer)
+
+
+
     else:
 
         transactions = []
@@ -95,7 +104,6 @@ def employee_check_transaction_view(request):
 
         return render(request, 'employee_checking_transactions.html',
                       {'employee': employee, 'transactions': transactions})
-
 
 
 @login_required
@@ -135,3 +143,13 @@ def update_employee_profile(request):
 
     return render(request, 'employee_edit.html',
                   {'user_form': user_form, 'form': form})
+
+
+@login_required
+@employee_required
+def employee_transaction_owner_view(request, customer):
+    employee = get_object_or_404(Employee, pk=request.user.id)
+    transactions = customer_all_transactions(customer)
+
+    return render(request, 'employee_customer_transactions.html',
+                  {'employee': employee, 'customer': customer, 'transactions': transactions})
