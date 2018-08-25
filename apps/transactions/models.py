@@ -146,6 +146,15 @@ class AbstractTransaction(models.Model):
     checking_employee = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True)
     checking = models.BooleanField(default=False)
 
+    def is_one_day_passed(self):
+        now = timezone.now()
+        difference = now - self.creation_time
+        if difference.days >= 1:
+            self.verified = False
+            return True
+        else:
+            return False
+
     class Meta:
         abstract = True
 
