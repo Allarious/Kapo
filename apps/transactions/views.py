@@ -15,26 +15,6 @@ def customer_transactions_view(request):
     return render(request, 'customer_transactions.html', {'customer': customer, })
 
 
-# @login_required
-# @customer_required
-# def customer_rial_inc_view(request):
-#     customer = get_object_or_404(Customer, pk=request.user.id)
-#     if request.method == 'POST' and request.POST.get("rial_inc"):
-#         form = RialIncForm(request.POST)
-#         if form.is_valid():
-#             transaction = form.save(commit=False)
-#             transaction.owner = customer
-#             customer.rial_wallet += transaction.amount
-#             customer.save()
-#             transaction.paid = True
-#             transaction.save()
-#             return HttpResponseRedirect(reverse('customer:index'))
-#     else:
-#         form = RialIncForm()
-#
-#     return render(request, 'transactions.html', {'customer': customer, 'form': form})
-
-
 # TODO update lahze yi maghdar e motanazer java script
 @login_required
 @customer_required
@@ -118,6 +98,7 @@ def exam_transactions_view(request):
         if form.is_valid():
             exam = form.save(commit=False)
             exam.owner = customer
+            exam.currency_type = 'dollar'
             cost = exam.dollar_cost * wage
             if customer.dollar_wallet < cost:
                 form.add_error('dollar_cost',
@@ -151,6 +132,7 @@ def app_fee_transactions_view(request):
             fee.owner = customer
             if fee.dollar_cost > fee.euro_cost and fee.euro_cost == 0:
                 cost = fee.dollar_cost * wage
+                fee.currency_type = 'dollar'
 
                 if customer.dollar_wallet < cost:
                     form.add_error('dollar_cost',
@@ -164,6 +146,7 @@ def app_fee_transactions_view(request):
 
             elif fee.euro_cost > fee.dollar_cost and fee.dollar_cost == 0:
                 cost = fee.dollar_cost * wage
+                fee.currency_type = 'euro'
 
                 if customer.euro_wallet < cost:
                     form.add_error('euro_cost',
@@ -205,6 +188,7 @@ def foreign_pay_transactions_view(request):
             pay.owner = customer
             if pay.dollar_cost > pay.euro_cost and pay.euro_cost == 0:
                 cost = pay.dollar_cost * wage
+                pay.currency_type = 'dollar'
 
                 if customer.dollar_wallet < cost:
                     form.add_error('dollar_cost',
@@ -218,6 +202,7 @@ def foreign_pay_transactions_view(request):
 
             elif pay.euro_cost > pay.dollar_cost and pay.dollar_cost == 0:
                 cost = pay.dollar_cost * wage
+                pay.currency_type = 'euro'
 
                 if customer.euro_wallet < cost:
                     form.add_error('euro_cost',
@@ -255,6 +240,8 @@ def domestic_pay_transactions_view(request):
         if form.is_valid():
             pay = form.save(commit=False)
             pay.owner = customer
+            pay.currency_type = 'rial'
+
             cost = pay.rial_cost * wage
             if customer.rial_wallet < cost:
                 form.add_error('rial_cost',
@@ -282,6 +269,8 @@ def unknown_pay_transactions_view(request):
             pay = form.save(commit=False)
             pay.owner = customer
             cost = pay.rial_cost * wage
+            pay.currency_type = 'rial'
+
             if customer.rial_wallet < cost:
                 form.add_error('rial_cost',
                                'You need {} more Rials!'.format(cost - customer.dollar_wallet))

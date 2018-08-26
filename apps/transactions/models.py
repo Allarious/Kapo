@@ -145,6 +145,8 @@ class AbstractTransaction(models.Model):
     verified = models.NullBooleanField(default=None)
     checking_employee = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True)
     checking = models.BooleanField(default=False)
+    CHOICES = (('Rial', 'rial'), ('Euro', 'euro'), ('Dollar', 'dollar'))
+    currency_type = models.CharField(choices=CHOICES, null=True, max_length=10)
 
     def is_one_day_passed(self):
         # TODO check if it works correctly

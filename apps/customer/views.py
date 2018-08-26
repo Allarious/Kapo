@@ -10,7 +10,6 @@ from apps.transactions.models import *
 from apps.accounts.models import *
 
 
-
 @login_required
 @customer_required
 def index(request):
@@ -77,6 +76,7 @@ def customer_home_view(request):
     return render(request, 'customer_home.html',
                   {'customer': customer, 'karmozds': karmozds, 'euro_rate': euro_rate, 'dollar_rate': dollar_rate})
 
+
 def customer_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     notifications = Notification.objects.all().filter(owner=customer.user)
@@ -88,6 +88,7 @@ def customer_dashboard_view(request):
     Notification.objects.all().filter(owner=customer.user).update(seen=True)
     return render(request, 'customer_dashboard1.html', {'notifications': notification})
 
+
 def message_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     messages = Message.objects.all().filter(receiver=customer.user)
@@ -96,7 +97,8 @@ def message_dashboard_view(request):
         message.append(messages[messages.count() - 1 - i])
     return render(request, 'customer_message_dashboard.html', {'messages': message})
 
-def transacrion_dashboard_view(request):
+
+def transaction_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     rial = RialWalletIncTransaction.objects.all().filter(owner=customer)
     exchange = CurrencyConvertTransaction.objects.all().filter(owner=customer)
@@ -145,7 +147,6 @@ def transacrion_dashboard_view(request):
 #
 #             return render(request, 'customer_dashboard.html',
 #                           {'customer': customer, 'transactions': transactions})
-
 
 
 def send_message(request):
