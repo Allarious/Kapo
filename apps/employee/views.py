@@ -40,7 +40,6 @@ def employee_check_transaction_view(request):
             transaction = transactions.pop(id=request.POST.get('transaction id', default=None))
             status = request.POST.get('transaction status', default=False)
             if status == 'accepted':
-                # TODO how to know what kind of cost we have
                 currency = transaction.currency_type
                 if currency == 'rial':
                     system_account.rial_amount_account -= transaction.dollar_cost
