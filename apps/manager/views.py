@@ -73,12 +73,10 @@ def manager_check_transaction_view(request):
             # TODO get transaction id and verified status
             if 'status' == True:
                 pass
-            # TODO accept transaction and do the money work and change checking and checking emloyeee to  null
+            # TODO accept transaction and do the money work and change checking and checking employeee to  null
             else:
                 pass
-            # TODO deny transaction and don't do any money work checking emloyeee to  null
-
-            return redirect('/manager/')
+            # TODO deny transaction and don't do any money work checking employeee to  null
 
         elif request.POST.get('Customer selected'):
             # delete this customer
