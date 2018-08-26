@@ -33,6 +33,7 @@ def customer_rial_inc_view(request):
 
     return render(request, 'transactions.html', {'customer': customer, 'form': form})
 
+
 # TODO update lahze yi maghdar e motanazer java script
 @login_required
 @customer_required
@@ -44,8 +45,6 @@ def customer_exchange_view(request):
     if request.method == 'POST':
         exchange_form = Exchange2Form(request.POST)
         form = RialIncForm(request.POST)
-        print(exchange_form, form)
-        print(request.POST)
         if exchange_form.is_valid() and form.is_valid():
             exchange = CurrencyConvertTransaction()
             exchange.owner = customer
@@ -70,10 +69,10 @@ def customer_exchange_view(request):
                 else:
                     exchange_form.add_error('euro_amount', 'موجودی کافی نیست')
                     return render(request, 'transactions.html', {'customer': customer,
-                                                                      'exchange_form': exchange_form,
-                                                                 'form' : form,
-                                                                      'dollar': dollar_rate,
-                                                                      'euro': euro_rate, })
+                                                                 'exchange_form': exchange_form,
+                                                                 'form': form,
+                                                                 'dollar': dollar_rate,
+                                                                 'euro': euro_rate, })
             elif request.POST.get('dollar_exchange') == '':
                 exchange.currency = 'dollar'
                 exchange.amount = exchange_form.cleaned_data['dollar_amount']
@@ -85,10 +84,10 @@ def customer_exchange_view(request):
                 else:
                     exchange_form.add_error('dollar_amount', 'موجودی کافی نیست')
                     return render(request, 'transactions.html', {'customer': customer,
-                                                                      'exchange_form': exchange_form,
-                                                                 'form' : form,
-                                                                      'dollar': dollar_rate,
-                                                                      'euro': euro_rate, })
+                                                                 'exchange_form': exchange_form,
+                                                                 'form': form,
+                                                                 'dollar': dollar_rate,
+                                                                 'euro': euro_rate, })
 
             customer.save()
             exchange.paid = True
@@ -99,10 +98,10 @@ def customer_exchange_view(request):
         exchange_form = ExchangeForm()
 
     return render(request, 'transactions.html', {'customer': customer,
-                                                      'exchange_form': exchange_form,
-                                                                 'form' : form,
-                                                      'dollar': dollar_rate,
-                                                      'euro': euro_rate, })
+                                                 'exchange_form': exchange_form,
+                                                 'form': form,
+                                                 'dollar': dollar_rate,
+                                                 'euro': euro_rate, })
 
 
 @login_required

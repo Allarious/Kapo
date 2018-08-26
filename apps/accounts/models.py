@@ -6,6 +6,8 @@ class MyUser(AbstractUser):
     is_manager = models.BooleanField(default=False)
     is_customer = models.BooleanField(default=False)
     is_employee = models.BooleanField(default=False)
+    is_not_banned = models.BooleanField(default=True)
+
 
 
 class Message(models.Model):

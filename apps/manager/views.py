@@ -101,6 +101,8 @@ def manager_customer_view(request, customer):
             Customer.objects.all().delete(shit_customer)
             return manager_customers_list_view(request)
         elif request.POST.get('send_message'):
+            # TODO REZA send message gets customer id
+
             return HttpResponseRedirect(reverse('manager:send_message'))
 
     transactions = customer_all_transactions(customer)
@@ -122,20 +124,6 @@ def manager_all_system_transactions_view(request):
 @manager_required
 def manager_employee_view(request, employee):
     manager = get_object_or_404(Manager, pk=request.user.id)
-
-    if request.method == 'POST':
-        if request.POST.get('employee change submitted'):
-            # TODO get employee changed as employee i dont know how and then delete the below line
-            changed_employee = Employee()
-            changed_employee.save()
-            return manager_employees_list_view(request)
-
-        elif request.POST.get('delete this shit employee'):
-            # TODO get employee changed as employee i dont know how and then delete the below line
-            shit_employee = Employee()
-            Employee.objects.all().delete(shit_employee)
-            return manager_employees_list_view(request)
-
     transactions = get_all_employee_checked_checking_transaction(employee)
     return render(request, 'manager_employee_checked_ing_transactions.html',
                   {'manager': manager, 'employee': employee, 'transactions': transactions})
@@ -147,10 +135,22 @@ def manager_employees_list_view(request):
     manager = get_object_or_404(Manager, pk=request.user.id)
 
     if request.method == 'POST':
+        # TODO check
         if request.POST.get('employee selected'):
-            # TODO delete bellow line and get employee from ui
-            employee = Employee()
-            return manager_employee_view(request, employee)
+            return manager_employee_view(request, Employee.objects.filter(username=request.username))
+
+        elif request.POST.get('ban employee'):
+            Employee.objects.filter(username=request.username).update(is_not_banned=False)
+
+        elif request.POST.get('remove'):
+            Employee.objects.all().delete(username=request.username)
+
+        elif request.POST.get('wage has fucking changed'):
+            Employee.objects.filter(username=request.username).update(wage_per_month=request.new_wage)
+        elif request.POST.get('send_message'):
+            # TODO REZA send message gets employee id
+            return HttpResponseRedirect(reverse('manager:send_message'))
+
     employees_list = Employee.objects.all()
     return render(request, 'manager_employees_list.html',
                   {'manager': manager, 'employees': employees_list})
@@ -162,13 +162,14 @@ def manager_customers_list_view(request):
     manager = get_object_or_404(Manager, pk=request.user.id)
 
     if request.method == 'POST':
+        # TODO check
+
         if request.POST.get('delete this shit customer'):
-            # TODO delete bellow line and get customer from ui
             Customer.objects.all().delete(username=request.username)
             request.success = True
         elif request.POST.get('opeen profle of customer'):
 
-            return manager_customer_view(request,Customer.objects.filter(username=request.username))
+            return manager_customer_view(request, Customer.objects.filter(username=request.username))
 
     customers_list = Customer.objects.all()
     return render(request, 'manager_customers_list.html',
