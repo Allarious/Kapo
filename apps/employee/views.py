@@ -29,35 +29,34 @@ def index(request):
 @employee_required
 def employee_check_transaction_view(request):
     employee = get_object_or_404(Employee, pk=request.user.id)
+    if request.method == 'POST':
 
-    if request.POST.get('checked transaction'):
-        # TODO get transaction id and verified status
-        if 'status' == True:
-            pass
-        # TODO accept transaction and do the money work
-        else:
-            pass
-        # TODO deny transaction and don't do any money work
+        if request.POST.get('checked transaction'):
+            # TODO get transaction id and verified status
+            if 'status' == True:
+                pass
+            # TODO accept transaction and do the money work
+            else:
+                pass
+            # TODO deny transaction and don't do any money work
 
-        return redirect('/employee/')
+            return redirect('/employee/')
 
-    elif request.POST.get('New Transaction'):
-        transactions = get_null_verified_transaction(employee)
+        elif request.POST.get('New Transaction'):
+            transactions = get_null_verified_transaction(employee)
 
-        return redirect('employee:employee_checking_transactions')
+            return redirect('employee:employee_checking_transactions')
 
-    elif request.POST.get('Customer selected'):
-        # delete this customer
-        customer = Customer()
-        # TODO get customer from request
-        return employee_transaction_owner_view(request, customer)
+        elif request.POST.get('Customer selected'):
+            # delete this customer
+            customer = Customer()
+            # TODO get customer from request
+            return employee_transaction_owner_view(request, customer)
 
-    else:
+    transactions = get_employee_transactions(employee)
 
-        transactions = get_employee_transactions(employee)
-
-        return render(request, 'employee_checking_transactions.html',
-                      {'employee': employee, 'transactions': transactions})
+    return render(request, 'employee_checking_transactions.html',
+                  {'employee': employee, 'transactions': transactions})
 
 
 @login_required

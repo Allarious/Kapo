@@ -68,29 +68,28 @@ def update_manager_profile(request):
 @manager_required
 def manager_check_transaction_view(request):
     manager = get_object_or_404(Manager, pk=request.user.id)
-    if request.POST.get('checked transaction'):
-        # TODO get transaction id and verified status
-        if 'status' == True:
-            pass
-        # TODO accept transaction and do the money work and change checking and checking emloyeee to  null
-        else:
-            pass
-        # TODO deny transaction and don't do any money work checking emloyeee to  null
+    if request.method == 'POST':
+        if request.POST.get('checked transaction'):
+            # TODO get transaction id and verified status
+            if 'status' == True:
+                pass
+            # TODO accept transaction and do the money work and change checking and checking emloyeee to  null
+            else:
+                pass
+            # TODO deny transaction and don't do any money work checking emloyeee to  null
 
-        return redirect('/manager/')
+            return redirect('/manager/')
 
-    elif request.POST.get('Customer selected'):
-        # delete this customer
-        customer = Customer()
-        # TODO get customer from request
-        return manager_transaction_owner_view(request, customer)
+        elif request.POST.get('Customer selected'):
+            # delete this customer
+            customer = Customer()
+            # TODO get customer from request
+            return manager_transaction_owner_view(request, customer)
 
-    else:
+    transactions = get_null_verified_transaction()
 
-        transactions = get_null_verified_transaction()
-
-        return render(request, 'manager_checking_transactions.html',
-                      {'manager': manager, 'transactions': transactions})
+    return render(request, 'manager_checking_transactions.html',
+                  {'manager': manager, 'transactions': transactions})
 
 
 @login_required
