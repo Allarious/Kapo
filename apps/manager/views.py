@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from apps.accounts.forms.forms import UserForm, EmployeeSignUpForm
 from apps.accounts.models import MyUser
 from apps.customer.models import Customer
-from apps.manager.models import Manager
+from apps.manager.models import *
 from apps.accounts.decorators import manager_required
 from apps.customer.forms.forms import EditUser
 from apps.manager.forms.forms import *
@@ -202,6 +202,8 @@ def manager_customers_list_view(request):
 @login_required
 @manager_required
 def manager_add_employee(request):
+    manager = get_object_or_404(Manager, pk=request.user.id)
+
     if request.method == 'POST':
         user_form = UserForm(request.POST, request.FILES)
         form = EmployeeSignUpForm(request.POST)
@@ -224,10 +226,35 @@ def manager_add_employee(request):
         else:
 
             return render(request, 'SignUp2.html',
-                          {'user_form': user_form, 'form': form})
+                          {'manager': manager, 'user_form': user_form, 'form': form})
 
     else:
         user_form = UserForm()
         form = EmployeeSignUpForm()
     return render(request, 'SignUp2.html',
                   {'user_form': user_form, 'form': form})
+
+
+@login_required
+@manager_required
+def manager_exams_list(request):
+    manager = get_object_or_404(Manager, pk=request.user.id)
+    exams = ManagerAddedExams.objects.all()
+    if request.method == 'POST':
+        if request.POST.get('exam added'):
+            exam_image_url = request.POST.get('exam_image_url')
+            exam_title = request.POST.get('exam_title')
+            exam_site_url = request.POST.get('exam_site_url')
+            exam_dollar_cost = request.POST.get('exam_dollar_cost')
+            new_exam = ManagerAddedExams()
+            new_exam.dollar_cost = exam_dollar_cost
+            new_exam.site_url = exam_site_url
+            new_exam.exam_title = exam_title
+            new_exam.image_url = exam_image_url
+            new_exam.save()
+
+            return render(request, 'exams.html',
+                          {'manger': manager, 'exams': exams})
+
+        return render(request, 'exams.html',
+                      {'manger': manager, 'exams': exams})

@@ -359,4 +359,4 @@ def manager_exchange_view(request):
                                                  'form': form,
                                                  'dollar': dollar_rate,
                                                  'euro': euro_rate,
-                                                 'is_manager' : True})
+                                                 'is_manager': True})
