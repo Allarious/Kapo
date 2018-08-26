@@ -305,6 +305,7 @@ def unknown_pay_transactions_view(request):
 @manager_required
 def manager_exchange_view(request):
     manager = get_object_or_404(Manager, pk=request.user.id)
+    customer = get_object_or_404(Customer, pk=request.user.id)
     dollar_rate = float(Configuration.objects.get(key='dollar').value)
     euro_rate = float(Configuration.objects.get(key='euro').value)
 
@@ -313,12 +314,12 @@ def manager_exchange_view(request):
         form = RialIncForm(request.POST)
         if exchange_form.is_valid() and form.is_valid():
             exchange = CurrencyConvertTransaction()
-            # exchange.owner = manager
+            exchange.owner = customer
             if request.POST.get("rial_inc") == '':
                 if form.is_valid():
                     transaction = RialWalletIncTransaction()
                     transaction.amount = form.cleaned_data['amount']
-                    # transaction.owner = manager
+                    transaction.owner = customer
                     manager.system_accounts.rial_amount_account += transaction.amount
                     manager.system_accounts.save()
                     transaction.paid = True
