@@ -82,7 +82,7 @@ def manager_check_transaction_view(request):
             # delete this customer
             customer = Customer()
             # TODO get customer from request
-            return manager_transaction_owner_view(request, customer)
+            return manager_customer_view(request, customer)
 
     transactions = get_null_verified_transaction()
 
