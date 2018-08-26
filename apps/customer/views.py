@@ -96,7 +96,7 @@ def message_dashboard_view(request):
         message.append(messages[messages.count() - 1 - i])
     return render(request, 'customer_message_dashboard.html', {'messages': message})
 
-def transacrion_dashboard_view(request):
+def transaction_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     rial = RialWalletIncTransaction.objects.all().filter(owner=customer)
     exchange = CurrencyConvertTransaction.objects.all().filter(owner=customer)
