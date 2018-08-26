@@ -7,3 +7,9 @@ class Configuration(models.Model):
 
     def __str__(self):
         return self.key
+
+
+class SystemAccounts(models.Model):
+    rial_amount_account = models.FloatField(default=0)
+    dollar_amount_account = models.FloatField(default=0)
+    euro_amount_account = models.FloatField(default=0)

@@ -19,6 +19,7 @@ class Employee(models.Model):
     phone = models.CharField(max_length=12, unique=False, default='')
     domestic_card_number = DomesticCardField(unique=False, max_length=16, null=True)
     rial_wallet = models.FloatField(default=0)
+    wage_per_month = models.FloatField(default=0)
 
     def clean(self):
         if self.rial_wallet < 0:
