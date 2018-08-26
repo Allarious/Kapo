@@ -96,6 +96,33 @@ def message_dashboard_view(request):
         message.append(messages[messages.count() - 1 - i])
     return render(request, 'customer_message_dashboard.html', {'messages': message})
 
+def transacrion_dashboard_view(request):
+    customer = get_object_or_404(Customer, pk=request.user.id)
+    rial = RialWalletIncTransaction.objects.all().filter(owner=customer)
+    exchange = CurrencyConvertTransaction.objects.all().filter(owner=customer)
+    transactions = []
+    transactions.extend(rial)
+    transactions.extend(exchange)
+    transactions.sort(key=lambda transaction: transaction.creation_time)
+    transactions_list = []
+    for transaction in transactions:
+        tmp = []
+        if isinstance(transaction, RialWalletIncTransaction):
+            tmp.append('Rial Charge')
+            tmp.append(str(transaction.amount) + 'ريال')
+        elif isinstance(transaction, CurrencyConvertTransaction) and transaction.currency == 'dollar':
+            tmp.append('Rial-Dollar Exchange')
+            tmp.append(str(transaction.amount) + '$')
+        else:
+            tmp.append('Rial-Euro Exchange')
+            tmp.append(str(transaction.amount) + '€')
+        tmp.append(transaction.creation_time.date())
+        tmp.append(transaction.creation_time.time())
+        tmp.append(transaction.verified)
+        tmp.append(transaction.description)
+        transactions_list.append(tmp)
+    return render(request, 'transaction_dashboard.html', {'transactions': transactions_list})
+
 
 # def customer_dashboard_view(request):
 #     customer = get_object_or_404(Customer, pk=request.user.id)
@@ -109,7 +136,7 @@ def message_dashboard_view(request):
 #                           {'customer': customer, 'transactions': transactions})
 #
 #         elif request.POST.get('messages button'):
-#             # TODO Reza messago bezan
+#
 #             pass
 #
 #         elif request.POST.get('orders button'):

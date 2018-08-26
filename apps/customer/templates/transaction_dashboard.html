@@ -10,9 +10,9 @@
     -->
     <link rel="manifest" href="http://localhost:3000/manifest.json">
     <link rel="shortcut icon" href="http://localhost:3000/favicon.ico">
-    <link rel="stylesheet" href="./customer_message_dashboard_files/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    <link rel="stylesheet" href="./customer_message_dashboard_files/font-awesome.min.css">
-    <link rel="stylesheet" href="./customer_message_dashboard_files/bootstrap.min.css">
+    <link rel="stylesheet" href="./transaction_dashboard_files/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="./transaction_dashboard_files/font-awesome.min.css">
+    <link rel="stylesheet" href="./transaction_dashboard_files/bootstrap.min.css">
 
     <!--
       Notice the use of  in the tags above.
@@ -1686,32 +1686,33 @@ html {
                 <div class="dashboard__right-col__7dKoi">
                     <div class="dashboard__nav__2LLxt">
                         <div class="dashboard__nav-container__2M4J4">
-                            <div class="dashboard__message-from__2e_Gr">from</div>
-                            <div class="dashboard__message-name__2L9sj">name</div>
-                            <div class="dashboard__message-thumbnail__1dXdI">thumbnail</div>
-                            <div class="dashboard__message-condition__3OfLb">condition</div>
+                            <div class="dashboard__left__GhWUe">type</div>
+                            <div class="dashboard__middle__1uYlL">amount</div>
+                            <div class="dashboard__middle__1uYlL">costD</div>
+                            <div class="dashboard__middle__1uYlL">date</div>
+                            <div class="dashboard__middle__1uYlL">time</div>
+                            <div class="dashboard__right__VSVw6">condition</div>
                         </div>
                     </div>
                     <div class="dashboard__inner-container__nl4ri">
                         <div>
-                            <div>
-
+                            {% for transaction in transactions %}
+                            <div class="transaction__container__1Qkyv">
+                                <div class="transaction__left__1mO41">{{ transaction.0 }}</div>
+                                <div class="transaction__middle__2ocXa">{{ transaction.1 }}</div>
+                                <div class="transaction__middle__2ocXa">0</div>
+                                <div class="transaction__middle__2ocXa">{{ transaction.2 }}</div>
+                                <div class="transaction__middle__2ocXa">{{ transaction.3 }}</div>
+                                <div class="transaction__right__7uyD4">accepted</div>
+                                <div class="transaction__break__195wa"></div>
+                                <div class="transaction__more-info__1Y1nW"></div>
                             </div>
-                            {% for message in messages %}
-                            <div class="messagecomponents__container__3DmVr">
-                                <div class="messagecomponents__from__5B0in">{{ message.sender.username }}</div>
-                                <div class="messagecomponents__name__1gNT_">{{ message.subject }}</div>
-                                <div class="messagecomponents__thumbnail__29-zl">{{ message.message|truncatewords:4 }}</div>
-                                <div class="messagecomponents__condition__2Uy8F">Read</div>
-                                <div class="messagecomponents__break__3I5Rf"></div>
-                                <div class="messagecomponents__message__Gkt-j">{{ message.message }}</div>
-                        </div>
                             {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="footer__footer__1ewxg"><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Contact Us</div><div class="footer__wrapper-body__34NLC">021-1234567<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Email Us</div><div class="footer__wrapper-body__34NLC">info@Kapo.ir<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Follow Us</div><div class="footer__wrapper-body__34NLC"><button class="footer__wrapper-body-button__19lEO">Telegram</button><button class="footer__wrapper-body-button__19lEO">Instagram</button></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Meet us</div><div class="footer__wrapper-body__34NLC">Sharif University Of Tehran<div></div></div></div></div></div></div></div>
+    <div class="footer__footer__1ewxg"><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Contact Us</div><div class="footer__wrapper-body__34NLC">021-1234567<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Email Us</div><div class="footer__wrapper-body__34NLC">info@Kapo.ir<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Follow Us</div><div class="footer__wrapper-body__34NLC"><button class="footer__wrapper-body-button__19lEO">Telegram</button><button class="footer__wrapper-body-button__19lEO">Instagram</button></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Meet us</div><div class="footer__wrapper-body__34NLC">Sharif University Of Tehran<div></div></div></div></div></div></div></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -1722,6 +1723,6 @@ html {
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  <script type="text/javascript" src="./customer_message_dashboard_files/bundle.js.download"></script>
+  <script type="text/javascript" src="./transaction_dashboard_files/bundle.js.download"></script>
 
 </body></html>

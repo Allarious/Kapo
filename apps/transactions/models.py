@@ -147,6 +147,7 @@ class AbstractTransaction(models.Model):
     checking = models.BooleanField(default=False)
 
     def is_one_day_passed(self):
+        # TODO check if it works correctly
         now = timezone.now()
         difference = now - self.creation_time
         if difference.days >= 1:

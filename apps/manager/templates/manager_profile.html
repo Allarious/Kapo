@@ -1231,15 +1231,15 @@ html {
                 <div class="profile__wallet__2YA8N">
                     <div class="walletpart__container__27GkM">
                         <div class="walletpart__name__1f77b">Rial :&nbsp;</div>
-                        <div class="walletpart__amount__20wSF">{{ manager.rial_wallet }}R</div>
+                        <div class="walletpart__amount__20wSF">{{ manager.system_accounts.rial_amount_account }}R</div>
                     </div>
                     <div class="walletpart__container__27GkM">
                         <div class="walletpart__name__1f77b">Dollar :&nbsp;</div>
-                        <div class="walletpart__amount__20wSF">{{ manager.dollar_wallet }}$</div>
+                        <div class="walletpart__amount__20wSF">{{ manager.system_accounts.dollar_amount_account }}$</div>
                     </div>
                     <div class="walletpart__container__27GkM">
                         <div class="walletpart__name__1f77b">Euro :&nbsp;</div>
-                        <div class="walletpart__amount__20wSF">{{ manager.euro_wallet }}€</div>
+                        <div class="walletpart__amount__20wSF">{{ manager.system_accounts.euro_amount_account }}€</div>
                     </div>
                 </div>
                 <div class="profile__profile-content__2nuB5">
@@ -1265,20 +1265,8 @@ html {
                             <div class="profilecontent__cont__1mP9a">Manager</div>
                         </div>
                         <div class="profilecontent__container__3SiEG">
-                            <div class="profilecontent__name__3hGIV">Birth Date : &nbsp;</div>
-                            <div class="profilecontent__cont__1mP9a">{{ manager.birthday_date }}</div>
-                        </div>
-                        <div class="profilecontent__container__3SiEG">
                             <div class="profilecontent__name__3hGIV">Joining Date : &nbsp;</div>
                             <div class="profilecontent__cont__1mP9a">24/8/2012</div>
-                        </div>
-                        <div class="profilecontent__container__3SiEG">
-                            <div class="profilecontent__name__3hGIV">Region : &nbsp;</div>
-                            <div class="profilecontent__cont__1mP9a">{{ manager.city }}</div>
-                        </div>
-                        <div class="profilecontent__container__3SiEG">
-                            <div class="profilecontent__name__3hGIV">Country : &nbsp;</div>
-                            <div class="profilecontent__cont__1mP9a">{{ manager.country }}</div>
                         </div>
                     </div>
                 </div>
