@@ -1,5 +1,8 @@
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+
+from apps.accounts.forms.forms import UserForm, EmployeeSignUpForm
 from apps.accounts.models import MyUser
 from apps.customer.models import Customer
 from apps.manager.models import Manager
@@ -174,3 +177,37 @@ def manager_customers_list_view(request):
     customers_list = Customer.objects.all()
     return render(request, 'manager_customers_list.html',
                   {'manager': manager, 'customers': customers_list})
+
+@login_required
+@manager_required
+def manager_add_employee(request):
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, request.FILES)
+        form = EmployeeSignUpForm(request.POST)
+        if form.is_valid() and user_form.is_valid():
+            user = user_form.save()
+            username = request.POST['username']
+            password = request.POST['password']
+            user.set_password(user.password)
+            user.is_employee = True
+            user.save()
+            employee = form.save(commit=False)
+            employee.user = user
+            employee.save()
+            user = authenticate(username=username, password=password)
+            if user is not None and employee is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect(reverse('manager:index'))
+
+        else:
+
+            return render(request, 'SignUp2.html',
+                          {'user_form': user_form, 'form': form})
+
+    else:
+        user_form = UserForm()
+        form = EmployeeSignUpForm()
+    return render(request, 'SignUp2.html',
+                  {'user_form': user_form, 'form': form})
+
