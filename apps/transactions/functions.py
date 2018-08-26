@@ -175,3 +175,27 @@ def customer_order_transactions(customer):
 
     return transactions
 
+
+def get_all_employee_checked_checking_transaction(employee):
+    transactions = []
+    # Exam transactions:
+    exams = ExamTransaction.objects.filter(checking_employee=employee)
+    # Application and tuition fees transactions:
+    fees = ApplicationTuitionFeeTransaction.objects.filter(checking_employee=employee)
+    # Foregin payments transactions:
+    foreign_payments = ForeignPaymentTransaction.objects.filter(checking_employee=employee)
+    # Domestic transactions:
+    domestic_payments = DomesticPaymentTransaction.objects.filter(checking_employee=employee)
+    #  Unknown payments transactions:
+    unknown_payments = UnknownPaymentTransaction.objects.filter(checking_employee=employee)
+
+    transactions.extend(exams)
+    transactions.extend(fees)
+    transactions.extend(foreign_payments)
+    transactions.extend(domestic_payments)
+    transactions.extend(unknown_payments)
+
+    for transaction in transactions:
+        transaction.is_one_day_passed()
+
+    return transactions

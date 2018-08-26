@@ -11,7 +11,8 @@ urlpatterns = [
     path('send-message', send_message, name='send_message'),
     path('check-transactions', manager_check_transaction_view, name='manager_checking_transactions'),
     path('check-owner-transactions', manager_transaction_owner_view, name='manager_checking_owner_transactions'),
-    path('all-system-transactions', manager_all_system_transactions_view, name='employee_checking_owner_transactions'),
+    path('all-system-transactions', manager_all_system_transactions_view, name='manager_checking_owner_transactions'),
+    path('employee-checked-transactions', manager_employee_checked_transactions_view, name='manager_checking_owner_transactions'),
 ]
 
 # TODO bayad mogheyi ke tarakonesh barresish tamum mishe checke checkingesh false beshe/

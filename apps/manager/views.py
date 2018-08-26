@@ -73,10 +73,10 @@ def manager_check_transaction_view(request):
             # TODO get transaction id and verified status
             if 'status' == True:
                 pass
-            # TODO accept transaction and do the money work and change checking and checking employeee to  null
+            # TODO accept transaction and do the money work and change checking
             else:
                 pass
-            # TODO deny transaction and don't do any money work checking employeee to  null
+            # TODO deny transaction and don't do any money work and change checking
 
         elif request.POST.get('Customer selected'):
             # delete this customer
@@ -104,5 +104,16 @@ def manager_transaction_owner_view(request, customer):
 @manager_required
 def manager_all_system_transactions_view(request):
     manager = get_object_or_404(Manager, pk=request.user.id)
+    transactions = get_all_system_transactions()
+    return render(request, 'manager_all_system_transactions.html',
+                  {'manager': manager, 'transactions': transactions})
 
-    pass
+
+@login_required
+@manager_required
+def manager_employee_checked_transactions_view(request, employee):
+    manager = get_object_or_404(Manager, pk=request.user.id)
+    # TODO employee should be given by employee's list of manager
+    transactions = get_all_employee_checked_checking_transaction(employee)
+    return render(request, 'manager_all_system_transactions.html',
+                  {'manager': manager, 'transactions': transactions})
