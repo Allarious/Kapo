@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import *
 from apps.customer.views import send_message
+from apps.transactions.views import manager_exchange_view
 
 # TODO badan url ha doros beshe ba estefade az id e cutomer
 app_name = "manager"
@@ -17,6 +18,7 @@ urlpatterns = [
     path('employees-list', manager_employees_list_view, name='manager_employees_list'),
     path('customers-list', manager_customers_list_view, name='manager_customers_list'),
     path('add-employee', manager_add_employee, name='manager_add_employee'),
+    path('system-wallet-management', manager_exchange_view, name='manger exchange'),
 ]
 
 # TODO bayad mogheyi ke tarakonesh barresish tamum mishe checke checkingesh false beshe/

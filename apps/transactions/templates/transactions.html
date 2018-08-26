@@ -1668,18 +1668,31 @@ html {
     <div id="root">
         <div class="App__App__3t9oX">
             <div class="navbar__navbar__2bGl1">
-                <a href={% url 'customer:index' %}><div class="navbar__navComponents__A_iF-">  HomePage  </div></a>
+                {% if is_manager %}
+                    <a href={% url 'manager:index' %}><div class="navbar__navComponents__A_iF-">  HomePage  </div></a>
+                <a href={% url 'manager:manger_profile' %}><div class="navbar__navComponents__A_iF-"> Profile </div></a>
+                <a href={% url 'manager:send_message' %}><div class="navbar__navComponents__A_iF-">  Send Message  </div></a>
+                    <a href={% url 'manager:manger exchange' %}><div class="navbar__navComponents__A_iF-">  System Account Management  </div></a>
+                <a href={% url 'accounts:logout' %}><div class="navbar__navComponents__A_iF-">  Logout  </div></a>
+                    {% else %}
+                    <a href={% url 'customer:index' %}><div class="navbar__navComponents__A_iF-">  HomePage  </div></a>
                 <a href={% url 'customer:customer_profile' %}><div class="navbar__navComponents__A_iF-"> Profile </div></a>
                 <a href={% url 'customer:send_message' %}><div class="navbar__navComponents__A_iF-">  Send Message  </div></a>
-                <a href={% url 'customer:transactions:customer rial inc' %}><div class="navbar__navComponents__A_iF-">  Convert  </div></a>
+                <a href={% url 'customer:transactions:exchange' %}><div class="navbar__navComponents__A_iF-">  Convert  </div></a>
                 <a href={% url 'customer:dashboard' %}><div class="navbar__navComponents__A_iF-">  Dashboard  </div></a>
                 <a href={% url 'accounts:logout' %}><div class="navbar__navComponents__A_iF-">  Logout  </div></a>
+                {% endif %}
+
             </div>
             <div class="convert__container__2X1cP">
             <div class="converttype__content__1YTH5">
                 <div class="converttype__logo__165-8">
                 </div>
-                <div class="converttype__remain__3gh7H">Remains : {{ customer.rial_wallet }}</div>
+                <div class="converttype__remain__3gh7H">Remains : {% if is_manager %}
+                    {{ customer.system_accounts.rial_amount_account }}
+                    {% else %}
+                {{ customer.rial_wallet }}
+                {% endif %}</div>
                 <div class="converttype__explain__2Cu_t">Charge your wallet</div>
                 <form class="form-horizontal login-form" method="post" role="form" action="" enctype="multipart/form-data">
             {% csrf_token %}
@@ -1693,7 +1706,11 @@ html {
             </div>
                 <div class="converttype__content__1YTH5">
                     <div class="converttype__logo1__1yebo"></div>
-                    <div class="converttype__remain__3gh7H">Remains : {{ customer.dollar_wallet }}</div>
+                    <div class="converttype__remain__3gh7H">Remains : {% if is_manager %}
+                    {{ customer.system_accounts.dollar_amount_account }}
+                    {% else %}
+                {{ customer.dollar_wallet }}
+                {% endif %}</div>
                     <div class="converttype__explain__2Cu_t">Change from Rial to Dollar</div>
                     <form class="form-horizontal login-form" method="post" role="form" action="" enctype="multipart/form-data">
             {% csrf_token %}
@@ -1710,7 +1727,11 @@ html {
                 </div>
                 <div class="converttype__content__1YTH5">
                     <div class="converttype__logo2__1I4c2"></div>
-                    <div class="converttype__remain__3gh7H">Remains : {{ customer.euro_wallet }}</div>
+                    <div class="converttype__remain__3gh7H">Remains : {% if is_manager %}
+                    {{ customer.system_accounts.euro_amount_account }}
+                    {% else %}
+                {{ customer.euro_wallet }}
+                {% endif %}</div>
                     <div class="converttype__explain__2Cu_t">Change from Rial to Euro</div>
                     <form class="form-horizontal login-form" method="post" role="form" action="" enctype="multipart/form-data">
             {% csrf_token %}

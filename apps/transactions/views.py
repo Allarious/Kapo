@@ -53,7 +53,8 @@ def customer_exchange_view(request):
                                                                  'exchange_form': exchange_form,
                                                                  'form': form,
                                                                  'dollar': dollar_rate,
-                                                                 'euro': euro_rate, })
+                                                                 'euro': euro_rate,
+                                                                 'is_manager': False})
             elif request.POST.get('dollar_exchange') == '':
                 exchange.currency = 'dollar'
                 exchange.amount = exchange_form.cleaned_data['dollar_amount']
@@ -68,7 +69,8 @@ def customer_exchange_view(request):
                                                                  'exchange_form': exchange_form,
                                                                  'form': form,
                                                                  'dollar': dollar_rate,
-                                                                 'euro': euro_rate, })
+                                                                 'euro': euro_rate,
+                                                                 'is_manager': False})
 
             customer.save()
             exchange.paid = True
@@ -300,12 +302,12 @@ def manager_exchange_view(request):
         form = RialIncForm(request.POST)
         if exchange_form.is_valid() and form.is_valid():
             exchange = CurrencyConvertTransaction()
-            exchange.owner = manager
+            # exchange.owner = manager
             if request.POST.get("rial_inc") == '':
                 if form.is_valid():
                     transaction = RialWalletIncTransaction()
                     transaction.amount = form.cleaned_data['amount']
-                    transaction.owner = manager
+                    # transaction.owner = manager
                     manager.system_accounts.rial_amount_account += transaction.amount
                     manager.system_accounts.save()
                     transaction.paid = True
@@ -325,7 +327,8 @@ def manager_exchange_view(request):
                                                                  'exchange_form': exchange_form,
                                                                  'form': form,
                                                                  'dollar': dollar_rate,
-                                                                 'euro': euro_rate, })
+                                                                 'euro': euro_rate,
+                                                                 'is_manager': True})
             elif request.POST.get('dollar_exchange') == '':
                 exchange.currency = 'dollar'
                 exchange.amount = exchange_form.cleaned_data['dollar_amount']
@@ -354,4 +357,5 @@ def manager_exchange_view(request):
                                                  'exchange_form': exchange_form,
                                                  'form': form,
                                                  'dollar': dollar_rate,
-                                                 'euro': euro_rate, })
+                                                 'euro': euro_rate,
+                                                 'is_manager' : True})

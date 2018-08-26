@@ -10,6 +10,7 @@ from apps.transactions.models import *
 from apps.accounts.models import *
 
 
+
 @login_required
 @customer_required
 def index(request):
@@ -76,7 +77,6 @@ def customer_home_view(request):
     return render(request, 'customer_home.html',
                   {'customer': customer, 'karmozds': karmozds, 'euro_rate': euro_rate, 'dollar_rate': dollar_rate})
 
-
 def customer_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     notifications = Notification.objects.all().filter(owner=customer.user)
@@ -88,7 +88,6 @@ def customer_dashboard_view(request):
     Notification.objects.all().filter(owner=customer.user).update(seen=True)
     return render(request, 'customer_dashboard1.html', {'notifications': notification})
 
-
 def message_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     messages = Message.objects.all().filter(receiver=customer.user)
@@ -96,149 +95,3 @@ def message_dashboard_view(request):
     for i in range(messages.count()):
         message.append(messages[messages.count() - 1 - i])
     return render(request, 'customer_message_dashboard.html', {'messages': message})
-
-
-def transaction_dashboard_view(request):
-    customer = get_object_or_404(Customer, pk=request.user.id)
-    rial = RialWalletIncTransaction.objects.all().filter(owner=customer)
-    exchange = CurrencyConvertTransaction.objects.all().filter(owner=customer)
-    transactions = []
-    transactions.extend(rial)
-    transactions.extend(exchange)
-    transactions.sort(key=lambda transaction: transaction.creation_time)
-    transactions_list = []
-    for transaction in transactions:
-        tmp = []
-        if isinstance(transaction, RialWalletIncTransaction):
-            tmp.append('Rial Charge')
-            tmp.append(str(transaction.amount) + 'ريال')
-        elif isinstance(transaction, CurrencyConvertTransaction) and transaction.currency == 'dollar':
-            tmp.append('Rial-Dollar Exchange')
-            tmp.append(str(transaction.amount) + '$')
-        else:
-            tmp.append('Rial-Euro Exchange')
-            tmp.append(str(transaction.amount) + '€')
-        tmp.append(transaction.creation_time.date())
-        tmp.append(transaction.creation_time.time())
-        tmp.append(transaction.verified)
-        tmp.append(transaction.description)
-        transactions_list.append(tmp)
-        order = False
-    return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
-                                                          'order' : order})
-
-
-def order_dashboard_view(request):
-    customer = get_object_or_404(Customer, pk=request.user.id)
-    exam = ExamTransaction.objects.all().filter(owner=customer)
-    apply = ApplicationTuitionFeeTransaction.objects.all().filter(owner=customer)
-    foreign = ForeignPaymentTransaction.objects.all().filter(owner=customer)
-    domestic = DomesticPaymentTransaction.objects.all().filter(owner=customer)
-    unknown = UnknownPaymentTransaction.objects.all().filter(owner=customer)
-    transactions = []
-    transactions.extend(exam)
-    transactions.extend(apply)
-    transactions.extend(foreign)
-    transactions.extend(domestic)
-    transactions.extend(unknown)
-    transactions.sort(key=lambda transaction: transaction.creation_time)
-    transactions_list = []
-    for transaction in transactions:
-        tmp = []
-        if isinstance(transaction, ExamTransaction):
-            tmp.append('Exam')
-            tmp.append(str(transaction.dollar_cost) + '$')
-            transaction.description += "Exam title is: " + transaction.exam_title
-        elif isinstance(transaction, ApplicationTuitionFeeTransaction):
-            if transaction.fee_type== 'application fee':
-                tmp.append('Application Fee')
-            else:
-                tmp.append('Tuition Fee')
-            if transaction.dollar_cost > 0:
-                tmp.append(str(transaction.dollar_cost) + '$')
-            else:
-                tmp.append(str(transaction.euro_cost) + '€')
-            transaction.description += "University site url is: " + transaction.site_url
-        elif isinstance(transaction, ForeignPaymentTransaction):
-            tmp.append('Foreign Payment')
-            if transaction.dollar_cost > 0:
-                tmp.append(str(transaction.dollar_cost) + '$')
-            else:
-                tmp.append(str(transaction.euro_cost) + '€')
-            transaction.description += "Destination card number is:" + transaction.foreign_card_number
-        elif isinstance(transaction, DomesticPaymentTransaction):
-            tmp.append('Domestic Payment')
-            tmp.append(str(transaction.rial_cost) + 'ريال')
-            transaction.description += "Destination card number is:" + transaction.domestic_card_number
-        else:
-            tmp.append('Unknown Payment')
-            tmp.append(str(transaction.rial_cost) + 'ريال')
-            transaction.description += "Destination card number is:" + transaction.domestic_card_number
-        tmp.append(transaction.creation_time.date())
-        tmp.append(transaction.creation_time.time())
-        tmp.append(transaction.verified)
-        tmp.append(transaction.description)
-        transactions_list.append(tmp)
-    return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
-                                                          'order': True})
-
-# def customer_dashboard_view(request):
-#     customer = get_object_or_404(Customer, pk=request.user.id)
-#     if request.method == 'POST':
-#
-#         if request.POST.get('transactions button'):
-#             # list of all transactions
-#             transactions = customer_all_transactions(customer)
-# #
-#             return render(request, 'customer_dashboard.html',
-#                           {'customer': customer, 'transactions': transactions})
-#
-#         elif request.POST.get('messages button'):
-#
-#             pass
-#
-#         elif request.POST.get('orders button'):
-#             # list of all transactions that needed or needs verification
-#             transactions = customer_order_transactions(customer)
-#
-#             return render(request, 'customer_dashboard.html',
-#                           {'customer': customer, 'transactions': transactions})
-
-
-def send_message(request):
-    user = get_object_or_404(MyUser, pk=request.user.id)
-    # user = MyUser.objects.get(username=request.user.username)
-    if request.method == 'POST':
-        form = SendMessage(request.POST)
-
-        if form.is_valid():
-            notification = Notification()
-            message = Message()
-            receiver = form.cleaned_data['receiver']
-            message_receiver = get_object_or_404(MyUser, username=receiver)
-            # message_receiver = MyUser.objects.get(username=receiver)
-            message.receiver = message_receiver
-            notification.owner = message_receiver
-            notification.type = 'message'
-            message.sender = user
-            message.subject = form.cleaned_data['subject']
-            message.message = form.cleaned_data['message']
-            notification.save()
-            message.save()
-            if user.is_customer:
-                return HttpResponseRedirect(reverse('customer:index'))
-            elif user.is_employee:
-                return HttpResponseRedirect(reverse('employee:index'))
-            else:
-                return HttpResponseRedirect(reverse('manager:index'))
-
-        else:
-            print(form.errors)
-            return render(request, 'send_message.html',
-                          {user: 'user', 'form': form})
-
-    else:
-        form = SendMessage()
-
-    return render(request, 'send_message.html',
-                  {user: 'user', 'form': form})
