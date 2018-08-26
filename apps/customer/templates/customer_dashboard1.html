@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0022)http://localhost:3000/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
     <!--
@@ -23,7 +22,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Dashboard</title>
   <style type="text/css">body {
   margin: 0;
   padding: 0;
@@ -1692,11 +1691,24 @@ html {
                         <div>
                             <div class="notifications__container__fn-lH">
                                 <div class="notifications__header__3sT78">Notifications</div>
+                            {% for notification in notifications %}
                                 <div class="notification__container__2TXGk">
-                                    <div class="notification__header__1EUST">You Have A New message</div>
+                                    <div class="notification__header__1EUST">{% if notification.type == 'message' %}
+                                    You Have A New message
+                                        {% elif notification.type == 'transaction' %}
+                                        Your transaction has been accepted
+                                        {% elif notification.type == 'order' %}
+                                        Your order has been accepted
+                                        {% else %}
+                                        A new feature has been added to system.
+                                    {% endif %}</div>
+                                    {% if not notification.seen %}
                                     <div class="notification__condition__3SHDM">New</div>
+                                    {% endif %}
                                 </div>
-                            </div></div></div></div></div></div><div class="footer__footer__1ewxg"><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Contact Us</div><div class="footer__wrapper-body__34NLC">021-1234567<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Email Us</div><div class="footer__wrapper-body__34NLC">info@Kapo.ir<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Follow Us</div><div class="footer__wrapper-body__34NLC"><button class="footer__wrapper-body-button__19lEO">Telegram</button><button class="footer__wrapper-body-button__19lEO">Instagram</button></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Meet us</div><div class="footer__wrapper-body__34NLC">Sharif University Of Tehran<div></div></div></div></div></div></div></div>
+                            {% endfor %}
+                            </div>
+                        </div></div></div></div></div><div class="footer__footer__1ewxg"><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Contact Us</div><div class="footer__wrapper-body__34NLC">021-1234567<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Email Us</div><div class="footer__wrapper-body__34NLC">info@Kapo.ir<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Follow Us</div><div class="footer__wrapper-body__34NLC"><button class="footer__wrapper-body-button__19lEO">Telegram</button><button class="footer__wrapper-body-button__19lEO">Instagram</button></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Meet us</div><div class="footer__wrapper-body__34NLC">Sharif University Of Tehran<div></div></div></div></div></div></div></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

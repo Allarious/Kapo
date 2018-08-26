@@ -10,6 +10,7 @@ from apps.transactions.models import *
 from apps.accounts.models import *
 
 
+
 @login_required
 @customer_required
 def index(request):
@@ -77,12 +78,23 @@ def customer_home_view(request):
                   {'customer': customer, 'karmozds': karmozds, 'euro_rate': euro_rate, 'dollar_rate': dollar_rate})
 
 def customer_dashboard_view(request):
-    return render(request, 'customer_dashboard1.html')
+    customer = get_object_or_404(Customer, pk=request.user.id)
+    notifications = Notification.objects.all().filter(owner=customer.user)
+    print(notifications[0].seen)
+    print(notifications[1].seen)
+    notification = []
+    for i in range(notifications.count()):
+        notification.append(notifications[notifications.count() - 1 - i])
+    Notification.objects.all().filter(owner=customer.user).update(seen=True)
+    return render(request, 'customer_dashboard1.html', {'notifications': notification})
 
 def message_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     messages = Message.objects.all().filter(receiver=customer.user)
-    return render(request, 'customer_message_dashboard.html', {'messages': messages})
+    message = []
+    for i in range(messages.count()):
+        message.append(messages[messages.count() - 1 - i])
+    return render(request, 'customer_message_dashboard.html', {'messages': message})
 
 
 # def customer_dashboard_view(request):
@@ -92,7 +104,7 @@ def message_dashboard_view(request):
 #         if request.POST.get('transactions button'):
 #             # list of all transactions
 #             transactions = customer_all_transactions(customer)
-#
+# #
 #             return render(request, 'customer_dashboard.html',
 #                           {'customer': customer, 'transactions': transactions})
 #
@@ -110,18 +122,24 @@ def message_dashboard_view(request):
 
 
 def send_message(request):
-    user = MyUser.objects.get(username=request.user.username)
+    user = get_object_or_404(MyUser, pk=request.user.id)
+    # user = MyUser.objects.get(username=request.user.username)
     if request.method == 'POST':
         form = SendMessage(request.POST)
 
         if form.is_valid():
+            notification = Notification()
             message = Message()
             receiver = form.cleaned_data['receiver']
-            message_receiver = MyUser.objects.get(username=receiver)
+            message_receiver = get_object_or_404(MyUser, username=receiver)
+            # message_receiver = MyUser.objects.get(username=receiver)
             message.receiver = message_receiver
+            notification.owner = message_receiver
+            notification.type = 'message'
             message.sender = user
             message.subject = form.cleaned_data['subject']
             message.message = form.cleaned_data['message']
+            notification.save()
             message.save()
             if user.is_customer:
                 return HttpResponseRedirect(reverse('customer:index'))

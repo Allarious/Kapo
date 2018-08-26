@@ -23,7 +23,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Dashboard</title>
   <style type="text/css">body {
   margin: 0;
   padding: 0;
@@ -1701,7 +1701,7 @@ html {
                             <div class="messagecomponents__container__3DmVr">
                                 <div class="messagecomponents__from__5B0in">{{ message.sender.username }}</div>
                                 <div class="messagecomponents__name__1gNT_">{{ message.subject }}</div>
-                                <div class="messagecomponents__thumbnail__29-zl">Hello and Good Evening ...</div>
+                                <div class="messagecomponents__thumbnail__29-zl">{{ message.message|truncatewords:4 }}</div>
                                 <div class="messagecomponents__condition__2Uy8F">Read</div>
                                 <div class="messagecomponents__break__3I5Rf"></div>
                                 <div class="messagecomponents__message__Gkt-j">{{ message.message }}</div>

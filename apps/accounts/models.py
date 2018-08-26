@@ -20,9 +20,10 @@ NOTIFICATION_TYPES = (('message', 'Message'), ('transaction', 'Transaction'), ('
 SEX_CHOICES = (('male', 'Male'), ('female', 'Female'), ('other', 'Non Binary'))
 
 
-class notification:
+class Notification(models.Model):
     owner = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='owner')
     type = models.CharField(max_length=10, choices=NOTIFICATION_TYPES)
+    seen = models.BooleanField(default=False)
 
 
 
