@@ -4,10 +4,9 @@ from apps.accounts.models import MyUser
 from apps.manager.models import Manager
 from apps.accounts.decorators import manager_required
 from apps.customer.forms.forms import EditUser
-from apps.manager.forms import EditManagerProfile
+from apps.manager.forms.forms import *
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-
 
 
 # Create your views here.
@@ -16,6 +15,7 @@ from django.urls import reverse
 def manager_profile_view(request):
     manager = get_object_or_404(Manager, pk=request.user.id)
     return render(request, 'manager_profile.html', {'manager': manager, })
+
 
 @login_required
 @manager_required
