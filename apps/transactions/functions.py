@@ -60,6 +60,7 @@ def get_null_verified_transaction(employee):
 
     transactions.sort(key=lambda transaction: transaction.creation_time, reverse=True)
     transactions[0].checking_employee = employee
+    type(transactions[0])
     transactions[0].checking = True
     return transactions
 

@@ -36,7 +36,6 @@ def update_manager_profile(request):
     if request.method == 'POST':
         user_form = EditUser(request.POST, request.FILES)
         form = EditManagerProfile(request.POST)
-
         if user_form.is_valid() and form.is_valid():
             for attr in user_form.data:
                 if attr in user_form.fields and user_form.data[attr] != '':
