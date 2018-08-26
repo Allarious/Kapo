@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+from apps.transactions.models import *
+
 
 def index(request):
     if request.user.is_authenticated and request.user.is_customer:
@@ -23,3 +25,5 @@ def about_us_view(request):
 
 def policy_view(request):
     return render(request, 'policy.html', {})
+
+

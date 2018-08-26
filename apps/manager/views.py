@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from apps.accounts.models import MyUser
+from apps.customer.models import Customer
 from apps.manager.models import Manager
 from apps.accounts.decorators import manager_required
 from apps.customer.forms.forms import EditUser
@@ -8,8 +9,9 @@ from apps.manager.forms.forms import *
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+from apps.transactions.functions import *
 
-# Create your views here.
+
 @login_required
 @manager_required
 def manager_profile_view(request):
@@ -60,3 +62,50 @@ def update_manager_profile(request):
 
     return render(request, 'manager_edit.html',
                   {'user_form': user_form, 'form': form})
+
+
+@login_required
+@manager_required
+def manager_check_transaction_view(request):
+    manager = get_object_or_404(Manager, pk=request.user.id)
+    if request.POST.get('checked transaction'):
+        # TODO get transaction id and verified status
+        if 'status' == True:
+            pass
+        # TODO accept transaction and do the money work and change checking and checking emloyeee to  null
+        else:
+            pass
+        # TODO deny transaction and don't do any money work checking emloyeee to  null
+
+        return redirect('/manager/')
+
+    elif request.POST.get('Customer selected'):
+        # delete this customer
+        customer = Customer()
+        # TODO get customer from request
+        return manager_transaction_owner_view(request, customer)
+
+    else:
+
+        transactions = get_null_verified_transaction()
+
+        return render(request, 'manager_checking_transactions.html',
+                      {'manager': manager, 'transactions': transactions})
+
+
+@login_required
+@manager_required
+def manager_transaction_owner_view(request, customer):
+    manager = get_object_or_404(Manager, pk=request.user.id)
+    transactions = customer_all_transactions(customer)
+
+    return render(request, 'manager_customer_transactions.html',
+                  {'manager': manager, 'customer': customer, 'transactions': transactions})
+
+
+@login_required
+@manager_required
+def manager_all_system_transactions_view(request):
+    manager = get_object_or_404(Manager, pk=request.user.id)
+
+    pass
