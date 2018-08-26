@@ -1,5 +1,8 @@
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+
+from apps.accounts.forms.forms import UserForm, EmployeeSignUpForm
 from apps.accounts.models import MyUser
 from apps.customer.models import Customer
 from apps.manager.models import Manager
@@ -67,15 +70,36 @@ def update_manager_profile(request):
 @manager_required
 def manager_check_transaction_view(request):
     manager = get_object_or_404(Manager, pk=request.user.id)
+    transactions = get_null_verified_transactions()
+    # TODO this above just gave without checking status but not verified
+
     if request.method == 'POST':
+        # TODO check
         if request.POST.get('checked transaction'):
-            # TODO get transaction id and verified status
-            if 'status' == True:
-                pass
-            # TODO accept transaction and do the money work and change checking
-            else:
-                pass
-            # TODO deny transaction and don't do any money work and change checking
+            transaction = transactions.pop(id=request.POST.get('transaction id', default=None))
+            status = request.POST.get('transaction status', default=False)
+            if status == 'accepted':
+                # TODO how to know what kind of cost we have
+                manager.system_accounts.dollar_amount_account -= transaction.dollar_cost
+                manager.system_accounts.dollar_amount_account -= transaction.dollar_cost
+                manager.system_accounts.rial_amount_account -= transaction.rial_cost
+                employees_wage = 0
+                for employee in Employee.objects.all():
+                    employees_wage += employee.wage_per_month
+                if manager.system_accounts.rial_amount_account <= employees_wage:
+                    # TODO send notif be kossher
+                    pass
+                manager.system_accounts.save()
+
+                transaction.paid = True
+                transaction.verified = True
+
+            elif status == 'rejected':
+                transaction.paid = False
+                transaction.checking = False
+                transaction.verified = False
+            transaction.save()
+
 
         elif request.POST.get('Customer selected'):
             # delete this customer
@@ -83,7 +107,7 @@ def manager_check_transaction_view(request):
             # TODO get customer from request
             return manager_customer_view(request, customer)
 
-    transactions = get_null_verified_transaction()
+    # this will show manager not verified and not checked transactions
 
     return render(request, 'manager_checking_transactions.html',
                   {'manager': manager, 'transactions': transactions})
@@ -173,3 +197,37 @@ def manager_customers_list_view(request):
     customers_list = Customer.objects.all()
     return render(request, 'manager_customers_list.html',
                   {'manager': manager, 'customers': customers_list})
+
+
+@login_required
+@manager_required
+def manager_add_employee(request):
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, request.FILES)
+        form = EmployeeSignUpForm(request.POST)
+        if form.is_valid() and user_form.is_valid():
+            user = user_form.save()
+            username = request.POST['username']
+            password = request.POST['password']
+            user.set_password(user.password)
+            user.is_employee = True
+            user.save()
+            employee = form.save(commit=False)
+            employee.user = user
+            employee.save()
+            user = authenticate(username=username, password=password)
+            if user is not None and employee is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect(reverse('manager:index'))
+
+        else:
+
+            return render(request, 'SignUp2.html',
+                          {'user_form': user_form, 'form': form})
+
+    else:
+        user_form = UserForm()
+        form = EmployeeSignUpForm()
+    return render(request, 'SignUp2.html',
+                  {'user_form': user_form, 'form': form})

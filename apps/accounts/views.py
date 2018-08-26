@@ -1,7 +1,7 @@
 
 from django.urls import reverse
 
-from apps.accounts.forms.forms import SignUpForm, UserForm
+from apps.accounts.forms.forms import CustomerSignUpForm, UserForm
 
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, get_object_or_404
@@ -40,7 +40,7 @@ def register(request):
 def sign_up(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST, request.FILES)
-        form = SignUpForm(request.POST)
+        form = CustomerSignUpForm(request.POST)
         if form.is_valid() and user_form.is_valid():
             user = user_form.save()
             username = request.POST['username']
@@ -66,7 +66,7 @@ def sign_up(request):
 
     else:
         user_form = UserForm()
-        form = SignUpForm()
+        form = CustomerSignUpForm()
     return render(request, 'SignUp1.html',
                   {'user_form': user_form, 'form': form})
 

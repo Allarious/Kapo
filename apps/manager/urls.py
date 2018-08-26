@@ -16,6 +16,7 @@ urlpatterns = [
          name='manager_employee'),
     path('employees-list', manager_employees_list_view, name='manager_employees_list'),
     path('customers-list', manager_customers_list_view, name='manager_customers_list'),
+    path('add-employee', manager_add_employee, name='manager_add_employee'),
 ]
 
 # TODO bayad mogheyi ke tarakonesh barresish tamum mishe checke checkingesh false beshe/
