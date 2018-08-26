@@ -14,24 +14,24 @@ def customer_transactions_view(request):
     return render(request, 'customer_transactions.html', {'customer': customer, })
 
 
-@login_required
-@customer_required
-def customer_rial_inc_view(request):
-    customer = get_object_or_404(Customer, pk=request.user.id)
-    if request.method == 'POST' and request.POST.get("rial_inc"):
-        form = RialIncForm(request.POST)
-        if form.is_valid():
-            transaction = form.save(commit=False)
-            transaction.owner = customer
-            customer.rial_wallet += transaction.amount
-            customer.save()
-            transaction.paid = True
-            transaction.save()
-            return HttpResponseRedirect(reverse('customer:index'))
-    else:
-        form = RialIncForm()
-
-    return render(request, 'transactions.html', {'customer': customer, 'form': form})
+# @login_required
+# @customer_required
+# def customer_rial_inc_view(request):
+#     customer = get_object_or_404(Customer, pk=request.user.id)
+#     if request.method == 'POST' and request.POST.get("rial_inc"):
+#         form = RialIncForm(request.POST)
+#         if form.is_valid():
+#             transaction = form.save(commit=False)
+#             transaction.owner = customer
+#             customer.rial_wallet += transaction.amount
+#             customer.save()
+#             transaction.paid = True
+#             transaction.save()
+#             return HttpResponseRedirect(reverse('customer:index'))
+#     else:
+#         form = RialIncForm()
+#
+#     return render(request, 'transactions.html', {'customer': customer, 'form': form})
 
 
 # TODO update lahze yi maghdar e motanazer java script

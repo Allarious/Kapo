@@ -11,6 +11,6 @@ urlpatterns = [
     path('foreign-pay/', foreign_pay_transactions_view, name='foreign pay transactions'),
     path('domestic-pay/', domestic_pay_transactions_view, name='domestic pay transactions'),
     path('unknown-pay/', unknown_pay_transactions_view, name='unknown pay transactions'),
-    path('rial-inc/', customer_rial_inc_view, name='customer rial inc'),
+    # path('rial-inc/', customer_rial_inc_view, name='customer rial inc'),
     path('exchange/', customer_exchange_view, name="exchange"),
 ]
