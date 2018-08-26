@@ -184,6 +184,8 @@ class CurrencyConvertTransaction(AbstractTransaction):
 class ExamTransaction(AbstractTransaction):
     exam_title = models.CharField(max_length=30)
     dollar_cost = models.FloatField(default=0, validators=[MaxValueValidator(1000), MinValueValidator(1)])
+    #TODO euro cost bayad ezafe she
+    # euro_cost = models.FloatField(default=0, validators=[MaxValueValidator(1000), MinValueValidator(1)])
     site_url = models.URLField(null=True, blank=True)
     site_authentication = models.NullBooleanField(default=False)
     site_username = models.CharField(null=True, blank=True, max_length=50)

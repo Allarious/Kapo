@@ -13,6 +13,7 @@ urlpatterns = [
     path('dashboard/', customer_dashboard_view, name="dashboard"),
     path('dashboard/messages', message_dashboard_view, name='message dashboard'),
     path('dashboard/transactions', transaction_dashboard_view, name='transaction dashboard'),
+    path('dashboard/orders', order_dashboard_view, name='ored dashboard'),
     path('transactions/', include('apps.transactions.urls'), name='customer_transactions'),
 
 ]

@@ -123,8 +123,64 @@ def transaction_dashboard_view(request):
         tmp.append(transaction.verified)
         tmp.append(transaction.description)
         transactions_list.append(tmp)
-    return render(request, 'transaction_dashboard.html', {'transactions': transactions_list})
+        order = False
+    return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
+                                                          'order' : order})
 
+
+def order_dashboard_view(request):
+    customer = get_object_or_404(Customer, pk=request.user.id)
+    exam = ExamTransaction.objects.all().filter(owner=customer)
+    apply = ApplicationTuitionFeeTransaction.objects.all().filter(owner=customer)
+    foreign = ForeignPaymentTransaction.objects.all().filter(owner=customer)
+    domestic = DomesticPaymentTransaction.objects.all().filter(owner=customer)
+    unknown = UnknownPaymentTransaction.objects.all().filter(owner=customer)
+    transactions = []
+    transactions.extend(exam)
+    transactions.extend(apply)
+    transactions.extend(foreign)
+    transactions.extend(domestic)
+    transactions.extend(unknown)
+    transactions.sort(key=lambda transaction: transaction.creation_time)
+    transactions_list = []
+    for transaction in transactions:
+        tmp = []
+        if isinstance(transaction, ExamTransaction):
+            tmp.append('Exam')
+            tmp.append(str(transaction.dollar_cost) + '$')
+            transaction.description += "Exam title is: " + transaction.exam_title
+        elif isinstance(transaction, ApplicationTuitionFeeTransaction):
+            if transaction.fee_type== 'application fee':
+                tmp.append('Application Fee')
+            else:
+                tmp.append('Tuition Fee')
+            if transaction.dollar_cost > 0:
+                tmp.append(str(transaction.dollar_cost) + '$')
+            else:
+                tmp.append(str(transaction.euro_cost) + '€')
+            transaction.description += "University site url is: " + transaction.site_url
+        elif isinstance(transaction, ForeignPaymentTransaction):
+            tmp.append('Foreign Payment')
+            if transaction.dollar_cost > 0:
+                tmp.append(str(transaction.dollar_cost) + '$')
+            else:
+                tmp.append(str(transaction.euro_cost) + '€')
+            transaction.description += "Destination card number is:" + transaction.foreign_card_number
+        elif isinstance(transaction, DomesticPaymentTransaction):
+            tmp.append('Domestic Payment')
+            tmp.append(str(transaction.rial_cost) + 'ريال')
+            transaction.description += "Destination card number is:" + transaction.domestic_card_number
+        else:
+            tmp.append('Unknown Payment')
+            tmp.append(str(transaction.rial_cost) + 'ريال')
+            transaction.description += "Destination card number is:" + transaction.domestic_card_number
+        tmp.append(transaction.creation_time.date())
+        tmp.append(transaction.creation_time.time())
+        tmp.append(transaction.verified)
+        tmp.append(transaction.description)
+        transactions_list.append(tmp)
+    return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
+                                                          'order': True})
 
 # def customer_dashboard_view(request):
 #     customer = get_object_or_404(Customer, pk=request.user.id)
