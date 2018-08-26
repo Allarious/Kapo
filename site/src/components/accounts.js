@@ -1,7 +1,9 @@
 import React from 'react';
 
 import classes from './accounts/accounts.css';
-import Acc from './accounts/acc'
+import Acc from './accounts/acc';
+import Inp from './inputs/input';
+import Button from './buttons/authbutton';
 
 const Accounts = (props) => {
 
@@ -68,6 +70,18 @@ const Accounts = (props) => {
             {account.map((event) => {
                 return(<Acc key={event.id} image={event.image} role={event.role} name={event.name}/>);
             })}
+            <div className={classes.add}>
+                <div className={classes.circle}>
+                    <div className={classes["ver-line"]}></div>
+                    <div className={classes["hor-line"]}></div>
+                </div>
+                <div className={classes.modal}>
+                    <Inp type="text" holder="Username"/>
+                    <Inp type="text" holder="E-mail"/>
+                    <Inp type="password" holder="Password"/>
+                    <Button>Add</Button>
+                </div>
+            </div>
         </div>);
 };
 

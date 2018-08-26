@@ -7,7 +7,7 @@
     margin-bottom: 10px;
     overflow: hidden;
     transition: 0.4s;
-    box-shadow: 5px 5px 10px #aaaaaa;
+    box-shadow: 2px 2px 6px #aaaaaa;
 
 }
 .container:hover{

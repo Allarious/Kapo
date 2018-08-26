@@ -1,0 +1,105 @@
+.container{
+    width: 90%;
+    border-radius: 10px;
+    border: 1px solid #97C4C4;
+    margin: 20px auto;
+    overflow: auto;
+    padding: 10px;
+}
+.header{
+    padding: 5px;
+    color: #468189;
+}
+.inner-container{
+    margin: 10px auto;
+}
+.rial{
+    width: 70px;
+    height: 70px;
+    background-color: #97C4C4;
+    float: left;
+    margin-left: 8px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-image: url("../../images/iran-rial.svg");
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.rial:hover{
+    background-color: #90C0B0;
+}
+.rial-active{
+    width: 70px;
+    height: 70px;
+    background-color: #90C0B0;
+    float: left;
+    margin-left: 8px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-image: url("../../images/iran-rial.svg");
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    cursor: pointer;
+}
+.dollar{
+    width: 70px;
+    height: 70px;
+    background-color: #97C4C4;
+    float: left;
+    background-image: url("../../images/dollar-symbol.svg");
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    margin-right: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.dollar:hover{
+    background-color: #90C0B0;
+}
+.dollar-active{
+    width: 70px;
+    height: 70px;
+    background-color: #90C0B0;
+    float: left;
+    background-image: url("../../images/dollar-symbol.svg");
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    margin-right: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.euro{
+    width: 70px;
+    height: 70px;
+    background-color: #97C4C4;
+    float: left;
+    border-radius: 50%;
+    background-image: url("../../images/euro-currency-symbol.svg");
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.euro:hover{
+    background-color: #90C0B0;
+}
+.euro-active{
+    width: 70px;
+    height: 70px;
+    background-color: #90C0B0;
+    float: left;
+    border-radius: 50%;
+    background-image: url("../../images/euro-currency-symbol.svg");
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    cursor: pointer;
+}

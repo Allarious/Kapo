@@ -15,11 +15,13 @@ import Conv from '../components/convert';
 import Error from '../components/error'
 import Accounts from '../components/accounts';
 import Dashboard from '../components/dashboard';
+import Order from '../components/order';
+import FillExam from '../components/order/fillexam';
 
 class App extends Component {
 
     state = {
-      visiblePage: 'Dashboard',
+      visiblePage: 'Accounts',
     };
 
     generateContent = () => {
@@ -56,6 +58,12 @@ class App extends Component {
         } else if(this.state.visiblePage === 'Dashboard')
         {
             return <Dashboard/>;
+        } else if(this.state.visiblePage === 'Order')
+        {
+            return <Order clicked={this.changePage}/>;
+        } else if(this.state.visiblePage === 'Fill Exam')
+        {
+            return <FillExam/>;
         } else {
             return <Error clicked={this.changePage}/>;
         }

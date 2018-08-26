@@ -1,0 +1,25 @@
+.container{
+    width: 300px;
+    border-radius: 30px;
+    background-color: #F9F9F9;
+    box-shadow: #aaaaaa 3px 3px 8px;
+    margin: 50px auto;
+    padding: 10px 0;
+}
+.txtareadiv{
+    width: 90%;
+    height: 100px;
+    border-radius: 20px;
+    border: 1px solid #97C4C4;
+    overflow: hidden;
+    margin: 20px auto;
+}
+.txtarea{
+    height: 100%;
+    width: 100%;
+    border: none;
+    padding: 8px;
+}
+.txtarea:focus{
+    outline: none;
+}

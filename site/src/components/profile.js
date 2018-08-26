@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import classes from './profile/profile.css';
 
@@ -7,9 +7,9 @@ import Att from './profile/profilecontent';
 // import Tablecomponents from './table/table';
 import WalletPart from "./profile/walletpart";
 
-const Profile = (props) => {
+class Profile extends Component{
 
-    const profile =[
+    profile =[
         {att : 'First Name',
         attCont: 'Alireza',
         id: 'a1'},
@@ -37,10 +37,11 @@ const Profile = (props) => {
         {att : 'Country',
             attCont: 'Iran',
             id: 'a10'},
+
     ];
 
 
-    const wallet = [
+    wallet = [
         {
             money: "Rial",
             amount: "153000R",
@@ -58,35 +59,37 @@ const Profile = (props) => {
         },
     ];
 
-
-    return(
-        <div className={classes.container}>
-            <div className={classes.title}>Profile Management</div>
-            <div className={classes["profile-header"]}>
-                <div className={classes["profile-pic"]}>
+    render() {
+        return (
+            <div className={classes.container}>
+                <div className={classes.title}>Profile Management</div>
+                <div className={classes["profile-header"]}>
+                    <div className={classes["profile-pic"]}>
+                    </div>
                 </div>
-            </div>
-            <div className={classes.wallet}>
-                {wallet.map((event) => {
-                    return(
-                        <WalletPart id={event.id} moneyType={event.money} amount={event.amount} clicked={props.clicked}/>
-                    );
-                })}
-            </div>
-            <div className={classes["profile-content"]}>
+                <div className={classes.wallet}>
+                    {this.wallet.map((event) => {
+                        return (
+                            <WalletPart id={event.id} moneyType={event.money} amount={event.amount}
+                                        clicked={this.props.clicked}/>
+                        );
+                    })}
+                </div>
+                <div className={classes["profile-content"]}>
                     <div>
-                        {profile.map((event) => {
-                            return(
+                        {this.profile.map((event) => {
+                            return (
                                 <Att id={event.id} attname={event.att} attcont={event.attCont}/>
                             );
                         })}
                     </div>
+                </div>
+                <div onClick={() => this.props.clicked('EditProfile')}>
+                    <Button>Edit Profile</Button>
+                </div>
             </div>
-            <div onClick={() => props.clicked('EditProfile')}>
-            <Button>Edit Profile</Button>
-            </div>
-        </div>
-    );
+        );
+    }
 };
 
 export default Profile;
