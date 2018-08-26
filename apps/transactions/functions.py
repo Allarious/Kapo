@@ -65,6 +65,33 @@ def get_null_verified_transaction(employee):
     return transactions
 
 
+def get_null_verified_transactions():
+    transactions = []
+    # Exam transactions:
+    exams = ExamTransaction.objects.filter(verified=None)
+    # Application and tuition fees transactions:
+    fees = ApplicationTuitionFeeTransaction.objects.filter( verified=None)
+    # Foregin payments transactions:
+    foreign_payments = ForeignPaymentTransaction.objects.filter( verified=None)
+    # Domestic transactions:
+    domestic_payments = DomesticPaymentTransaction.objects.filter( verified=None)
+    #  Unknown payments transactions:
+    unknown_payments = UnknownPaymentTransaction.objects.filter(verified=None)
+
+    transactions.extend(exams)
+    transactions.extend(fees)
+    transactions.extend(foreign_payments)
+    transactions.extend(domestic_payments)
+    transactions.extend(unknown_payments)
+
+    for transaction in transactions:
+        transaction.is_one_day_passed()
+        if transaction.verified is False:
+            transactions.pop(transaction)
+
+    return transactions
+
+
 def get_employee_transactions(employee):
     transactions = []
     # Exam transactions:
