@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+
+from apps.core.models import SystemAccounts
 from apps.customer.forms.forms import EditUser, SendMessage
 from apps.accounts.models import *
 from apps.customer.forms.forms import EditUser
@@ -29,30 +31,55 @@ def index(request):
 @employee_required
 def employee_check_transaction_view(request):
     employee = get_object_or_404(Employee, pk=request.user.id)
+    transactions = get_employee_transactions(employee)
+
     if request.method == 'POST':
-
+        # TODO check
+        system_account = SystemAccounts.objects.all()[0]
         if request.POST.get('checked transaction'):
-            # TODO get transaction id and verified status
-            if 'status' == True:
-                pass
-            # TODO accept transaction and do the money work and change checking and checking employeee to  null
-            else:
-                pass
-            # TODO deny transaction and don't do any money work checking employeee to  null
+            transaction = transactions.pop(id=request.POST.get('transaction id', default=None))
+            status = request.POST.get('transaction status', default=False)
+            if status == 'accepted':
+                # TODO how to know what kind of cost we have
+                currency = transaction.currency_type
+                if currency == 'rial':
+                    system_account.rial_amount_account -= transaction.dollar_cost
+                elif currency == 'dollar':
+                    system_account.dollar_amount_account -= transaction.dollar_cost
+                elif currency == 'euro':
+                    system_account.euro_amount_account -= transaction.rial_cost
 
+                employees_wage = 0
+                for employee in Employee.objects.all():
+                    employees_wage += employee.wage_per_month
+                if system_account.rial_amount_account <= employees_wage:
+                    # TODO send notif be kossher
+                    pass
+                system_account.save()
 
-        elif request.POST.get('New Transaction'):
-            transactions = get_null_verified_transaction(employee)
+                transaction.paid = True
+                transaction.verified = True
+                transaction.checking = False
 
-            return redirect('employee:employee_checking_transactions')
+            elif status == 'rejected':
+                transaction.paid = False
+                transaction.checking = False
+                transaction.verified = False
+            transaction.save()
+
 
         elif request.POST.get('Customer selected'):
             # delete this customer
-            customer = Customer()
-            # TODO get customer from request
+            customer = Customer.objects.filter(username=request.POST.get('username'))
             return employee_transaction_owner_view(request, customer)
 
-    transactions = get_employee_transactions(employee)
+        elif request.POST.get('give me a fucking transaction'):
+            transaction = get_null_verified_transactions()[0]
+            transaction.checking_employee = employee
+            transaction.checking = True
+            return employee_check_transaction_view(request)
+
+    # this will show manager not verified and not checked transactions
 
     return render(request, 'employee_checking_transactions.html',
                   {'employee': employee, 'transactions': transactions})
