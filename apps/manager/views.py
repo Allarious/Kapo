@@ -95,17 +95,13 @@ def manager_check_transaction_view(request):
 def manager_customer_view(request, customer):
     manager = get_object_or_404(Manager, pk=request.user.id)
     if request.method == 'POST':
-        if request.POST.get('customer change submitted'):
-            # TODO get customer changed as customer i dont know how and then delete the below line
-            changed_customer = Customer()
-            changed_customer.save()
-            return manager_customers_list_view(request)
-
-        elif request.POST.get('delete this shit customer'):
-            # TODO get customer changed as customer i dont know how and then delete the below line
-            shit_customer = Customer()
+        if request.POST.get('delete this shit customer'):
+            # TODO check
+            shit_customer = Customer.objects.filter(username=request.username)
             Customer.objects.all().delete(shit_customer)
             return manager_customers_list_view(request)
+        elif request.POST.get('send_message'):
+            return HttpResponseRedirect(reverse('manager:send_message'))
 
     transactions = customer_all_transactions(customer)
 
@@ -166,10 +162,14 @@ def manager_customers_list_view(request):
     manager = get_object_or_404(Manager, pk=request.user.id)
 
     if request.method == 'POST':
-        if request.POST.get('customer selected'):
+        if request.POST.get('delete this shit customer'):
             # TODO delete bellow line and get customer from ui
-            customer = Customer()
-            return manager_customer_view(request, customer)
+            Customer.objects.all().delete(username=request.username)
+            request.success = True
+        elif request.POST.get('opeen profle of customer'):
+
+            return manager_customer_view(request,Customer.objects.filter(username=request.username))
+
     customers_list = Customer.objects.all()
     return render(request, 'manager_customers_list.html',
                   {'manager': manager, 'customers': customers_list})
