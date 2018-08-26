@@ -92,8 +92,21 @@ def manager_check_transaction_view(request):
 
 @login_required
 @manager_required
-def manager_transaction_owner_view(request, customer):
+def manager_customer_view(request, customer):
     manager = get_object_or_404(Manager, pk=request.user.id)
+    if request.method == 'POST':
+        if request.POST.get('customer change submitted'):
+            # TODO get customer changed as customer i dont know how and then delete the below line
+            changed_customer = Customer()
+            changed_customer.save()
+            return manager_customers_list_view(request)
+
+        elif request.POST.get('delete this shit customer'):
+            # TODO get customer changed as customer i dont know how and then delete the below line
+            shit_customer = Customer()
+            Customer.objects.all().delete(shit_customer)
+            return manager_customers_list_view(request)
+
     transactions = customer_all_transactions(customer)
 
     return render(request, 'manager_customer_transactions.html',
@@ -111,9 +124,52 @@ def manager_all_system_transactions_view(request):
 
 @login_required
 @manager_required
-def manager_employee_checked_transactions_view(request, employee):
+def manager_employee_view(request, employee):
     manager = get_object_or_404(Manager, pk=request.user.id)
-    # TODO employee should be given by employee's list of manager
+
+    if request.method == 'POST':
+        if request.POST.get('employee change submitted'):
+            # TODO get employee changed as employee i dont know how and then delete the below line
+            changed_employee = Employee()
+            changed_employee.save()
+            return manager_employees_list_view(request)
+
+        elif request.POST.get('delete this shit employee'):
+            # TODO get employee changed as employee i dont know how and then delete the below line
+            shit_employee = Employee()
+            Employee.objects.all().delete(shit_employee)
+            return manager_employees_list_view(request)
+
     transactions = get_all_employee_checked_checking_transaction(employee)
-    return render(request, 'manager_all_system_transactions.html',
-                  {'manager': manager, 'transactions': transactions})
+    return render(request, 'manager_employee_checked_ing_transactions.html',
+                  {'manager': manager, 'employee': employee, 'transactions': transactions})
+
+
+@login_required
+@manager_required
+def manager_employees_list_view(request):
+    manager = get_object_or_404(Manager, pk=request.user.id)
+
+    if request.method == 'POST':
+        if request.POST.get('employee selected'):
+            # TODO delete bellow line and get employee from ui
+            employee = Employee()
+            return manager_employee_view(request, employee)
+    employees_list = Employee.objects.all()
+    return render(request, 'manager_employees_list.html',
+                  {'manager': manager, 'employees': employees_list})
+
+
+@login_required
+@manager_required
+def manager_customers_list_view(request):
+    manager = get_object_or_404(Manager, pk=request.user.id)
+
+    if request.method == 'POST':
+        if request.POST.get('customer selected'):
+            # TODO delete bellow line and get customer from ui
+            customer = Customer()
+            return manager_customer_view(request, customer)
+    customers_list = Customer.objects.all()
+    return render(request, 'manager_customers_list.html',
+                  {'manager': manager, 'customers': customers_list})

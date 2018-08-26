@@ -7,3 +7,10 @@ class ConfigurationAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Configuration, ConfigurationAdmin)
+
+
+class SystemAccountsAdmin(admin.ModelAdmin):
+    list_display = ('rial_amount_account', 'dollar_amount_account', 'euro_amount_account')
+
+
+admin.site.register(SystemAccounts, SystemAccountsAdmin)
