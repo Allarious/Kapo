@@ -1,0 +1,290 @@
+class AccountsEmployee(models.Model):
+    user = models.ForeignKey('AccountsMyuser', models.DO_NOTHING, primary_key=True)
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
+    gender = models.CharField(max_length=10)
+    day = models.IntegerField()
+    month = models.IntegerField()
+    year = models.IntegerField()
+    national_id = models.CharField(max_length=10)
+    city = models.CharField(max_length=10)
+    address = models.CharField(max_length=100)
+    phone = models.CharField(max_length=12)
+
+    class Meta:
+        managed = False
+        db_table = 'accounts_employee'
+
+
+class AccountsManager(models.Model):
+    user = models.ForeignKey('AccountsMyuser', models.DO_NOTHING, primary_key=True)
+
+    class Meta:
+        managed = False
+        db_table = 'accounts_manager'
+
+
+class AccountsMyuser(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    password = models.CharField(max_length=128)
+    last_login = models.DateTimeField(blank=True, null=True)
+    is_superuser = models.BooleanField()
+    username = models.CharField(unique=True, max_length=150)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=150)
+    email = models.CharField(max_length=254)
+    is_staff = models.BooleanField()
+    is_active = models.BooleanField()
+    date_joined = models.DateTimeField()
+    is_manager = models.BooleanField()
+    is_customer = models.BooleanField()
+    is_employee = models.BooleanField()
+
+    class Meta:
+        managed = False
+        db_table = 'accounts_myuser'
+
+
+class AccountsMyuserGroups(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    myuser = models.ForeignKey(AccountsMyuser, models.DO_NOTHING)
+    group = models.ForeignKey('AuthGroup', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'accounts_myuser_groups'
+        unique_together = (('myuser', 'group'),)
+
+
+class AccountsMyuserUserPermissions(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    myuser = models.ForeignKey(AccountsMyuser, models.DO_NOTHING)
+    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'accounts_myuser_user_permissions'
+        unique_together = (('myuser', 'permission'),)
+
+
+class AuthGroup(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    name = models.CharField(unique=True, max_length=80)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group'
+
+
+class AuthGroupPermissions(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group_permissions'
+        unique_together = (('group', 'permission'),)
+
+
+class AuthPermission(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
+    codename = models.CharField(max_length=100)
+    name = models.CharField(max_length=255)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_permission'
+        unique_together = (('content_type', 'codename'),)
+
+
+class CoreApplicationtuitionfeetransaction(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    creation_time = models.DateTimeField()
+    description = models.TextField(blank=True, null=True)
+    paid = models.BooleanField()
+    verified = models.BooleanField()
+    fee_type = models.CharField(max_length=50)
+    dollar_cost = models.IntegerField(blank=True, null=True)
+    euro_cost = models.IntegerField(blank=True, null=True)
+    site_url = models.CharField(max_length=200, blank=True, null=True)
+    site_authentication = models.BooleanField()
+    site_username = models.CharField(max_length=50, blank=True, null=True)
+    site_password = models.CharField(max_length=50, blank=True, null=True)
+    owner = models.ForeignKey('CustomerCustomer', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'core_applicationtuitionfeetransaction'
+
+
+class CoreConfiguration(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    key = models.CharField(max_length=10)
+    value = models.CharField(max_length=10)
+
+    class Meta:
+        managed = False
+        db_table = 'core_configuration'
+
+
+class CoreDomesticpaymenttransaction(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    creation_time = models.DateTimeField()
+    description = models.TextField(blank=True, null=True)
+    paid = models.BooleanField()
+    verified = models.BooleanField()
+    rial_cost = models.IntegerField()
+    domestic_card_number = models.CharField(max_length=16)
+    owner = models.ForeignKey('CustomerCustomer', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'core_domesticpaymenttransaction'
+
+
+class CoreExamtransaction(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    creation_time = models.DateTimeField()
+    description = models.TextField(blank=True, null=True)
+    paid = models.BooleanField()
+    verified = models.BooleanField()
+    exam_title = models.CharField(max_length=30)
+    dollar_cost = models.IntegerField()
+    site_url = models.CharField(max_length=200, blank=True, null=True)
+    site_authentication = models.BooleanField()
+    site_username = models.CharField(max_length=50, blank=True, null=True)
+    site_password = models.CharField(max_length=50, blank=True, null=True)
+    owner = models.ForeignKey('CustomerCustomer', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'core_examtransaction'
+
+
+class CoreForeignpaymenttransaction(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    creation_time = models.DateTimeField()
+    description = models.TextField(blank=True, null=True)
+    paid = models.BooleanField()
+    verified = models.BooleanField()
+    dollar_cost = models.IntegerField(blank=True, null=True)
+    euro_cost = models.IntegerField(blank=True, null=True)
+    foreign_card_number = models.CharField(max_length=19)
+    owner = models.ForeignKey('CustomerCustomer', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'core_foreignpaymenttransaction'
+
+
+class CoreUnknownpaymenttransaction(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    creation_time = models.DateTimeField()
+    description = models.TextField(blank=True, null=True)
+    paid = models.BooleanField()
+    verified = models.BooleanField()
+    rial_cost = models.IntegerField()
+    domestic_card_number = models.CharField(max_length=16)
+    owner = models.ForeignKey('CustomerCustomer', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'core_unknownpaymenttransaction'
+
+
+class CustomerCustomer(models.Model):
+    user = models.ForeignKey(AccountsMyuser, models.DO_NOTHING, primary_key=True)
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
+    gender = models.CharField(max_length=10)
+    national_id = models.CharField(max_length=10)
+    city = models.CharField(max_length=10)
+    address = models.CharField(max_length=100)
+    phone = models.CharField(unique=True, max_length=12)
+    domestic_bank_account_id = models.CharField(unique=True, max_length=16, blank=True, null=True)
+    rial_wallet = models.IntegerField()
+    dollar_wallet = models.IntegerField()
+    euro_wallet = models.IntegerField()
+    country = models.CharField(max_length=20)
+    birthday_date = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'customer_customer'
+
+
+class DjangoAdminLog(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    object_id = models.TextField(blank=True, null=True)
+    object_repr = models.CharField(max_length=200)
+    action_flag = models.PositiveSmallIntegerField()
+    change_message = models.TextField()
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
+    user = models.ForeignKey(AccountsMyuser, models.DO_NOTHING)
+    action_time = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_admin_log'
+
+
+class DjangoContentType(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    app_label = models.CharField(max_length=100)
+    model = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'django_content_type'
+        unique_together = (('app_label', 'model'),)
+
+
+class DjangoMigrations(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    app = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    applied = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_migrations'
+
+
+class DjangoSession(models.Model):
+    session_key = models.CharField(primary_key=True, max_length=40)
+    session_data = models.TextField()
+    expire_date = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_session'
+
+
+class NotifyNotification(models.Model):
+    id = models.IntegerField(primary_key=True)  # AutoField?
+    actor_object_id = models.PositiveIntegerField(blank=True, null=True)
+    actor_text = models.CharField(max_length=50, blank=True, null=True)
+    actor_url_text = models.CharField(max_length=200, blank=True, null=True)
+    verb = models.CharField(max_length=50)
+    description = models.CharField(max_length=255, blank=True, null=True)
+    nf_type = models.CharField(max_length=20)
+    target_object_id = models.PositiveIntegerField(blank=True, null=True)
+    target_text = models.CharField(max_length=50, blank=True, null=True)
+    obj_object_id = models.PositiveIntegerField(blank=True, null=True)
+    obj_text = models.CharField(max_length=50, blank=True, null=True)
+    obj_url_text = models.CharField(max_length=200, blank=True, null=True)
+    extra = models.TextField(blank=True, null=True)
+    created = models.DateTimeField()
+    read = models.BooleanField()
+    deleted = models.BooleanField()
+    actor_content_type = models.ForeignKey(DjangoContentType, models.DO_NOTHING, blank=True, null=True)
+    obj_content_type = models.ForeignKey(DjangoContentType, models.DO_NOTHING, blank=True, null=True)
+    recipient = models.ForeignKey(AccountsMyuser, models.DO_NOTHING)
+    target_content_type = models.ForeignKey(DjangoContentType, models.DO_NOTHING, blank=True, null=True)
+    target_url_text = models.CharField(max_length=200, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'notify_notification'
