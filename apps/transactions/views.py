@@ -1,8 +1,11 @@
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives, EmailMessage
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.template.loader import render_to_string
 from django.urls import reverse
+from django.utils.html import strip_tags
+
 from apps.core.models import Configuration
 from apps.manager.models import Manager
 from tahlil import settings
@@ -313,7 +316,7 @@ def unknown_pay_transactions_view(request):
             unknown.rial_wallet += pay.rial_cost
             my_user.save()
             unknown.save()
-            unknown_transaction_email(request, customer, unknown)
+            unknown_transaction_email(customer, unknown)
             noification = Notification()
             noification.owner = customer.user
             noification.type = 'order'
@@ -398,14 +401,13 @@ def manager_exchange_view(request):
                                                  'is_manager': True})
 
 
-def unknown_transaction_email(request, old_customer, new_customer):
+def unknown_transaction_email(old_customer, new_customer):
     subject = 'Congrats, you are added to Kapo!'
     message = 'Your friend ' + str(old_customer.first_name) + ' ' + str(
-        old_customer.last_name) + ' has sent u money in our syste.\nFeel free to join and collect it.\n details:\n username : ' + str(
+        old_customer.last_name) + ' has sent u money in our system.\nFeel free to join and collect it.\nDetails:\nusername : ' + str(
         new_customer.user.username) + '\npassword: 1234\nKapo.com'
-    recipient_list = [str(new_customer.user.email)]
-
-    email_from = settings.EMAIL_HOST_USER
-    send_mail(subject, message, email_from, recipient_list)
-    # if redirect needed
-    # return redirect('redirect to a new page')
+    #
+    from_email = 'webelopertest@gmail.com'
+    to = new_customer.user.email
+    msg = EmailMessage(subject, message, from_email, [to])
+    msg.send()

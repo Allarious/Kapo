@@ -28,7 +28,7 @@ AUTH_USER_MODEL = "accounts.MyUser"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -133,6 +133,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'kapokapo686@gmail.com'
-EMAIL_HOST_PASSWORD = 'Kapo123456'
+EMAIL_HOST_USER = 'webelopertest@gmail.com'
+EMAIL_HOST_PASSWORD = 'amin12345'
 EMAIL_PORT = 587
+
