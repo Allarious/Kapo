@@ -50,7 +50,7 @@ class DomesticPaymentTransactionForm(forms.ModelForm):
 class UnknownPaymentTransactionForm(forms.ModelForm):
     class Meta:
         model = UnknownPaymentTransaction
-        fields = ['domestic_card_number', 'rial_cost', 'description']
+        fields = ['domestic_card_number', 'rial_cost', 'description', 'email']
 
 class Exchange2Form(forms.Form):
     dollar_amount = forms.FloatField(validators=[MaxValueValidator(1000), MinValueValidator(1)], required=False)

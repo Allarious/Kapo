@@ -2030,7 +2030,7 @@ html {
             </div>
             <div class="order__container__IHv22">
                 {% for exam in exams %}
-                    <a href="{% url 'customer:transactions:exam transactions' 'title' %}?exam= {{ exam }}"><div class="exam__container__1nfNm">
+                    <a href="{% url 'customer:transactions:exam transactions' %}?exam= {{ exam }}"><div class="exam__container__1nfNm">
                     <div class="exam__header__2YBu9">{{ exam.exam_title}}</div>
                     <div class="exam__image__2PBPD" style="background-image: url({{ exam.image_url }});"></div>
                 </div></a>

@@ -1565,14 +1565,23 @@ html {
     width: 16.75%;
     line-height: 75px;
 }
-.transaction__right__7uyD4{
+.transaction__unknown__7uyD4{
     float: left;
     border-left: 1px solid #468189;
     border-bottom: 1px solid #468189;
     width: 16.5%;
     line-height: 75px;
-    color: lightgreen;
+    color: black;
 }
+.transaction__wrong__7uyD4{
+    float: left;
+    border-left: 1px solid #468189;
+    border-bottom: 1px solid #468189;
+    width: 16.5%;
+    line-height: 75px;
+    color: red;
+}
+
 .transaction__wrong__7uyD4{
     float: left;
     border-left: 1px solid #468189;
@@ -1720,7 +1729,12 @@ html {
                                 <div class="transaction__middle__2ocXa">{{ transaction.6 }}</div>
                                 <div class="transaction__middle__2ocXa">{{ transaction.2 }}</div>
                                 <div class="transaction__middle__2ocXa">{{ transaction.3 }}</div>
-                                <div class="transaction__right__7uyD4">{% if transaction.4 %}
+                                {% if transaction.4 == 'true' %}
+                                    <div class="transaction__right__7uyD4">accepted
+                                    {% elif transaction.4 == 'false' %}
+                                    <div class="transaction__wrong__7uyD4">rejected
+                                    {% else %}
+                                    <div class="transaction__unknown__7uyD4">unknown
                                 {% endif %}</div>
                                 <div class="transaction__break__195wa"></div>
                                 <div class="transaction__more-info__1Y1nW">{{ transaction.5 }}</div>

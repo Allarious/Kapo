@@ -203,7 +203,7 @@ def foreign_pay_transactions_view(request):
                 if customer.dollar_wallet < cost:
                     form.add_error('dollar_cost',
                                    'You need {} more Dollars!'.format(cost - customer.dollar_wallet))
-                    return render(request, 'foreign_pay_transaction.html',
+                    return render(request, 'foreign_payment_order.html',
                                   {'customer': customer, 'form': form, 'wage': wage,
                                    'dollar_rate': dollar_rate,
                                    'euro_rate': euro_rate})
@@ -217,7 +217,7 @@ def foreign_pay_transactions_view(request):
                 if customer.euro_wallet < cost:
                     form.add_error('euro_cost',
                                    'You need {} more Euros!'.format(cost - customer.euro_wallet))
-                    return render(request, 'foreign_pay_transaction.html',
+                    return render(request, 'foreign_payment_order.html',
                                   {'customer': customer, 'form': form, 'wage': wage,
                                    'dollar_rate': dollar_rate,
                                    'euro_rate': euro_rate})
@@ -225,17 +225,22 @@ def foreign_pay_transactions_view(request):
                 pay.save()
 
             else:
+                print(pay.dollar_cost, pay.euro_cost)
                 form.add_error('dollar_cost', 'sth went wrong!')
-                return render(request, 'foreign_pay_transaction.html',
+                return render(request, 'foreign_payment_order.html',
                               {'customer': customer, 'form': form, 'wage': wage,
                                'dollar_rate': dollar_rate,
                                'euro_rate': euro_rate})
 
-            return redirect('/customer/')
+            noification = Notification()
+            noification.owner = customer.user
+            noification.type = 'order'
+            noification.save()
+            return redirect(reverse('customer:index'))
     else:
         form = ForeignPaymentTransactionForm()
 
-    return render(request, 'foreign_pay_transaction.html',
+    return render(request, 'foreign_payment_order.html',
                   {'customer': customer, 'form': form, 'wage': wage, 'dollar_rate': dollar_rate,
                    'euro_rate': euro_rate})
 
@@ -256,14 +261,18 @@ def domestic_pay_transactions_view(request):
             if customer.rial_wallet < cost:
                 form.add_error('rial_cost',
                                'You need {} more Rials!'.format(cost - customer.dollar_wallet))
-                return render(request, 'domestic_pay_transaction.html',
+                return render(request, 'domestic_payment.html',
                               {'customer': customer, 'wage': wage, 'form': form})
             pay.save()
-            return redirect('/customer/')
+            noification = Notification()
+            noification.owner = customer.user
+            noification.type = 'order'
+            noification.save()
+            return redirect(reverse('customer:index'))
     else:
         form = DomesticPaymentTransactionForm()
 
-    return render(request, 'domestic_pay_transaction.html',
+    return render(request, 'domestic_payment.html',
                   {'customer': customer, 'wage': wage, 'form': form})
 
 
@@ -284,17 +293,33 @@ def unknown_pay_transactions_view(request):
             if customer.rial_wallet < cost:
                 form.add_error('rial_cost',
                                'You need {} more Rials!'.format(cost - customer.dollar_wallet))
-                return render(request, 'unknown_pay_transaction.html',
+                return render(request, 'unknown_payment_order.html',
                               {'customer': customer, 'wage': wage, 'form': form})
             pay.save()
 
             # TODO Reza add new customer if we dont have the user
+            my_user = MyUser()
+            unknown = Customer()
+            unknown.user = my_user
+            unknown.user.username = 'user' + MyUser.objects.all().count().__str__()
+            my_user.set_password('1234')
+            my_user.is_customer = True
+            unknown.user.email = form.cleaned_data['email']
+            unknown.first_name = ''
+            unknown.last_name = ''
+            unknown.rial_wallet += pay.rial_cost
+            my_user.save()
+            unknown.save()
 
-            return redirect('/customer/')
+            noification = Notification()
+            noification.owner = customer.user
+            noification.type = 'order'
+            noification.save()
+            return redirect(reverse('customer:index'))
     else:
         form = UnknownPaymentTransactionForm()
 
-    return render(request, 'unknown_pay_transaction.html',
+    return render(request, 'unknown_payment_order.html',
                   {'customer': customer, 'wage': wage, 'form': form})
 
 

@@ -243,6 +243,7 @@ class DomesticPaymentTransaction(AbstractTransaction):
 class UnknownPaymentTransaction(AbstractTransaction):
     rial_cost = models.FloatField(default=0, validators=[MaxValueValidator(30000000), MinValueValidator(10000)])
     domestic_card_number = models.CharField(max_length=16)
+    email = models.EmailField(default='hazrat@gmail.com')
 
     def __str__(self):
         return 'Unknown payment' + ' ' + str(self.id)

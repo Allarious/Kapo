@@ -104,7 +104,7 @@ def transaction_dashboard_view(request):
     transactions = []
     transactions.extend(rial)
     transactions.extend(exchange)
-    transactions.sort(key=lambda transaction: transaction.creation_time)
+    transactions.sort(key=lambda transaction: transaction.creation_time, reverse=True)
     transactions_list = []
     for transaction in transactions:
         tmp = []
@@ -119,8 +119,14 @@ def transaction_dashboard_view(request):
             tmp.append(str(transaction.amount) + '€')
         tmp.append(transaction.creation_time.date())
         tmp.append(transaction.creation_time.time())
-        tmp.append(transaction.verified)
+        if transaction.verified == None:
+            tmp.append('none')
+        elif transaction.verified:
+            tmp.append('true')
+        else:
+            tmp.append('false')
         tmp.append(transaction.description)
+        tmp.append(customer.user.username)
         transactions_list.append(tmp)
         order = False
     return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
@@ -140,7 +146,7 @@ def order_dashboard_view(request):
     transactions.extend(foreign)
     transactions.extend(domestic)
     transactions.extend(unknown)
-    transactions.sort(key=lambda transaction: transaction.creation_time)
+    transactions.sort(key=lambda transaction: transaction.creation_time, reverse=True)
     transactions_list = []
     for transaction in transactions:
         tmp = []
@@ -175,7 +181,12 @@ def order_dashboard_view(request):
             transaction.description += "Destination card number is:" + transaction.domestic_card_number
         tmp.append(transaction.creation_time.date())
         tmp.append(transaction.creation_time.time())
-        tmp.append(transaction.verified)
+        if transaction.verified == None:
+            tmp.append('none')
+        elif transaction.verified:
+            tmp.append('true')
+        else:
+            tmp.append('false')
         tmp.append(transaction.description)
         tmp.append(customer.user.username)
         transactions_list.append(tmp)
