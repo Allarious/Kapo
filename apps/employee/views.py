@@ -62,13 +62,13 @@ def employee_check_transaction_view(request):
                 transaction.paid = True
                 transaction.verified = True
                 transaction.checking = False
-                transaction_report_email(request, transaction, customer)
+                transaction_report_email(transaction, customer)
 
             elif status == 'rejected':
                 transaction.paid = False
                 transaction.checking = False
                 transaction.verified = False
-                transaction_report_email(request, transaction, customer)
+                transaction_report_email(transaction, customer)
             transaction.save()
 
 
@@ -192,6 +192,7 @@ def transaction_dashboard_view(request):
         tmp.append(transaction.description)
         transactions_list.append(tmp)
         order = False
+        #TODO check order
     return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
                                                           'order': order})
 

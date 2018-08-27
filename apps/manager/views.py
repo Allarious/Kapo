@@ -104,8 +104,9 @@ def manager_check_transaction_view(request):
 
         elif request.POST.get('Customer selected'):
             # delete this customer
-            customer = Customer()
             # TODO get customer from request
+
+            customer = Customer().objects.filter(username=request.POST.get('username'))
             return manager_customer_view(request, customer)
 
     # this will show manager not verified and not checked transactions
@@ -268,7 +269,7 @@ def manager_send_to_all(request):
     if request.method == 'POST':
         if request.POST.get('sent to all'):
             inform = Inform(request.POST.get('subject'), request.POST.get('message')).save()
-            inform_email(request, inform)
+            inform_email(inform)
 
             return HttpResponseRedirect('manager:index')
     return render(request, 'sendtoall.html',

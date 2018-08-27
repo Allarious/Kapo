@@ -131,6 +131,7 @@ def transaction_dashboard_view(request):
         tmp.append(customer.user.username)
         transactions_list.append(tmp)
         order = False
+        # TODO check why order have problem
     return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
                                                           'order': order})
 
@@ -194,29 +195,6 @@ def order_dashboard_view(request):
         transactions_list.append(tmp)
     return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
                                                           'order': True})
-
-
-# def customer_dashboard_view(request):
-#     customer = get_object_or_404(Customer, pk=request.user.id)
-#     if request.method == 'POST':
-#
-#         if request.POST.get('transactions button'):
-#             # list of all transactions
-#             transactions = customer_all_transactions(customer)
-# #
-#             return render(request, 'customer_dashboard.html',
-#                           {'customer': customer, 'transactions': transactions})
-#
-#         elif request.POST.get('messages button'):
-#
-#             pass
-#
-#         elif request.POST.get('orders button'):
-#             # list of all transactions that needed or needs verification
-#             transactions = customer_order_transactions(customer)
-#
-#             return render(request, 'customer_dashboard.html',
-#                           {'customer': customer, 'transactions': transactions})
 
 
 def send_message(request):

@@ -4,11 +4,11 @@ from django.urls import reverse
 from apps.accounts.forms.forms import CustomerSignUpForm, UserForm
 
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
 # Create your views here.
-from apps.transactions.functions import paid_this_month, pay_wages
+from apps.transactions.functions import pay_wages
 from apps.transactions.models import *
 from tahlil import settings
 
@@ -100,7 +100,7 @@ def user_logout(request):
     return HttpResponseRedirect(reverse('accounts:index'))
 
 
-def transaction_report_email(request, transaction, customer):
+def transaction_report_email(transaction, customer):
     subject = 'Transaction report'
     message = 'Hello ' + customer.first_name + '\n'
 
@@ -193,7 +193,7 @@ def transaction_report_email(request, transaction, customer):
     # return redirect('redirect to a new page')
 
 
-def inform_email(request, inform):
+def inform_email(inform):
     subject = inform.subject
     message = inform.message
     recipient_list = []
@@ -204,5 +204,4 @@ def inform_email(request, inform):
 
     email_from = settings.EMAIL_HOST_USER
     send_mail(subject, message, email_from, recipient_list)
-    # if redirect needed
-    # return redirect('redirect to a new page')
+

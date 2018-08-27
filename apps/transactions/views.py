@@ -1,15 +1,11 @@
-from django.core.mail import send_mail, EmailMultiAlternatives, EmailMessage
+from django.core.mail import EmailMessage
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.template.loader import render_to_string
 from django.urls import reverse
-from django.utils.html import strip_tags
-
 
 from apps.core.models import Configuration
 from apps.manager.models import Manager
-from tahlil import settings
 from .forms.forms import *
 from apps.accounts.models import Notification
 from apps.accounts.decorators import customer_required, manager_required
@@ -39,6 +35,7 @@ def customer_exchange_view(request):
             if request.POST.get("rial_inc") == '':
                 if form.is_valid():
                     transaction = RialWalletIncTransaction()
+                    transaction.wage_rate = 0
                     transaction.amount = form.cleaned_data['amount']
                     transaction.owner = customer
                     customer.rial_wallet += transaction.amount
@@ -48,6 +45,7 @@ def customer_exchange_view(request):
                     return HttpResponseRedirect(reverse('customer:index'))
             if request.POST.get('euro_exchange') == '':
                 exchange.currency = 'euro'
+                exchange.wage_rate = 0
                 exchange.amount = exchange_form.cleaned_data['euro_amount']
                 cost = exchange.amount * euro_rate
                 if customer.rial_wallet >= cost:
@@ -106,6 +104,7 @@ def exam_transactions_view(request, title, cost, site_url, image_url):
         form = ExamTransactionForm(request.POST)
         if form.is_valid():
             exam = form.save(commit=False)
+            exam.wage_rate = 1 - wage
             exam.owner = customer
             exam.currency_type = 'dollar'
             if exam.site_authentication != None:
@@ -141,6 +140,7 @@ def app_fee_transactions_view(request):
         if form.is_valid():
             fee = form.save(commit=False)
             fee.owner = customer
+            fee.wage_rate = 1 - wage
             if fee.site_username == "" and fee.site_password == "":
                 fee.site_authentication = False
             if fee.dollar_cost > fee.euro_cost and fee.euro_cost == 0:
@@ -154,6 +154,7 @@ def app_fee_transactions_view(request):
                                   {'customer': customer, 'form': form, 'wage': wage,
                                    'dollar_rate': dollar_rate,
                                    'euro_rate': euro_rate})
+                fee.wage_rate = 1 - wage
                 fee.save()
 
 
@@ -168,7 +169,7 @@ def app_fee_transactions_view(request):
                                   {'customer': customer, 'form': form, 'wage': wage,
                                    'dollar_rate': dollar_rate,
                                    'euro_rate': euro_rate})
-
+                fee.wage_rate = 1 - wage
                 fee.save()
             else:
                 print(fee.euro_cost, fee.dollar_cost)
@@ -214,6 +215,8 @@ def foreign_pay_transactions_view(request):
                                   {'customer': customer, 'form': form, 'wage': wage,
                                    'dollar_rate': dollar_rate,
                                    'euro_rate': euro_rate})
+
+                pay.wage_rate = 1 - wage
                 pay.save()
 
 
@@ -228,7 +231,7 @@ def foreign_pay_transactions_view(request):
                                   {'customer': customer, 'form': form, 'wage': wage,
                                    'dollar_rate': dollar_rate,
                                    'euro_rate': euro_rate})
-
+                pay.wage_rate = 1 - wage
                 pay.save()
 
             else:
@@ -263,7 +266,7 @@ def domestic_pay_transactions_view(request):
             pay = form.save(commit=False)
             pay.owner = customer
             pay.currency_type = 'rial'
-
+            pay.wage_rate = 1 - wage
             cost = pay.rial_cost * wage
             if customer.rial_wallet < cost:
                 form.add_error('rial_cost',
@@ -296,6 +299,7 @@ def unknown_pay_transactions_view(request):
             pay.owner = customer
             cost = pay.rial_cost * wage
             pay.currency_type = 'rial'
+            pay.wage_rate = 1 - wage
 
             if customer.rial_wallet < cost:
                 form.add_error('rial_cost',
@@ -304,7 +308,6 @@ def unknown_pay_transactions_view(request):
                               {'customer': customer, 'wage': wage, 'form': form})
             pay.save()
 
-            # TODO Reza add new customer if we dont have the user
             my_user = MyUser()
             unknown = Customer()
             unknown.user = my_user
@@ -352,6 +355,7 @@ def manager_exchange_view(request):
                     manager.system_accounts.rial_amount_account += transaction.amount
                     manager.system_accounts.save()
                     transaction.paid = True
+                    transaction.wage_rate = 0
                     transaction.save()
                     return HttpResponseRedirect(reverse('manager:index'))
             if request.POST.get('euro_exchange') == '':
@@ -361,6 +365,7 @@ def manager_exchange_view(request):
                 if manager.system_accounts.rial_amount_account >= cost:
                     manager.system_accounts.rial_amount_account -= cost
                     exchange.rial_cost = cost
+                    exchange.wage_rate = 0
                     manager.system_accounts.euro_amount_account += exchange.amount
                 else:
                     exchange_form.add_error('euro_amount', 'موجودی کافی نیست')
@@ -377,6 +382,7 @@ def manager_exchange_view(request):
                 if manager.system_accounts.rial_amount_account >= cost:
                     manager.system_accounts.rial_amount_account -= cost
                     exchange.rial_cost = cost
+                    exchange.wage_rate = 0
                     manager.system_accounts.dollar_amount_account += exchange.amount
                 else:
                     exchange_form.add_error('dollar_amount', 'موجودی کافی نیست')

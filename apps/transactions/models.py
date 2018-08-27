@@ -149,6 +149,7 @@ class AbstractTransaction(models.Model):
     CHOICES = (('Rial', 'rial'), ('Euro', 'euro'), ('Dollar', 'dollar'))
     currency_type = models.CharField(choices=CHOICES, null=True, max_length=10)
     image = models.ImageField(null=True)
+    wage_rate = models.FloatField(default=0)
 
     def is_one_day_passed(self):
         # TODO check if it works correctly
@@ -157,7 +158,7 @@ class AbstractTransaction(models.Model):
         if difference.days >= 1:
             self.verified = False
             self.save()
-            transaction_report_email(None, self, self.owner)
+            transaction_report_email(self, self.owner)
 
             return True
         else:
@@ -187,8 +188,6 @@ class CurrencyConvertTransaction(AbstractTransaction):
 class ExamTransaction(AbstractTransaction):
     exam_title = models.CharField(max_length=30)
     dollar_cost = models.FloatField(default=0, validators=[MaxValueValidator(1000), MinValueValidator(1)])
-    # TODO euro cost bayad ezafe she
-    # euro_cost = models.FloatField(default=0, validators=[MaxValueValidator(1000), MinValueValidator(1)])
     site_url = models.URLField(null=True, blank=True)
     site_authentication = models.NullBooleanField(default=False)
     site_username = models.CharField(null=True, blank=True, max_length=50)
