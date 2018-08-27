@@ -17,11 +17,12 @@ import Accounts from '../components/accounts';
 import Dashboard from '../components/dashboard';
 import Order from '../components/order';
 import FillExam from '../components/order/fillexam';
+import AboutUs from '../components/aboutus';
 
 class App extends Component {
 
     state = {
-        visiblePage: 'Homepage',
+        visiblePage: 'About Us',
     };
 
     generateContent = () => {
@@ -51,7 +52,9 @@ class App extends Component {
             return <Order clicked={this.changePage}/>;
         } else if (this.state.visiblePage === 'Fill Exam') {
             return <FillExam/>;
-        } else {
+        } else if (this.state.visiblePage === 'About Us') {
+            return <AboutUs/>;
+        }else {
             return <Error clicked={this.changePage}/>;
         }
     };

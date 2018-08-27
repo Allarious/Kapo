@@ -30,6 +30,7 @@
     line-height: 75px;
 }
 .left{
+    cursor: pointer;
     float: left;
     border-right: 1px solid #468189;
     border-bottom: 1px solid #468189;

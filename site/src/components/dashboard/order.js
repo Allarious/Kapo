@@ -8,7 +8,7 @@ const Order = (props) => {
     };
     return(
         <div className={classes.container}>
-            <div className={classes.left}>{props.username}</div>
+            <div className={classes.left}><a>@{props.username}</a></div>
             <div className={classes.middle}>{props.type}</div>
             <div className={classes.middle}>{props.costR}</div>
             <div className={classes.middle}>{props.date}</div>

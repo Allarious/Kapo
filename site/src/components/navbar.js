@@ -48,6 +48,11 @@ const Navbar = (props) => {
             id: 'c8'
         },
         {
+            text: 'About Us',
+            clicked: 'About Us',
+            id: 'c10'
+        },
+        {
             text: 'Dashboard',
             clicked: 'Dashboard',
             pop: 3,

@@ -1,7 +1,11 @@
-body{
-  padding-top: 75px;
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700);
+
+body {
+    padding-top: 75px;
+    font-family: 'Source Sans Pro';
 }
+
 .App {
-  text-align: center;
+    text-align: center;
 }
 
