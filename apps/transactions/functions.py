@@ -1,4 +1,6 @@
+from apps.core.models import SystemAccounts
 from .models import *
+from django.utils import timezone
 
 
 def get_all_system_transactions():
@@ -70,11 +72,11 @@ def get_null_verified_transactions():
     # Exam transactions:
     exams = ExamTransaction.objects.filter(verified=None)
     # Application and tuition fees transactions:
-    fees = ApplicationTuitionFeeTransaction.objects.filter( verified=None)
+    fees = ApplicationTuitionFeeTransaction.objects.filter(verified=None)
     # Foregin payments transactions:
-    foreign_payments = ForeignPaymentTransaction.objects.filter( verified=None)
+    foreign_payments = ForeignPaymentTransaction.objects.filter(verified=None)
     # Domestic transactions:
-    domestic_payments = DomesticPaymentTransaction.objects.filter( verified=None)
+    domestic_payments = DomesticPaymentTransaction.objects.filter(verified=None)
     #  Unknown payments transactions:
     unknown_payments = UnknownPaymentTransaction.objects.filter(verified=None)
 
@@ -227,3 +229,19 @@ def get_all_employee_checked_checking_transaction(employee):
         transaction.is_one_day_passed()
 
     return transactions
+
+
+paid_this_month = False
+
+
+def pay_wages():
+    global paid_this_month
+    now = timezone.now()
+    system_account = SystemAccounts.objects.all()[0]
+    if now.day == 1 and not paid_this_month:
+        for employee in Employee.objects.all():
+            system_account.rial_amount_account -= employee.wage_per_month
+            employee.rial_wallet += employee.wage_per_month
+        paid_this_month = True
+    elif now.day != 1 and paid_this_month:
+        paid_this_month = False

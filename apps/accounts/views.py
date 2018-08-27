@@ -8,17 +8,13 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 
 # Create your views here.
+from apps.transactions.functions import paid_this_month, pay_wages
 from apps.transactions.models import *
 from tahlil import settings
 
 
 def index(request):
     return render(request, 'Home_page.html', {})
-
-
-# TODO bayad in 404 ro dorost konim
-def handler404(request):
-    return render(request, '404.html', status=404)
 
 
 def register(request):
@@ -76,6 +72,7 @@ def sign_up(request):
 
 
 def login_user(request):
+    pay_wages()
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
@@ -205,10 +202,7 @@ def inform_email(request, inform):
         if customer.email_notification:
             recipient_list.append(str(customer.email))
 
-
     email_from = settings.EMAIL_HOST_USER
     send_mail(subject, message, email_from, recipient_list)
     # if redirect needed
     # return redirect('redirect to a new page')
-
-
