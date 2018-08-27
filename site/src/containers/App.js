@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import classes from './App.css';
 
@@ -21,48 +21,35 @@ import FillExam from '../components/order/fillexam';
 class App extends Component {
 
     state = {
-      visiblePage: 'EditProfile',
+        visiblePage: 'Homepage',
     };
 
     generateContent = () => {
-        if (this.state.visiblePage === 'Homepage')
-        {
+        if (this.state.visiblePage === 'Homepage') {
             return <HomePage/>;
-        } else if (this.state.visiblePage === 'Login')
-        {
+        } else if (this.state.visiblePage === 'Login') {
             return <Login clicked={this.changePage}/>;
-        } else if(this.state.visiblePage === 'Signup')
-        {
+        } else if (this.state.visiblePage === 'Signup') {
             return <SignUp clicked={this.changePage}/>;
-        } else if(this.state.visiblePage === 'ForgetPassword')
-        {
+        } else if (this.state.visiblePage === 'ForgetPassword') {
             return <ResetPassword/>;
-        } else if(this.state.visiblePage === 'Profile')
-        {
+        } else if (this.state.visiblePage === 'Profile') {
             return <Profile clicked={this.changePage}/>;
-        } else if(this.state.visiblePage === 'EditProfile')
-        {
+        } else if (this.state.visiblePage === 'EditProfile') {
             return <EditProfile/>;
-        } else if(this.state.visiblePage === 'SendMessage')
-        {
+        } else if (this.state.visiblePage === 'SendMessage') {
             return <SendMessage/>;
-        } else if(this.state.visiblePage === 'Convert')
-        {
+        } else if (this.state.visiblePage === 'Convert') {
             return <Conv/>;
-        } else if(this.state.visiblePage === 'Error')
-        {
+        } else if (this.state.visiblePage === 'Error') {
             return <Error clicked={this.changePage}/>;
-        } else if(this.state.visiblePage === 'Accounts')
-        {
+        } else if (this.state.visiblePage === 'Accounts') {
             return <Accounts/>;
-        } else if(this.state.visiblePage === 'Dashboard')
-        {
+        } else if (this.state.visiblePage === 'Dashboard') {
             return <Dashboard/>;
-        } else if(this.state.visiblePage === 'Order')
-        {
+        } else if (this.state.visiblePage === 'Order') {
             return <Order clicked={this.changePage}/>;
-        } else if(this.state.visiblePage === 'Fill Exam')
-        {
+        } else if (this.state.visiblePage === 'Fill Exam') {
             return <FillExam/>;
         } else {
             return <Error clicked={this.changePage}/>;
@@ -73,16 +60,16 @@ class App extends Component {
         this.setState({visiblePage: pageName});
     };
 
-  render() {
+    render() {
 
-    return (
-      <div className={classes.App}>
-          <Navbar clicked={this.changePage}/>
-          {this.generateContent()}
-          <Footer/>
-      </div>
-    );
-  }
+        return (
+            <div className={classes.App}>
+                <Navbar clicked={this.changePage}/>
+                {this.generateContent()}
+                <Footer/>
+            </div>
+        );
+    }
 }
 
 export default App;

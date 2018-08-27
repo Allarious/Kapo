@@ -9,6 +9,7 @@
     overflow: hidden;
     cursor: pointer;
     box-shadow: 5px 5px 10px #aaaaaa;
+    transition: 0.2s;
 }
 
 .im {

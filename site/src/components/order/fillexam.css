@@ -1,4 +1,4 @@
-.container{
+.container {
     width: 300px;
     border-radius: 30px;
     background-color: #F9F9F9;
@@ -6,7 +6,8 @@
     margin: 50px auto;
     padding: 10px 0;
 }
-.txtareadiv{
+
+.txtareadiv {
     width: 90%;
     height: 100px;
     border-radius: 20px;
@@ -14,12 +15,26 @@
     overflow: hidden;
     margin: 20px auto;
 }
-.txtarea{
+
+.txtarea {
     height: 100%;
     width: 100%;
     border: none;
     padding: 8px;
 }
-.txtarea:focus{
+
+.txtarea:focus {
     outline: none;
+}
+
+.wage {
+    width: 80%;
+    margin: 10px auto;
+    padding: 5px;
+    border: 1px solid #468189;
+    border-radius: 10px;
+}
+.header{
+    color: #97C4C4;
+    font-size: 180%;
 }

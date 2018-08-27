@@ -28,3 +28,15 @@
     outline: none;
     border: 2px solid rosybrown;
 }
+.logo{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background-color: #97C4C4;
+    margin: auto;
+    box-shadow: 1px 1px 10px #aaaaaa;
+    background-image: url("../../images/if_SignIn_1031506.svg");
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}

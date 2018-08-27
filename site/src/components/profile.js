@@ -87,6 +87,9 @@ class Profile extends Component{
                 <div onClick={() => this.props.clicked('EditProfile')}>
                     <Button>Edit Profile</Button>
                 </div>
+                <div onClick={() => this.props.clicked('Dashboard')}>
+                <Button>Dashboard</Button>
+                </div>
             </div>
         );
     }

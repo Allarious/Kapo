@@ -61,7 +61,8 @@
     width: 100%;
 }
 .accept{
-    background-color: red;
+    background-color: #97C4C4;
+    border: 1px solid #97C4C4;
     height: 40px;
     width: 40px;
     float: left;
@@ -73,9 +74,11 @@
     background-size: 50% 50%;
     background-repeat: no-repeat;
     background-position: 50% 50%;
+    transition: 0.2s;
 }
 .reject{
-    background-color: lightgreen;
+    background-color: #97C4C4;
+    border: 1px solid #97C4C4;
     height: 40px;
     width: 40px;
     float: left;
@@ -87,4 +90,13 @@
     background-size: 50% 50%;
     background-repeat: no-repeat;
     background-position: 50% 50%;
+    transition: 0.2s;
+}
+.accept:hover{
+    background-color: #F9F9F9;
+    color: #97C4C4;
+}
+.reject:hover{
+    background-color: #F9F9F9;
+    color: #97C4C4;
 }

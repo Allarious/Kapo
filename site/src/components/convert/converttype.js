@@ -26,6 +26,7 @@ class ConvertType extends Component{
     render() {
         let image = <div></div>
         let charge = "";
+        let wage ="";
         let explain = "";
         let converter = <div></div>
 
@@ -41,6 +42,9 @@ class ConvertType extends Component{
             image = <div className={classes.logo1}></div>
             charge = "Change";
             explain = "Change from Rial to Dollar";
+            wage = (<div className={classes.remain}>
+                <div> wage : {this.props.wage} </div>
+            </div>);
             converter = (<div>
                 <Inp type="number" holder="Amount to change (R)" timeToChange={this.returnDtoR} changed={this.changeRtoD}/>
                 <div className={classes.to}>To :</div>
@@ -50,6 +54,9 @@ class ConvertType extends Component{
             image = <div className={classes.logo2}></div>
             charge = "Change";
             explain = "Change from Rial to Euro";
+            wage = (<div className={classes.remain}>
+                <div> wage : {this.props.wage} </div>
+            </div>);
             converter = (<div>
                 <Inp type="number" holder="Amount to change (R)"/>
                 <div className={classes.to}>To :</div>
@@ -61,6 +68,7 @@ class ConvertType extends Component{
             <div className={classes.remain}>
                 Remains : {this.props.remain}
             </div>
+            {wage}
             <div className={classes.explain}>
                 {explain}
             </div>

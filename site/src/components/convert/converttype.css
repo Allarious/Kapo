@@ -1,6 +1,6 @@
 .content{
     float: left;
-    height: 580px;
+    height: 620px;
     width: 25%;
     margin: 0 4.1%;
     padding: 20px;
@@ -46,7 +46,7 @@
 }
 .remain{
     width: 80%;
-    margin: 0 auto;
+    margin: 10px auto;
     padding: 5px;
     border: 1px solid #468189;
     border-radius: 10px;
@@ -58,5 +58,5 @@
     padding-top: 20px;
 }
 .gap{
-    margin-top: 100px;
+    margin-top: 145px;
 }
