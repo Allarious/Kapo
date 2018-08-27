@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from django.urls import reverse
 
 from apps.accounts.forms.forms import CustomerSignUpForm, UserForm
@@ -6,8 +7,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 
-
 # Create your views here.
+from apps.transactions.models import *
+from tahlil import settings
+
+
 def index(request):
     return render(request, 'Home_page.html', {})
 
@@ -97,3 +101,96 @@ def login_user(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('accounts:index'))
+
+
+def transaction_report_email(request, transaction, customer):
+    subject = 'Transaction report'
+    message = 'Hello ' + customer.first_name + '\n'
+
+    if isinstance(transaction, RialWalletIncTransaction):
+
+        message += 'You had successfully increased your Rial wallet by ' + str(
+            transaction.amount) + '.'
+
+    elif isinstance(transaction, CurrencyConvertTransaction):
+
+        message += 'You had successfully converted ' + str(transaction.amount) + ' ' + str(
+            transaction.currency) + ' and paid ' + str(transaction.rial_cost) + ' Rials.'
+
+    elif isinstance(transaction, ExamTransaction):
+
+        message += 'Your ' + transaction.exam_title + ' exam '
+
+        if transaction.verified:
+            message += 'successfully verified and ' + str(
+                transaction.dollar_cost) + '$ has been withdrawn from your account.'
+        else:
+            message += 'unfortunately not verified.\nHope to see you again.'
+
+
+    elif isinstance(transaction, ApplicationTuitionFeeTransaction):
+
+        message += 'Your ' + transaction.fee_type + 'request, '
+
+        if transaction.verified:
+            message += 'successfully verified and '
+
+            if transaction.dollar_cost > 0:
+
+                message += str(transaction.dollar_cost) + '$ has been withdrawn from your account.'
+
+            else:
+                message += str(transaction.euro_cost) + '€ has been withdrawn from your account.'
+
+        else:
+            message += 'unfortunately not verified.\nHope to see you again.'
+
+    elif isinstance(transaction, ForeignPaymentTransaction):
+
+        message += 'Your foreign payment request to ' + str(transaction.foreign_card_number) + ' bank account, '
+
+        if transaction.verified:
+
+            message += 'successfully verified and '
+
+            if transaction.dollar_cost > 0:
+                message += str(transaction.dollar_cost) + '$ has been withdrawn from your account.'
+            else:
+                message += str(transaction.euro_cost) + '€ has been withdrawn from your account.'
+
+        else:
+
+            message += 'unfortunately not verified.\nHope to see you again.'
+
+    elif isinstance(transaction, DomesticPaymentTransaction):
+
+        message += 'Your domestic payment request to ' + str(transaction.domestic_card_number) + ' bank account, '
+
+        if transaction.verified:
+
+            message += 'successfully verified and ' + str(
+                transaction.rial_cost) + 'Rials has been withdrawn from your account.'
+
+        else:
+            message += 'unfortunately not verified.\nHope to see you again.'
+
+    elif isinstance(transaction, UnknownPaymentTransaction):
+
+        message += 'Your unknown payment request to ' + str(transaction.domestic_card_number) + ' bank account, '
+
+        if transaction.verified:
+
+            message += 'successfully verified and ' + str(
+                transaction.rial_cost) + 'Rials has been withdrawn from your account.'
+
+        else:
+            message += 'unfortunately not verified.\nHope to see you again.'
+
+    message += '\n Your transaction ID is ' + str(transaction.id)
+    message += '\nThanks for using our site'
+
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [str(customer.email), ]
+    send_mail(subject, message, email_from, recipient_list)
+    # if redirect needed
+    # return redirect('redirect to a new page')

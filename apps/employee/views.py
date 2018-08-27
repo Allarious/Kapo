@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
+from apps.accounts.views import transaction_report_email
 from apps.core.models import SystemAccounts
 from apps.customer.forms.forms import EditUser, SendMessage
 from apps.accounts.models import *
@@ -8,6 +9,7 @@ from apps.customer.forms.forms import EditUser
 from apps.employee.forms import EditEmployeeProfile
 from apps.employee.models import Employee
 from apps.accounts.decorators import employee_required
+from apps.manager.models import Manager
 from apps.transactions.functions import *
 from apps.transactions.models import *
 from django.http import HttpResponseRedirect
@@ -38,6 +40,7 @@ def employee_check_transaction_view(request):
         system_account = SystemAccounts.objects.all()[0]
         if request.POST.get('checked transaction'):
             transaction = transactions.pop(id=request.POST.get('transaction id', default=None))
+            customer = transaction.owner
             status = request.POST.get('transaction status', default=False)
             if status == 'accepted':
                 currency = transaction.currency_type
@@ -52,18 +55,20 @@ def employee_check_transaction_view(request):
                 for employee in Employee.objects.all():
                     employees_wage += employee.wage_per_month
                 if system_account.rial_amount_account <= employees_wage:
-                    # TODO send notif be kossher
+                    Notification(owner=Manager.objects.all()[0], type='insufficient money').save()
                     pass
                 system_account.save()
 
                 transaction.paid = True
                 transaction.verified = True
                 transaction.checking = False
+                transaction_report_email(request, transaction, customer)
 
             elif status == 'rejected':
                 transaction.paid = False
                 transaction.checking = False
                 transaction.verified = False
+                transaction_report_email(request, transaction, customer)
             transaction.save()
 
 
@@ -151,6 +156,7 @@ def employee_dashboard_view(request):
     Notification.objects.all().filter(owner=employee.user).update(seen=True)
     return render(request, 'employee_dashboard.html', {'notifications': notification})
 
+
 def message_dashboard_view(request):
     employee = get_object_or_404(Employee, pk=request.user.id)
     messages = Message.objects.all().filter(receiver=employee.user)
@@ -158,6 +164,7 @@ def message_dashboard_view(request):
     for i in range(messages.count()):
         message.append(messages[messages.count() - 1 - i])
     return render(request, 'employee_massage_dashboard.html', {'messages': message})
+
 
 def transaction_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
@@ -186,7 +193,7 @@ def transaction_dashboard_view(request):
         transactions_list.append(tmp)
         order = False
     return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
-                                                          'order' : order})
+                                                          'order': order})
 
 
 def order_dashboard_view(request):
@@ -211,7 +218,7 @@ def order_dashboard_view(request):
             tmp.append(str(transaction.dollar_cost) + '$')
             transaction.description += "Exam title is: " + transaction.exam_title
         elif isinstance(transaction, ApplicationTuitionFeeTransaction):
-            if transaction.fee_type== 'application fee':
+            if transaction.fee_type == 'application fee':
                 tmp.append('Application Fee')
             else:
                 tmp.append('Tuition Fee')

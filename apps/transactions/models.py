@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 
 from apps.accounts.models import MyUser
+from apps.accounts.views import transaction_report_email
 from apps.customer.models import Customer, DomesticCardField
 
 from django import forms
@@ -155,8 +156,9 @@ class AbstractTransaction(models.Model):
         difference = now - self.creation_time
         if difference.days >= 1:
             self.verified = False
-            self.checking_employee = None
             self.save()
+            transaction_report_email(None, self, self.owner)
+
             return True
         else:
             return False
@@ -185,7 +187,7 @@ class CurrencyConvertTransaction(AbstractTransaction):
 class ExamTransaction(AbstractTransaction):
     exam_title = models.CharField(max_length=30)
     dollar_cost = models.FloatField(default=0, validators=[MaxValueValidator(1000), MinValueValidator(1)])
-    #TODO euro cost bayad ezafe she
+    # TODO euro cost bayad ezafe she
     # euro_cost = models.FloatField(default=0, validators=[MaxValueValidator(1000), MinValueValidator(1)])
     site_url = models.URLField(null=True, blank=True)
     site_authentication = models.NullBooleanField(default=False)
