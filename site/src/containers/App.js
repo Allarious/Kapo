@@ -21,7 +21,7 @@ import FillExam from '../components/order/fillexam';
 class App extends Component {
 
     state = {
-      visiblePage: 'Accounts',
+      visiblePage: 'EditProfile',
     };
 
     generateContent = () => {

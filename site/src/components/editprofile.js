@@ -15,6 +15,23 @@ const EditProfile = () => {
             <Inp holder="Region" type="text"/>
             <Inp holder="Country" type="text"/>
             <Inp holder="Birth Date" type="text"/>
+            <select className={classes.gender}>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="None">None</option>
+                <option value="Prefer Not To Say">Prefer Not To Say</option>
+            </select>
+            <div className={classes["select-a-way-container"]}>
+                <div className={classes.header}>Choose A Way To Receive Our News</div>
+                <div className={classes["box-container"]}>
+                    <div className={classes.sms}>
+                    <input type="checkbox" name="SMS" value="SMS"/> SMS
+                    </div>
+                    <div className={classes.email}>
+                    <input type="checkbox" name="E-mail" value="E-mail"/> E-mail
+                    </div>
+                </div>
+            </div>
             <div className={classes.gap}></div>
             <div className={classes["section-header"]}>Change Password</div>
             <Inp holder="New Password" type="password"/>
