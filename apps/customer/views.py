@@ -11,7 +11,6 @@ from apps.accounts.models import *
 from apps.manager.models import *
 
 
-
 @login_required
 @customer_required
 def index(request):
@@ -78,6 +77,7 @@ def customer_home_view(request):
     return render(request, 'customer_home.html',
                   {'customer': customer, 'karmozds': karmozds, 'euro_rate': euro_rate, 'dollar_rate': dollar_rate})
 
+
 def customer_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     notifications = Notification.objects.all().filter(owner=customer.user)
@@ -89,6 +89,7 @@ def customer_dashboard_view(request):
     Notification.objects.all().filter(owner=customer.user).update(seen=True)
     return render(request, 'customer_dashboard1.html', {'notifications': notification})
 
+
 def message_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     messages = Message.objects.all().filter(receiver=customer.user)
@@ -96,6 +97,7 @@ def message_dashboard_view(request):
     for i in range(messages.count()):
         message.append(messages[messages.count() - 1 - i])
     return render(request, 'customer_message_dashboard.html', {'messages': message})
+
 
 def transaction_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
@@ -124,7 +126,7 @@ def transaction_dashboard_view(request):
         transactions_list.append(tmp)
         order = False
     return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
-                                                          'order' : order})
+                                                          'order': order})
 
 
 def order_dashboard_view(request):
@@ -149,7 +151,7 @@ def order_dashboard_view(request):
             tmp.append(str(transaction.dollar_cost) + '$')
             transaction.description += "Exam title is: " + transaction.exam_title
         elif isinstance(transaction, ApplicationTuitionFeeTransaction):
-            if transaction.fee_type== 'application fee':
+            if transaction.fee_type == 'application fee':
                 tmp.append('Application Fee')
             else:
                 tmp.append('Tuition Fee')
@@ -182,6 +184,7 @@ def order_dashboard_view(request):
     return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
                                                           'order': True})
 
+
 # def customer_dashboard_view(request):
 #     customer = get_object_or_404(Customer, pk=request.user.id)
 #     if request.method == 'POST':
@@ -203,7 +206,6 @@ def order_dashboard_view(request):
 #
 #             return render(request, 'customer_dashboard.html',
 #                           {'customer': customer, 'transactions': transactions})
-
 
 
 def send_message(request):

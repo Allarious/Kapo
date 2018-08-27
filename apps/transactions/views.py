@@ -90,7 +90,7 @@ def customer_exchange_view(request):
 
 @login_required
 @customer_required
-def exam_transactions_view(request):
+def exam_transactions_view(request, title, cost, site_url, image_url):
     customer = get_object_or_404(Customer, pk=request.user.id)
     wage = float(Configuration.objects.get(key='exam wage').value)
     dollar_rate = int(Configuration.objects.get(key='dollar').value)
@@ -102,7 +102,8 @@ def exam_transactions_view(request):
             exam = form.save(commit=False)
             exam.owner = customer
             exam.currency_type = 'dollar'
-            exam.exam
+            if exam.site_authentication != None:
+                exam.site_authentication = True
             cost = exam.dollar_cost * wage
             if customer.dollar_wallet < cost:
                 form.add_error('dollar_cost',
@@ -118,7 +119,7 @@ def exam_transactions_view(request):
 
     return render(request, 'exam_order.html',
                   {'customer': customer, 'form': form, 'wage': wage, 'dollar_rate': dollar_rate,
-                   'euro_rate': euro_rate})
+                   'euro_rate': euro_rate, 'title': title, 'cost': cost, 'site_url': site_url, 'image_url': image_url})
 
 
 @login_required
