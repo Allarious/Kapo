@@ -3,7 +3,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
 from apps.accounts.forms.forms import UserForm, EmployeeSignUpForm
-from apps.accounts.models import MyUser
+from apps.accounts.models import MyUser, Inform
+from apps.accounts.views import inform_email
 from apps.customer.models import Customer
 from apps.manager.models import *
 from apps.accounts.decorators import manager_required
@@ -258,3 +259,17 @@ def manager_exams_list(request):
 
         return render(request, 'exams.html',
                       {'manger': manager, 'exams': exams})
+
+
+@login_required
+@manager_required
+def manager_send_to_all(request):
+    manager = get_object_or_404(Manager, pk=request.user.id)
+    if request.method == 'POST':
+        if request.POST.get('sent to all'):
+            inform = Inform(request.POST.get('subject'), request.POST.get('message')).save()
+            inform_email(request, inform)
+
+            return HttpResponseRedirect('manager:index')
+    return render(request, 'sendtoall.html',
+                  {'manger': manager})

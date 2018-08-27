@@ -194,3 +194,21 @@ def transaction_report_email(request, transaction, customer):
     send_mail(subject, message, email_from, recipient_list)
     # if redirect needed
     # return redirect('redirect to a new page')
+
+
+def inform_email(request, inform):
+    subject = inform.subject
+    message = inform.message
+    recipient_list = []
+
+    for customer in Customer.objects.all():
+        if customer.email_notification:
+            recipient_list.append(str(customer.email))
+
+
+    email_from = settings.EMAIL_HOST_USER
+    send_mail(subject, message, email_from, recipient_list)
+    # if redirect needed
+    # return redirect('redirect to a new page')
+
+

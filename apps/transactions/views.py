@@ -1,9 +1,11 @@
+from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from apps.core.models import Configuration
 from apps.manager.models import Manager
+from tahlil import settings
 from .forms.forms import *
 from apps.accounts.models import Notification
 from apps.accounts.decorators import customer_required, manager_required
@@ -369,3 +371,16 @@ def manager_exchange_view(request):
                                                  'dollar': dollar_rate,
                                                  'euro': euro_rate,
                                                  'is_manager': True})
+
+
+def unknown_transaction_email(request, old_customer, new_customer):
+    subject = 'Congrats, you are added to Kapo!'
+    message = 'Your friend ' + str(old_customer.first_name) + ' ' + str(
+        old_customer.last_name) + ' has sent u money in our syste.\nFeel free to join and collect it.\n details:\n username : ' + str(
+        new_customer.username) + '\npassword: 1234\nKapo.com'
+    recipient_list = [str(new_customer.email)]
+
+    email_from = settings.EMAIL_HOST_USER
+    send_mail(subject, message, email_from, recipient_list)
+    # if redirect needed
+    # return redirect('redirect to a new page')

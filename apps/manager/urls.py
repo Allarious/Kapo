@@ -19,6 +19,7 @@ urlpatterns = [
     path('customers-list', manager_customers_list_view, name='manager_customers_list'),
     path('add-employee', manager_add_employee, name='manager_add_employee'),
     path('system-wallet-management', manager_exchange_view, name='manger exchange'),
+    path('manager-send-inform', manager_send_to_all, name='manger send inform'),
 ]
 
 # TODO bayad mogheyi ke tarakonesh barresish tamum mishe checke checkingesh false beshe/
