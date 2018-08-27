@@ -16,11 +16,6 @@ def index(request):
     return render(request, 'Home_page.html', {})
 
 
-# TODO bayad in 404 ro dorost konim
-def handler404(request):
-    return render(request, '404.html', status=404)
-
-
 def register(request):
     form = UserForm(request.POST or None)
     if form.is_valid():
