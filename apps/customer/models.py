@@ -32,12 +32,14 @@ class Customer(models.Model):
     rial_wallet = models.FloatField(default=0)
     dollar_wallet = models.FloatField(default=0)
     euro_wallet = models.FloatField(default=0)
+    email_notification = models.BooleanField(default=False)
+    sms_notification = models.BooleanField(default=False)
 
     def clean(self):
         if self.rial_wallet < 0:
             raise ValidationError('You Dont have enough Rials')
         if self.dollar_wallet < 0:
-            raise ValidationError('You Dont have enough Dolars')
+            raise ValidationError('You Dont have enough Dollars')
         if self.euro_wallet < 0:
             raise ValidationError('You Dont have enough Euros')
 

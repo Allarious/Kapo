@@ -33,12 +33,16 @@ class EditCustomerProfile(forms.ModelForm):
     country = forms.CharField(max_length=20, required=False)
     # address = forms.CharField(max_length=100, default='Tehran')
     phone = forms.CharField(max_length=12, required=False)
+    email_notification = forms.BooleanField(required=False)
+    sms_notification = forms.BooleanField(required=False)
 
     # domestic_bank_account_id = forms.CharField(unique=False, max_length=16, null=True)
 
     class Meta:
         model = Customer
-        fields = ('first_name', 'last_name', 'birthday_date', 'city', 'country', 'phone')
+        fields = ('first_name', 'last_name', 'birthday_date', 'city', 'country', 'phone', 'email_notification',
+                  'sms_notification')
+
 
 class SendMessage(forms.Form):
     subject = forms.CharField(max_length=40, required=False)
