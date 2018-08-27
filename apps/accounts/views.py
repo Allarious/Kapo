@@ -1,4 +1,3 @@
-
 from django.urls import reverse
 
 from apps.accounts.forms.forms import CustomerSignUpForm, UserForm
@@ -11,6 +10,7 @@ from django.http import HttpResponseRedirect
 # Create your views here.
 def index(request):
     return render(request, 'Home_page.html', {})
+
 
 # TODO bayad in 404 ro dorost konim
 def handler404(request):
@@ -97,5 +97,3 @@ def login_user(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('accounts:index'))
-
-
