@@ -6,6 +6,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.html import strip_tags
 
+
 from apps.core.models import Configuration
 from apps.manager.models import Manager
 from tahlil import settings
