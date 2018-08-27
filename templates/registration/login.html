@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href={% static "css/style.css" %}>
+	<link rel="stylesheet" type="text/css" href={% static "css/login.css" %}>
+	<link rel="stylesheet" href={% static "css/ionicons.min.css" %}>
+</head>
+<body>
+	
+	<div class="wrapper">
+		
+		<form class="login" method="POST">
+			{% csrf_token %}
+			<p class="title">ورود</p>
+			{% if error %}
+            <p style="color: red;">نام کاربری یا کلمه‌ی عبور نادرست است.</p>
+            {% endif %}
+			<p>
+				<input type="text" placeholder="نام کاربری" class="login-text" name="username">
+				<i class="ion-person"></i>
+			</p>
+			<p>
+				<input type="password" placeholder="رمز عبور" class="login-text" name="password">
+				<i class="ion-ios-locked"></i>
+			</p>
+			<div class="enter"><button>ورود</button></div>
+			<a href={% url 'password_reset' %} class="forget">فراموشی رمز عبور</a>
+			
+		</form>
+		
+	</div>
+	
+</body>
+</html>
