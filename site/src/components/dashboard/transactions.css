@@ -1,0 +1,20 @@
+.auto-assign{
+    width: 85%;
+    height: 50px;
+    line-height: 50px;
+    border: 1px solid #97C4C4;
+    background-color: #97C4C4;
+    margin: 20px auto;
+    transition: 0.2s;
+    border-radius: 10px;
+    overflow: auto;
+    color: #F9F9F9;
+    cursor: pointer;
+}
+.auto-assign:focus{
+    outline: none;
+}
+.auto-assign:hover{
+    background-color: #F9F9F9;
+    color: black;
+}

@@ -8,6 +8,7 @@ const Transactions = (props) => {
 
     let transactions = [
         {
+            username:'Someone',
             type: 'Rial',
             costR: '1530000',
             costD: '15',
@@ -17,6 +18,7 @@ const Transactions = (props) => {
             description:'cool bro',
             id: 't1',
         },{
+            username:'Someone',
             type: 'Rial',
             costR: '1530000',
             costD: '15',
@@ -26,6 +28,7 @@ const Transactions = (props) => {
             description:'cool bro',
             id: 't2',
         },{
+            username:'Someone',
             type: 'Rial',
             costR: '1530000',
             costD: '15',
@@ -35,6 +38,7 @@ const Transactions = (props) => {
             description:'cool bro',
             id: 't3',
         },{
+            username:'Someone',
             type: 'Rial',
             costR: '1530000',
             costD: '15',
@@ -44,6 +48,7 @@ const Transactions = (props) => {
             description:'cool bro',
             id: 't4',
         },{
+            username:'Someone',
             type: 'Rial',
             costR: '1530000',
             costD: '15',
@@ -53,6 +58,7 @@ const Transactions = (props) => {
             description:'cool bro',
             id: 't5',
         },{
+            username:'Someone',
             type: 'Rial',
             costR: '1530000',
             costD: '15',
@@ -62,6 +68,7 @@ const Transactions = (props) => {
             description:'cool bro',
             id: 't6',
         },{
+            username:'Someone',
             type: 'Rial',
             costR: '1530000',
             costD: '15',
@@ -71,6 +78,7 @@ const Transactions = (props) => {
             description:'cool bro',
             id: 't7',
         },{
+            username:'Someone',
             type: 'Rial',
             costR: '1530000',
             costD: '15',
@@ -80,6 +88,7 @@ const Transactions = (props) => {
             description:'cool bro',
             id: 't8',
         },{
+            username:'Someone',
             type: 'Rial',
             costR: '1530000',
             costD: '15',
@@ -93,12 +102,15 @@ const Transactions = (props) => {
 
     return(
         <div className={classes.container}>
+            <div className={classes["auto-assign"]}>
+                Auto Assign
+            </div>
             {transactions.map((event) => {
                 return (
                     <Transaction key={event.id}
                                       type={event.type}
                                       costR={event.costR}
-                                      costD={event.costD}
+                                      username={event.username}
                                       date={event.date}
                                       time={event.time}
                                       condition={event.condition}

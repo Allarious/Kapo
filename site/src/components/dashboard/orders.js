@@ -8,6 +8,7 @@ const Orders = (props) => {
 
     let orders = [
         {
+            username:'Someone',
             type: 'Tofel',
             costR: '1530000',
             costD: '15',
@@ -17,6 +18,7 @@ const Orders = (props) => {
             description:'cool bro',
             id: 't1',
         },{
+            username:'Someone',
             type: 'Tofel',
             costR: '1530000',
             costD: '15',
@@ -26,6 +28,7 @@ const Orders = (props) => {
             description:'cool bro',
             id: 't2',
         },{
+            username:'Someone',
             type: 'Tofel',
             costR: '1530000',
             costD: '15',
@@ -35,6 +38,7 @@ const Orders = (props) => {
             description:'cool bro',
             id: 't3',
         },{
+            username:'Someone',
             type: 'Tofel',
             costR: '1530000',
             costD: '15',
@@ -44,6 +48,7 @@ const Orders = (props) => {
             description:'cool bro',
             id: 't4',
         },{
+            username:'Someone',
             type: 'Tofel',
             costR: '1530000',
             costD: '15',
@@ -53,6 +58,7 @@ const Orders = (props) => {
             description:'cool bro',
             id: 't5',
         },{
+            username:'Someone',
             type: 'Tofel',
             costR: '1530000',
             costD: '15',
@@ -62,6 +68,7 @@ const Orders = (props) => {
             description:'cool bro',
             id: 't6',
         },{
+            username:'Someone',
             type: 'Tofel',
             costR: '1530000',
             costD: '15',
@@ -71,6 +78,7 @@ const Orders = (props) => {
             description:'cool bro',
             id: 't7',
         },{
+            username:'Someone',
             type: 'Tofel',
             costR: '1530000',
             costD: '15',
@@ -80,6 +88,7 @@ const Orders = (props) => {
             description:'cool bro',
             id: 't8',
         },{
+            username:'Someone',
             type: 'Tofel',
             costR: '1530000',
             costD: '15',
@@ -98,7 +107,7 @@ const Orders = (props) => {
                     <Order key={event.id}
                                  type={event.type}
                                  costR={event.costR}
-                                 costD={event.costD}
+                                 username={event.username}
                                  date={event.date}
                                  time={event.time}
                                  condition={event.condition}

@@ -61,23 +61,23 @@ class Dashboard extends Component {
         {
             this.content = <Transactions/>;
             nav = (<div className={classes["nav-container"]}>
-                <div className={classes.left}>type</div>
-                <div className={classes.middle}>costR</div>
-                <div className={classes.middle}>costD</div>
-                <div className={classes.middle}>date</div>
-                <div className={classes.middle}>time</div>
-                <div className={classes.right}>condition</div>
+                <div className={classes.left}>Username</div>
+                <div className={classes.middle}>Type</div>
+                <div className={classes.middle}>Cost</div>
+                <div className={classes.middle}>Date</div>
+                <div className={classes.middle}>Time</div>
+                <div className={classes.right}>Condition</div>
             </div>);
         }else if (this.state.visiblePage === 'Orders')
         {
             this.content = <Orders/>;
             nav = (<div className={classes["nav-container"]}>
-                <div className={classes.left}>type</div>
-                <div className={classes.middle}>costR</div>
-                <div className={classes.middle}>costD</div>
-                <div className={classes.middle}>date</div>
-                <div className={classes.middle}>time</div>
-                <div className={classes.right}>condition</div>
+                <div className={classes.left}>Username</div>
+                <div className={classes.middle}>Type</div>
+                <div className={classes.middle}>Cost</div>
+                <div className={classes.middle}>Date</div>
+                <div className={classes.middle}>Time</div>
+                <div className={classes.right}>Condition</div>
             </div>);
         } else {
             this.content = <MainPage/>;
