@@ -313,7 +313,7 @@ def unknown_pay_transactions_view(request):
             unknown.rial_wallet += pay.rial_cost
             my_user.save()
             unknown.save()
-
+            unknown_transaction_email(request, customer, unknown)
             noification = Notification()
             noification.owner = customer.user
             noification.type = 'order'
@@ -402,8 +402,8 @@ def unknown_transaction_email(request, old_customer, new_customer):
     subject = 'Congrats, you are added to Kapo!'
     message = 'Your friend ' + str(old_customer.first_name) + ' ' + str(
         old_customer.last_name) + ' has sent u money in our syste.\nFeel free to join and collect it.\n details:\n username : ' + str(
-        new_customer.username) + '\npassword: 1234\nKapo.com'
-    recipient_list = [str(new_customer.email)]
+        new_customer.user.username) + '\npassword: 1234\nKapo.com'
+    recipient_list = [str(new_customer.user.email)]
 
     email_from = settings.EMAIL_HOST_USER
     send_mail(subject, message, email_from, recipient_list)
