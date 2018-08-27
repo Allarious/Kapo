@@ -13,4 +13,6 @@ urlpatterns = [
     path('check-owner-transactions', employee_transaction_owner_view, name='employee_checking_owner_transactions'),
     path('all-system-transactions', employee_all_system_transactions_view, name='employee_checking_owner_transactions'),
     path('send-message', send_message, name='send_message'),
+    path('dashboard', employee_dashboard_view, name='dashboard'),
+    path('dashboard/messages', message_dashboard_view, name='message dashboard'),
 ]

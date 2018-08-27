@@ -10,9 +10,9 @@
     -->
     <link rel="manifest" href="http://localhost:3000/manifest.json">
     <link rel="shortcut icon" href="http://localhost:3000/favicon.ico">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    <link rel="stylesheet" href="./send_message_files/font-awesome.min.css">
-    <link rel="stylesheet" href="./send_message_files/bootstrap.min.css">
+    <link rel="stylesheet" href="./make_order_files/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="./make_order_files/font-awesome.min.css">
+    <link rel="stylesheet" href="./make_order_files/bootstrap.min.css">
 
     <!--
       Notice the use of  in the tags above.
@@ -23,7 +23,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Send Message</title>
+    <title>Make Order</title>
   <style type="text/css">body {
   margin: 0;
   padding: 0;
@@ -823,8 +823,8 @@
     border-radius: 20px;
     border: 1px solid #468189;
     overflow: hidden;
-    -webkit-box-shadow: 5px 5px 10px #aaaaaa;
-            box-shadow: 5px 5px 10px #aaaaaa;
+    -webkit-box-shadow: 3px 3px 8px #aaaaaa;
+            box-shadow: 3px 3px 8px #aaaaaa;
 
 }
 .converttype__logo__165-8{
@@ -1241,22 +1241,69 @@ html {
     border-radius: 30px;
     padding: 30px;
     overflow: hidden;
-}</style><style type="text/css">.acc__container__19wqh{
+}
+.accounts__add__2RuQ1{
+    width: 30%;
+    height: 300px;
+    margin: 30px 1.6%;
+    border-radius: 30px;
+    float: left;
+    background-size: 100% 100%;
+    border: 1px dashed #468189;
+    overflow: hidden;
+    cursor: pointer;
+    -webkit-box-shadow: 5px 5px 10px #aaaaaa;
+            box-shadow: 5px 5px 10px #aaaaaa;
+    -webkit-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+}
+.accounts__circle__2LFZY{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 40px auto;
+    border: 1px dashed #468189;
+    /*display: none;*/
+}
+.accounts__ver-line__1mRGN{
+    position: relative;
+    top: 25%;
+    left: 50%;
+    height: 100px;
+    width: 100px;
+    border-left: 1px dashed #468189;
+    background-color: transparent;
+}
+.accounts__hor-line__1ohYg{
+    position: relative;
+    left: 25%;
+    height: 100px;
+    width: 100px;
+    border-top: 1px dashed #468189;
+    background-color: transparent;
+}
+.accounts__modal__1Phdc{
+    height: 100%;
+    width: 100%;
+}
+.accounts__add__2RuQ1:hover{
+    height: 600px;
+}</style><style type="text/css">.acc__container__19wqh {
     width: 30%;
     height: 300px;
     margin: 30px 1.6%;
     background-color: #97C4C4;
     border-radius: 30px;
     float: left;
-    background-size: 100% 100%;
     border: 2px solid #468189;
     overflow: hidden;
     cursor: pointer;
     -webkit-box-shadow: 5px 5px 10px #aaaaaa;
             box-shadow: 5px 5px 10px #aaaaaa;
-
 }
-.acc__im__UofGK{
+
+.acc__im__UofGK {
     position: relative;
     width: 100%;
     height: 100%;
@@ -1267,10 +1314,12 @@ html {
     -o-transition: 4s;
     transition: 4s;
 }
-.acc__im__UofGK:hover{
+
+.acc__im__UofGK:hover {
     background-size: 150% 150%;
 }
-.acc__pro-image__aXltb{
+
+.acc__pro-image__aXltb {
     position: relative;
     top: -90%;
     margin: auto;
@@ -1281,15 +1330,94 @@ html {
     background-size: 100% 100%;
     border-radius: 70px;
 }
-.acc__role__1r0j_{
+
+.acc__role__1r0j_ {
     position: relative;
     top: -90%;
 }
-.acc__name__28Gvb{
+
+.acc__name__28Gvb {
     position: relative;
     top: -90%;
     font-size: 150%;
     padding: 10px 0 0 0;
+}
+
+.acc__button-box__2qyB0 {
+    height: 50px;
+    width: 75%;
+    background-color: transparent;
+    margin: 10px auto;
+    position: relative;
+    top: -260px;
+    border-radius: 10px;
+    /*border: 1px dashed #F9F9F9;*/
+}
+
+.acc__buttonsremove__3c0Tx {
+    width: 17%;
+    height: 40px;
+    margin: 5px 1.5%;
+    /*background-color: transparent;*/
+    float: left;
+    border-radius: 50%;
+    border: 1px dashed #F9F9F9;
+    background-image: url(/static/media/rubbish.77dbda87.svg);
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.acc__buttonsban__11NDP {
+    width: 17%;
+    height: 40px;
+    margin: 5px 1.5%;
+    /*background-color: transparent;*/
+    float: left;
+    border-radius: 50%;
+    border: 1px dashed #F9F9F9;
+    background-image: url(/static/media/ban.26920248.svg);
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.acc__buttonsprofile__3hKn3 {
+    width: 17%;
+    height: 40px;
+    margin: 5px 1.5%;
+    /*background-color: transparent;*/
+    float: left;
+    border-radius: 50%;
+    border: 1px dashed #F9F9F9;
+    background-image: url(/static/media/user.e2d5f809.svg);
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.acc__buttonssendmessage__3alGU {
+    width: 17%;
+    height: 40px;
+    margin: 5px 1.5%;
+    /*background-color: transparent;*/
+    float: left;
+    border-radius: 50%;
+    border: 1px dashed #F9F9F9;
+    background-image: url(/static/media/envelope.4d9e5a20.svg);
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+.acc__buttonspayment__3ktrN {
+    width: 17%;
+    height: 40px;
+    margin: 5px 1.5%;
+    /*background-color: transparent;*/
+    float: left;
+    border-radius: 50%;
+    border: 1px dashed #F9F9F9;
+    background-image: url(/static/media/payment.3e257171.svg);
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
 }</style><style type="text/css">@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700,300);</style><style type="text/css">.dashboard__container__ouR2j{
     width: 85%;
     height: 550px;
@@ -1443,8 +1571,8 @@ html {
     -webkit-transition: 0.4s;
     -o-transition: 0.4s;
     transition: 0.4s;
-    -webkit-box-shadow: 5px 5px 10px #aaaaaa;
-            box-shadow: 5px 5px 10px #aaaaaa;
+    -webkit-box-shadow: 2px 2px 6px #aaaaaa;
+            box-shadow: 2px 2px 6px #aaaaaa;
 
 }
 .messagecomponents__container__3DmVr:hover{
@@ -1527,6 +1655,7 @@ html {
     -webkit-box-shadow: 2px 2px 6px #aaaaaa;
             box-shadow: 2px 2px 6px #aaaaaa;
     cursor: pointer;
+    background-color: #E7E7E7;
 }
 
 .notification__header__1EUST{
@@ -1549,8 +1678,8 @@ html {
     -webkit-transition: 0.4s;
     -o-transition: 0.4s;
     transition: 0.4s;
-    -webkit-box-shadow: 5px 5px 10px #aaaaaa;
-            box-shadow: 5px 5px 10px #aaaaaa;
+    -webkit-box-shadow: 2px 2px 6px #aaaaaa;
+            box-shadow: 2px 2px 6px #aaaaaa;
 
 }
 .transaction__container__1Qkyv:hover{
@@ -1610,8 +1739,8 @@ html {
     -webkit-transition: 0.4s;
     -o-transition: 0.4s;
     transition: 0.4s;
-    -webkit-box-shadow: 5px 5px 10px #aaaaaa;
-            box-shadow: 5px 5px 10px #aaaaaa;
+    -webkit-box-shadow: 2px 2px 6px #aaaaaa;
+            box-shadow: 2px 2px 6px #aaaaaa;
 
 }
 .order__container__3FeH_:hover{
@@ -1660,6 +1789,229 @@ html {
 }
 .order__break__36CEw{
     clear: both;
+}</style><style type="text/css">.order__container__IHv22{
+    width: 85%;
+    margin: 30px auto;
+    background-color: #F9F9F9;
+    border-radius: 30px;
+    -webkit-box-shadow: 5px 5px 10px #aaaaaa;
+            box-shadow: 5px 5px 10px #aaaaaa;
+    overflow: auto;
+    padding: 30px;
+}
+.order__add__2iWv_{
+    padding: 10px;
+    margin-left: 2.5%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 30%;
+    height: 300px;
+    background-color: #eeeeee;
+    border-radius: 30px;
+    border: 1px dashed #468189;
+    float: left;
+    cursor: pointer;
+    -webkit-box-shadow: #aaaaaa 3px 3px 8px;
+            box-shadow: #aaaaaa 3px 3px 8px;
+    overflow: hidden;
+    -webkit-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+}
+.order__circle__1rkcE{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 40px auto;
+    border: 1px dashed #468189;
+}
+.order__ver-line__3fPjH{
+    position: relative;
+    top: 25%;
+    left: 50%;
+    height: 100px;
+    width: 100px;
+    border-left: 1px dashed #468189;
+    background-color: transparent;
+}
+.order__hor-line__b7d37{
+    position: relative;
+    left: 25%;
+    height: 100px;
+    width: 100px;
+    border-top: 1px dashed #468189;
+    background-color: transparent;
+}
+.order__modal__1Krho{
+    height: 100%;
+    width: 100%;
+}
+.order__add__2iWv_:hover{
+    height: 600px;
+}</style><style type="text/css">.exam__container__1nfNm{
+    padding: 10px;
+    margin-left: 2.5%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 30%;
+    height: 300px;
+    background-color: #eeeeee;
+    border-radius: 30px;
+    border: 1px solid #468189;
+    float: left;
+    cursor: pointer;
+    -webkit-box-shadow: #aaaaaa 3px 3px 8px;
+            box-shadow: #aaaaaa 3px 3px 8px;
+}
+
+.exam__header__2YBu9{
+    margin: 0 auto;
+    font-size: 150%;
+    color: #468189;
+}
+.exam__image__2PBPD{
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    height: 80%;
+    width: 80%;
+    margin: 10px auto;
+    border-radius: 30px;
+}</style><style type="text/css">.fillexam__container__1GbbK{
+    width: 300px;
+    border-radius: 30px;
+    background-color: #F9F9F9;
+    -webkit-box-shadow: #aaaaaa 3px 3px 8px;
+            box-shadow: #aaaaaa 3px 3px 8px;
+    margin: 50px auto;
+    padding: 10px 0;
+}
+.fillexam__txtareadiv__3s-I-{
+    width: 90%;
+    height: 100px;
+    border-radius: 20px;
+    border: 1px solid #97C4C4;
+    overflow: hidden;
+    margin: 20px auto;
+}
+.fillexam__txtarea__v-Wcu{
+    height: 100%;
+    width: 100%;
+    border: none;
+    padding: 8px;
+}
+.fillexam__txtarea__v-Wcu:focus{
+    outline: none;
+}</style><style type="text/css">.paymentmethod__container__Czf6U{
+    width: 90%;
+    border-radius: 10px;
+    border: 1px solid #97C4C4;
+    margin: 20px auto;
+    overflow: auto;
+    padding: 10px;
+}
+.paymentmethod__header__2UK_4{
+    padding: 5px;
+    color: #468189;
+}
+.paymentmethod__inner-container__NV0sJ{
+    margin: 10px auto;
+}
+.paymentmethod__rial__3AVT3{
+    width: 70px;
+    height: 70px;
+    background-color: #97C4C4;
+    float: left;
+    margin-left: 8px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-image: url(/static/media/iran-rial.d9f9ecd5.svg);
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    cursor: pointer;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    transition: 0.2s;
+}
+.paymentmethod__rial__3AVT3:hover{
+    background-color: #90C0B0;
+}
+.paymentmethod__rial-active__2OiRK{
+    width: 70px;
+    height: 70px;
+    background-color: #90C0B0;
+    float: left;
+    margin-left: 8px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-image: url(/static/media/iran-rial.d9f9ecd5.svg);
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    cursor: pointer;
+}
+.paymentmethod__dollar__2pltE{
+    width: 70px;
+    height: 70px;
+    background-color: #97C4C4;
+    float: left;
+    background-image: url(/static/media/dollar-symbol.0a6b6518.svg);
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    margin-right: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    transition: 0.2s;
+}
+.paymentmethod__dollar__2pltE:hover{
+    background-color: #90C0B0;
+}
+.paymentmethod__dollar-active__16muI{
+    width: 70px;
+    height: 70px;
+    background-color: #90C0B0;
+    float: left;
+    background-image: url(/static/media/dollar-symbol.0a6b6518.svg);
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    margin-right: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.paymentmethod__euro__2elZD{
+    width: 70px;
+    height: 70px;
+    background-color: #97C4C4;
+    float: left;
+    border-radius: 50%;
+    background-image: url(/static/media/euro-currency-symbol.5abc8329.svg);
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    cursor: pointer;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    transition: 0.2s;
+}
+.paymentmethod__euro__2elZD:hover{
+    background-color: #90C0B0;
+}
+.paymentmethod__euro-active__12SAT{
+    width: 70px;
+    height: 70px;
+    background-color: #90C0B0;
+    float: left;
+    border-radius: 50%;
+    background-image: url(/static/media/euro-currency-symbol.5abc8329.svg);
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    cursor: pointer;
 }</style></head>
   <body>
     <noscript>
@@ -1668,47 +2020,33 @@ html {
     <div id="root">
         <div class="App__App__3t9oX">
             <div class="navbar__navbar__2bGl1">
-                <a href={% if user.is_customer  %}{% url 'customer:index' %} {% elif user.is_employee %} {% url 'employee:index' %}
-                {% else %} {% url 'manager:index' %}{% endif %}><div class="navbar__navComponents__A_iF-">  HomePage  </div></a>
-                <a href={% if user.is_customer  %}{% url 'customer:customer_profile' %} {% elif user.is_employee %} {% url 'employee:employee_profile' %}
-                {% else %} {% url 'manager:manger_profile' %}{% endif %}><div class="navbar__navComponents__A_iF-"> Profile </div></a>
-                <a href={% if user.is_customer  %}{% url 'customer:send_message' %} {% elif user.is_employee %} {% url 'employee:send_message' %}
-                {% else %} {% url 'manager:send_message' %}{% endif %}><div class="navbar__navComponents__A_iF-">  Send Message  </div></a>
-                {% if user.is_customer %}
-                    <a href={% url 'customer:transactions:exchange' %}><div class="navbar__navComponents__A_iF-">  Convert  </div></a>
-                    <a href={% url 'customer:orders' %}><div class="navbar__navComponents__A_iF-">  Orders  </div></a>
-                    <a href={% url 'customer:dashboard' %}><div class="navbar__navComponents__A_iF-">  Dashboard  </div></a>
-                {% endif %}
-            {% if user.is_employee %}
-                <a href={% url 'employee:dashboard' %}><div class="navbar__navComponents__A_iF-">  Dashboard  </div></a>
-            {% endif %}
-
-            {% if user.is_manager %}
-                <a href={% url 'manager:manger exchange' %}><div class="navbar__navComponents__A_iF-">  System Account Management  </div></a>
-            {% endif %}
+                <a href={% url 'customer:index' %}><div class="navbar__navComponents__A_iF-">  HomePage  </div></a>
+                <a href={% url 'customer:customer_profile' %}><div class="navbar__navComponents__A_iF-"> Profile </div></a>
+                <a href={% url 'customer:send_message' %}><div class="navbar__navComponents__A_iF-">  Send Message  </div></a>
+                <a href={% url 'customer:transactions:exchange' %}><div class="navbar__navComponents__A_iF-">  Convert  </div></a>
+                <a href={% url 'customer:orders' %}><div class="navbar__navComponents__A_iF-">  Orders  </div></a>
+                <a href={% url 'customer:dashboard' %}><div class="navbar__navComponents__A_iF-">  Dashboard  </div></a>
                 <a href={% url 'accounts:logout' %}><div class="navbar__navComponents__A_iF-">  Logout  </div></a>
             </div>
-            <div class="sendmessage__container__1qSFO">
-                <form class="form-horizontal login-form" method="post" role="form" action="" enctype="multipart/form-data">
-            {% csrf_token %}
-                <div class="sendmessage__send-to__1dbbY">
-                    <div class="sendmessage__send-to-container__3Uy7u">
-                        <div class="sendmessage__send-to-image__eEIb7">To:</div>
-                        <input class="sendmessage__send-to-input__PeXkT" name="receiver">
+            <div class="fillexam__container__1GbbK">
+                <div><input class="input__login-input__FAzIY" placeholder="Full Name" value=""></div>
+                <div><input class="input__login-input__FAzIY" placeholder="Site Username" value="" name="site_username"></div>
+                <div><input class="input__login-input__FAzIY" placeholder="Site Password" value="" name="site_password"></div>
+                <div><input class="input__login-input__FAzIY" placeholder="Country" value=""></div>
+                <div><input class="input__login-input__FAzIY" placeholder="City" value=""></div>
+                <div class="paymentmethod__container__Czf6U">
+                    <div class="paymentmethod__header__2UK_4"> Choose A Payment Currency </div>
+                    <div class="paymentmethod__inner-container__NV0sJ"><div>
+                        <div class="paymentmethod__rial__3AVT3"></div>
+                        <div class="paymentmethod__dollar-active__16muI"></div>
+                        <div class="paymentmethod__euro__2elZD"></div>
+                    </div>
                     </div>
                 </div>
-                <div class="sendmessage__subject__eb9u_">
-                    <div class="sendmessage__subject-container__1EHsC">
-                        <div class="sendmessage__subject-image__3ohSK">Subject:</div>
-                        <input class="sendmessage__subject-input__1LqRB" name="subject">
-                    </div>
+                <div class="fillexam__txtareadiv__3s-I-">
+                    <textarea class="fillexam__txtarea__v-Wcu" placeholder="write your description here" name="discription"></textarea>
                 </div>
-                <div class="sendmessage__text-body__105H1">
-                    <textarea class="sendmessage__text-body-input__jErOV" type="text" name="message"></textarea>
-                </div>
-                <a href={% url 'customer:index' %}><button class="profilebutton__form-button__2Ovl-">Send</button></a>
-                    {{ form.errors }}
-                </form>
+                <button class="authbutton__form-button__26qDW">Confirm</button>
             </div><div class="footer__footer__1ewxg"><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Contact Us</div><div class="footer__wrapper-body__34NLC">021-1234567<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Email Us</div><div class="footer__wrapper-body__34NLC">info@Kapo.ir<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Follow Us</div><div class="footer__wrapper-body__34NLC"><button class="footer__wrapper-body-button__19lEO">Telegram</button><button class="footer__wrapper-body-button__19lEO">Instagram</button></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Meet us</div><div class="footer__wrapper-body__34NLC">Sharif University Of Tehran<div></div></div></div></div></div></div></div>
     <!--
       This HTML file is a template.
@@ -1720,6 +2058,6 @@ html {
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  <script type="text/javascript" src="./send_message_files/bundle.js.download"></script>
+  <script type="text/javascript" src="./make_order_files/bundle.js.download"></script>
 
 </body></html>

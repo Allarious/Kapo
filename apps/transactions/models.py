@@ -147,6 +147,7 @@ class AbstractTransaction(models.Model):
     checking = models.BooleanField(default=False)
     CHOICES = (('Rial', 'rial'), ('Euro', 'euro'), ('Dollar', 'dollar'))
     currency_type = models.CharField(choices=CHOICES, null=True, max_length=10)
+    image = models.ImageField(null=True)
 
     def is_one_day_passed(self):
         # TODO check if it works correctly

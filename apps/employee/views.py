@@ -140,3 +140,105 @@ def employee_all_system_transactions_view(request):
     transactions = get_all_system_transactions()
     return render(request, 'employee_all_system_transactions.html',
                   {'employee': employee, 'transactions': transactions})
+
+
+def employee_dashboard_view(request):
+    employee = get_object_or_404(Employee, pk=request.user.id)
+    notifications = Notification.objects.all().filter(owner=employee.user)
+    notification = []
+    for i in range(notifications.count()):
+        notification.append(notifications[notifications.count() - 1 - i])
+    Notification.objects.all().filter(owner=employee.user).update(seen=True)
+    return render(request, 'employee_dashboard.html', {'notifications': notification})
+
+def message_dashboard_view(request):
+    employee = get_object_or_404(Employee, pk=request.user.id)
+    messages = Message.objects.all().filter(receiver=employee.user)
+    message = []
+    for i in range(messages.count()):
+        message.append(messages[messages.count() - 1 - i])
+    return render(request, 'employee_massage_dashboard.html', {'messages': message})
+
+def transaction_dashboard_view(request):
+    customer = get_object_or_404(Customer, pk=request.user.id)
+    rial = RialWalletIncTransaction.objects.all().filter(owner=customer)
+    exchange = CurrencyConvertTransaction.objects.all().filter(owner=customer)
+    transactions = []
+    transactions.extend(rial)
+    transactions.extend(exchange)
+    transactions.sort(key=lambda transaction: transaction.creation_time)
+    transactions_list = []
+    for transaction in transactions:
+        tmp = []
+        if isinstance(transaction, RialWalletIncTransaction):
+            tmp.append('Rial Charge')
+            tmp.append(str(transaction.amount) + 'ريال')
+        elif isinstance(transaction, CurrencyConvertTransaction) and transaction.currency == 'dollar':
+            tmp.append('Rial-Dollar Exchange')
+            tmp.append(str(transaction.amount) + '$')
+        else:
+            tmp.append('Rial-Euro Exchange')
+            tmp.append(str(transaction.amount) + '€')
+        tmp.append(transaction.creation_time.date())
+        tmp.append(transaction.creation_time.time())
+        tmp.append(transaction.verified)
+        tmp.append(transaction.description)
+        transactions_list.append(tmp)
+        order = False
+    return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
+                                                          'order' : order})
+
+
+def order_dashboard_view(request):
+    customer = get_object_or_404(Customer, pk=request.user.id)
+    exam = ExamTransaction.objects.all().filter(owner=customer)
+    apply = ApplicationTuitionFeeTransaction.objects.all().filter(owner=customer)
+    foreign = ForeignPaymentTransaction.objects.all().filter(owner=customer)
+    domestic = DomesticPaymentTransaction.objects.all().filter(owner=customer)
+    unknown = UnknownPaymentTransaction.objects.all().filter(owner=customer)
+    transactions = []
+    transactions.extend(exam)
+    transactions.extend(apply)
+    transactions.extend(foreign)
+    transactions.extend(domestic)
+    transactions.extend(unknown)
+    transactions.sort(key=lambda transaction: transaction.creation_time)
+    transactions_list = []
+    for transaction in transactions:
+        tmp = []
+        if isinstance(transaction, ExamTransaction):
+            tmp.append('Exam')
+            tmp.append(str(transaction.dollar_cost) + '$')
+            transaction.description += "Exam title is: " + transaction.exam_title
+        elif isinstance(transaction, ApplicationTuitionFeeTransaction):
+            if transaction.fee_type== 'application fee':
+                tmp.append('Application Fee')
+            else:
+                tmp.append('Tuition Fee')
+            if transaction.dollar_cost > 0:
+                tmp.append(str(transaction.dollar_cost) + '$')
+            else:
+                tmp.append(str(transaction.euro_cost) + '€')
+            transaction.description += "University site url is: " + transaction.site_url
+        elif isinstance(transaction, ForeignPaymentTransaction):
+            tmp.append('Foreign Payment')
+            if transaction.dollar_cost > 0:
+                tmp.append(str(transaction.dollar_cost) + '$')
+            else:
+                tmp.append(str(transaction.euro_cost) + '€')
+            transaction.description += "Destination card number is:" + transaction.foreign_card_number
+        elif isinstance(transaction, DomesticPaymentTransaction):
+            tmp.append('Domestic Payment')
+            tmp.append(str(transaction.rial_cost) + 'ريال')
+            transaction.description += "Destination card number is:" + transaction.domestic_card_number
+        else:
+            tmp.append('Unknown Payment')
+            tmp.append(str(transaction.rial_cost) + 'ريال')
+            transaction.description += "Destination card number is:" + transaction.domestic_card_number
+        tmp.append(transaction.creation_time.date())
+        tmp.append(transaction.creation_time.time())
+        tmp.append(transaction.verified)
+        tmp.append(transaction.description)
+        transactions_list.append(tmp)
+    return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
+                                                          'order': True})

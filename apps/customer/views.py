@@ -8,6 +8,7 @@ from apps.accounts.decorators import customer_required
 from django.urls import reverse
 from apps.transactions.models import *
 from apps.accounts.models import *
+from apps.manager.models import *
 
 
 
@@ -176,6 +177,7 @@ def order_dashboard_view(request):
         tmp.append(transaction.creation_time.time())
         tmp.append(transaction.verified)
         tmp.append(transaction.description)
+        tmp.append(customer.user.username)
         transactions_list.append(tmp)
     return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
                                                           'order': True})
@@ -241,3 +243,8 @@ def send_message(request):
 
     return render(request, 'send_message.html',
                   {user: 'user', 'form': form})
+
+
+def orders(request):
+    exams = ManagerAddedExams.objects.all()
+    return render(request, 'orders.html', {'exams': exams})

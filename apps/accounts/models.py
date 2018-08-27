@@ -18,7 +18,7 @@ class Message(models.Model):
     read = models.BooleanField(default=False)
 
 
-NOTIFICATION_TYPES = (('message', 'Message'), ('transaction', 'Transaction'), ('order', 'Order'), ('feature', 'Feature'))
+NOTIFICATION_TYPES = (('message', 'Message'), ('transaction', 'Transaction'), ('order', 'Order'), ('feature', 'Feature'), ('insufficient money', ' Insufficient Money'))
 SEX_CHOICES = (('male', 'Male'), ('female', 'Female'), ('other', 'Non Binary'))
 
 

@@ -2020,32 +2020,53 @@ html {
     <div id="root">
         <div class="App__App__3t9oX">
             <div class="navbar__navbar__2bGl1">
-                <div class="navbar__navComponents__A_iF-">  HomePage  </div>
-                <div class="navbar__navComponents__A_iF-">  Profile  </div>
-                <div class="navbar__navComponents__A_iF-">  Login  </div>
-                <div class="navbar__navComponents__A_iF-">  Signup  </div>
-                <div class="navbar__navComponents__A_iF-">  Send Message  </div>
-                <div class="navbar__navComponents__A_iF-">  Convert  </div>
-                <div class="navbar__navComponents__A_iF-">  Accounts  </div>
-                <div class="navbar__navComponents__A_iF-">  Order  </div>
-                <div class="navbar__navComponents__A_iF-">  Dashboard  </div>
+                <a href={% url 'customer:index' %}><div class="navbar__navComponents__A_iF-">  HomePage  </div></a>
+                <a href={% url 'customer:customer_profile' %}><div class="navbar__navComponents__A_iF-"> Profile </div></a>
+                <a href={% url 'customer:send_message' %}><div class="navbar__navComponents__A_iF-">  Send Message  </div></a>
+                <a href={% url 'customer:transactions:exchange' %}><div class="navbar__navComponents__A_iF-">  Convert  </div></a>
+                <a href={% url 'customer:orders' %}><div class="navbar__navComponents__A_iF-">  Orders  </div></a>
+                <a href={% url 'customer:dashboard' %}><div class="navbar__navComponents__A_iF-">  Dashboard  </div></a>
+                <a href={% url 'accounts:logout' %}><div class="navbar__navComponents__A_iF-">  Logout  </div></a>
             </div>
-            <div class="order__container__IHv22"><div class="exam__container__1nfNm">
-                <div class="exam__header__2YBu9">Tofel</div>
-                <div class="exam__image__2PBPD" style="background-image: url(&quot;https://yt3.ggpht.com/-Qj3MuJufOYo/AAAAAAAAAAI/AAAAAAAAAAA/YxqFm1RvezU/s900-c-k-no-mo-rj-c0xffffff/photo.jpg&quot;);"></div>
-            </div>
-                <div class="exam__container__1nfNm">
-                    <div class="exam__header__2YBu9">IELTS</div>
-                    <div class="exam__image__2PBPD" style="background-image: url(&quot;https://takeielts.britishcouncil.org/sites/default/files/2018-02/IELTS_app_icon.png&quot;);"></div>
-                </div>
-                <div class="exam__container__1nfNm">
-                    <div class="exam__header__2YBu9">International Exams</div>
-                    <div class="exam__image__2PBPD" style="background-image: url(&quot;https://images.careers360.mobi/sites/default/files/2016/10/04/GRE_Test-2016.jpg&quot;);"></div>
-                </div>
-                <div class="exam__container__1nfNm">
-                    <div class="exam__header__2YBu9">Cryptocurrency</div>
-                    <div class="exam__image__2PBPD" style="background-image: url(&quot;https://pbs.twimg.com/profile_images/421692600446619648/dWAbC2wg.jpeg&quot;);"></div>
-                </div>
+            <div class="order__container__IHv22">
+                {% for exam in exams %}
+                    <a href="{% url 'customer:transactions:exam transactions' 'title' %}?exam= {{ exam }}"><div class="exam__container__1nfNm">
+                    <div class="exam__header__2YBu9">{{ exam.exam_title}}</div>
+                    <div class="exam__image__2PBPD" style="background-image: url({{ exam.image_url }});"></div>
+                </div></a>
+                {% endfor %}
+                <a href={% url 'customer:transactions:application fee transactions' %}><div class="exam__container__1nfNm">
+                    <div class="exam__header__2YBu9">Application/Fee</div>
+                    <div class="exam__image__2PBPD" style="background-image: none"></div>
+                </div></a>
+                <a href={% url 'customer:transactions:foreign pay transactions' %}><div class="exam__container__1nfNm">
+                    <div class="exam__header__2YBu9">Foreign Payment</div>
+                    <div class="exam__image__2PBPD" style="background-image: none"></div>
+                </div></a>
+                <a href={% url 'customer:transactions:domestic pay transactions' %}><div class="exam__container__1nfNm">
+                    <div class="exam__header__2YBu9">Domestic Payment</div>
+                    <div class="exam__image__2PBPD" style="background-image: none"></div>
+                </div></a>
+                <a href={% url 'customer:transactions:unknown pay transactions' %}><div class="exam__container__1nfNm">
+                    <div class="exam__header__2YBu9">Unknown Payment</div>
+                    <div class="exam__image__2PBPD" style="background-image: none"></div>
+                </div></a>
+{#                <div class="exam__container__1nfNm">#}
+{#                    <div class="exam__header__2YBu9">Tofel</div>#}
+{#                    <div class="exam__image__2PBPD" style="background-image: url(&quot;https://yt3.ggpht.com/-Qj3MuJufOYo/AAAAAAAAAAI/AAAAAAAAAAA/YxqFm1RvezU/s900-c-k-no-mo-rj-c0xffffff/photo.jpg&quot;);"></div>#}
+{#                </div>#}
+{#                <div class="exam__container__1nfNm">#}
+{#                    <div class="exam__header__2YBu9">IELTS</div>#}
+{#                    <div class="exam__image__2PBPD" style="background-image: url(&quot;https://takeielts.britishcouncil.org/sites/default/files/2018-02/IELTS_app_icon.png&quot;);"></div>#}
+{#                </div>#}
+{#                <div class="exam__container__1nfNm">#}
+{#                    <div class="exam__header__2YBu9">International Exams</div>#}
+{#                    <div class="exam__image__2PBPD" style="background-image: url(&quot;https://images.careers360.mobi/sites/default/files/2016/10/04/GRE_Test-2016.jpg&quot;);"></div>#}
+{#                </div>#}
+{#                <div class="exam__container__1nfNm">#}
+{#                    <div class="exam__header__2YBu9">Cryptocurrency</div>#}
+{#                    <div class="exam__image__2PBPD" style="background-image: url(&quot;https://pbs.twimg.com/profile_images/421692600446619648/dWAbC2wg.jpeg&quot;);"></div>#}
+{#                </div>#}
                 <div class="order__add__2iWv_">
                     <div class="order__circle__1rkcE">
                         <div class="order__ver-line__3fPjH"></div>

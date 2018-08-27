@@ -19,14 +19,15 @@ class ExchangeForm(forms.ModelForm):
 class ExamTransactionForm(forms.ModelForm):
     class Meta:
         model = ExamTransaction
-        fields = ['exam_title', 'dollar_cost', 'site_url', 'site_authentication', 'site_username', 'site_password',
-                  'description']
+        fields = ['site_username', 'site_password',
+                  'description'] #['exam_title', 'dollar_cost', 'site_url', 'site_authentication',
+
 
 
 class ApplicationTuitionFeeTransactionForm(forms.ModelForm):
     class Meta:
         model = ApplicationTuitionFeeTransaction
-        fields = ['fee_type', 'dollar_cost', 'euro_cost', 'site_url', 'site_authentication', 'site_username',
+        fields = ['fee_type', 'dollar_cost', 'euro_cost', 'site_url', 'site_username',
                   'site_password', 'description']
 
 

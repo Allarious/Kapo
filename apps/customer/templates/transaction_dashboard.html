@@ -1573,6 +1573,14 @@ html {
     line-height: 75px;
     color: lightgreen;
 }
+.transaction__wrong__7uyD4{
+    float: left;
+    border-left: 1px solid #468189;
+    border-bottom: 1px solid #468189;
+    width: 16.5%;
+    line-height: 75px;
+    color: red;
+}
 .transaction__left__1mO41{
     float: left;
     border-right: 1px solid #468189;
@@ -1672,6 +1680,7 @@ html {
                 <a href={% url 'customer:customer_profile' %}><div class="navbar__navComponents__A_iF-"> Profile </div></a>
                 <a href={% url 'customer:send_message' %}><div class="navbar__navComponents__A_iF-">  Send Message  </div></a>
                 <a href={% url 'customer:transactions:exchange' %}><div class="navbar__navComponents__A_iF-">  Convert  </div></a>
+                <a href={% url 'customer:orders' %}><div class="navbar__navComponents__A_iF-">  Orders  </div></a>
                 <a href={% url 'customer:dashboard' %}><div class="navbar__navComponents__A_iF-">  Dashboard  </div></a>
                 <a href={% url 'accounts:logout' %}><div class="navbar__navComponents__A_iF-">  Logout  </div></a>
             </div>
@@ -1696,7 +1705,7 @@ html {
                         <div class="dashboard__nav-container__2M4J4">
                             <div class="dashboard__left__GhWUe">type</div>
                             <div class="dashboard__middle__1uYlL">amount</div>
-                            <div class="dashboard__middle__1uYlL">costD</div>
+                            <div class="dashboard__middle__1uYlL">User</div>
                             <div class="dashboard__middle__1uYlL">date</div>
                             <div class="dashboard__middle__1uYlL">time</div>
                             <div class="dashboard__right__VSVw6">condition</div>
@@ -1708,12 +1717,13 @@ html {
                             <div class="transaction__container__1Qkyv">
                                 <div class="transaction__left__1mO41">{{ transaction.0 }}</div>
                                 <div class="transaction__middle__2ocXa">{{ transaction.1 }}</div>
-                                <div class="transaction__middle__2ocXa">0</div>
+                                <div class="transaction__middle__2ocXa">{{ transaction.6 }}</div>
                                 <div class="transaction__middle__2ocXa">{{ transaction.2 }}</div>
                                 <div class="transaction__middle__2ocXa">{{ transaction.3 }}</div>
-                                <div class="transaction__right__7uyD4">accepted</div>
+                                <div class="transaction__right__7uyD4">{% if transaction.4 %}
+                                {% endif %}</div>
                                 <div class="transaction__break__195wa"></div>
-                                <div class="transaction__more-info__1Y1nW"></div>
+                                <div class="transaction__more-info__1Y1nW">{{ transaction.5 }}</div>
                             </div>
                             {% endfor %}
                         </div>

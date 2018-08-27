@@ -5,6 +5,7 @@ from django.urls import reverse
 from apps.core.models import Configuration
 from apps.manager.models import Manager
 from .forms.forms import *
+from apps.accounts.models import Notification
 from apps.accounts.decorators import customer_required, manager_required
 
 
@@ -94,18 +95,19 @@ def exam_transactions_view(request):
     wage = float(Configuration.objects.get(key='exam wage').value)
     dollar_rate = int(Configuration.objects.get(key='dollar').value)
     euro_rate = int(Configuration.objects.get(key='euro').value)
-
+    exam_type = request.Get.get('exam')
     if request.method == 'POST':
         form = ExamTransactionForm(request.POST)
         if form.is_valid():
             exam = form.save(commit=False)
             exam.owner = customer
             exam.currency_type = 'dollar'
+            exam.exam
             cost = exam.dollar_cost * wage
             if customer.dollar_wallet < cost:
                 form.add_error('dollar_cost',
                                'You need {} more dollars!'.format(cost - customer.dollar_wallet))
-                return render(request, 'exam_transactions.html',
+                return render(request, 'exam_order.html',
                               {'customer': customer, 'form': form, 'wage': wage,
                                'dollar_rate': dollar_rate,
                                'euro_rate': euro_rate})
@@ -114,7 +116,7 @@ def exam_transactions_view(request):
     else:
         form = ExamTransactionForm()
 
-    return render(request, 'exam_transactions.html',
+    return render(request, 'exam_order.html',
                   {'customer': customer, 'form': form, 'wage': wage, 'dollar_rate': dollar_rate,
                    'euro_rate': euro_rate})
 
@@ -132,6 +134,8 @@ def app_fee_transactions_view(request):
         if form.is_valid():
             fee = form.save(commit=False)
             fee.owner = customer
+            if fee.site_username == "" and fee.site_password == "":
+                fee.site_authentication = False
             if fee.dollar_cost > fee.euro_cost and fee.euro_cost == 0:
                 cost = fee.dollar_cost * wage
                 fee.currency_type = 'dollar'
@@ -139,7 +143,7 @@ def app_fee_transactions_view(request):
                 if customer.dollar_wallet < cost:
                     form.add_error('dollar_cost',
                                    'You need {} more Dollars!'.format(cost - customer.dollar_wallet))
-                    return render(request, 'fee_transactions.html',
+                    return render(request, 'app_fee_order.html',
                                   {'customer': customer, 'form': form, 'wage': wage,
                                    'dollar_rate': dollar_rate,
                                    'euro_rate': euro_rate})
@@ -153,24 +157,28 @@ def app_fee_transactions_view(request):
                 if customer.euro_wallet < cost:
                     form.add_error('euro_cost',
                                    'You need {} more Euros!'.format(cost - customer.euro_wallet))
-                    return render(request, 'fee_transactions.html',
+                    return render(request, 'app_fee_order.html',
                                   {'customer': customer, 'form': form, 'wage': wage,
                                    'dollar_rate': dollar_rate,
                                    'euro_rate': euro_rate})
 
                 fee.save()
             else:
+                print(fee.euro_cost, fee.dollar_cost)
                 form.add_error('dollar_cost', 'sth went wrong!')
-                return render(request, 'fee_transactions.html',
+                return render(request, 'app_fee_order.html',
                               {'customer': customer, 'form': form, 'wage': wage,
                                'dollar_rate': dollar_rate,
                                'euro_rate': euro_rate})
-
-            return redirect('/customer/')
+            noification = Notification()
+            noification.owner = customer.user
+            noification.type = 'order'
+            noification.save()
+            return redirect(reverse('customer:index'))
     else:
         form = ApplicationTuitionFeeTransactionForm()
 
-    return render(request, 'fee_transactions.html',
+    return render(request, 'app_fee_order.html',
                   {'customer': customer, 'form': form, 'wage': wage, 'dollar_rate': dollar_rate,
                    'euro_rate': euro_rate})
 

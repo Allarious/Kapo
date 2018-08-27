@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- saved from url=(0022)http://localhost:3000/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
     <!--
@@ -10,9 +10,9 @@
     -->
     <link rel="manifest" href="http://localhost:3000/manifest.json">
     <link rel="shortcut icon" href="http://localhost:3000/favicon.ico">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-    <link rel="stylesheet" href="./send_message_files/font-awesome.min.css">
-    <link rel="stylesheet" href="./send_message_files/bootstrap.min.css">
+    <link rel="stylesheet" href="./customer_message_dashboard_files/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="./customer_message_dashboard_files/font-awesome.min.css">
+    <link rel="stylesheet" href="./customer_message_dashboard_files/bootstrap.min.css">
 
     <!--
       Notice the use of  in the tags above.
@@ -23,7 +23,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Send Message</title>
+    <title>Dashboard</title>
   <style type="text/css">body {
   margin: 0;
   padding: 0;
@@ -1668,48 +1668,48 @@ html {
     <div id="root">
         <div class="App__App__3t9oX">
             <div class="navbar__navbar__2bGl1">
-                <a href={% if user.is_customer  %}{% url 'customer:index' %} {% elif user.is_employee %} {% url 'employee:index' %}
-                {% else %} {% url 'manager:index' %}{% endif %}><div class="navbar__navComponents__A_iF-">  HomePage  </div></a>
-                <a href={% if user.is_customer  %}{% url 'customer:customer_profile' %} {% elif user.is_employee %} {% url 'employee:employee_profile' %}
-                {% else %} {% url 'manager:manger_profile' %}{% endif %}><div class="navbar__navComponents__A_iF-"> Profile </div></a>
-                <a href={% if user.is_customer  %}{% url 'customer:send_message' %} {% elif user.is_employee %} {% url 'employee:send_message' %}
-                {% else %} {% url 'manager:send_message' %}{% endif %}><div class="navbar__navComponents__A_iF-">  Send Message  </div></a>
-                {% if user.is_customer %}
-                    <a href={% url 'customer:transactions:exchange' %}><div class="navbar__navComponents__A_iF-">  Convert  </div></a>
-                    <a href={% url 'customer:orders' %}><div class="navbar__navComponents__A_iF-">  Orders  </div></a>
-                    <a href={% url 'customer:dashboard' %}><div class="navbar__navComponents__A_iF-">  Dashboard  </div></a>
-                {% endif %}
-            {% if user.is_employee %}
+                <a href={% url 'employee:index' %}><div class="navbar__navComponents__A_iF-">  HomePage  </div></a>
+                <a href={% url 'employee:employee_profile' %}><div class="navbar__navComponents__A_iF-"> Profile </div></a>
+                <a href={% url 'employee:send_message' %}><div class="navbar__navComponents__A_iF-">  Send Message  </div></a>
                 <a href={% url 'employee:dashboard' %}><div class="navbar__navComponents__A_iF-">  Dashboard  </div></a>
-            {% endif %}
-
-            {% if user.is_manager %}
-                <a href={% url 'manager:manger exchange' %}><div class="navbar__navComponents__A_iF-">  System Account Management  </div></a>
-            {% endif %}
                 <a href={% url 'accounts:logout' %}><div class="navbar__navComponents__A_iF-">  Logout  </div></a>
             </div>
-            <div class="sendmessage__container__1qSFO">
-                <form class="form-horizontal login-form" method="post" role="form" action="" enctype="multipart/form-data">
-            {% csrf_token %}
-                <div class="sendmessage__send-to__1dbbY">
-                    <div class="sendmessage__send-to-container__3Uy7u">
-                        <div class="sendmessage__send-to-image__eEIb7">To:</div>
-                        <input class="sendmessage__send-to-input__PeXkT" name="receiver">
+            <div class="dashboard__container__ouR2j">
+                <div class="dashboard__left-col__nSUG8">
+                    <div class="dashboard__logo__12FZ0"> Kapo </div>
+                    <a href={% url 'employee:dashboard' %}><button class="dashboard__left-col-selectors__1F6OI">Main Page</button></a>
+                    <a href={% url 'employee:message dashboard' %}><button class="dashboard__left-col-selectors-active__2bPpI">Messages</button></a>
+                    <a href={% url 'employee:employee_checking_transactions' %}><button class="dashboard__left-col-selectors__1F6OI">Transactions</button></a>
+                </div>
+                <div class="dashboard__right-col__7dKoi">
+                    <div class="dashboard__nav__2LLxt">
+                        <div class="dashboard__nav-container__2M4J4">
+                            <div class="dashboard__message-from__2e_Gr">from</div>
+                            <div class="dashboard__message-name__2L9sj">name</div>
+                            <div class="dashboard__message-thumbnail__1dXdI">thumbnail</div>
+                            <div class="dashboard__message-condition__3OfLb">condition</div>
+                        </div>
+                    </div>
+                    <div class="dashboard__inner-container__nl4ri">
+                        <div>
+                            <div>
+
+                            </div>
+                            {% for message in messages %}
+                            <div class="messagecomponents__container__3DmVr">
+                                <div class="messagecomponents__from__5B0in">{{ message.sender.username }}</div>
+                                <div class="messagecomponents__name__1gNT_">{{ message.subject }}</div>
+                                <div class="messagecomponents__thumbnail__29-zl">{{ message.message|truncatewords:4 }}</div>
+                                <div class="messagecomponents__condition__2Uy8F">Read</div>
+                                <div class="messagecomponents__break__3I5Rf"></div>
+                                <div class="messagecomponents__message__Gkt-j">{{ message.message }}</div>
+                        </div>
+                            {% endfor %}
                     </div>
                 </div>
-                <div class="sendmessage__subject__eb9u_">
-                    <div class="sendmessage__subject-container__1EHsC">
-                        <div class="sendmessage__subject-image__3ohSK">Subject:</div>
-                        <input class="sendmessage__subject-input__1LqRB" name="subject">
-                    </div>
-                </div>
-                <div class="sendmessage__text-body__105H1">
-                    <textarea class="sendmessage__text-body-input__jErOV" type="text" name="message"></textarea>
-                </div>
-                <a href={% url 'customer:index' %}><button class="profilebutton__form-button__2Ovl-">Send</button></a>
-                    {{ form.errors }}
-                </form>
-            </div><div class="footer__footer__1ewxg"><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Contact Us</div><div class="footer__wrapper-body__34NLC">021-1234567<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Email Us</div><div class="footer__wrapper-body__34NLC">info@Kapo.ir<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Follow Us</div><div class="footer__wrapper-body__34NLC"><button class="footer__wrapper-body-button__19lEO">Telegram</button><button class="footer__wrapper-body-button__19lEO">Instagram</button></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Meet us</div><div class="footer__wrapper-body__34NLC">Sharif University Of Tehran<div></div></div></div></div></div></div></div>
+            </div>
+        </div>
+        <div class="footer__footer__1ewxg"><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Contact Us</div><div class="footer__wrapper-body__34NLC">021-1234567<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Email Us</div><div class="footer__wrapper-body__34NLC">info@Kapo.ir<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Follow Us</div><div class="footer__wrapper-body__34NLC"><button class="footer__wrapper-body-button__19lEO">Telegram</button><button class="footer__wrapper-body-button__19lEO">Instagram</button></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Meet us</div><div class="footer__wrapper-body__34NLC">Sharif University Of Tehran<div></div></div></div></div></div></div></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -1720,6 +1720,6 @@ html {
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  <script type="text/javascript" src="./send_message_files/bundle.js.download"></script>
+  <script type="text/javascript" src="./customer_message_dashboard_files/bundle.js.download"></script>
 
 </body></html>
