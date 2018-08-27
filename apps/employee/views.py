@@ -45,19 +45,30 @@ def employee_check_transaction_view(request):
             if status == 'accepted':
                 currency = transaction.currency_type
                 if currency == 'rial':
-                    system_account.rial_amount_account -= transaction.dollar_cost
+                    system_account.rial_amount_account -= transaction.rial_cost
+                    customer.rial_wallet -= transaction.rial_cost * transaction.wage_rate
+                    customer.rial_wallet -= transaction.rial_cost
+                    system_account.rial_amount_account += transaction.rial_cost * transaction.wage_rate
+
                 elif currency == 'dollar':
                     system_account.dollar_amount_account -= transaction.dollar_cost
+                    customer.dollar_wallet -= transaction.dollar_cost * transaction.wage_rate
+                    customer.dollar_wallet -= transaction.dollar_cost
+                    system_account.dollar_amount_account += transaction.dollar_cost * transaction.wage_rate
                 elif currency == 'euro':
-                    system_account.euro_amount_account -= transaction.rial_cost
+                    system_account.euro_amount_account -= transaction.euro_cost
+                    customer.euro_wallet -= transaction.euro_cost * transaction.wage_rate
+                    customer.euro_wallet -= transaction.euro_cost
+                    system_account.euro_amount_account += transaction.euro_cost * transaction.wage_rate
 
                 employees_wage = 0
                 for employee in Employee.objects.all():
                     employees_wage += employee.wage_per_month
-                if system_account.rial_amount_account <= employees_wage:
+                if system_account.rial_amount_account <= 3 * employees_wage:
                     Notification(owner=Manager.objects.all()[0], type='insufficient money').save()
-                    pass
+
                 system_account.save()
+                customer.save()
 
                 transaction.paid = True
                 transaction.verified = True
@@ -73,7 +84,6 @@ def employee_check_transaction_view(request):
 
 
         elif request.POST.get('Customer selected'):
-            # delete this customer
             customer = Customer.objects.filter(username=request.POST.get('username'))
             return employee_transaction_owner_view(request, customer)
 
@@ -192,7 +202,7 @@ def transaction_dashboard_view(request):
         tmp.append(transaction.description)
         transactions_list.append(tmp)
         order = False
-        #TODO check order
+        # TODO check order
     return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
                                                           'order': order})
 
