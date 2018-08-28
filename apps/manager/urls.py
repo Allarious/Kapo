@@ -20,6 +20,7 @@ urlpatterns = [
     path('add-employee', manager_add_employee, name='manager_add_employee'),
     path('system-wallet-management', manager_exchange_view, name='manger exchange'),
     path('manager-send-inform', manager_send_to_all, name='manger send inform'),
+    path('manager-acc-inc', manager_increase_account_money, name='manger increase account'),
 ]
 
 # TODO bayad mogheyi ke tarakonesh barresish tamum mishe checke checkingesh false beshe/

@@ -274,3 +274,9 @@ def manager_send_to_all(request):
             return HttpResponseRedirect('manager:index')
     return render(request, 'sendtoall.html',
                   {'manger': manager})
+
+
+def manager_increase_account_money(request):
+    manager = get_object_or_404(Manager, pk=request.user.id)
+    return render(request, 'manager_account_inc_money.html',
+                  {'manger': manager})
