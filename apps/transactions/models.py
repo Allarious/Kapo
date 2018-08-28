@@ -151,6 +151,7 @@ class AbstractTransaction(models.Model):
     image = models.ImageField(null=True)
     wage_rate = models.FloatField(default=0)
     type_name = models.CharField(max_length=50, default='no name')
+    manager_owner = models.BooleanField(default=False)
 
     def is_one_day_passed(self):
         # TODO check if it works correctly
