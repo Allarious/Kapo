@@ -1675,6 +1675,11 @@ html {
                     <a href={% url 'manager:manager_employees_list' %}><div class="navbar__navComponents__A_iF-">  Employee List  </div></a>
                 <a href={% url 'manager:manager_customers_list' %}><div class="navbar__navComponents__A_iF-">  Customer List  </div></a>
                     <a href={% url 'manager:manger exchange' %}><div class="navbar__navComponents__A_iF-">  System Account Management  </div></a>
+                    <a href={% url 'about-us' %}><div class="navbar__navComponents__A_iF-">  About Us  </div></a>
+                <a href={% url 'contact-us' %}><div class="navbar__navComponents__A_iF-">  Contact Us  </div></a>
+                <a href={% url 'policy' %}><div class="navbar__navComponents__A_iF-">  Policy  </div></a>
+                <a href={% url 'transition_test' %}><div class="navbar__navComponents__A_iF-">  Transition Test  </div></a>
+                <a href={% url 'wages' %}><div class="navbar__navComponents__A_iF-">  Rates  </div></a>
                 <a href={% url 'accounts:logout' %}><div class="navbar__navComponents__A_iF-">  Logout  </div></a>
                     {% else %}
                     <a href={% url 'customer:index' %}><div class="navbar__navComponents__A_iF-">  HomePage  </div></a>
@@ -1683,6 +1688,11 @@ html {
                 <a href={% url 'customer:transactions:exchange' %}><div class="navbar__navComponents__A_iF-">  Convert  </div></a>
                     <a href={% url 'customer:orders' %}><div class="navbar__navComponents__A_iF-">  Orders  </div></a>
                 <a href={% url 'customer:dashboard' %}><div class="navbar__navComponents__A_iF-">  Dashboard  </div></a>
+                    <a href={% url 'about-us' %}><div class="navbar__navComponents__A_iF-">  About Us  </div></a>
+                <a href={% url 'contact-us' %}><div class="navbar__navComponents__A_iF-">  Contact Us  </div></a>
+                <a href={% url 'policy' %}><div class="navbar__navComponents__A_iF-">  Policy  </div></a>
+                <a href={% url 'transition_test' %}><div class="navbar__navComponents__A_iF-">  Transition Test  </div></a>
+                <a href={% url 'wages' %}><div class="navbar__navComponents__A_iF-">  Rates  </div></a>
                 <a href={% url 'accounts:logout' %}><div class="navbar__navComponents__A_iF-">  Logout  </div></a>
                 {% endif %}
 

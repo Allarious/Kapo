@@ -52,6 +52,11 @@ def policy_view(request):
 
 def wages_list_view(request):
     wages = Configuration.objects.all().exclude(key__in=['dollar', 'euro'])
+    for wage in wages:
+        tmp = '0' + wage.value[1:]
+        # tmp = '0'
+        print(tmp)
+        wage.value = tmp
     rates = Configuration.objects.all().filter(key__in=['dollar', 'euro'])
     return render(request, 'wages.html', {'rates': rates, 'wages': wages})
 
