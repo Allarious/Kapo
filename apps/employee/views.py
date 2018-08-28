@@ -46,21 +46,38 @@ def employee_check_transaction_view(request):
             if status == 'accepted':
                 currency = transaction.currency_type
                 if currency == 'rial':
-                    system_account.rial_amount_account -= transaction.rial_cost
-                    customer.rial_wallet -= transaction.rial_cost * transaction.wage_rate
-                    customer.rial_wallet -= transaction.rial_cost
-                    system_account.rial_amount_account += transaction.rial_cost * transaction.wage_rate
+                    cost = transaction.rial_cost * transaction.wage_rate + transaction.rial_cost
+                    if customer.rial_wallet < cost:
+                        transaction.paid = False
+                        transaction.checking = False
+                        transaction.verified = False
+                        transaction_report_email(transaction, customer)
+                        return transaction.save()
+
+                    customer.rial_wallet -= cost
+                    system_account.rial_amount_account += round(transaction.rial_cost * transaction.wage_rate, 2)
 
                 elif currency == 'dollar':
-                    system_account.dollar_amount_account -= transaction.dollar_cost
-                    customer.dollar_wallet -= transaction.dollar_cost * transaction.wage_rate
-                    customer.dollar_wallet -= transaction.dollar_cost
-                    system_account.dollar_amount_account += transaction.dollar_cost * transaction.wage_rate
+                    cost = transaction.dollar_cost * transaction.wage_rate + transaction.dollar_cost
+                    if customer.dollar_wallet < cost:
+                        transaction.paid = False
+                        transaction.checking = False
+                        transaction.verified = False
+                        transaction_report_email(transaction, customer)
+                        return transaction.save()
+                    customer.dollar_wallet -= cost
+
+                    system_account.dollar_amount_account += round(transaction.dollar_cost * transaction.wage_rate, 2)
                 elif currency == 'euro':
-                    system_account.euro_amount_account -= transaction.euro_cost
-                    customer.euro_wallet -= transaction.euro_cost * transaction.wage_rate
-                    customer.euro_wallet -= transaction.euro_cost
-                    system_account.euro_amount_account += transaction.euro_cost * transaction.wage_rate
+                    cost = transaction.euro_cost * transaction.euro_cost + transaction.euro_cost
+                    if customer.euro_wallet < cost:
+                        transaction.paid = False
+                        transaction.checking = False
+                        transaction.verified = False
+                        transaction_report_email(transaction, customer)
+                        return transaction.save()
+                    customer.euro_wallet -= cost
+                    system_account.euro_amount_account += round(transaction.euro_cost * transaction.wage_rate, 2)
 
                 employees_wage = 0
                 for employee in Employee.objects.all():
@@ -84,15 +101,15 @@ def employee_check_transaction_view(request):
             transaction.save()
 
 
-        elif request.POST.get('Customer selected'):
-            customer = Customer.objects.filter(username=request.POST.get('username'))
-            return employee_transaction_owner_view(request, customer)
+    elif request.POST.get('Customer selected'):
+        customer = Customer.objects.filter(username=request.POST.get('username'))
+        return employee_transaction_owner_view(request, customer)
 
-        # elif request.POST.get('assign'):
-        #     transaction = get_null_verified_transactions()[0]
-        #     transaction.checking_employee = employee
-        #     transaction.checking = True
-        #     return employee_check_transaction_view(request)
+    # elif request.POST.get('assign'):
+    #     transaction = get_null_verified_transactions()[0]
+    #     transaction.checking_employee = employee
+    #     transaction.checking = True
+    #     return employee_check_transaction_view(request)
 
     # this will show manager not verified and not checked transactions
 
@@ -288,6 +305,7 @@ def get_employee_transactions(employee):
             transactions.pop(transaction)
 
     return transactions
+
 
 def get_all_system_transactions():
     transactions = []

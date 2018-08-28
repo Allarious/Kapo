@@ -150,6 +150,7 @@ class AbstractTransaction(models.Model):
     currency_type = models.CharField(choices=CHOICES, null=True, max_length=10)
     image = models.ImageField(null=True)
     wage_rate = models.FloatField(default=0)
+    type_name = models.CharField(max_length=50, default='khar')
 
     def is_one_day_passed(self):
         # TODO check if it works correctly
@@ -174,6 +175,11 @@ class RialWalletIncTransaction(AbstractTransaction):
     def __str__(self):
         return 'Rial inc ' + str(self.id)
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.type_name = 'folan'
+        super().save()
+
 
 class CurrencyConvertTransaction(AbstractTransaction):
     rial_cost = models.FloatField(validators=[MaxValueValidator(300000000), MinValueValidator(100000)])
@@ -183,6 +189,11 @@ class CurrencyConvertTransaction(AbstractTransaction):
 
     def __str__(self):
         return str(self.currency) + ' Convert ' + str(self.id)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.type_name = 'folan'
+        super().save()
 
 
 class ExamTransaction(AbstractTransaction):
@@ -195,6 +206,11 @@ class ExamTransaction(AbstractTransaction):
 
     def __str__(self):
         return self.exam_title + ' ' + str(self.id)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.type_name = 'Exam'
+        super().save()
 
 
 class ApplicationTuitionFeeTransaction(AbstractTransaction):
@@ -217,6 +233,15 @@ class ApplicationTuitionFeeTransaction(AbstractTransaction):
     def __str__(self):
         return self.fee_type + ' ' + str(self.id)
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        if self.fee_type == 'application fee':
+            self.type_name = 'Application Fee'
+        if self.fee_type == 'tuition fee':
+            self.type_name = 'Tuition Fee'
+
+        super().save()
+
 
 class ForeignPaymentTransaction(AbstractTransaction):
     dollar_cost = models.FloatField(default=0,
@@ -232,6 +257,11 @@ class ForeignPaymentTransaction(AbstractTransaction):
     def __str__(self):
         return 'Foreign payment ' + str(self.id)
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.type_name = 'Foreign Payment'
+        super().save()
+
 
 class DomesticPaymentTransaction(AbstractTransaction):
     rial_cost = models.FloatField(default=0, validators=[MaxValueValidator(30000000), MinValueValidator(10000)])
@@ -239,6 +269,11 @@ class DomesticPaymentTransaction(AbstractTransaction):
 
     def __str__(self):
         return 'Domestic payment' + ' ' + str(self.id)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.type_name = 'Domestic Payment'
+        super().save()
 
 
 class UnknownPaymentTransaction(AbstractTransaction):
@@ -248,3 +283,8 @@ class UnknownPaymentTransaction(AbstractTransaction):
 
     def __str__(self):
         return 'Unknown payment' + ' ' + str(self.id)
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        self.type_name = 'Unknown Payment'
+        super().save()

@@ -140,7 +140,7 @@ def app_fee_transactions_view(request):
         if form.is_valid():
             fee = form.save(commit=False)
             fee.owner = customer
-            fee.wage_rate = 1 - wage
+            fee.wage_rate = round(wage-1,2)
             if fee.site_username == "" and fee.site_password == "":
                 fee.site_authentication = False
             if fee.dollar_cost > fee.euro_cost and fee.euro_cost == 0:
@@ -154,7 +154,7 @@ def app_fee_transactions_view(request):
                                   {'customer': customer, 'form': form, 'wage': wage,
                                    'dollar_rate': dollar_rate,
                                    'euro_rate': euro_rate})
-                fee.wage_rate = 1 - wage
+                fee.wage_rate = round(wage-1,2)
                 fee.save()
 
 
@@ -169,7 +169,7 @@ def app_fee_transactions_view(request):
                                   {'customer': customer, 'form': form, 'wage': wage,
                                    'dollar_rate': dollar_rate,
                                    'euro_rate': euro_rate})
-                fee.wage_rate = 1 - wage
+                fee.wage_rate = round(wage-1,2)
                 fee.save()
             else:
                 print(fee.euro_cost, fee.dollar_cost)
@@ -216,7 +216,7 @@ def foreign_pay_transactions_view(request):
                                    'dollar_rate': dollar_rate,
                                    'euro_rate': euro_rate})
 
-                pay.wage_rate = 1 - wage
+                pay.wage_rate = round(wage-1,2)
                 pay.save()
 
 
@@ -231,7 +231,7 @@ def foreign_pay_transactions_view(request):
                                   {'customer': customer, 'form': form, 'wage': wage,
                                    'dollar_rate': dollar_rate,
                                    'euro_rate': euro_rate})
-                pay.wage_rate = 1 - wage
+                pay.wage_rate = round(wage-1,2)
                 pay.save()
 
             else:
@@ -266,7 +266,7 @@ def domestic_pay_transactions_view(request):
             pay = form.save(commit=False)
             pay.owner = customer
             pay.currency_type = 'rial'
-            pay.wage_rate = 1 - wage
+            pay.wage_rate = round(wage-1,2)
             cost = pay.rial_cost * wage
             if customer.rial_wallet < cost:
                 form.add_error('rial_cost',
@@ -299,7 +299,7 @@ def unknown_pay_transactions_view(request):
             pay.owner = customer
             cost = pay.rial_cost * wage
             pay.currency_type = 'rial'
-            pay.wage_rate = 1 - wage
+            pay.wage_rate = round(wage-1,2)
 
             if customer.rial_wallet < cost:
                 form.add_error('rial_cost',
