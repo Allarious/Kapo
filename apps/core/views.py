@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+from apps.core.models import Configuration
 from apps.transactions.models import *
 
 
@@ -27,3 +28,9 @@ def policy_view(request):
     return render(request, 'policy.html', {})
 
 
+
+
+
+def wages_list_view(request):
+    wages = Configuration.objects.all().exclude(key__in=['dollar', 'euro'])
+    return render(request, 'wages.html', {'wages': wages})

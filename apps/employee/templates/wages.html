@@ -1,0 +1,18 @@
+{% load tag_library %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>wages</title>
+</head>
+<body>
+
+{% for wage in wages %}
+    {{ wage.key }} : {{ wage.value|to_float_persent }}<br>
+
+{% endfor %}
+
+</body>
+</html>
