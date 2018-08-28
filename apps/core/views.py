@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+from apps.accounts.models import Notification, Message
 from apps.core.models import Configuration
+from apps.manager.models import Manager
 from apps.transactions.models import *
 
 
@@ -17,7 +19,27 @@ def index(request):
 
 
 def contact_us_view(request):
-    return render(request, 'contact_us.html', {})
+    if (request.POST):
+        notification = Notification()
+        message = Message()
+        message_receiver = get_object_or_404(MyUser, id=Manager.objects.all()[0].user.id)
+        # message_receiver = MyUser.objects.get(username=receiver)
+        message.receiver = message_receiver
+        notification.owner = message_receiver
+        notification.type = 'message'
+        user = MyUser()
+        print(user.id)
+        id = MyUser.objects.all().count()
+        user.username = "user" + str(id)
+        user.set_password("1234")
+        user.email = "user" + str(user.id) +"@gmail.com"
+        user.save()
+        message.sender = user
+        message.subject = request.POST.get("subject")
+        message.message = request.POST.get('message')
+        notification.save()
+        message.save()
+    return render(request, 'contact-us.html', {})
 
 
 def about_us_view(request):

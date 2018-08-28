@@ -619,6 +619,7 @@ input {
                 <a href={% url 'accounts:login' %}><div class="navbar__navComponents__A_iF-">  Login  </div></a>
                 <a href={% url 'accounts:register' %}><div class="navbar__navComponents__A_iF-">  Signup  </div></a>
                 <a href={% url 'about-us' %}><div class="navbar__navComponents__A_iF-">  About Us  </div></a>
+                <a href={% url 'contact-us' %}><div class="navbar__navComponents__A_iF-">  Contact Us  </div></a>
             </div>
             <div class="signup__signup-container__3eqmF"><div>
         </div>
@@ -646,7 +647,7 @@ input {
                 <div>
                     <input class="input__login-input__1pYxI" type="password" placeholder="Confirm Password" name="password2">
                 </div>
-                    <div class="signup__conditions-of-use__2PETr">{{ user_form.errors }}</div>
+                    <div class="signup__conditions-of-use__2PETr">{{ form.errors }}{{ user_form.errors }}</div>
 
                     <br>
                     <div class="signup__conditions-of-use__2PETr">
