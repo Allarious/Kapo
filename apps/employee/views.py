@@ -260,3 +260,30 @@ def order_dashboard_view(request):
         transactions_list.append(tmp)
     return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
                                                           'order': True})
+
+
+def get_employee_transactions(employee):
+    transactions = []
+    # Exam transactions:
+    exams = ExamTransaction.objects.filter(checking_employee=employee, verified=None)
+    # Application and tuition fees transactions:
+    fees = ApplicationTuitionFeeTransaction.objects.filter(checking_employee=employee, verified=None)
+    # Foregin payments transactions:
+    foreign_payments = ForeignPaymentTransaction.objects.filter(checking_employee=employee, verified=None)
+    # Domestic transactions:
+    domestic_payments = DomesticPaymentTransaction.objects.filter(checking_employee=employee, verified=None)
+    #  Unknown payments transactions:
+    unknown_payments = UnknownPaymentTransaction.objects.filter(checking_employee=employee, verified=None)
+
+    transactions.extend(exams)
+    transactions.extend(fees)
+    transactions.extend(foreign_payments)
+    transactions.extend(domestic_payments)
+    transactions.extend(unknown_payments)
+
+    for transaction in transactions:
+        transaction.is_one_day_passed()
+        if transaction.verified is False:
+            transactions.pop(transaction)
+
+    return transactions
