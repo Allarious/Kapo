@@ -2510,7 +2510,7 @@ html {
 <script>
     function f(w, id) {
         if (w === 1) {
-            document.getElementById("status").value = "accepted";
+            document.getElementById("status").value = "rejected";
 
         }
         else
@@ -2560,14 +2560,14 @@ html {
                 <div class="dashboard__right__VSVw6">Condition</div></div>
             </div>
                 <div class="dashboard__inner-container__nl4ri">
-                    <div><p name="transaction status" id="status" style="display: none"></p>
-                        <p name="id" id="id" style="display: none"></p>
-                        <p name = "checked transaction", id = "checked transaction" style="display: none"></p>
+                    <div><form method="post">
+                        {% csrf_token %}
                     <p name="assign"><div class="transactions__auto-assign__1Ib-2" style="
     overflow:  hidden;" onclick=this.form.submit()>Auto Assign</div></p>
-                        {% for transaction in transactions %}<form method="post">
-                        {% csrf_token %}
-
+                        {% for transaction in transactions %}
+                        <p name="transaction status" id="status" style="display: none"></p>
+                        <p name="id" id="id" style="display: none"></p>
+                        <p name = "checked transaction", id = "checked transaction" style="display: none"></p>
                         <div class="transaction__container__1Qkyv">
                             <div class="transaction__left__1mO41"><a>@{{ transaction.owner.user.username }}</a></div>
                             <div class="transaction__middle__2ocXa"><script>f1({{ transaction }});</script>f1()</div>
@@ -2576,9 +2576,13 @@ html {
                             <div class="transaction__middle__2ocXa">{{ transaction.creation_time.time }}</div>
                             <div class="transaction__right__7uyD4">
                                 <div class="transaction__btn-container__3iP5M">
-                                     <div class="transaction__accept__Uu40x"
-                                                                                                             onclick="f(1, {{ transaction.id }})"></div>
+                                    {% if transaction.checking_employee == employee %}
+                                     <div class="transaction__accept__Uu40x" onclick="f(1, {{ transaction.id }})"></div>
                                     <div class="transaction__reject__1Px3-" onclick="f(0, {{ transaction.id }})"></div>
+                                        {% elif transaction.verified == none %} Unknown
+                                        {% elif transaction.verified %} Accepted
+                                        {% else %} Rejected
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="transaction__break__195wa"></div>

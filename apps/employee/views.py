@@ -35,6 +35,7 @@ def employee_check_transaction_view(request):
     employee = get_object_or_404(Employee, pk=request.user.id)
     # transactions = get_employee_transactions(employee)
     transactions = get_all_system_transactions()
+    transactions.sort(key=lambda transaction: transaction.creation_time, reverse=True)
 
     if request.method == 'POST':
         # TODO check
@@ -88,16 +89,16 @@ def employee_check_transaction_view(request):
             customer = Customer.objects.filter(username=request.POST.get('username'))
             return employee_transaction_owner_view(request, customer)
 
-        # elif request.POST.get('assign'):
-        #     transaction = get_null_verified_transactions()[0]
-        #     transaction.checking_employee = employee
-        #     transaction.checking = True
-        #     return employee_check_transaction_view(request)
+        elif request.POST.get('assign'):
+            transaction = get_null_verified_transactions()[transactions.count() - 1]
+            transaction.checking_employee = employee
+            transaction.checking = True
+            return employee_check_transaction_view(request)
 
     # this will show manager not verified and not checked transactions
-
+    none = None
     return render(request, 'employee_transaction_check.html',
-                  {'employee': employee, 'transactions': transactions})
+                  {'employee': employee, 'transactions': transactions, 'none': none})
 
 
 @login_required
