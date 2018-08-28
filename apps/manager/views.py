@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
 from apps.accounts.forms.forms import UserForm, EmployeeSignUpForm
-from apps.accounts.models import MyUser, Inform
+from apps.accounts.models import MyUser, Inform, Notification, Message
 from apps.accounts.views import inform_email
 from apps.customer.models import Customer
 from apps.manager.models import *
@@ -12,6 +12,7 @@ from apps.customer.forms.forms import EditUser
 from apps.manager.forms.forms import *
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from apps.employee.models import Employee
 
 from apps.transactions.functions import *
 
@@ -280,3 +281,21 @@ def manager_increase_account_money(request):
     manager = get_object_or_404(Manager, pk=request.user.id)
     return render(request, 'manager_account_inc_money.html',
                   {'manger': manager})
+
+def manager_dashboard_view(request):
+    manager = get_object_or_404(Manager, pk=request.user.id)
+    notifications = Notification.objects.all().filter(owner=manager.user)
+    notification = []
+    for i in range(notifications.count()):
+        notification.append(notifications[notifications.count() - 1 - i])
+    Notification.objects.all().filter(owner=manager.user).update(seen=True)
+    return render(request, 'manager_dashboard.html', {'notifications': notification})
+
+
+def message_dashboard_view(request):
+    manager = get_object_or_404(Manager, pk=request.user.id)
+    messages = Message.objects.all().filter(receiver=manager.user)
+    message = []
+    for i in range(messages.count()):
+        message.append(messages[messages.count() - 1 - i])
+    return render(request, 'employee_massage_dashboard.html', {'messages': message})

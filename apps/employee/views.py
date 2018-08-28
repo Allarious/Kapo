@@ -312,7 +312,6 @@ def get_employee_transactions(employee):
 
     return transactions
 
-
 def get_all_system_transactions():
     transactions = []
     # Rial increase transactions:

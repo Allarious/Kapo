@@ -2511,12 +2511,21 @@ html {
     function f(w, id) {
         if (w === 1) {
             document.getElementById("status").value = "rejected";
+            {#document.getElementById("status").value="accepted";#}
+            document.getElementById("accept").setAttribute('value',id);
+            document.getElementById("checked transaction").value = true;
+        }
+        else if (w == 0) {
+            document.getElementById("status").value="accepted";
+            document.getElementById("reject").value= id;
+            document.getElementById("checked transaction").value = true;
 
         }
-        else
-            document.getElementById("status").value="accepted";
-         document.getElementById("id").value= id;
-         document.getElementById("checked transaction").value = true;
+        else {
+            document.getElementById("relax").value = "ali";
+        }
+        document.getElementById('accept').setAttribute('value','My default value');
+        {#document.getElementById("myform").submit();#}
 
     }
 
@@ -2560,25 +2569,27 @@ html {
                 <div class="dashboard__right__VSVw6">Condition</div></div>
             </div>
                 <div class="dashboard__inner-container__nl4ri">
-                    <div><form method="post">
+                    <div><form method="post" id="myform">
                         {% csrf_token %}
-                    <p name="assign"><div class="transactions__auto-assign__1Ib-2" style="
-    overflow:  hidden;" onclick=this.form.submit()>Auto Assign</div></p>
+                    <p name="ajb" value="2">SADS</p>
+                    <input type="text" name="relax" value="asd">
+                    <button name="ali" type="submit" class="transactions__auto-assign__1Ib-2" style="
+    overflow:  hidden;" value=>Auto Assign</button>
                         {% for transaction in transactions %}
                         <p name="transaction status" id="status" style="display: none"></p>
                         <p name="id" id="id" style="display: none"></p>
                         <p name = "checked transaction", id = "checked transaction" style="display: none"></p>
                         <div class="transaction__container__1Qkyv">
                             <div class="transaction__left__1mO41"><a>@{{ transaction.owner.user.username }}</a></div>
-                            <div class="transaction__middle__2ocXa"><script>f1({{ transaction }});</script>f1()</div>
+                            <div class="transaction__middle__2ocXa">{{ transaction.type_name }}</div>
                             <div class="transaction__middle__2ocXa">{% if transaction.dollar_cost > 0 %}{{ transaction.dollar_cost }}$ {% elif transaction.rial_cost > 0 %} {{ transaction.rial_cost }}R {% elif transaction.amount > 0 %} {{ transaction.amount }}R {% else %} {{ transaction.euro_cost }}€ {% endif %}</div>
                             <div class="transaction__middle__2ocXa">{{ transaction.creation_time.date }}</div>
                             <div class="transaction__middle__2ocXa">{{ transaction.creation_time.time }}</div>
                             <div class="transaction__right__7uyD4">
                                 <div class="transaction__btn-container__3iP5M">
                                     {% if transaction.checking_employee == employee %}
-                                     <div class="transaction__accept__Uu40x" onclick="f(1, {{ transaction.id }})"></div>
-                                    <div class="transaction__reject__1Px3-" onclick="f(0, {{ transaction.id }})"></div>
+                                     <button type="submit" name="accept" value={{ transaction.id }} class="transaction__accept__Uu40x" onclick="f(1, {{ transaction.id }})"></button>
+                                    <button type="submit" name="reject" class="transaction__reject__1Px3-" onclick="f(0, {{ transaction.id }})"></button>
                                         {% elif transaction.verified == none %} Unknown
                                         {% elif transaction.verified %} Accepted
                                         {% else %} Rejected

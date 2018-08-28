@@ -150,7 +150,7 @@ class AbstractTransaction(models.Model):
     currency_type = models.CharField(choices=CHOICES, null=True, max_length=10)
     image = models.ImageField(null=True)
     wage_rate = models.FloatField(default=0)
-    type_name = models.CharField(max_length=50, default='khar')
+    type_name = models.CharField(max_length=50, default='no name')
 
     def is_one_day_passed(self):
         # TODO check if it works correctly

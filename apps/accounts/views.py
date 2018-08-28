@@ -74,6 +74,7 @@ def sign_up(request):
 def login_user(request):
     pay_wages()
     if request.method == "POST":
+        print(request.POST)
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
