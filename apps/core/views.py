@@ -21,7 +21,7 @@ def contact_us_view(request):
 
 
 def about_us_view(request):
-    return render(request, 'about_us.html', {})
+    return render(request, 'info.html', {})
 
 
 def policy_view(request):
