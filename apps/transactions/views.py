@@ -390,7 +390,8 @@ def manager_exchange_view(request):
                                                                  'exchange_form': exchange_form,
                                                                  'form': form,
                                                                  'dollar': dollar_rate,
-                                                                 'euro': euro_rate, })
+                                                                 'euro': euro_rate,
+                                                                 'is_manager': True})
 
             manager.system_accounts.save()
             exchange.paid = True

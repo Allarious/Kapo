@@ -177,8 +177,8 @@ def manager_employees_list_view(request):
             return HttpResponseRedirect(reverse('manager:send_message'))
 
     employees_list = Employee.objects.all()
-    return render(request, 'manager_employees_list.html',
-                  {'manager': manager, 'employees': employees_list})
+    return render(request, 'accounts.html',
+                  {'manager': manager, 'accounts': employees_list})
 
 
 @login_required
@@ -197,8 +197,8 @@ def manager_customers_list_view(request):
             return manager_customer_view(request, Customer.objects.filter(username=request.username))
 
     customers_list = Customer.objects.all()
-    return render(request, 'manager_customers_list.html',
-                  {'manager': manager, 'customers': customers_list})
+    return render(request, 'accounts.html',
+                  {'manager': manager, 'accounts': customers_list})
 
 
 @login_required

@@ -81,8 +81,6 @@ def customer_home_view(request):
 def customer_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     notifications = Notification.objects.all().filter(owner=customer.user)
-    print(notifications[0].seen)
-    print(notifications[1].seen)
     notification = []
     for i in range(notifications.count()):
         notification.append(notifications[notifications.count() - 1 - i])

@@ -2505,7 +2505,23 @@ html {
         font-size: 19px;
         line-height: 28px;
     }
-}</style></head>
+}</style>
+
+<script>
+    function f(w, id) {
+        if (w === 1) {
+            document.getElementById("status").value = "accepted";
+
+        }
+        else
+            document.getElementById("status").value="accepted";
+         document.getElementById("id").value= id;
+         document.getElementById("checked transaction").value = true;
+
+    }
+</script>
+
+</head>
   <body>
     <noscript>
       You need to enable JavaScript to run this app.
@@ -2533,8 +2549,14 @@ html {
                 <div class="dashboard__right__VSVw6">Condition</div></div>
             </div>
                 <div class="dashboard__inner-container__nl4ri">
-                    <div><div class="transactions__auto-assign__1Ib-2" style="
-    overflow:  hidden;" name="">Auto Assign</div>
+                    <div><p name="transaction status" id="status" style="display: none"></p>
+                        <p name="id" id="id" style="display: none"></p>
+                        <p name = "checked transaction", id = "checked transaction" style="display: none"></p>
+                        {% for transaction in transactions %}<form method="post">
+                        {% csrf_token %}
+                        <div class="transactions__auto-assign__1Ib-2" style="
+    overflow:  hidden;" onclick=this.form.submit()><p name="assign">Auto Assign</p></div>
+
                         <div class="transaction__container__1Qkyv">
                             <div class="transaction__left__1mO41"><a>@Someone</a></div>
                             <div class="transaction__middle__2ocXa">Rial</div>
@@ -2543,13 +2565,16 @@ html {
                             <div class="transaction__middle__2ocXa">22:37</div>
                             <div class="transaction__right__7uyD4">
                                 <div class="transaction__btn-container__3iP5M">
-                                    <div class="transaction__accept__Uu40x"></div>
-                                    <div class="transaction__reject__1Px3-"></div>
+                                     <div class="transaction__accept__Uu40x"
+                                                                                                             onclick="f(1, {{ transaction.id }})"></div>
+                                    <div class="transaction__reject__1Px3-" onclick="f(0, {{ transaction.id }})"></div>
                                 </div>
                             </div>
                             <div class="transaction__break__195wa"></div>
                             <div class="transaction__more-info__1Y1nW"></div>
                         </div>
+                            {% endfor %}
+                        </form>
                         </div>
                 </div>
             </div>

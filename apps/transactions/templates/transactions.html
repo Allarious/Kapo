@@ -1672,6 +1672,8 @@ html {
                     <a href={% url 'manager:index' %}><div class="navbar__navComponents__A_iF-">  HomePage  </div></a>
                 <a href={% url 'manager:manger_profile' %}><div class="navbar__navComponents__A_iF-"> Profile </div></a>
                 <a href={% url 'manager:send_message' %}><div class="navbar__navComponents__A_iF-">  Send Message  </div></a>
+                    <a href={% url 'manager:manager_employees_list' %}><div class="navbar__navComponents__A_iF-">  Employee List  </div></a>
+                <a href={% url 'manager:manager_customers_list' %}><div class="navbar__navComponents__A_iF-">  Customer List  </div></a>
                     <a href={% url 'manager:manger exchange' %}><div class="navbar__navComponents__A_iF-">  System Account Management  </div></a>
                 <a href={% url 'accounts:logout' %}><div class="navbar__navComponents__A_iF-">  Logout  </div></a>
                     {% else %}
@@ -1713,14 +1715,37 @@ html {
                 {{ customer.dollar_wallet }}
                 {% endif %}</div>
                     <div class="converttype__explain__2Cu_t">Change from Rial to Dollar</div>
-                    <form class="form-horizontal login-form" method="post" role="form" action="" enctype="multipart/form-data">
+                    <form class="form-horizontal login-form" method="post" role="form" action="" onchange="Call2()" enctype="multipart/form-data">
             {% csrf_token %}
                     <div>
                         <div>
-                            <input class="input__login-input__FAzIY" type="number" placeholder="Amount to change ($)" value="" name="dollar_amount">
+                            <input class="input__login-input__FAzIY" id="inp1" type="number" placeholder="Amount to change ($)" onchange="Call1()" value="" name="dollar_amount">
+                            <script>
+function Call1()
+{
+    let x = document.getElementById("inp1").value;
+    document.getElementById("inp2").value = x*10000;
+}
+function Call2()
+{
+    let x = document.getElementById("inp2").value;
+    document.getElementById("inp1").value = x*0.001;
+}
+function Call3()
+{
+    let x = document.getElementById("inp3").value;
+    document.getElementById("inp4").value = x*12000;
+}
+function Call4()
+{
+    let x = document.getElementById("inp4").value;
+    document.getElementById("inp3").value = x / 12000.0;
+}
+
+</script>
                         </div>
                         <div class="converttype__to__1hJo6">Cost :</div>
-                        <div><input class="input__login-input__FAzIY" type="number" placeholder="Amount to change (R)" value=""></div>
+                        <div><input class="input__login-input__FAzIY" id="inp2" type="number" placeholder="Amount to change (R)" value=""></div>
                     </div>
                     <button class="authbutton__form-button__26qDW" type="submit" name="dollar_exchange">Change</button>
                         {{ exchange_form.errors }}
@@ -1738,10 +1763,10 @@ html {
             {% csrf_token %}
                     <div>
                         <div>
-                        <input class="input__login-input__FAzIY" type="number" placeholder="Amount to change (€)" value="" name="euro_amount">
+                        <input class="input__login-input__FAzIY" onchange="Call3()" id="inp3" type="number" placeholder="Amount to change (€)" value="" name="euro_amount">
                     </div>
                         <div class="converttype__to__1hJo6">Cost :</div>
-                        <div><input class="input__login-input__FAzIY" type="number" placeholder="Amount to change (R)" value=""></div>
+                        <div><input class="input__login-input__FAzIY" onchange="Call4()" id="inp4" type="number" placeholder="Amount to change (R)" value=""></div>
                     </div>
                     <button class="authbutton__form-button__26qDW"name="euro_exchange" type="submit">Change</button>
                     </form>
