@@ -28,9 +28,12 @@ def policy_view(request):
     return render(request, 'policy.html', {})
 
 
-
-
-
 def wages_list_view(request):
     wages = Configuration.objects.all().exclude(key__in=['dollar', 'euro'])
-    return render(request, 'wages.html', {'wages': wages})
+    rates = Configuration.objects.all().filter(key__in=['dollar', 'euro'])
+    return render(request, 'wages.html', {'rates': rates, 'wages': wages})
+
+
+def transition_test_view(request):
+    rates = Configuration.objects.all().filter(key__in=['dollar', 'euro'])
+    return render(request, 'trans.html', {'rates': rates})

@@ -9,6 +9,11 @@
 </head>
 <body>
 
+{% for rate in rates %}
+    {{ rate.key }} : {{ rate.value }} Rials<br>
+
+{% endfor %}
+
 {% for wage in wages %}
     {{ wage.key }} : {{ wage.value|to_float_persent }}<br>
 
