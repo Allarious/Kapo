@@ -33,7 +33,8 @@ def index(request):
 @employee_required
 def employee_check_transaction_view(request):
     employee = get_object_or_404(Employee, pk=request.user.id)
-    transactions = get_employee_transactions(employee)
+    # transactions = get_employee_transactions(employee)
+    transactions = get_all_system_transactions()
 
     if request.method == 'POST':
         # TODO check
@@ -285,5 +286,37 @@ def get_employee_transactions(employee):
         transaction.is_one_day_passed()
         if transaction.verified is False:
             transactions.pop(transaction)
+
+    return transactions
+
+def get_all_system_transactions():
+    transactions = []
+    # Rial increase transactions:
+    rial_incs = RialWalletIncTransaction.objects.all()
+    # Convert transactions:
+    converts = CurrencyConvertTransaction.objects.all()
+    # Exam transactions:
+    exams = ExamTransaction.objects.all()
+    # Application and tuition fees transactions:
+    fees = ApplicationTuitionFeeTransaction.objects.all()
+    # Foregin payments transactions:
+    foreign_payments = ForeignPaymentTransaction.objects.all()
+    # Domestic transactions:
+    domestic_payments = DomesticPaymentTransaction.objects.all()
+    #  Unknown payments transactions:
+    unknown_payments = UnknownPaymentTransaction.objects.all()
+
+    # for list of transactions uncomment bellow
+
+    transactions.extend(rial_incs)
+    transactions.extend(converts)
+    transactions.extend(exams)
+    transactions.extend(fees)
+    transactions.extend(foreign_payments)
+    transactions.extend(domestic_payments)
+    transactions.extend(unknown_payments)
+
+    # for transaction in transactions:
+    #     transaction.is_one_day_passed()
 
     return transactions

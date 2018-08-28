@@ -5,37 +5,37 @@ from django.utils import timezone
 
 
 
-def get_all_system_transactions():
-    transactions = []
-    # Rial increase transactions:
-    rial_incs = RialWalletIncTransaction.objects.all()
-    # Convert transactions:
-    converts = CurrencyConvertTransaction.objects.all()
-    # Exam transactions:
-    exams = ExamTransaction.objects.all()
-    # Application and tuition fees transactions:
-    fees = ApplicationTuitionFeeTransaction.objects.all()
-    # Foregin payments transactions:
-    foreign_payments = ForeignPaymentTransaction.objects.all()
-    # Domestic transactions:
-    domestic_payments = DomesticPaymentTransaction.objects.all()
-    #  Unknown payments transactions:
-    unknown_payments = UnknownPaymentTransaction.objects.all()
-
-    # for list of transactions uncomment bellow
-
-    transactions.extend(rial_incs)
-    transactions.extend(converts)
-    transactions.extend(exams)
-    transactions.extend(fees)
-    transactions.extend(foreign_payments)
-    transactions.extend(domestic_payments)
-    transactions.extend(unknown_payments)
-
-    for transaction in transactions:
-        transaction.is_one_day_passed()
-
-    return transactions
+# def get_all_system_transactions():
+#     transactions = []
+#     # Rial increase transactions:
+#     rial_incs = RialWalletIncTransaction.objects.all()
+#     # Convert transactions:
+#     converts = CurrencyConvertTransaction.objects.all()
+#     # Exam transactions:
+#     exams = ExamTransaction.objects.all()
+#     # Application and tuition fees transactions:
+#     fees = ApplicationTuitionFeeTransaction.objects.all()
+#     # Foregin payments transactions:
+#     foreign_payments = ForeignPaymentTransaction.objects.all()
+#     # Domestic transactions:
+#     domestic_payments = DomesticPaymentTransaction.objects.all()
+#     #  Unknown payments transactions:
+#     unknown_payments = UnknownPaymentTransaction.objects.all()
+#
+#     # for list of transactions uncomment bellow
+#
+#     transactions.extend(rial_incs)
+#     transactions.extend(converts)
+#     transactions.extend(exams)
+#     transactions.extend(fees)
+#     transactions.extend(foreign_payments)
+#     transactions.extend(domestic_payments)
+#     transactions.extend(unknown_payments)
+#
+#     for transaction in transactions:
+#         transaction.is_one_day_passed()
+#
+#     return transactions
 
 
 def get_null_verified_transaction(employee):

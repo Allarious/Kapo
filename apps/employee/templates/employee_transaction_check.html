@@ -2519,6 +2519,12 @@ html {
          document.getElementById("checked transaction").value = true;
 
     }
+
+    function f1(trans) {
+        return type(trans);
+    }
+
+
 </script>
 
 </head>
@@ -2557,17 +2563,17 @@ html {
                     <div><p name="transaction status" id="status" style="display: none"></p>
                         <p name="id" id="id" style="display: none"></p>
                         <p name = "checked transaction", id = "checked transaction" style="display: none"></p>
+                    <p name="assign"><div class="transactions__auto-assign__1Ib-2" style="
+    overflow:  hidden;" onclick=this.form.submit()>Auto Assign</div></p>
                         {% for transaction in transactions %}<form method="post">
                         {% csrf_token %}
-                        <div class="transactions__auto-assign__1Ib-2" style="
-    overflow:  hidden;" onclick=this.form.submit()><p name="assign">Auto Assign</p></div>
 
                         <div class="transaction__container__1Qkyv">
-                            <div class="transaction__left__1mO41"><a>@Someone</a></div>
-                            <div class="transaction__middle__2ocXa">Rial</div>
-                            <div class="transaction__middle__2ocXa">1530000</div>
-                            <div class="transaction__middle__2ocXa">3/3/1950</div>
-                            <div class="transaction__middle__2ocXa">22:37</div>
+                            <div class="transaction__left__1mO41"><a>@{{ transaction.owner.user.username }}</a></div>
+                            <div class="transaction__middle__2ocXa"><script>f1({{ transaction }});</script>f1()</div>
+                            <div class="transaction__middle__2ocXa">{% if transaction.dollar_cost > 0 %}{{ transaction.dollar_cost }}$ {% elif transaction.rial_cost > 0 %} {{ transaction.rial_cost }}R {% elif transaction.amount > 0 %} {{ transaction.amount }}R {% else %} {{ transaction.euro_cost }}€ {% endif %}</div>
+                            <div class="transaction__middle__2ocXa">{{ transaction.creation_time.date }}</div>
+                            <div class="transaction__middle__2ocXa">{{ transaction.creation_time.time }}</div>
                             <div class="transaction__right__7uyD4">
                                 <div class="transaction__btn-container__3iP5M">
                                      <div class="transaction__accept__Uu40x"
