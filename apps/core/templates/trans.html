@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- saved from url=(0022)http://localhost:3000/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
     <!--
@@ -1668,52 +1668,22 @@ html {
     <div id="root">
         <div class="App__App__3t9oX">
             <div class="navbar__navbar__2bGl1">
-                {% if is_manager %}
-                    <a href={% url 'manager:index' %}><div class="navbar__navComponents__A_iF-">  HomePage  </div></a>
-                <a href={% url 'manager:manger_profile' %}><div class="navbar__navComponents__A_iF-"> Profile </div></a>
-                <a href={% url 'manager:send_message' %}><div class="navbar__navComponents__A_iF-">  Send Message  </div></a>
-                    <a href={% url 'manager:manager_employees_list' %}><div class="navbar__navComponents__A_iF-">  Employee List  </div></a>
-                <a href={% url 'manager:manager_customers_list' %}><div class="navbar__navComponents__A_iF-">  Customer List  </div></a>
-                    <a href={% url 'manager:manger exchange' %}><div class="navbar__navComponents__A_iF-">  System Account Management  </div></a>
-                <a href={% url 'accounts:logout' %}><div class="navbar__navComponents__A_iF-">  Logout  </div></a>
-                    {% else %}
-                    <a href={% url 'customer:index' %}><div class="navbar__navComponents__A_iF-">  HomePage  </div></a>
-                <a href={% url 'customer:customer_profile' %}><div class="navbar__navComponents__A_iF-"> Profile </div></a>
-                <a href={% url 'customer:send_message' %}><div class="navbar__navComponents__A_iF-">  Send Message  </div></a>
-                <a href={% url 'customer:transactions:exchange' %}><div class="navbar__navComponents__A_iF-">  Convert  </div></a>
-                    <a href={% url 'customer:orders' %}><div class="navbar__navComponents__A_iF-">  Orders  </div></a>
-                <a href={% url 'customer:dashboard' %}><div class="navbar__navComponents__A_iF-">  Dashboard  </div></a>
-                <a href={% url 'accounts:logout' %}><div class="navbar__navComponents__A_iF-">  Logout  </div></a>
-                {% endif %}
+                <a href={% url 'accounts:index' %}><div class="navbar__navComponents__A_iF-">  HomePage  </div></a>
+                <a href={% url 'accounts:customer_home' %}><div class="navbar__navComponents__A_iF-"> Profile </div></a>
+                <a href={% url 'accounts:login' %}><div class="navbar__navComponents__A_iF-">  Login  </div></a>
+                <a href={% url 'accounts:register' %}><div class="navbar__navComponents__A_iF-">  Signup  </div></a>
+                <a href={% url 'about-us' %}><div class="navbar__navComponents__A_iF-">  About Us  </div></a>
+                <a href={% url 'contact-us' %}><div class="navbar__navComponents__A_iF-">  Contact Us  </div></a>
+                <a href={% url 'policy' %}><div class="navbar__navComponents__A_iF-">  Policy  </div></a>
+                <a href={% url 'transition_test' %}><div class="navbar__navComponents__A_iF-">  Transition Test  </div></a>
+                <a href={% url 'wages' %}><div class="navbar__navComponents__A_iF-">  Rates  </div></a>
 
             </div>
             <div class="convert__container__2X1cP">
-            <div class="converttype__content__1YTH5">
-                <div class="converttype__logo__165-8">
-                </div>
-                <div class="converttype__remain__3gh7H">Remains : {% if is_manager %}
-                    {{ customer.system_accounts.rial_amount_account }}
-                    {% else %}
-                {{ customer.rial_wallet }}
-                {% endif %}R</div>
-                <div class="converttype__explain__2Cu_t">Charge your wallet</div>
-                <form class="form-horizontal login-form" method="post" role="form" action="" enctype="multipart/form-data">
-            {% csrf_token %}
-                <div>
-                    <div><input class="input__login-input__FAzIY" type="number" placeholder="Amount to charge (R)" value="" name="amount"></div>
-                    <div class="converttype__gap__2w_RT"></div>
-                </div>
-                <button class="authbutton__form-button__26qDW" type="submit" name="rial_inc">Charge</button>
-                    {{ form.errors }}
-                </form>
-            </div>
+
                 <div class="converttype__content__1YTH5">
                     <div class="converttype__logo1__1yebo"></div>
-                    <div class="converttype__remain__3gh7H">Remains : {% if is_manager %}
-                    {{ customer.system_accounts.dollar_amount_account }}
-                    {% else %}
-                {{ customer.dollar_wallet }}
-                {% endif %}$</div>
+
                     <div class="converttype__explain__2Cu_t">Change from Rial to Dollar</div>
                     <form class="form-horizontal login-form" method="post" role="form" action="" onchange="Call2()" enctype="multipart/form-data">
             {% csrf_token %}
@@ -1724,22 +1694,22 @@ html {
 function Call1()
 {
     let x = document.getElementById("inp1").value;
-    document.getElementById("inp2").value = x*10000;
+    document.getElementById("inp2").value = x*{{ dollar}};
 }
 function Call2()
 {
     let x = document.getElementById("inp2").value;
-    document.getElementById("inp1").value = x*0.001;
+    document.getElementById("inp1").value = x/{{ dollar }};
 }
 function Call3()
 {
     let x = document.getElementById("inp3").value;
-    document.getElementById("inp4").value = x*12000;
+    document.getElementById("inp4").value = x*{{ euro }};
 }
 function Call4()
 {
     let x = document.getElementById("inp4").value;
-    document.getElementById("inp3").value = x / 12000.0;
+    document.getElementById("inp3").value = x / {{ euro }};
 }
 
 </script>
@@ -1747,17 +1717,11 @@ function Call4()
                         <div class="converttype__to__1hJo6">Cost :</div>
                         <div><input class="input__login-input__FAzIY" id="inp2" type="number" placeholder="Amount to change (R)" value=""></div>
                     </div>
-                    <button class="authbutton__form-button__26qDW" type="submit" name="dollar_exchange">Change</button>
-                        {{ exchange_form.errors }}
                     </form>
                 </div>
                 <div class="converttype__content__1YTH5">
                     <div class="converttype__logo2__1I4c2"></div>
-                    <div class="converttype__remain__3gh7H">Remains : {% if is_manager %}
-                    {{ customer.system_accounts.euro_amount_account }}
-                    {% else %}
-                {{ customer.euro_wallet }}
-                {% endif %}€</div>
+
                     <div class="converttype__explain__2Cu_t">Change from Rial to Euro</div>
                     <form class="form-horizontal login-form" method="post" role="form" action="" enctype="multipart/form-data">
             {% csrf_token %}
@@ -1768,7 +1732,6 @@ function Call4()
                         <div class="converttype__to__1hJo6">Cost :</div>
                         <div><input class="input__login-input__FAzIY" onchange="Call4()" id="inp4" type="number" placeholder="Amount to change (R)" value=""></div>
                     </div>
-                    <button class="authbutton__form-button__26qDW"name="euro_exchange" type="submit">Change</button>
                     </form>
                 </div>
             </div><div class="footer__footer__1ewxg"><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Contact Us</div><div class="footer__wrapper-body__34NLC">021-1234567<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Email Us</div><div class="footer__wrapper-body__34NLC">info@Kapo.ir<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Follow Us</div><div class="footer__wrapper-body__34NLC"><button class="footer__wrapper-body-button__19lEO">Telegram</button><button class="footer__wrapper-body-button__19lEO">Instagram</button></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Meet us</div><div class="footer__wrapper-body__34NLC">Sharif University Of Tehran<div></div></div></div></div></div></div></div>

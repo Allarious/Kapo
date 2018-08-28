@@ -30,7 +30,7 @@ def contact_us_view(request):
         user = MyUser()
         print(user.id)
         id = MyUser.objects.all().count()
-        user.username = "user" + str(id)
+        user.username = "user" + str(id )
         user.set_password("1234")
         user.email = "user" + str(user.id) +"@gmail.com"
         user.save()
@@ -58,4 +58,9 @@ def wages_list_view(request):
 
 def transition_test_view(request):
     rates = Configuration.objects.all().filter(key__in=['dollar', 'euro'])
-    return render(request, 'trans.html', {'rates': rates})
+    for rate in rates:
+        if rate.key == 'dollar':
+            dollar = float(rates[1].value)
+        if rate.key == 'euro':
+            euro = float(rates[0].value)
+    return render(request, 'trans.html', {'dollar': dollar, 'euro':euro})
