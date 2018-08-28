@@ -350,8 +350,8 @@ def get_all_system_transactions():
     transactions.extend(domestic_payments)
     transactions.extend(unknown_payments)
 
-    # for transaction in transactions:
-    #     transaction.is_one_day_passed()
+    for transaction in transactions:
+        transaction.is_one_day_passed()
 
     return transactions
 

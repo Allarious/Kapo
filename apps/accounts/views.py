@@ -9,8 +9,9 @@ from django.http import HttpResponseRedirect
 
 # Create your views here.
 from apps.transactions.functions import pay_wages
-from apps.transactions.models import *
+
 from tahlil import settings
+from apps.transactions.models import *
 
 
 def index(request):

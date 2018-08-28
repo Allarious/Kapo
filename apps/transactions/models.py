@@ -159,7 +159,7 @@ class AbstractTransaction(models.Model):
         if difference.days >= 1:
             self.verified = False
             self.save()
-            transaction_report_email(self, self.owner)
+            # transaction_report_email(self, self.owner)
 
             return True
         else:
