@@ -1713,8 +1713,9 @@ html {
                     <div><input class="input__login-input__FAzIY" type="number" placeholder="Amount to charge (R)" value="" name="amount"></div>
                     <div class="converttype__gap__2w_RT"></div>
                 </div>
-                <button class="authbutton__form-button__26qDW" type="submit" name="rial_inc">Charge</button>
                     {{ form.errors }}
+                <button class="authbutton__form-button__26qDW" type="submit" name="rial_inc">Charge</button>
+
                 </form>
             </div>
                 <div class="converttype__content__1YTH5">
@@ -1725,11 +1726,11 @@ html {
                 {{ customer.dollar_wallet }}
                 {% endif %}$</div>
                     <div class="converttype__explain__2Cu_t">Change from Rial to Dollar</div>
-                    <form class="form-horizontal login-form" method="post" role="form" action="" onchange="Call2()" enctype="multipart/form-data">
+                    <form class="form-horizontal login-form" method="post" role="form" action="" enctype="multipart/form-data">
             {% csrf_token %}
                     <div>
                         <div>
-                            <input class="input__login-input__FAzIY" id="inp1" type="number" placeholder="Amount to change ($)" onchange="Call1()" value="" name="dollar_amount">
+                            <input class="input__login-input__FAzIY" id="inp1" type="number" placeholder="Amount to change ($)" value="" name="dollar_amount">
                             <script>
 function Call1()
 {
@@ -1773,10 +1774,10 @@ function Call4()
             {% csrf_token %}
                     <div>
                         <div>
-                        <input class="input__login-input__FAzIY" onchange="Call3()" id="inp3" type="number" placeholder="Amount to change (€)" value="" name="euro_amount">
+                        <input class="input__login-input__FAzIY"  id="inp3" type="number" placeholder="Amount to change (€)" value="" name="euro_amount">
                     </div>
                         <div class="converttype__to__1hJo6">Cost :</div>
-                        <div><input class="input__login-input__FAzIY" onchange="Call4()" id="inp4" type="number" placeholder="Amount to change (R)" value=""></div>
+                        <div><input class="input__login-input__FAzIY"  id="inp4" type="number" placeholder="Amount to change (R)" value=""></div>
                     </div>
                     <button class="authbutton__form-button__26qDW"name="euro_exchange" type="submit">Change</button>
                     </form>
