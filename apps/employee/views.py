@@ -307,22 +307,24 @@ def get_employee_transactions(employee):
 
     return transactions
 
+
 def get_all_system_transactions():
+    manager = Manager.objects.all()[0]
     transactions = []
     # Rial increase transactions:
-    rial_incs = RialWalletIncTransaction.objects.all()
+    rial_incs = RialWalletIncTransaction.objects.all().exclude(owner=manager)
     # Convert transactions:
-    converts = CurrencyConvertTransaction.objects.all()
+    converts = CurrencyConvertTransaction.objects.all().exclude(owner=manager)
     # Exam transactions:
-    exams = ExamTransaction.objects.all()
+    exams = ExamTransaction.objects.all().exclude(owner=manager)
     # Application and tuition fees transactions:
-    fees = ApplicationTuitionFeeTransaction.objects.all()
+    fees = ApplicationTuitionFeeTransaction.objects.all().exclude(owner=manager)
     # Foregin payments transactions:
-    foreign_payments = ForeignPaymentTransaction.objects.all()
+    foreign_payments = ForeignPaymentTransaction.objects.all().exclude(owner=manager)
     # Domestic transactions:
-    domestic_payments = DomesticPaymentTransaction.objects.all()
+    domestic_payments = DomesticPaymentTransaction.objects.all().exclude(owner=manager)
     #  Unknown payments transactions:
-    unknown_payments = UnknownPaymentTransaction.objects.all()
+    unknown_payments = UnknownPaymentTransaction.objects.all().exclude(owner=manager)
 
     # for list of transactions uncomment bellow
 
@@ -334,7 +336,7 @@ def get_all_system_transactions():
     transactions.extend(domestic_payments)
     transactions.extend(unknown_payments)
 
-    # for transaction in transactions:
-    #     transaction.is_one_day_passed()
+    for transaction in transactions:
+        transaction.is_one_day_passed()
 
     return transactions
