@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from apps.accounts.forms.forms import UserForm, EmployeeSignUpForm
 from apps.accounts.models import MyUser, Inform, Notification, Message
 from apps.accounts.views import inform_email
-from apps.customer.models import Customer
+from apps.transactions.models import RialWalletIncTransaction, CurrencyConvertTransaction, ApplicationTuitionFeeTransaction, UnknownPaymentTransaction, DomesticPaymentTransaction, ForeignPaymentTransaction,ExamTransaction
 from apps.manager.models import *
 from apps.accounts.decorators import manager_required
 from apps.customer.forms.forms import EditUser
@@ -282,6 +282,9 @@ def manager_increase_account_money(request):
     return render(request, 'manager_account_inc_money.html',
                   {'manger': manager})
 
+
+@login_required
+@manager_required
 def manager_dashboard_view(request):
     manager = get_object_or_404(Manager, pk=request.user.id)
     notifications = Notification.objects.all().filter(owner=manager.user)
@@ -291,7 +294,8 @@ def manager_dashboard_view(request):
     Notification.objects.all().filter(owner=manager.user).update(seen=True)
     return render(request, 'manager_dashboard.html', {'notifications': notification})
 
-
+@login_required
+@manager_required
 def message_dashboard_view(request):
     manager = get_object_or_404(Manager, pk=request.user.id)
     messages = Message.objects.all().filter(receiver=manager.user)
@@ -299,3 +303,55 @@ def message_dashboard_view(request):
     for i in range(messages.count()):
         message.append(messages[messages.count() - 1 - i])
     return render(request, 'employee_massage_dashboard.html', {'messages': message})
+
+
+
+@login_required
+@manager_required
+def manager_all_transaction_view(request):
+    manager = get_object_or_404(Manager, pk=request.user.id)
+    # transactions = get_employee_transactions(employee)
+    transactions = get_all_system_transactions()
+    transactions.sort(key=lambda transaction: transaction.creation_time, reverse=True)
+
+
+
+    # this will show manager not verified and not checked transactions
+    none = None
+    return render(request, 'manager_all_system_transactions.html',
+                  {'employee': manager, 'transactions': transactions, 'none': none})
+
+
+
+def get_all_system_transactions():
+    transactions = []
+    # Rial increase transactions:
+    rial_incs = RialWalletIncTransaction.objects.all()
+    # Convert transactions:
+    converts = CurrencyConvertTransaction.objects.all()
+    # Exam transactions:
+    exams = ExamTransaction.objects.all()
+    # Application and tuition fees transactions:
+    fees = ApplicationTuitionFeeTransaction.objects.all()
+    # Foregin payments transactions:
+    foreign_payments = ForeignPaymentTransaction.objects.all()
+    # Domestic transactions:
+    domestic_payments = DomesticPaymentTransaction.objects.all()
+    #  Unknown payments transactions:
+    unknown_payments = UnknownPaymentTransaction.objects.all()
+
+    # for list of transactions uncomment bellow
+
+    transactions.extend(rial_incs)
+    transactions.extend(converts)
+    transactions.extend(exams)
+    transactions.extend(fees)
+    transactions.extend(foreign_payments)
+    transactions.extend(domestic_payments)
+    transactions.extend(unknown_payments)
+
+    # for transaction in transactions:
+    #     transaction.is_one_day_passed()
+
+    return transactions
+

@@ -22,7 +22,9 @@ urlpatterns = [
     path('manager-send-inform', manager_send_to_all, name='manger send inform'),
     path('manager-acc-inc', manager_increase_account_money, name='manger increase account'),
     path('dashboard', manager_dashboard_view, name='manager dashboard'),
-    path('dashboard/messages', message_dashboard_view, name="message dashboard")
+    path('dashboard/messages', message_dashboard_view, name="message dashboard"),
+    path('dashboard/orders', manager_all_transaction_view, name="manager orders"),
+
 ]
 
 # TODO bayad mogheyi ke tarakonesh barresish tamum mishe checke checkingesh false beshe/

@@ -107,11 +107,6 @@ def employee_check_transaction_view(request):
         return employee_transaction_owner_view(request, customer)
 
     elif request.POST.get('assign'):
-        transaction = get_null_verified_transactions()[0]
-        transaction.checking_employee = employee
-        transaction.checking = True
-        return employee_check_transaction_view(request)
-    elif request.POST.get('assign'):
         transaction = get_null_verified_transactions()[transactions.count() - 1]
         transaction.checking_employee = employee
         transaction.checking = True
