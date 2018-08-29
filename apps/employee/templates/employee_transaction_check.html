@@ -2571,10 +2571,8 @@ html {
                 <div class="dashboard__inner-container__nl4ri">
                     <div><form method="post" id="myform">
                         {% csrf_token %}
-                    <p name="ajb" value="2">SADS</p>
-                    <input type="text" name="relax" value="asd">
-                    <button name="ali" type="submit" class="transactions__auto-assign__1Ib-2" style="
-    overflow:  hidden;" value=>Auto Assign</button>
+                    <button name="assign" type="submit" class="transactions__auto-assign__1Ib-2" style="
+    overflow:  hidden;" >Auto Assign</button>
                         {% for transaction in transactions %}
                         <p name="transaction status" id="status" style="display: none"></p>
                         <p name="id" id="id" style="display: none"></p>
@@ -2587,9 +2585,9 @@ html {
                             <div class="transaction__middle__2ocXa">{{ transaction.creation_time.time }}</div>
                             <div class="transaction__right__7uyD4">
                                 <div class="transaction__btn-container__3iP5M">
-                                    {% if transaction.checking_employee == employee %}
-                                     <button type="submit" name="accept" value={{ transaction.id }} class="transaction__accept__Uu40x" onclick="f(1, {{ transaction.id }})"></button>
-                                    <button type="submit" name="reject" class="transaction__reject__1Px3-" onclick="f(0, {{ transaction.id }})"></button>
+                                    {% if transaction.checking_employee == employee and transaction.verified%}
+                                     <button type="submit" name="accept" value={{ transaction.id }} class="transaction__accept__Uu40x" ></button>
+                                    <button style="background-color: red"  type="submit" name="reject" class="transaction__reject__1Px3-" value={{ transaction.id }}></button>
                                         {% elif transaction.verified == none %} Unknown
                                         {% elif transaction.verified %} Accepted
                                         {% else %} Rejected

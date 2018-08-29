@@ -40,8 +40,20 @@ def employee_check_transaction_view(request):
     transactions.sort(key=lambda transaction: transaction.creation_time, reverse=True)
 
     if request.method == 'POST':
+        print(request.POST)
         # TODO check
         system_account = SystemAccounts.objects.all()[0]
+        if request.POST.get('assign') == '':
+            tmp = get_null_verified_transactions()
+            if len(tmp) > 0:
+                transaction = tmp[tmp.count() - 1]
+                print(transaction)
+                transaction.checking_employee = employee
+                print(employee)
+                transaction.checking = True
+                transaction.save()
+                return employee_check_transaction_view(request)
+
         if request.POST.get('checked transaction'):
             transaction = transactions.pop(id=request.POST.get('transaction id', default=None))
             customer = transaction.owner
@@ -104,15 +116,11 @@ def employee_check_transaction_view(request):
             transaction.save()
 
 
-    elif request.POST.get('Customer selected'):
-        customer = Customer.objects.filter(username=request.POST.get('username'))
-        return employee_transaction_owner_view(request, customer)
+        if request.POST.get('Customer selected'):
+            customer = Customer.objects.filter(username=request.POST.get('username'))
+            return employee_transaction_owner_view(request, customer)
 
-    elif request.POST.get('assign'):
-        transaction = get_null_verified_transactions()[transactions.count() - 1]
-        transaction.checking_employee = employee
-        transaction.checking = True
-        return employee_check_transaction_view(request)
+
 
     # this will show manager not verified and not checked transactions
     none = None
@@ -349,5 +357,32 @@ def get_all_system_transactions():
 
     for transaction in transactions:
         transaction.is_one_day_passed()
+
+    return transactions
+
+
+def get_null_verified_transactions():
+    transactions = []
+    # Exam transactions:
+    exams = ExamTransaction.objects.filter(verified=None)
+    # Application and tuition fees transactions:
+    fees = ApplicationTuitionFeeTransaction.objects.filter(verified=None)
+    # Foregin payments transactions:
+    foreign_payments = ForeignPaymentTransaction.objects.filter(verified=None)
+    # Domestic transactions:
+    domestic_payments = DomesticPaymentTransaction.objects.filter(verified=None)
+    #  Unknown payments transactions:
+    unknown_payments = UnknownPaymentTransaction.objects.filter(verified=None)
+
+    transactions.extend(exams)
+    transactions.extend(fees)
+    transactions.extend(foreign_payments)
+    transactions.extend(domestic_payments)
+    transactions.extend(unknown_payments)
+
+    for transaction in transactions:
+        transaction.is_one_day_passed()
+        if transaction.verified is False:
+            transactions.pop(transaction)
 
     return transactions

@@ -194,6 +194,13 @@ def manager_employees_list_view(request):
         if request.POST.get('employee selected'):
             return manager_employee_view(request, Employee.objects.filter(username=request.username))
 
+        elif request.POST.get('wage'):
+            user =  MyUser.objects.filter(username=request.POST.get('wage'))
+            print(user[0].username)
+            employee = Employee.objects.filter(user=user[0])
+            print(employee[0].last_name)
+            return render(request, "see_employee_profile.html", {'employee':employee[0]})
+
         elif request.POST.get('ban'):
             MyUser.objects.filter(username=request.POST.get('ban')).update(is_not_banned=False)
 
@@ -205,6 +212,19 @@ def manager_employees_list_view(request):
         elif request.POST.get('send_message'):
             # TODO REZA send message gets employee id
             return HttpResponseRedirect(reverse('manager:send_message'))
+
+        if request.POST.get('employee'):
+            user = MyUser.objects.filter(username=request.POST.get('employee'))
+            print(user[0].username)
+            employee = Employee.objects.filter(user=user[0])[0]
+            print(employee.first_name)
+            employee.wage_per_month = request.POST.get('wage_value')
+            employee.save()
+
+            employees_list = Employee.objects.all()
+            return render(request, 'accounts.html',
+                  {'manager': manager, 'accounts': employees_list, 'employee':True})
+            # return render(request, "see_employee_profile.html", {'employee':employee})
 
     employees_list = Employee.objects.all()
     return render(request, 'accounts.html',
@@ -224,6 +244,10 @@ def manager_customers_list_view(request):
         if request.POST.get('delete this shit customer'):
             Customer.objects.all().delete(username=request.username)
             request.success = True
+        elif request.POST.get('wage'):
+            user =  MyUser.objects.filter(username=request.POST.get('wage'))[0]
+            customer = Customer.objects.filter(user=user)[0]
+            return render(request, "see_customer_profile.html", {'customer':customer})
         elif request.POST.get('opeen profle of customer'):
 
             return manager_customer_view(request, Customer.objects.filter(username=request.username))
