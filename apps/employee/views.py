@@ -47,81 +47,117 @@ def employee_check_transaction_view(request):
             tmp = get_null_verified_transactions()
             print(tmp)
             if len(tmp) > 0:
-                transaction = tmp[0]
+                transaction = tmp[-1]
                 print(transaction)
                 transaction.checking_employee = employee
-                print(employee)
                 transaction.checking = True
+                print(transaction.checking_employee)
                 transaction.save()
                 return render(request, 'employee_transaction_check.html',
                               {'employee': employee, 'transactions': transactions, 'none': None})
 
-        if request.POST.get('checked transaction'):
-            transaction = transactions.pop(id=request.POST.get('transaction id', default=None))
+        if request.POST.get('accept'):
+            transaction = None
+            for t in transactions:
+                if t.id == int(request.POST.get('accept')):
+                    transaction = t
+
             customer = transaction.owner
-            status = request.POST.get('transaction status', default=False)
-            if status == 'accept':
-                currency = transaction.currency_type
-                if currency == 'rial':
-                    cost = transaction.rial_cost * transaction.wage_rate + transaction.rial_cost
-                    if customer.rial_wallet < cost:
-                        transaction.paid = False
-                        transaction.checking = False
-                        transaction.verified = False
-                        transaction_report_email(transaction, customer)
-                        return transaction.save()
+            # if status == 'accept':
+            currency = transaction.currency_type
+            if currency == 'rial':
+                cost = transaction.rial_cost * transaction.wage_rate + transaction.rial_cost
+                if customer.rial_wallet < cost:
+                    transaction.paid = False
+                    transaction.checking = False
+                    transaction.verified = False
+                    # TODO email
+                    # transaction_report_email(transaction, customer)
+                    return transaction.save()
 
-                    customer.rial_wallet -= cost
-                    system_account.rial_amount_account += round(transaction.rial_cost * transaction.wage_rate, 2)
+                customer.rial_wallet -= cost
+                system_account.rial_amount_account += round(transaction.rial_cost * transaction.wage_rate, 2)
 
-                elif currency == 'dollar':
-                    cost = transaction.dollar_cost * transaction.wage_rate + transaction.dollar_cost
-                    if customer.dollar_wallet < cost:
-                        transaction.paid = False
-                        transaction.checking = False
-                        transaction.verified = False
-                        transaction_report_email(transaction, customer)
-                        return transaction.save()
-                    customer.dollar_wallet -= cost
+            elif currency == 'dollar':
+                cost = transaction.dollar_cost * transaction.wage_rate + transaction.dollar_cost
+                if customer.dollar_wallet < cost:
+                    transaction.paid = False
+                    transaction.checking = False
+                    transaction.verified = False
+                    transaction_report_email(transaction, customer)
+                    return transaction.save()
+                customer.dollar_wallet -= cost
 
-                    system_account.dollar_amount_account += round(transaction.dollar_cost * transaction.wage_rate, 2)
-                elif currency == 'euro':
-                    cost = transaction.euro_cost * transaction.euro_cost + transaction.euro_cost
-                    if customer.euro_wallet < cost:
-                        transaction.paid = False
-                        transaction.checking = False
-                        transaction.verified = False
-                        transaction_report_email(transaction, customer)
-                        return transaction.save()
-                    customer.euro_wallet -= cost
-                    system_account.euro_amount_account += round(transaction.euro_cost * transaction.wage_rate, 2)
+                system_account.dollar_amount_account += round(transaction.dollar_cost * transaction.wage_rate, 2)
+            elif currency == 'euro':
+                cost = transaction.euro_cost * transaction.euro_cost + transaction.euro_cost
+                if customer.euro_wallet < cost:
+                    transaction.paid = False
+                    transaction.checking = False
+                    transaction.verified = False
+                    transaction_report_email(transaction, customer)
+                    return transaction.save()
+                customer.euro_wallet -= cost
+                system_account.euro_amount_account += round(transaction.euro_cost * transaction.wage_rate, 2)
 
-                employees_wage = 0
-                for employee in Employee.objects.all():
-                    employees_wage += employee.wage_per_month
-                if system_account.rial_amount_account <= 3 * employees_wage:
-                    Notification(owner=Manager.objects.all()[0], type='insufficient money').save()
+            employees_wage = 0
+            for employee in Employee.objects.all():
+                employees_wage += employee.wage_per_month
+            if system_account.rial_amount_account <= 3 * employees_wage:
+                Notification(owner=Manager.objects.all()[0], type='insufficient money').save()
 
-                system_account.save()
-                customer.save()
+            system_account.save()
+            customer.save()
 
-                transaction.paid = True
-                transaction.verified = True
-                transaction.checking = False
-                transaction_report_email(transaction, customer)
-
-            elif status == 'reject':
-                transaction.paid = False
-                transaction.checking = False
-                transaction.verified = False
-                transaction_report_email(transaction, customer)
+            transaction.paid = True
+            transaction.verified = True
+            transaction.checking = False
+            # transaction_report_email(transaction, customer)
             transaction.save()
 
-        if request.POST.get('Customer selected'):
-            customer = Customer.objects.filter(username=request.POST.get('username'))
-            return employee_transaction_owner_view(request, customer)
+        elif request.POST.get('reject'):
+            transaction = None
+            for t in transactions:
+                if t.id == int(request.POST.get('reject')):
+                    transaction = t
+            customer = transaction.owner
+            transaction.paid = False
+            transaction.checking = False
+            transaction.verified = False
+            print(transaction.checking)
+            # transaction_report_email(transaction, customer)
+            transaction.save()
 
+        # if request.POST.get('Customer selected'):
+        #     customer = Customer.objects.filter(username=request.POST.get('username'))
+        #     return employee_transaction_owner_view(request, customer)
 
+    # transactions_list = []
+    # for transaction in transactions:
+    #     tmp = []
+    #     if isinstance(transaction, RialWalletIncTransaction):
+    #         tmp.append('Rial Charge')
+    #         tmp.append(str(transaction.amount) + 'ريال')
+    #     elif isinstance(transaction, CurrencyConvertTransaction) and transaction.currency == 'dollar':
+    #         tmp.append('Rial-Dollar Exchange')
+    #         tmp.append(str(transaction.amount) + '$')
+    #     elif isinstance(transaction, CurrencyConvertTransaction) and transaction.currency == 'euro':
+    #         tmp.append('Rial-Euro Exchange')
+    #         tmp.append(str(transaction.amount) + '€')
+    #     else:
+    #         pass
+    #     tmp.append(transaction.creation_time.date())
+    #     tmp.append(transaction.creation_time.time())
+    #     if transaction.verified == None:
+    #         tmp.append('none')
+    #     elif transaction.verified:
+    #         tmp.append('true')
+    #     else:
+    #         tmp.append('false')
+    #     tmp.append(transaction.description)
+    #     tmp.append(transaction.owner.user.username)
+    #     transactions_list.append(tmp)
+    #     order = False
 
     return render(request, 'employee_transaction_check.html',
                   {'employee': employee, 'transactions': transactions, 'none': None})
@@ -325,6 +361,7 @@ def get_employee_transactions(employee):
         transaction.is_one_day_passed()
         if transaction.verified is False:
             transactions.pop(transaction)
+    transactions.sort(key=lambda transaction: transaction.creation_time)
 
     return transactions
 
@@ -332,19 +369,19 @@ def get_employee_transactions(employee):
 def get_all_system_transactions():
     transactions = []
     # Rial increase transactions:
-    rial_incs = RialWalletIncTransaction.objects.all().exclude(manager_owner=False)
+    rial_incs = RialWalletIncTransaction.objects.all().exclude(manager_owner=True)
     # Convert transactions:
-    converts = CurrencyConvertTransaction.objects.all().exclude(manager_owner=False)
+    converts = CurrencyConvertTransaction.objects.all().exclude(manager_owner=True)
     # Exam transactions:
-    exams = ExamTransaction.objects.all().exclude(manager_owner=False)
+    exams = ExamTransaction.objects.all().exclude(manager_owner=True)
     # Application and tuition fees transactions:
-    fees = ApplicationTuitionFeeTransaction.objects.all().exclude(manager_owner=False)
+    fees = ApplicationTuitionFeeTransaction.objects.all().exclude(manager_owner=True)
     # Foregin payments transactions:
-    foreign_payments = ForeignPaymentTransaction.objects.all().exclude(manager_owner=False)
+    foreign_payments = ForeignPaymentTransaction.objects.all().exclude(manager_owner=True)
     # Domestic transactions:
-    domestic_payments = DomesticPaymentTransaction.objects.all().exclude(manager_owner=False)
+    domestic_payments = DomesticPaymentTransaction.objects.all().exclude(manager_owner=True)
     #  Unknown payments transactions:
-    unknown_payments = UnknownPaymentTransaction.objects.all().exclude(manager_owner=False)
+    unknown_payments = UnknownPaymentTransaction.objects.all().exclude(manager_owner=True)
 
     # for list of transactions uncomment bellow
 
@@ -358,6 +395,8 @@ def get_all_system_transactions():
 
     for transaction in transactions:
         transaction.is_one_day_passed()
+
+    transactions.sort(key=lambda transaction: transaction.creation_time)
 
     return transactions
 
@@ -385,5 +424,7 @@ def get_null_verified_transactions():
         transaction.is_one_day_passed()
         if transaction.verified is False:
             transactions.pop(transaction)
+
+    transactions.sort(key=lambda transaction: transaction.creation_time)
 
     return transactions

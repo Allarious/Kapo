@@ -2585,7 +2585,7 @@ html {
                             <div class="transaction__middle__2ocXa">{{ transaction.creation_time.time }}</div>
                             <div class="transaction__right__7uyD4">
                                 <div class="transaction__btn-container__3iP5M">
-                                    {% if transaction.checking_employee == employee and transaction.verified%}
+                                    {% if transaction.checking_employee == employee and  transaction.verified == none and transaction.checking%}
                                      <button type="submit" name="accept" value={{ transaction.id }} class="transaction__accept__Uu40x" ></button>
                                     <button style="background-color: red"  type="submit" name="reject" class="transaction__reject__1Px3-" value={{ transaction.id }}></button>
                                         {% elif transaction.verified == none %} Unknown
