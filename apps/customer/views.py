@@ -253,5 +253,5 @@ def send_message(request):
 @customer_required
 @customer_is_not_banned
 def orders(request):
-    exams = ManagerAddedExams.objects.all()
-    return render(request, 'orders.html', {'exams': exams})
+    # exams = ManagerAddedExams.objects.all()
+    return render(request, 'orders.html', {})

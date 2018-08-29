@@ -2034,14 +2034,14 @@ html {
                 <a href={% url 'accounts:logout' %}><div class="navbar__navComponents__A_iF-">  Logout  </div></a>
             </div>
             <div class="order__container__IHv22">
-                {% for exam in exams %}
-                    <a href="{% url 'customer:transactions:exam transactions' %}?exam= {{ exam }}"><div class="exam__container__1nfNm">
-                    <div class="exam__header__2YBu9">{{ exam.exam_title}}</div>
+{#                {% for exam in exams %}#}
+                    <a href="{% url 'customer:transactions:exam transactions' %}"><div class="exam__container__1nfNm">
+                    <div class="exam__header__2YBu9">Exam</div>
                     <div class="exam__image__2PBPD" style="background-image: url({{ exam.image_url }});"></div>
                 </div></a>
-                {% endfor %}
+{#                {% endfor %}#}
                 <a href={% url 'customer:transactions:application fee transactions' %}><div class="exam__container__1nfNm">
-                    <div class="exam__header__2YBu9">Application/Fee wage={{ wage }}</div>
+                    <div class="exam__header__2YBu9">Application/Tuition Fee</div>
                     <div class="exam__image__2PBPD" style="background-image: none"></div>
                 </div></a>
                 <a href={% url 'customer:transactions:foreign pay transactions' %}><div class="exam__container__1nfNm">

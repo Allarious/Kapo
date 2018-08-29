@@ -19,9 +19,8 @@ class ExchangeForm(forms.ModelForm):
 class ExamTransactionForm(forms.ModelForm):
     class Meta:
         model = ExamTransaction
-        fields = ['site_username', 'site_password',
-                  'description'] #['exam_title', 'dollar_cost', 'site_url', 'site_authentication',
-
+        fields = ['exam_title', 'dollar_cost', 'site_url', 'site_username', 'site_password',
+                  'description']
 
 
 class ApplicationTuitionFeeTransactionForm(forms.ModelForm):
@@ -51,6 +50,7 @@ class UnknownPaymentTransactionForm(forms.ModelForm):
     class Meta:
         model = UnknownPaymentTransaction
         fields = ['domestic_card_number', 'rial_cost', 'description', 'email']
+
 
 class Exchange2Form(forms.Form):
     dollar_amount = forms.FloatField(validators=[MaxValueValidator(1000), MinValueValidator(1)], required=False)

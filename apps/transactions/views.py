@@ -116,12 +116,11 @@ def customer_exchange_view(request):
 
 @login_required
 @customer_required
-def exam_transactions_view(request, title, cost, site_url, image_url):
+def exam_transactions_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     wage = float(Configuration.objects.get(key='exam wage').value)
     dollar_rate = int(Configuration.objects.get(key='dollar').value)
     euro_rate = int(Configuration.objects.get(key='euro').value)
-    exam_type = request.Get.get('exam')
     if request.method == 'POST':
         form = ExamTransactionForm(request.POST)
         if form.is_valid():
@@ -140,13 +139,13 @@ def exam_transactions_view(request, title, cost, site_url, image_url):
                                'dollar_rate': dollar_rate,
                                'euro_rate': euro_rate})
             exam.save()
-            return redirect('/customer/')
+            return HttpResponseRedirect(reverse('index'))
     else:
         form = ExamTransactionForm()
 
     return render(request, 'exam_order.html',
                   {'customer': customer, 'form': form, 'wage': wage, 'dollar_rate': dollar_rate,
-                   'euro_rate': euro_rate, 'title': title, 'cost': cost, 'site_url': site_url, 'image_url': image_url})
+                   'euro_rate': euro_rate})
 
 
 @login_required
