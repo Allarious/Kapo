@@ -199,10 +199,10 @@ def app_fee_transactions_view(request):
                               {'customer': customer, 'form': form, 'wage': wage,
                                'dollar_rate': dollar_rate,
                                'euro_rate': euro_rate})
-            noification = Notification()
-            noification.owner = customer.user
-            noification.type = 'order'
-            noification.save()
+            # noification = Notification()
+            # noification.owner = customer.user
+            # noification.type = 'order'
+            # noification.save()
             return redirect(reverse('customer:index'))
     else:
         form = ApplicationTuitionFeeTransactionForm()
@@ -263,10 +263,10 @@ def foreign_pay_transactions_view(request):
                                'dollar_rate': dollar_rate,
                                'euro_rate': euro_rate})
 
-            noification = Notification()
-            noification.owner = customer.user
-            noification.type = 'order'
-            noification.save()
+            # noification = Notification()
+            # noification.owner = customer.user
+            # noification.type = 'order'
+            # noification.save()
             return redirect(reverse('customer:index'))
     else:
         form = ForeignPaymentTransactionForm()
@@ -295,10 +295,10 @@ def domestic_pay_transactions_view(request):
                 return render(request, 'domestic_payment.html',
                               {'customer': customer, 'wage': wage, 'form': form})
             pay.save()
-            noification = Notification()
-            noification.owner = customer.user
-            noification.type = 'order'
-            noification.save()
+            # noification = Notification()
+            # noification.owner = customer.user
+            # noification.type = 'order'
+            # noification.save()
             return redirect(reverse('customer:index'))
     else:
         form = DomesticPaymentTransactionForm()
@@ -342,10 +342,10 @@ def unknown_pay_transactions_view(request):
             my_user.save()
             unknown.save()
             unknown_transaction_email(customer, unknown)
-            noification = Notification()
-            noification.owner = customer.user
-            noification.type = 'order'
-            noification.save()
+            # noification = Notification()
+            # noification.owner = customer.user
+            # noification.type = 'order'
+            # noification.save()
             return redirect(reverse('customer:index'))
     else:
         form = UnknownPaymentTransactionForm()
