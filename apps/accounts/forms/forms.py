@@ -51,4 +51,4 @@ class CustomerSignUpForm(forms.ModelForm):
 class EmployeeSignUpForm(forms.ModelForm):
     class Meta:
         model = Employee
-        fields = ('first_name', 'last_name', 'phone')
+        fields = ('first_name', 'last_name')

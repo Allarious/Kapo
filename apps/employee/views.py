@@ -8,7 +8,7 @@ from apps.accounts.models import *
 from apps.customer.forms.forms import EditUser
 from apps.employee.forms import EditEmployeeProfile
 from apps.employee.models import Employee
-from apps.accounts.decorators import employee_required
+from apps.accounts.decorators import employee_required, employee_is_not_banned
 from apps.manager.models import Manager
 from apps.transactions.functions import *
 from apps.transactions.models import *
@@ -18,6 +18,7 @@ from django.urls import reverse
 
 @login_required
 @employee_required
+@employee_is_not_banned
 def employee_profile_view(request):
     employee = get_object_or_404(Employee, pk=request.user.id)
     return render(request, 'employee-profile.html', {'employee': employee, })
@@ -31,6 +32,7 @@ def index(request):
 
 @login_required
 @employee_required
+@employee_is_not_banned
 def employee_check_transaction_view(request):
     employee = get_object_or_404(Employee, pk=request.user.id)
     # transactions = get_employee_transactions(employee)
@@ -120,6 +122,7 @@ def employee_check_transaction_view(request):
 
 @login_required
 @employee_required
+@employee_is_not_banned
 def update_employee_profile(request):
     user = MyUser.objects.get(username=request.user.username)
     # customer = user.customer
@@ -159,6 +162,7 @@ def update_employee_profile(request):
 
 @login_required
 @employee_required
+@employee_is_not_banned
 def employee_transaction_owner_view(request, customer):
     employee = get_object_or_404(Employee, pk=request.user.id)
     transactions = customer_all_transactions(customer)
@@ -169,13 +173,16 @@ def employee_transaction_owner_view(request, customer):
 
 @login_required
 @employee_required
+@employee_is_not_banned
 def employee_all_system_transactions_view(request):
     employee = get_object_or_404(Employee, pk=request.user.id)
     transactions = get_all_system_transactions()
     return render(request, 'employee_all_system_transactions.html',
                   {'employee': employee, 'transactions': transactions})
 
-
+@login_required
+@employee_required
+@employee_is_not_banned
 def employee_dashboard_view(request):
     employee = get_object_or_404(Employee, pk=request.user.id)
     notifications = Notification.objects.all().filter(owner=employee.user)
@@ -185,7 +192,9 @@ def employee_dashboard_view(request):
     Notification.objects.all().filter(owner=employee.user).update(seen=True)
     return render(request, 'employee_dashboard.html', {'notifications': notification})
 
-
+@login_required
+@employee_required
+@employee_is_not_banned
 def message_dashboard_view(request):
     employee = get_object_or_404(Employee, pk=request.user.id)
     messages = Message.objects.all().filter(receiver=employee.user)
@@ -194,7 +203,9 @@ def message_dashboard_view(request):
         message.append(messages[messages.count() - 1 - i])
     return render(request, 'employee_massage_dashboard.html', {'messages': message})
 
-
+@login_required
+@employee_required
+@employee_is_not_banned
 def transaction_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     rial = RialWalletIncTransaction.objects.all().filter(owner=customer)
@@ -312,19 +323,19 @@ def get_all_system_transactions():
     manager = Manager.objects.all()[0]
     transactions = []
     # Rial increase transactions:
-    rial_incs = RialWalletIncTransaction.objects.all().exclude(owner=manager)
+    rial_incs = RialWalletIncTransaction.objects.all().exclude(manager_owner=True)
     # Convert transactions:
-    converts = CurrencyConvertTransaction.objects.all().exclude(owner=manager)
+    converts = CurrencyConvertTransaction.objects.all().exclude(manager_owner=True)
     # Exam transactions:
-    exams = ExamTransaction.objects.all().exclude(owner=manager)
+    exams = ExamTransaction.objects.all().exclude(manager_owner=True)
     # Application and tuition fees transactions:
-    fees = ApplicationTuitionFeeTransaction.objects.all().exclude(owner=manager)
+    fees = ApplicationTuitionFeeTransaction.objects.all().exclude(manager_owner=True)
     # Foregin payments transactions:
-    foreign_payments = ForeignPaymentTransaction.objects.all().exclude(owner=manager)
+    foreign_payments = ForeignPaymentTransaction.objects.all().exclude(manager_owner=True)
     # Domestic transactions:
-    domestic_payments = DomesticPaymentTransaction.objects.all().exclude(owner=manager)
+    domestic_payments = DomesticPaymentTransaction.objects.all().exclude(manager_owner=True)
     #  Unknown payments transactions:
-    unknown_payments = UnknownPaymentTransaction.objects.all().exclude(owner=manager)
+    unknown_payments = UnknownPaymentTransaction.objects.all().exclude(manager_owner=True)
 
     # for list of transactions uncomment bellow
 

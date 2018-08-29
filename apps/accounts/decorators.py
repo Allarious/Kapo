@@ -33,7 +33,7 @@ def employee_required(function=None, redirect_field_name=REDIRECT_FIELD_NAME, lo
     return actual_decorator
 
 
-def employee_is_not_banned(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='khar'):
+def employee_is_not_banned(function=None, redirect_field_name=REDIRECT_FIELD_NAME, login_url='../accounts/login'):
     '''
     Decorator for views that checks that the logged in user is a teacher,
     redirects to the log-in page if necessary.

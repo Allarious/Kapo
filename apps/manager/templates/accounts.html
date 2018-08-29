@@ -1493,7 +1493,7 @@ html {
     width: 100%;
 }
 .accounts__add__2RuQ1:hover{
-    height: 600px;
+    height: 750px;
 }</style><style type="text/css">.acc__container__19wqh {
     width: 30%;
     height: 300px;
@@ -2548,16 +2548,43 @@ html {
                     <div class="acc__im__UofGK" style="background-image: url(&quot;https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample1.jpg&quot;);"></div>
                     <div class="acc__pro-image__aXltb" style="background-image: url(&quot;https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/profile-sample1.jpg&quot;);"></div>
                     <div class="acc__name__28Gvb">{{ account.first_name }} {{ account.last_name }}</div>
-                    <div class="acc__role__1r0j_">User</div>
+                    <div class="acc__role__1r0j_">{% if employee %}Employee {% else%} User {% endif %}</div>
 {#                    <div class="acc__role__1r0j_">User</div>#}
                     <div class="acc__button-box__2qyB0">
-                        <div class="acc__buttonsremove__3c0Tx"></div>
-                        <div class="acc__buttonsban__11NDP"></div>
+                        <form method="post">
+                            {% csrf_token %}
+{#                        <div class="acc__buttonsremove__3c0Tx"></div>#}
+                         <button type="submit" name="ban" value={{ account.user.username }} class="acc__buttonsban__11NDP"></button>
                         <div class="acc__buttonsprofile__3hKn3"></div>
-                        <div class="acc__buttonssendmessage__3alGU"></div>
-                        <div class="acc__buttonspayment__3ktrN"></div></div></div>
+                            </form>
+{#                        <div class="acc__buttonssendmessage__3alGU"></div>#}
+{#                        <div class="acc__buttonspayment__3ktrN"></div>#}
+                    </div></div>
             {% endfor %}
-        </div>
+
+            {% if employee %}
+                <div class="accounts__add__2RuQ1">
+            <div class="accounts__circle__2LFZY">
+                <div class="accounts__ver-line__1mRGN"></div>
+                <div class="accounts__hor-line__1ohYg"></div>
+            </div>
+            <div class="accounts__modal__1Phdc">
+            <form method="post">
+                {% csrf_token %}
+                <div>
+                    <input class="input__login-input__FAzIY" type="text" placeholder="First Name" value="" name="first_name"></div>
+                <div>
+                    <input class="input__login-input__FAzIY" type="text" placeholder="Last Name" value="" name="last_name"></div>
+                <div>
+                    <input class="input__login-input__FAzIY" type="text" placeholder="Username" value="" name="username"></div>
+            <div>
+                <input class="input__login-input__FAzIY" type="text" placeholder="E-mail" value="" name="email"></div>
+            <div><input class="input__login-input__FAzIY" type="password" placeholder="Password" value="" name="password"></div>
+                <div>
+                    <input class="input__login-input__FAzIY" type="password" placeholder="Confirm Password" value="" name="password2"></div>
+                <button type="submit" class="authbutton__form-button__26qDW">Add</button></form></div>
+            {% endif %}
+
 
             </div></div><div class="footer__footer__1ewxg"><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Contact Us</div><div class="footer__wrapper-body__34NLC">021-1234567<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Email Us</div><div class="footer__wrapper-body__34NLC">info@Kapo.ir<div></div></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Follow Us</div><div class="footer__wrapper-body__34NLC"><button class="footer__wrapper-body-button__19lEO">Telegram</button><button class="footer__wrapper-body-button__19lEO">Instagram</button></div></div></div><div class="footer__footer-components__24pDN"><div><div class="footer__wrapper-header__2lVLG">Meet us</div><div class="footer__wrapper-body__34NLC">Sharif University Of Tehran<div></div></div></div></div></div></div></div>
     <!--

@@ -2579,7 +2579,7 @@ html {
                         <p name="id" id="id" style="display: none"></p>
                         <p name = "checked transaction", id = "checked transaction" style="display: none"></p>
                         <div class="transaction__container__1Qkyv">
-                            <div class="transaction__left__1mO41"><a>@{{ transaction.owner.user.username }}</a></div>
+                            <div class="transaction__left__1mO41"><a>@{% if transaction.manager_owner %} {{ manager.user.username }} {% else %}{{ transaction.owner.user.username }} {% endif %}</a></div>
                             <div class="transaction__middle__2ocXa">{{ transaction.type_name }}</div>
                             <div class="transaction__middle__2ocXa">{% if transaction.dollar_cost > 0 %}{{ transaction.dollar_cost }}$ {% elif transaction.rial_cost > 0 %} {{ transaction.rial_cost }}R {% elif transaction.amount > 0 %} {{ transaction.amount }}R {% else %} {{ transaction.euro_cost }}€ {% endif %}</div>
                             <div class="transaction__middle__2ocXa">{{ transaction.creation_time }}</div>

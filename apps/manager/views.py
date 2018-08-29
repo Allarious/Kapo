@@ -13,6 +13,7 @@ from apps.manager.forms.forms import *
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from apps.employee.models import Employee
+from apps.customer.models import Customer
 
 from apps.transactions.functions import *
 
@@ -161,12 +162,40 @@ def manager_employees_list_view(request):
     manager = get_object_or_404(Manager, pk=request.user.id)
 
     if request.method == 'POST':
+        user_form = UserForm(request.POST, request.FILES)
+        form = EmployeeSignUpForm(request.POST)
+        if form.is_valid() and user_form.is_valid():
+            user = user_form.save()
+            username = request.POST['username']
+            password = request.POST['password']
+            user.set_password(user.password)
+            user.is_employee = True
+            user.save()
+            employee = form.save(commit=False)
+            employee.user = user
+            employee.save()
+            employees_list = Employee.objects.all()
+            return render(request, 'accounts.html',
+                          {'manager': manager, 'accounts': employees_list, 'employee': True})
+
+        # else:
+        #
+        #     employees_list = Employee.objects.all()
+        #     return render(request, 'accounts.html',
+        #                   {'manager': manager, 'accounts': employees_list, 'employee': True})
+
+    else:
+        user_form = UserForm()
+        form = EmployeeSignUpForm()
+
+    if request.method == 'POST':
         # TODO check
+        print(request.POST)
         if request.POST.get('employee selected'):
             return manager_employee_view(request, Employee.objects.filter(username=request.username))
 
-        elif request.POST.get('ban employee'):
-            Employee.objects.filter(username=request.username).update(is_not_banned=False)
+        elif request.POST.get('ban'):
+            MyUser.objects.filter(username=request.POST.get('ban')).update(is_not_banned=False)
 
         elif request.POST.get('remove'):
             Employee.objects.all().delete(username=request.username)
@@ -179,13 +208,15 @@ def manager_employees_list_view(request):
 
     employees_list = Employee.objects.all()
     return render(request, 'accounts.html',
-                  {'manager': manager, 'accounts': employees_list})
+                  {'manager': manager, 'accounts': employees_list, 'employee':True})
 
 
 @login_required
 @manager_required
 def manager_customers_list_view(request):
     manager = get_object_or_404(Manager, pk=request.user.id)
+
+
 
     if request.method == 'POST':
         # TODO check
@@ -199,7 +230,7 @@ def manager_customers_list_view(request):
 
     customers_list = Customer.objects.all()
     return render(request, 'accounts.html',
-                  {'manager': manager, 'accounts': customers_list})
+                  {'manager': manager, 'accounts': customers_list, 'employee':False})
 
 
 @login_required
