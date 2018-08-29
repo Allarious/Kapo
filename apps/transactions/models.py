@@ -141,7 +141,7 @@ class AbstractTransaction(models.Model):
     id = models.AutoField(primary_key=True)
     owner = models.ForeignKey(Customer, on_delete=models.CASCADE)
     creation_time = models.DateTimeField(default=timezone.now)
-    description = models.TextField(null=True, blank=True)
+    description = models.TextField(blank=True, default='')
     paid = models.BooleanField(default=False)
     verified = models.NullBooleanField(default=None)
     checking_employee = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True)

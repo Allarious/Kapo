@@ -45,20 +45,22 @@ def employee_check_transaction_view(request):
         system_account = SystemAccounts.objects.all()[0]
         if request.POST.get('assign') == '':
             tmp = get_null_verified_transactions()
+            print(tmp)
             if len(tmp) > 0:
-                transaction = tmp[tmp.count() - 1]
+                transaction = tmp[0]
                 print(transaction)
                 transaction.checking_employee = employee
                 print(employee)
                 transaction.checking = True
                 transaction.save()
-                return employee_check_transaction_view(request)
+                return render(request, 'employee_transaction_check.html',
+                              {'employee': employee, 'transactions': transactions, 'none': None})
 
         if request.POST.get('checked transaction'):
             transaction = transactions.pop(id=request.POST.get('transaction id', default=None))
             customer = transaction.owner
             status = request.POST.get('transaction status', default=False)
-            if status == 'accepted':
+            if status == 'accept':
                 currency = transaction.currency_type
                 if currency == 'rial':
                     cost = transaction.rial_cost * transaction.wage_rate + transaction.rial_cost
@@ -108,13 +110,12 @@ def employee_check_transaction_view(request):
                 transaction.checking = False
                 transaction_report_email(transaction, customer)
 
-            elif status == 'rejected':
+            elif status == 'reject':
                 transaction.paid = False
                 transaction.checking = False
                 transaction.verified = False
                 transaction_report_email(transaction, customer)
             transaction.save()
-
 
         if request.POST.get('Customer selected'):
             customer = Customer.objects.filter(username=request.POST.get('username'))
@@ -122,10 +123,8 @@ def employee_check_transaction_view(request):
 
 
 
-    # this will show manager not verified and not checked transactions
-    none = None
     return render(request, 'employee_transaction_check.html',
-                  {'employee': employee, 'transactions': transactions, 'none': none})
+                  {'employee': employee, 'transactions': transactions, 'none': None})
 
 
 @login_required
@@ -188,6 +187,7 @@ def employee_all_system_transactions_view(request):
     return render(request, 'employee_all_system_transactions.html',
                   {'employee': employee, 'transactions': transactions})
 
+
 @login_required
 @employee_required
 @employee_is_not_banned
@@ -200,6 +200,7 @@ def employee_dashboard_view(request):
     Notification.objects.all().filter(owner=employee.user).update(seen=True)
     return render(request, 'employee_dashboard.html', {'notifications': notification})
 
+
 @login_required
 @employee_required
 @employee_is_not_banned
@@ -211,13 +212,14 @@ def message_dashboard_view(request):
         message.append(messages[messages.count() - 1 - i])
     return render(request, 'employee_massage_dashboard.html', {'messages': message})
 
+
 @login_required
 @employee_required
 @employee_is_not_banned
 def transaction_dashboard_view(request):
-    customer = get_object_or_404(Customer, pk=request.user.id)
-    rial = RialWalletIncTransaction.objects.all().filter(owner=customer)
-    exchange = CurrencyConvertTransaction.objects.all().filter(owner=customer)
+    employee = get_object_or_404(Employee, pk=request.user.id)
+    rial = RialWalletIncTransaction.objects.all()
+    exchange = CurrencyConvertTransaction.objects.all()
     transactions = []
     transactions.extend(rial)
     transactions.extend(exchange)
@@ -328,22 +330,21 @@ def get_employee_transactions(employee):
 
 
 def get_all_system_transactions():
-    manager = Manager.objects.all()[0]
     transactions = []
     # Rial increase transactions:
-    rial_incs = RialWalletIncTransaction.objects.all().exclude(manager_owner=True)
+    rial_incs = RialWalletIncTransaction.objects.all().exclude(manager_owner=False)
     # Convert transactions:
-    converts = CurrencyConvertTransaction.objects.all().exclude(manager_owner=True)
+    converts = CurrencyConvertTransaction.objects.all().exclude(manager_owner=False)
     # Exam transactions:
-    exams = ExamTransaction.objects.all().exclude(manager_owner=True)
+    exams = ExamTransaction.objects.all().exclude(manager_owner=False)
     # Application and tuition fees transactions:
-    fees = ApplicationTuitionFeeTransaction.objects.all().exclude(manager_owner=True)
+    fees = ApplicationTuitionFeeTransaction.objects.all().exclude(manager_owner=False)
     # Foregin payments transactions:
-    foreign_payments = ForeignPaymentTransaction.objects.all().exclude(manager_owner=True)
+    foreign_payments = ForeignPaymentTransaction.objects.all().exclude(manager_owner=False)
     # Domestic transactions:
-    domestic_payments = DomesticPaymentTransaction.objects.all().exclude(manager_owner=True)
+    domestic_payments = DomesticPaymentTransaction.objects.all().exclude(manager_owner=False)
     #  Unknown payments transactions:
-    unknown_payments = UnknownPaymentTransaction.objects.all().exclude(manager_owner=True)
+    unknown_payments = UnknownPaymentTransaction.objects.all().exclude(manager_owner=False)
 
     # for list of transactions uncomment bellow
 

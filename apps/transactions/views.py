@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 
-from apps.core.models import Configuration
+from apps.core.models import Configuration, SystemAccounts
 from apps.manager.models import Manager
 from .forms.forms import *
 from apps.accounts.models import Notification
@@ -25,6 +25,7 @@ def customer_exchange_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     dollar_rate = float(Configuration.objects.get(key='dollar').value)
     euro_rate = float(Configuration.objects.get(key='euro').value)
+    system_account = SystemAccounts.objects.all()[0]
 
     if request.method == 'POST':
         exchange_form = Exchange2Form(request.POST)
@@ -38,10 +39,22 @@ def customer_exchange_view(request):
                     transaction.wage_rate = 0
                     transaction.amount = form.cleaned_data['amount']
                     transaction.owner = customer
-                    customer.rial_wallet += transaction.amount
-                    customer.save()
-                    transaction.save()
-                    return HttpResponseRedirect(reverse('customer:index'))
+                    if system_account.rial_amount_account > transaction.amount:
+                        system_account.rial_amount_account -= transaction.amount
+
+                        customer.rial_wallet += transaction.amount
+                        customer.save()
+                        system_account.save()
+                        transaction.save()
+                    else:
+                        exchange_form.add_error('euro_amount', 'موجودی سامانه کافی نیست')
+                        return render(request, 'transactions.html', {'customer': customer,
+                                                                     'exchange_form': exchange_form,
+                                                                     'form': form,
+                                                                     'dollar': dollar_rate,
+                                                                     'euro': euro_rate})
+
+                    return HttpResponseRedirect(reverse('customer:transactions:exchange'))
             if request.POST.get('euro_exchange') == '':
                 exchange.currency = 'euro'
                 exchange.wage_rate = 0
@@ -76,11 +89,19 @@ def customer_exchange_view(request):
                                                                  'euro': euro_rate,
                                                                  'is_manager': False})
 
+
+
+            employees_wage = 0
+            for employee in Employee.objects.all():
+                employees_wage += employee.wage_per_month
+            if system_account.rial_amount_account <= 3 * employees_wage:
+                Notification(owner=Manager.objects.all()[0], type='insufficient money').save()
+
             customer.save()
             exchange.paid = True
             exchange.verified = True
             exchange.save()
-            return HttpResponseRedirect(reverse('customer:index'))
+            return HttpResponseRedirect(reverse('customer:transactions:exchange'))
     else:
         form = RialIncForm()
         exchange_form = ExchangeForm()

@@ -45,7 +45,7 @@ def update_customer_profile(request):
                     setattr(customer, attr, form.data[attr])
             user.save()
             customer.save()
-            return HttpResponseRedirect(reverse('customer:customer profile'))
+            return HttpResponseRedirect(reverse('customer:customer_profile'))
 
         else:
             print(user_form.errors, form.errors)
@@ -164,7 +164,8 @@ def order_dashboard_view(request):
                 tmp.append(str(transaction.dollar_cost) + '$')
             else:
                 tmp.append(str(transaction.euro_cost) + '€')
-            transaction.description += "University site url is: " + transaction.site_url
+            if transaction.site_url is not None:
+                transaction.description += "University site url is: " + str(transaction.site_url)
         elif isinstance(transaction, ForeignPaymentTransaction):
             tmp.append('Foreign Payment')
             if transaction.dollar_cost > 0:
@@ -188,8 +189,9 @@ def order_dashboard_view(request):
             tmp.append('true')
         else:
             tmp.append('false')
-        tmp.append(transaction.description)
-        tmp.append(customer.user.username)
+        if transaction.description is not None:
+            tmp.append(str(transaction.description))
+        tmp.append(str(customer.user.username))
         transactions_list.append(tmp)
     return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
                                                           'order': True})
