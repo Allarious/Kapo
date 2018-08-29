@@ -139,6 +139,7 @@ class CreditCardField(forms.CharField):
 
 class AbstractTransaction(models.Model):
     id = models.AutoField(primary_key=True)
+    type_name_id = models.CharField(max_length=100, default='')
     owner = models.ForeignKey(Customer, on_delete=models.CASCADE)
     creation_time = models.DateTimeField(default=timezone.now)
     description = models.TextField(blank=True, default='')
@@ -174,11 +175,12 @@ class RialWalletIncTransaction(AbstractTransaction):
     amount = models.FloatField(default=0, validators=[MaxValueValidator(300000000), MinValueValidator(100000)])
 
     def __str__(self):
+        self.type_name_id = 'Rial inc ' + str(self.id)
         return 'Rial inc ' + str(self.id)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        self.type_name = 'folan'
+        self.type_name = 'Rial'
         super().save()
 
 
@@ -189,11 +191,12 @@ class CurrencyConvertTransaction(AbstractTransaction):
     amount = models.FloatField(validators=[MaxValueValidator(1000), MinValueValidator(1)])
 
     def __str__(self):
+        self.type_name_id = str(self.currency) + ' Convert ' + str(self.id)
         return str(self.currency) + ' Convert ' + str(self.id)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        self.type_name = 'folan'
+        self.type_name = 'Convert'
         super().save()
 
 
@@ -206,6 +209,8 @@ class ExamTransaction(AbstractTransaction):
     site_password = models.CharField(null=True, blank=True, max_length=50)
 
     def __str__(self):
+        self.type_name_id = self.exam_title + str(self.id)
+
         return self.exam_title + ' ' + str(self.id)
 
     def save(self, force_insert=False, force_update=False, using=None,
@@ -232,6 +237,7 @@ class ApplicationTuitionFeeTransaction(AbstractTransaction):
     site_password = models.CharField(null=True, blank=True, max_length=50)
 
     def __str__(self):
+        self.type_name_id = self.fee_type + ' ' + str(self.id)
         return self.fee_type + ' ' + str(self.id)
 
     def save(self, force_insert=False, force_update=False, using=None,
@@ -256,6 +262,7 @@ class ForeignPaymentTransaction(AbstractTransaction):
     foreign_card_number = models.CharField(max_length=19)
 
     def __str__(self):
+        self.type_name_id = 'Foreign payment ' + str(self.id)
         return 'Foreign payment ' + str(self.id)
 
     def save(self, force_insert=False, force_update=False, using=None,
@@ -269,6 +276,7 @@ class DomesticPaymentTransaction(AbstractTransaction):
     domestic_card_number = DomesticCardField(max_length=16)
 
     def __str__(self):
+        self.type_name_id = 'Domestic payment' + ' ' + str(self.id)
         return 'Domestic payment' + ' ' + str(self.id)
 
     def save(self, force_insert=False, force_update=False, using=None,
@@ -283,6 +291,7 @@ class UnknownPaymentTransaction(AbstractTransaction):
     email = models.EmailField(default='hazrat@gmail.com')
 
     def __str__(self):
+        self.type_name_id = 'Unknown payment' + ' ' + str(self.id)
         return 'Unknown payment' + ' ' + str(self.id)
 
     def save(self, force_insert=False, force_update=False, using=None,
