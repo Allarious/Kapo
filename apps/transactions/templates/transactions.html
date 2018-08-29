@@ -1706,6 +1706,11 @@ html {
                     {% else %}
                 {{ customer.rial_wallet }}
                 {% endif %}R</div>
+                div class="converttype__remain__3gh7H">Wage: : {% if is_manager %}
+                    {{ customer.system_accounts.rial_amount_account }}
+                    {% else %}
+                {{ customer.rial_wallet }}
+                {% endif %}R</div>
                 <div class="converttype__explain__2Cu_t">Charge your wallet</div>
                 <form class="form-horizontal login-form" method="post" role="form" action="" enctype="multipart/form-data">
             {% csrf_token %}

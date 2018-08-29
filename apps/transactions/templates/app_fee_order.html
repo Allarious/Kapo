@@ -1,3 +1,4 @@
+{% load tag_library %}
 <!DOCTYPE html>
 <!-- saved from url=(0022)http://localhost:3000/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -2042,6 +2043,7 @@ html {
                 <div><input class="input__login-input__FAzIY" placeholder="Site Password" value="" name="site_password"></div>
                 <div><input class="input__login-input__FAzIY" placeholder="Country" value=""></div>
                 <div><input class="input__login-input__FAzIY" placeholder="City" value=""></div>
+                    <label >Fee Wage = {{ wage|to_float_persent }}</label>
                 <div class="paymentmethod__container__Czf6U">
                     <div class="paymentmethod__header__2UK_4"> Choose A Payment Currency </div>
                     <div class="paymentmethod__inner-container__NV0sJ"><div>

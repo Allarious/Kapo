@@ -45,6 +45,7 @@ def customer_exchange_view(request):
                         customer.rial_wallet += transaction.amount
                         customer.save()
                         system_account.save()
+                        SystemAccounts.objects.all().update(rial_amount_account=system_account.rial_amount_account)
                         transaction.save()
                     else:
                         exchange_form.add_error('euro_amount', 'موجودی سامانه کافی نیست')
@@ -95,7 +96,7 @@ def customer_exchange_view(request):
             for employee in Employee.objects.all():
                 employees_wage += employee.wage_per_month
             if system_account.rial_amount_account <= 3 * employees_wage:
-                Notification(owner=Manager.objects.all()[0], type='insufficient money').save()
+                Notification(owner=Manager.objects.all()[0].user, type='insufficient money').save()
 
             customer.save()
             exchange.paid = True
@@ -152,7 +153,7 @@ def exam_transactions_view(request, title, cost, site_url, image_url):
 @customer_required
 def app_fee_transactions_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
-    wage = float(Configuration.objects.get(key='exam wage').value)
+    wage = float(Configuration.objects.get(key='fee wage').value)
     dollar_rate = int(Configuration.objects.get(key='dollar').value)
     euro_rate = int(Configuration.objects.get(key='euro').value)
 

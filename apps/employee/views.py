@@ -53,13 +53,13 @@ def employee_check_transaction_view(request):
                 transaction.checking = True
                 print(transaction.checking_employee)
                 transaction.save()
-                return render(request, 'employee_transaction_check.html',
-                              {'employee': employee, 'transactions': transactions, 'none': None})
+                # return render(request, 'employee_transaction_check.html',
+                #               {'employee': employee, 'transactions': transactions, 'none': None})
 
         if request.POST.get('accept'):
             transaction = None
             for t in transactions:
-                if t.id == int(request.POST.get('accept')):
+                if t.type_name_id == str(request.POST.get('accept')):
                     transaction = t
 
             customer = transaction.owner
@@ -104,7 +104,7 @@ def employee_check_transaction_view(request):
             for employee in Employee.objects.all():
                 employees_wage += employee.wage_per_month
             if system_account.rial_amount_account <= 3 * employees_wage:
-                Notification(owner=Manager.objects.all()[0], type='insufficient money').save()
+                Notification(owner=Manager.objects.all()[0].user, type='insufficient money').save()
 
             system_account.save()
             customer.save()
@@ -114,19 +114,60 @@ def employee_check_transaction_view(request):
             transaction.checking = False
             # transaction_report_email(transaction, customer)
             transaction.save()
+            if isinstance(transaction, ExamTransaction):#transaction.type_name=='Exam':
+                ExamTransaction.objects.filter(id=transaction.id).update(paid=True, checking=False,
+                                                                         verified=True)
+            if transaction.type_name=='Application Fee':
+                ApplicationTuitionFeeTransaction.objects.filter(id=transaction.id).update(paid=True, checking=False,
+                                                                         verified=True)
+            if transaction.type_name=='Tuition Fee':
+                ApplicationTuitionFeeTransaction.objects.filter(id=transaction.id).update(paid=True, checking=False,
+                                                                         verified=True)
+            if isinstance(transaction, DomesticPaymentTransaction):
+                DomesticPaymentTransaction.objects.filter(id=transaction.id).update(paid=True, checking=False,
+                                                                         verified=True)
+            if isinstance(transaction, ForeignPaymentTransaction):
+                ForeignPaymentTransaction.objects.filter(id=transaction.id).update(paid=True, checking=False,
+                                                                                          verified=True)
+            if isinstance(transaction, UnknownPaymentTransaction):
+                UnknownPaymentTransaction.objects.filter(id=transaction.id).update(paid=True, checking=False,
+                                                                                          verified=True)
 
         elif request.POST.get('reject'):
+            print(288)
             transaction = None
             for t in transactions:
-                if t.id == int(request.POST.get('reject')):
+                if t.type_name_id == str(request.POST.get('reject')):
                     transaction = t
+            print(transaction)
             customer = transaction.owner
-            transaction.paid = False
-            transaction.checking = False
-            transaction.verified = False
-            print(transaction.checking)
+            # transaction.paid = False
+            # transaction.checking = False
+            # transaction.verified = False
+            # print(transaction.checking)
             # transaction_report_email(transaction, customer)
-            transaction.save()
+            # transaction.save()
+            print(transaction.type_name)
+            if isinstance(transaction, ExamTransaction):    #transaction.type_name=='Exam':
+                ExamTransaction.objects.filter(id=transaction.id).update(paid=False, checking=False,
+                                                                         verified=False)
+            if transaction.type_name=='Application Fee':
+                ApplicationTuitionFeeTransaction.objects.filter(id=transaction.id).update(paid=False, checking=False,
+                                                                                    verified=False)
+            if transaction.type_name=='Tuition Fee':
+                print(155)
+                ApplicationTuitionFeeTransaction.objects.filter(id=transaction.id).update(paid=False, checking=False,
+                                                                                          verified=False)
+            if isinstance(transaction, DomesticPaymentTransaction):
+                DomesticPaymentTransaction.objects.filter(id=transaction.id).update(paid=False, checking=False,
+                                                                                          verified=False)
+            if isinstance(transaction, ForeignPaymentTransaction):
+                ForeignPaymentTransaction.objects.filter(id=transaction.id).update(paid=False, checking=False,
+                                                                                          verified=False)
+            if isinstance(transaction, UnknownPaymentTransaction):
+                print(233)
+                UnknownPaymentTransaction.objects.filter(id=transaction.id).update(paid=False, checking=False,
+                                                                                          verified=False)
 
         # if request.POST.get('Customer selected'):
         #     customer = Customer.objects.filter(username=request.POST.get('username'))
@@ -404,15 +445,15 @@ def get_all_system_transactions():
 def get_null_verified_transactions():
     transactions = []
     # Exam transactions:
-    exams = ExamTransaction.objects.filter(verified=None)
+    exams = ExamTransaction.objects.filter(verified=None, checking=False)
     # Application and tuition fees transactions:
-    fees = ApplicationTuitionFeeTransaction.objects.filter(verified=None)
+    fees = ApplicationTuitionFeeTransaction.objects.filter(verified=None, checking=False)
     # Foregin payments transactions:
-    foreign_payments = ForeignPaymentTransaction.objects.filter(verified=None)
+    foreign_payments = ForeignPaymentTransaction.objects.filter(verified=None, checking=False)
     # Domestic transactions:
-    domestic_payments = DomesticPaymentTransaction.objects.filter(verified=None)
+    domestic_payments = DomesticPaymentTransaction.objects.filter(verified=None, checking=False)
     #  Unknown payments transactions:
-    unknown_payments = UnknownPaymentTransaction.objects.filter(verified=None)
+    unknown_payments = UnknownPaymentTransaction.objects.filter(verified=None, checking=False)
 
     transactions.extend(exams)
     transactions.extend(fees)

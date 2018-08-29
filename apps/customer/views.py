@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from apps.core.models import Configuration
 from apps.customer.forms.forms import *
 from apps.customer.models import Customer
-from apps.accounts.decorators import customer_required
+from apps.accounts.decorators import customer_required, customer_is_not_banned
 from django.urls import reverse
 from apps.transactions.models import *
 from apps.accounts.models import *
@@ -13,6 +13,7 @@ from apps.manager.models import *
 
 @login_required
 @customer_required
+@customer_is_not_banned
 def index(request):
     return render(request, 'Customer_HomePage.html', {})
 
@@ -21,6 +22,7 @@ def index(request):
 
 @login_required
 @customer_required
+@customer_is_not_banned
 def update_customer_profile(request):
     user = MyUser.objects.get(username=request.user.username)
     # customer = user.customer
@@ -62,6 +64,7 @@ def update_customer_profile(request):
 
 @login_required
 @customer_required
+@customer_is_not_banned
 def customer_profile_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     return render(request, 'Profile.html', {'customer': customer, })
@@ -69,6 +72,7 @@ def customer_profile_view(request):
 
 @login_required
 @customer_required
+@customer_is_not_banned
 def customer_home_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     karmozds = Configuration.objects.exclude(key='dollar').exclude(key='euro')
@@ -77,7 +81,9 @@ def customer_home_view(request):
     return render(request, 'customer_home.html',
                   {'customer': customer, 'karmozds': karmozds, 'euro_rate': euro_rate, 'dollar_rate': dollar_rate})
 
-
+@login_required
+@customer_required
+@customer_is_not_banned
 def customer_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     notifications = Notification.objects.all().filter(owner=customer.user)
@@ -87,7 +93,9 @@ def customer_dashboard_view(request):
     Notification.objects.all().filter(owner=customer.user).update(seen=True)
     return render(request, 'customer_dashboard1.html', {'notifications': notification})
 
-
+@login_required
+@customer_required
+@customer_is_not_banned
 def message_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     messages = Message.objects.all().filter(receiver=customer.user)
@@ -96,7 +104,9 @@ def message_dashboard_view(request):
         message.append(messages[messages.count() - 1 - i])
     return render(request, 'customer_message_dashboard.html', {'messages': message})
 
-
+@login_required
+@customer_required
+@customer_is_not_banned
 def transaction_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     rial = RialWalletIncTransaction.objects.all().filter(owner=customer)
@@ -133,7 +143,9 @@ def transaction_dashboard_view(request):
     return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
                                                           'order': order})
 
-
+@login_required
+@customer_required
+@customer_is_not_banned
 def order_dashboard_view(request):
     customer = get_object_or_404(Customer, pk=request.user.id)
     exam = ExamTransaction.objects.all().filter(owner=customer)
@@ -196,7 +208,9 @@ def order_dashboard_view(request):
     return render(request, 'transaction_dashboard.html', {'transactions': transactions_list,
                                                           'order': True})
 
-
+@login_required
+@customer_required
+@customer_is_not_banned
 def send_message(request):
     user = get_object_or_404(MyUser, pk=request.user.id)
     # user = MyUser.objects.get(username=request.user.username)
@@ -235,7 +249,9 @@ def send_message(request):
     return render(request, 'send_message.html',
                   {user: 'user', 'form': form})
 
-
+@login_required
+@customer_required
+@customer_is_not_banned
 def orders(request):
     exams = ManagerAddedExams.objects.all()
     return render(request, 'orders.html', {'exams': exams})

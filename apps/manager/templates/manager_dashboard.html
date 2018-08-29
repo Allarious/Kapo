@@ -1707,8 +1707,10 @@ html {
                                         Your transaction has been accepted
                                         {% elif notification.type == 'order' %}
                                         Your order has been accepted
-                                        {% else %}
+                                        {% elif notification.type == 'feature' %}
                                         A new feature has been added to system.
+                                        {% else %}
+                                        You have low backup money.
                                     {% endif %}</div>
                                     {% if not notification.seen %}
                                     <div class="notification__condition__3SHDM">New</div>
