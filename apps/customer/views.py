@@ -129,12 +129,8 @@ def transaction_dashboard_view(request):
             tmp.append(str(transaction.amount) + '€')
         tmp.append(transaction.creation_time.date())
         tmp.append(transaction.creation_time.time())
-        if transaction.verified == None:
-            tmp.append('none')
-        elif transaction.verified:
-            tmp.append('true')
-        else:
-            tmp.append('false')
+
+        tmp.append('true')
         tmp.append(transaction.description)
         tmp.append(customer.user.username)
         transactions_list.append(tmp)
